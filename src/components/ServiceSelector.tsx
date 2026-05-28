@@ -3,14 +3,29 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SERVICE_CATEGORIES } from '../data';
 import { ServiceItem, ServiceCategory } from '../types';
-import { Search, Compass, Palette, Code, Smartphone, ShoppingBag, Cpu, Sparkles } from 'lucide-react';
+import {
+  Search, Compass,
+  // Design & Branding
+  PenTool, Layers, LayoutTemplate, UserCheck, Image, Instagram, Presentation, Clapperboard,
+  // Web Dev
+  Globe, Globe2, MousePointerClick, AppWindow, Workflow, Plug2, Wifi, RefreshCw,
+  // Mobile
+  Apple, Smartphone, Tablets, Blend, Wrench,
+  // E-commerce
+  Store, ShoppingCart, ShoppingBag, Tag, CreditCard, Package,
+  // Technical
+  ShieldCheck, Zap, ClipboardList, Lock, Cloud, Database, GitBranch, Bot,
+  // AI & Automation
+  MessageSquare, FileText, Repeat2, Users, BarChart2, BrainCircuit,
+  // Category icons
+  Palette, Code, Cpu, Sparkles,
+} from 'lucide-react';
 import ServiceModal from './ServiceModal';
 
-// Define what we track when a card is clicked
 interface SelectedService {
   item: ServiceItem;
   catTitle: string;
@@ -18,34 +33,78 @@ interface SelectedService {
   catIcon: string;
 }
 
+// Per-service icon map — unique relevant icon for every single service
+const SERVICE_ICON_MAP: Record<string, React.ReactNode> = {
+  // DESIGN & BRANDING
+  'Logo Design':              <PenTool className="w-5 h-5" />,
+  'Brand Identity Packages':  <Layers className="w-5 h-5" />,
+  'UI Design':                <LayoutTemplate className="w-5 h-5" />,
+  'UX Design':                <UserCheck className="w-5 h-5" />,
+  'Graphic Design':           <Image className="w-5 h-5" />,
+  'Social Media Design':      <Instagram className="w-5 h-5" />,
+  'Presentation Design':      <Presentation className="w-5 h-5" />,
+  'Motion Graphics':          <Clapperboard className="w-5 h-5" />,
+  // WEB DEVELOPMENT
+  'Website Development':      <Globe className="w-5 h-5" />,
+  'Landing Page Development': <MousePointerClick className="w-5 h-5" />,
+  'Web App Development':      <AppWindow className="w-5 h-5" />,
+  'WordPress Development':    <Globe2 className="w-5 h-5" />,
+  'Webflow Development':      <Workflow className="w-5 h-5" />,
+  'API Development':          <Plug2 className="w-5 h-5" />,
+  'Progressive Web Apps':     <Wifi className="w-5 h-5" />,
+  'Website Redesign':         <RefreshCw className="w-5 h-5" />,
+  // MOBILE APPS
+  'iOS App Development':      <Apple className="w-5 h-5" />,
+  'Android App Development':  <Smartphone className="w-5 h-5" />,
+  'Cross-Platform Apps':      <Tablets className="w-5 h-5" />,
+  'App UI/UX Design':         <Blend className="w-5 h-5" />,
+  'App Maintenance':          <Wrench className="w-5 h-5" />,
+  // E-COMMERCE
+  'Shopify Store Setup':              <Store className="w-5 h-5" />,
+  'E-commerce Website':               <ShoppingCart className="w-5 h-5" />,
+  'WooCommerce Development':          <ShoppingBag className="w-5 h-5" />,
+  'Product Listing Optimization':     <Tag className="w-5 h-5" />,
+  'Payment Gateway Integration':      <CreditCard className="w-5 h-5" />,
+  'Dropshipping Store Setup':         <Package className="w-5 h-5" />,
+  // TECHNICAL & PERF.
+  'Website Maintenance':   <ShieldCheck className="w-5 h-5" />,
+  'Speed Optimization':    <Zap className="w-5 h-5" />,
+  'UX Audit':              <ClipboardList className="w-5 h-5" />,
+  'Website Security':      <Lock className="w-5 h-5" />,
+  'Cloud Hosting Setup':   <Cloud className="w-5 h-5" />,
+  'Database Design':       <Database className="w-5 h-5" />,
+  'DevOps & CI/CD':        <GitBranch className="w-5 h-5" />,
+  'Chatbot Development':   <Bot className="w-5 h-5" />,
+  // AI & AUTOMATION
+  'AI Chatbot Integration':  <MessageSquare className="w-5 h-5" />,
+  'AI Content Generation':   <FileText className="w-5 h-5" />,
+  'Workflow Automation':     <Repeat2 className="w-5 h-5" />,
+  'CRM Setup & Automation':  <Users className="w-5 h-5" />,
+  'AI-Powered SEO Tools':    <BarChart2 className="w-5 h-5" />,
+  'Custom GPT / AI Agents':  <BrainCircuit className="w-5 h-5" />,
+};
+
+// Category header icon map
+const getCategoryIcon = (iconName: string) => {
+  switch (iconName) {
+    case 'Palette':     return <Palette     className="w-5 h-5" />;
+    case 'Code':        return <Code        className="w-5 h-5" />;
+    case 'Smartphone':  return <Smartphone  className="w-5 h-5" />;
+    case 'ShoppingBag': return <ShoppingBag className="w-5 h-5" />;
+    case 'Cpu':         return <Cpu         className="w-5 h-5" />;
+    case 'Sparkles':    return <Sparkles    className="w-5 h-5" />;
+    default:            return <Compass     className="w-5 h-5" />;
+  }
+};
+
 export default function ServiceSelector() {
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [hoverItem, setHoverItem] = useState<string | null>(null);
-
-  // Modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [selected, setSelected] = useState<SelectedService | null>(null);
 
-  // Booking callback wired in from App – we pass a no-op here;
-  // the real openBooking is threaded via props below.
-  const [onBooking, setOnBooking] = useState<(plan: string, price: string) => void>(() => () => {});
-
   const categories = useMemo(() => SERVICE_CATEGORIES, []);
-
-  // Icon mapping helper
-  const getCategoryIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Palette':     return <Palette     className="w-5 h-5" />;
-      case 'Code':        return <Code        className="w-5 h-5" />;
-      case 'Smartphone':  return <Smartphone  className="w-5 h-5" />;
-      case 'ShoppingBag': return <ShoppingBag className="w-5 h-5" />;
-      case 'Cpu':         return <Cpu         className="w-5 h-5" />;
-      case 'Sparkles':    return <Sparkles    className="w-5 h-5" />;
-      default:            return <Compass     className="w-5 h-5" />;
-    }
-  };
-
   const divisionPills = useMemo(() => ['ALL', ...categories.map(c => c.title)], [categories]);
 
   const filteredData = useMemo(() => {
@@ -149,9 +208,10 @@ export default function ServiceSelector() {
                   </div>
 
                   {/* Cards grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                     {items.map((item) => {
                       const isHovering = hoverItem === item.name;
+                      const serviceIcon = SERVICE_ICON_MAP[item.name] ?? getCategoryIcon(category.iconName);
                       return (
                         <motion.div
                           key={item.name}
@@ -159,57 +219,70 @@ export default function ServiceSelector() {
                           onClick={() => openModal(item, category)}
                           onMouseEnter={() => setHoverItem(item.name)}
                           onMouseLeave={() => setHoverItem(null)}
-                          whileHover={{ y: -4 }}
-                          className={`group p-5 border rounded-xl cursor-pointer flex flex-col gap-3 relative overflow-hidden transition-all duration-300 ${
+                          whileHover={{ y: -5, scale: 1.01 }}
+                          whileTap={{ scale: 0.98 }}
+                          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                          className={`group relative p-5 rounded-2xl cursor-pointer flex flex-col gap-4 overflow-hidden border transition-all duration-300 ${
                             isHovering
-                              ? 'bg-[#c5a059]/[0.07] border-[#c5a059]/50 shadow-[0_8px_40px_rgba(197,160,89,0.18)]'
-                              : 'bg-white/[0.06] border-white/[0.15] hover:border-white/30'
+                              ? 'bg-gradient-to-br from-[#c5a059]/10 via-[#c5a059]/[0.05] to-transparent border-[#c5a059]/40 shadow-[0_12px_40px_rgba(197,160,89,0.15)]'
+                              : 'bg-white/[0.04] border-white/[0.12] hover:border-white/25'
                           }`}
                         >
-                          {/* Gold top accent bar — always slightly visible */}
+                          {/* Glow background on hover */}
                           <div
-                            className="absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300"
-                            style={{ background: 'linear-gradient(to right,#c5a059,transparent)', opacity: isHovering ? 1 : 0.25 }}
+                            className="absolute inset-0 rounded-2xl transition-opacity duration-500 pointer-events-none"
+                            style={{
+                              background: 'radial-gradient(ellipse at top left, rgba(197,160,89,0.1) 0%, transparent 60%)',
+                              opacity: isHovering ? 1 : 0,
+                            }}
                           />
 
-                          {/* Dot indicator top-right */}
-                          <div className="absolute top-3 right-3">
-                            <span
-                              className="w-2 h-2 rounded-full block transition-all duration-300"
-                              style={{
-                                backgroundColor: isHovering ? '#c5a059' : 'rgba(255,255,255,0.25)',
-                                transform: isHovering ? 'scale(1.4)' : 'scale(1)'
-                              }}
-                            />
+                          {/* Top gold bar */}
+                          <div
+                            className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl transition-opacity duration-300"
+                            style={{
+                              background: 'linear-gradient(to right, #c5a059, rgba(197,160,89,0.3), transparent)',
+                              opacity: isHovering ? 1 : 0.3,
+                            }}
+                          />
+
+                          {/* Icon + category badge row */}
+                          <div className="flex items-start justify-between relative">
+                            <div className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                              isHovering
+                                ? 'bg-[#c5a059]/20 text-[#c5a059] shadow-[0_0_16px_rgba(197,160,89,0.25)]'
+                                : 'bg-white/[0.07] text-white/60'
+                            }`}>
+                              {serviceIcon}
+                            </div>
+
+                            {/* Dot status */}
+                            <div className={`w-2 h-2 rounded-full mt-1 transition-all duration-300 ${
+                              isHovering ? 'bg-[#c5a059] shadow-[0_0_8px_rgba(197,160,89,0.8)]' : 'bg-white/20'
+                            }`} />
                           </div>
 
-                          {/* Icon orb */}
-                          <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
-                            isHovering ? 'bg-[#c5a059]/25 text-[#c5a059]' : 'bg-white/[0.08] text-white/50'
-                          }`}>
-                            {getCategoryIcon(category.iconName)}
-                          </div>
-
-                          {/* Top: label + title */}
-                          <div className="space-y-1 pr-5">
-                            <span className="text-[9px] font-mono font-bold text-[#c5a059]/70 uppercase tracking-[0.2em]">● SERVICE</span>
-                            <h4 className={`text-[13px] font-display font-bold tracking-wide transition-colors duration-200 leading-snug ${
+                          {/* Title + description */}
+                          <div className="space-y-2 relative flex-1">
+                            <h4 className={`text-[13px] font-display font-bold leading-tight tracking-wide transition-colors duration-200 ${
                               isHovering ? 'text-[#c5a059]' : 'text-white'
                             }`}>
                               {item.name}
                             </h4>
+                            <p className="text-[11px] text-white/55 leading-relaxed line-clamp-2">
+                              {item.description}
+                            </p>
                           </div>
 
-                          {/* Description */}
-                          <p className="text-[11px] text-white/65 leading-relaxed line-clamp-3 flex-1">{item.description}</p>
-
-                          {/* View Details row */}
-                          <div className={`flex items-center gap-1.5 transition-all duration-200 ${
-                            isHovering ? 'opacity-100 translate-x-1' : 'opacity-40'
+                          {/* Footer — View Details */}
+                          <div className={`relative flex items-center gap-2 transition-all duration-200 ${
+                            isHovering ? 'opacity-100' : 'opacity-0 translate-y-1'
                           }`}>
-                            <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#c5a059]">
-                              View Details →
+                            <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-[#c5a059] font-semibold">
+                              View Details
                             </span>
+                            <div className="flex-1 h-[1px] bg-gradient-to-r from-[#c5a059]/50 to-transparent" />
+                            <span className="text-[#c5a059] text-xs">→</span>
                           </div>
                         </motion.div>
                       );
@@ -231,7 +304,6 @@ export default function ServiceSelector() {
         categoryColor={selected?.catColor ?? '#c5a059'}
         categoryIcon={selected?.catIcon ?? 'Compass'}
         onBooking={(plan, price) => {
-          // Bubble up to App's openBooking via a custom event
           window.dispatchEvent(new CustomEvent('nexcore:openBooking', { detail: { plan, price } }));
         }}
       />
