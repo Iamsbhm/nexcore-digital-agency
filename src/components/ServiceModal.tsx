@@ -89,45 +89,135 @@ export default function ServiceModal({ open, onClose, service, categoryTitle, ca
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[90] bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-[90] bg-black/75 backdrop-blur-sm"
             onClick={onClose}
           />
 
-          {/* Modal */}
+          {/* ── MOBILE: Bottom Sheet ── */}
           <motion.div
-            key="modal"
+            key="mobile-sheet"
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-x-0 bottom-0 z-[91] flex flex-col md:hidden"
+            style={{ maxHeight: '92dvh' }}
+          >
+            <div
+              className="flex flex-col bg-[#0e0e0e] rounded-t-[28px] overflow-hidden border-t border-x border-white/[0.1] shadow-[0_-20px_60px_rgba(0,0,0,0.8)]"
+              style={{ maxHeight: '92dvh' }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Gold accent line */}
+              <div className="h-[2px] w-full bg-gradient-to-r from-[#c5a059] via-[#c5a059]/60 to-transparent shrink-0" />
+
+              {/* Drag handle */}
+              <div className="flex justify-center pt-3 pb-1 shrink-0">
+                <div className="w-10 h-1 rounded-full bg-white/20" />
+              </div>
+
+              {/* Fixed Header */}
+              <div className="px-5 pt-3 pb-4 flex items-center gap-4 border-b border-white/[0.07] shrink-0">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border border-[#c5a059]/25 bg-[#c5a059]/10 text-[#c5a059]">
+                  {ICON_MAP[categoryIcon] ?? <Compass className="w-6 h-6" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[9px] font-mono tracking-[0.28em] uppercase text-[#c5a059] mb-0.5">{categoryTitle}</p>
+                  <h2 className="text-lg font-display font-bold text-white leading-tight truncate">{service.name}</h2>
+                  <p className="text-[11px] text-white/40 italic mt-0.5 leading-snug">{details.tagline}</p>
+                </div>
+                <button
+                  onClick={onClose}
+                  className="shrink-0 w-8 h-8 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center active:bg-[#c5a059]/10 transition-colors cursor-pointer"
+                >
+                  <X className="w-4 h-4 text-white/50" />
+                </button>
+              </div>
+
+              {/* Scrollable body */}
+              <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-5 space-y-4">
+                {/* Description */}
+                <p className="text-sm text-white/60 leading-relaxed">{service.description}</p>
+
+                {/* What's Included */}
+                <div className="p-4 bg-white/[0.03] border border-white/[0.08] rounded-2xl space-y-3">
+                  <p className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#c5a059]/70">What's Included</p>
+                  <ul className="space-y-2.5">
+                    {details.bullets.map((b, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <CheckCircle className="w-4 h-4 mt-0.5 shrink-0 text-[#c5a059]" />
+                        <span className="text-sm text-white/70 leading-snug">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Deliverables */}
+                <div className="p-4 bg-white/[0.03] border border-white/[0.08] rounded-2xl space-y-3">
+                  <p className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#c5a059]/70">Deliverables</p>
+                  <ul className="space-y-2.5">
+                    {details.deliverables.map((d, i) => (
+                      <li key={i} className="flex items-center gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full shrink-0 bg-[#c5a059]" />
+                        <span className="text-sm text-white/70">{d}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="pt-1">
+                    <span className="text-[10px] font-mono px-3 py-1.5 rounded-full border border-[#c5a059]/30 bg-[#c5a059]/8 text-[#c5a059] inline-block">
+                      ⚡ Fast Turnaround Available
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bottom padding so content clears the fixed CTA */}
+                <div className="h-2" />
+              </div>
+
+              {/* Fixed footer CTA */}
+              <div className="px-5 py-4 border-t border-white/[0.07] bg-[#0e0e0e] shrink-0 flex flex-col gap-2.5 safe-area-bottom">
+                <button
+                  onClick={() => { onBooking('GROWTH', '$2,999'); onClose(); }}
+                  className="w-full flex items-center justify-center gap-2 py-4 bg-[#c5a059] text-black text-[11px] font-mono font-bold tracking-[0.2em] uppercase rounded-xl active:scale-95 transition-all shadow-[0_0_24px_rgba(197,160,89,0.3)] cursor-pointer"
+                >
+                  Get a Free Quote <ArrowRight className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={onClose}
+                  className="w-full py-3 text-white/35 text-[11px] font-mono tracking-widest uppercase cursor-pointer active:text-white/60"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* ── DESKTOP: Centered Modal ── */}
+          <motion.div
+            key="desktop-modal"
             initial={{ opacity: 0, scale: 0.93, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[91] flex items-center justify-center px-4 py-8 pointer-events-none"
+            className="fixed inset-0 z-[91] hidden md:flex items-center justify-center px-4 py-8 pointer-events-none"
           >
             <div
               className="pointer-events-auto w-full max-w-2xl bg-[#0d0d0d] border border-white/[0.08] rounded-3xl overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.7)]"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* ── Top accent bar ── */}
               <div className="h-[2px] w-full bg-gradient-to-r from-[#c5a059] to-transparent" />
 
-              {/* ── Header ── */}
               <div className="px-8 pt-7 pb-6 flex items-start justify-between gap-4 border-b border-white/[0.05]">
                 <div className="flex items-center gap-5">
-                  {/* Icon orb */}
                   <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border border-[#c5a059]/25 bg-[#c5a059]/10 text-[#c5a059]">
                     {ICON_MAP[categoryIcon] ?? <Compass className="w-7 h-7" />}
                   </div>
                   <div>
-                    <p className="text-[9px] font-mono tracking-[0.3em] uppercase mb-1 text-[#c5a059]">
-                      {categoryTitle}
-                    </p>
-                    <h2 className="text-xl md:text-2xl font-display font-semibold text-white leading-tight">
-                      {service.name}
-                    </h2>
+                    <p className="text-[9px] font-mono tracking-[0.3em] uppercase mb-1 text-[#c5a059]">{categoryTitle}</p>
+                    <h2 className="text-xl md:text-2xl font-display font-semibold text-white leading-tight">{service.name}</h2>
                     <p className="text-xs text-white/40 mt-1 font-light italic">{details.tagline}</p>
                   </div>
                 </div>
-
-                {/* Close */}
                 <button
                   onClick={onClose}
                   className="shrink-0 w-8 h-8 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center hover:bg-[#c5a059]/10 hover:border-[#c5a059]/30 transition-colors cursor-pointer"
@@ -136,14 +226,9 @@ export default function ServiceModal({ open, onClose, service, categoryTitle, ca
                 </button>
               </div>
 
-              {/* ── Body ── */}
               <div className="px-8 py-6 space-y-6">
-                {/* Description */}
                 <p className="text-sm text-white/50 leading-relaxed">{service.description}</p>
-
-                {/* Two-column: What's included / Deliverables */}
                 <div className="grid md:grid-cols-2 gap-5">
-                  {/* Included */}
                   <div className="p-5 bg-white/[0.02] border border-white/[0.05] rounded-2xl space-y-3">
                     <p className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#c5a059]/60">What's Included</p>
                     <ul className="space-y-2">
@@ -155,8 +240,6 @@ export default function ServiceModal({ open, onClose, service, categoryTitle, ca
                       ))}
                     </ul>
                   </div>
-
-                  {/* Deliverables */}
                   <div className="p-5 bg-white/[0.02] border border-white/[0.05] rounded-2xl space-y-3">
                     <p className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#c5a059]/60">Deliverables</p>
                     <ul className="space-y-2">
@@ -167,8 +250,6 @@ export default function ServiceModal({ open, onClose, service, categoryTitle, ca
                         </li>
                       ))}
                     </ul>
-
-                    {/* Turnaround badge */}
                     <div className="pt-2 flex items-center gap-2">
                       <span className="text-[9px] font-mono px-2.5 py-1 rounded-full border border-[#c5a059]/30 bg-[#c5a059]/8 text-[#c5a059]">
                         ⚡ Fast Turnaround Available
@@ -178,7 +259,6 @@ export default function ServiceModal({ open, onClose, service, categoryTitle, ca
                 </div>
               </div>
 
-              {/* ── Footer CTA ── */}
               <div className="px-8 pb-7 flex flex-col sm:flex-row items-center gap-3">
                 <button
                   onClick={() => { onBooking('GROWTH', '$2,999'); onClose(); }}
