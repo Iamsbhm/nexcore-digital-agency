@@ -159,17 +159,17 @@ export default function ServiceSelector() {
                           onClick={() => openModal(item, category)}
                           onMouseEnter={() => setHoverItem(item.name)}
                           onMouseLeave={() => setHoverItem(null)}
-                          whileHover={{ y: -3 }}
-                          className={`group p-4 bg-white/[0.012] border rounded-xl cursor-pointer flex flex-col gap-3 relative overflow-hidden transition-all duration-300 ${
+                          whileHover={{ y: -4 }}
+                          className={`group p-5 border rounded-xl cursor-pointer flex flex-col gap-3 relative overflow-hidden transition-all duration-300 ${
                             isHovering
-                              ? 'border-[#c5a059]/30 bg-white/[0.03] shadow-[0_8px_32px_rgba(197,160,89,0.08)]'
-                              : 'border-white/[0.06] hover:border-white/15'
+                              ? 'bg-[#c5a059]/[0.07] border-[#c5a059]/50 shadow-[0_8px_40px_rgba(197,160,89,0.18)]'
+                              : 'bg-white/[0.06] border-white/[0.15] hover:border-white/30'
                           }`}
                         >
-                          {/* Gold top accent bar */}
+                          {/* Gold top accent bar — always slightly visible */}
                           <div
                             className="absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300"
-                            style={{ background: 'linear-gradient(to right,#c5a059,transparent)', opacity: isHovering ? 1 : 0 }}
+                            style={{ background: 'linear-gradient(to right,#c5a059,transparent)', opacity: isHovering ? 1 : 0.25 }}
                           />
 
                           {/* Dot indicator top-right */}
@@ -177,15 +177,22 @@ export default function ServiceSelector() {
                             <span
                               className="w-2 h-2 rounded-full block transition-all duration-300"
                               style={{
-                                backgroundColor: isHovering ? '#c5a059' : 'rgba(255,255,255,0.1)',
-                                transform: isHovering ? 'scale(1.3)' : 'scale(1)'
+                                backgroundColor: isHovering ? '#c5a059' : 'rgba(255,255,255,0.25)',
+                                transform: isHovering ? 'scale(1.4)' : 'scale(1)'
                               }}
                             />
                           </div>
 
+                          {/* Icon orb */}
+                          <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                            isHovering ? 'bg-[#c5a059]/25 text-[#c5a059]' : 'bg-white/[0.08] text-white/50'
+                          }`}>
+                            {getCategoryIcon(category.iconName)}
+                          </div>
+
                           {/* Top: label + title */}
                           <div className="space-y-1 pr-5">
-                            <span className="text-[9px] font-mono font-bold text-white/25 uppercase tracking-[0.2em]">● SERVICE</span>
+                            <span className="text-[9px] font-mono font-bold text-[#c5a059]/70 uppercase tracking-[0.2em]">● SERVICE</span>
                             <h4 className={`text-[13px] font-display font-bold tracking-wide transition-colors duration-200 leading-snug ${
                               isHovering ? 'text-[#c5a059]' : 'text-white'
                             }`}>
@@ -194,11 +201,11 @@ export default function ServiceSelector() {
                           </div>
 
                           {/* Description */}
-                          <p className="text-[11px] text-white/40 leading-relaxed line-clamp-3 flex-1">{item.description}</p>
+                          <p className="text-[11px] text-white/65 leading-relaxed line-clamp-3 flex-1">{item.description}</p>
 
-                          {/* View Details row — always in flow, fades in */}
-                          <div className={`flex items-center gap-1.5 transition-opacity duration-200 ${
-                            isHovering ? 'opacity-100' : 'opacity-0'
+                          {/* View Details row */}
+                          <div className={`flex items-center gap-1.5 transition-all duration-200 ${
+                            isHovering ? 'opacity-100 translate-x-1' : 'opacity-40'
                           }`}>
                             <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#c5a059]">
                               View Details →
