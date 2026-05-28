@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Calendar, Clock, Video, CheckCircle, Clipboard, Loader2 } from 'lucide-react';
+import { useModalHistory } from '../hooks/useModalHistory';
+
 
 // ─────────────────────────────────────────────────────────
 // EmailJS credentials — fill these in after signing up at
@@ -34,7 +36,11 @@ const PLANS = [
 ];
 
 export default function BookingModal({ isOpen, onClose, selectedPlan, calculatedPrice }: BookingModalProps) {
+  // Back button closes modal on mobile instead of navigating away
+  useModalHistory(isOpen, onClose);
+
   const [step, setStep] = useState<'details' | 'success'>('details');
+
   const [selectedDate, setSelectedDate] = useState<string>('Friday, May 29, 2026');
   const [selectedTime, setSelectedTime] = useState<string>('10:00 AM');
   const [clientName, setClientName] = useState<string>('');

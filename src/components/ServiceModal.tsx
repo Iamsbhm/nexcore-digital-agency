@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ArrowRight, CheckCircle, Palette, Code, Smartphone, ShoppingBag, Cpu, Sparkles, Compass } from 'lucide-react';
 import { ServiceItem } from '../types';
+import { useModalHistory } from '../hooks/useModalHistory';
 
 interface ServiceModalProps {
   open: boolean;
@@ -68,6 +69,9 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 };
 
 export default function ServiceModal({ open, onClose, service, categoryTitle, categoryColor, categoryIcon, onBooking }: ServiceModalProps) {
+  // Back button closes modal on mobile instead of navigating away
+  useModalHistory(open, onClose);
+
   const details = service ? (SERVICE_DETAILS[service.name] ?? {
     tagline: 'Premium service tailored to your business.',
     bullets: ['Custom scope to your needs', 'Expert team assigned', 'Dedicated project manager', 'Quality guaranteed'],
