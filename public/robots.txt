@@ -1,0 +1,13 @@
+# NexCore Digital Studio — robots.txt
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Block any private/utility paths (add more as needed)
+Disallow: /api/
+Disallow: /.env
+Disallow: /node_modules/
+
+# Sitemap location — update with your real domain
+Sitemap: https://www.yourdomain.com/sitemap.xml

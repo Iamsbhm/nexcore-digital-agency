@@ -1,0 +1,6 @@
+{
+  "name": "NexCore Digital Agency",
+  "description": "High-performance digital agency crafting premium digital brands, custom sleek 3D interactive showcases, and high-fidelity motion graphics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

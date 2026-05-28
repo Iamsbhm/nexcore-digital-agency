@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,300;0,400;1,400&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-primary-neon: #c5a059;
+  --color-accent-neon: #8c6e3d;
+  --color-dark-bg: #0a0a0a;
+  --color-panel-bg: rgba(255, 255, 255, 0.03);
+
+  /* Override standard blue shades with gorgeous gold tones */
+  --color-blue-50: #fdfaf2;
+  --color-blue-100: #fcf5e6;
+  --color-blue-200: #f7e6c3;
+  --color-blue-300: #f0d195;
+  --color-blue-400: #e5b661;
+  --color-blue-500: #c5a059;
+  --color-blue-600: #bc934d;
+  --color-blue-700: #9e753b;
+  --color-blue-800: #815c32;
+  --color-blue-900: #6b4d2c;
+  --color-blue-950: #3b2816;
+
+  /* Override standard indigo shades with rich dark gold / bronze tones */
+  --color-indigo-50: #faf8f5;
+  --color-indigo-100: #f5eedf;
+  --color-indigo-200: #eadcb9;
+  --color-indigo-300: #dac38e;
+  --color-indigo-400: #c9a868;
+  --color-indigo-500: #8c6e3d;
+  --color-indigo-600: #7c5f34;
+  --color-indigo-700: #6b502b;
+  --color-indigo-800: #584124;
+  --color-indigo-900: #49351e;
+  --color-indigo-950: #2a1c0f;
+}
+
+/* Custom background grid styling */
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+.bg-dot-pattern {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(197, 160, 89, 0.04) 1px, transparent 1px);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Glow effects */
+.shadow-glow-blue {
+  box-shadow: 0 0 40px -5px rgba(197, 160, 89, 0.15);
+}
+
+.shadow-glow-indigo {
+  box-shadow: 0 0 45px -5px rgba(140, 110, 61, 0.18);
+}
+
+.product-shadow {
+  box-shadow: 0 0 120px rgba(197, 160, 89, 0.12);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #c5a059 0%, #8c6e3d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom webkit scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 9999px;
+  border: 2px solid #0a0a0a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2a2a;
+}
+
+/* Continuous slow slide for marquee or scrolling indicators */
+@keyframes slide-infinite {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-slide {
+  animation: slide-infinite 45s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.45; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 4s ease-in-out infinite;
+}
+
+/* 3D Hero effects */
+@keyframes shimmer-gold {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.text-shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    #c5a059 0%,
+    #f7e6b5 30%,
+    #c5a059 50%,
+    #8c6e3d 70%,
+    #c5a059 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-gold 4s linear infinite;
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(-12px) rotate(1deg); }
+}
+.hero-float { animation: hero-float 7s ease-in-out infinite; }
+
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.05); }
+  66%       { transform: translate(-20px, 15px) scale(0.97); }
+}
+.orb-drift { animation: orb-drift 12s ease-in-out infinite; }
+
+@keyframes line-grow {
+  0%   { width: 0; opacity: 0; }
+  100% { width: 100%; opacity: 1; }
+}
+
+.hero-3d-text {
+  text-shadow:
+    0 1px 0 #8c6e3d,
+    0 2px 0 #7a5e33,
+    0 3px 0 #6b5030,
+    0 4px 8px rgba(0,0,0,0.6),
+    0 8px 30px rgba(197,160,89,0.15);
+}
+
+.hero-3d-white {
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.2),
+    0 2px 4px rgba(0,0,0,0.5),
+    0 8px 24px rgba(0,0,0,0.4);
+}
