@@ -315,7 +315,7 @@ export default function App() {
 
       {/* 3. HERO SECTION — Premium 3D */}
       <section
-        className="relative z-10 min-h-screen flex flex-col overflow-hidden"
+        className="relative z-10 min-h-screen flex flex-col overflow-hidden pt-16 md:pt-0"
         id="hero"
       >
         {/* 3D particles — scoped only to hero */}
