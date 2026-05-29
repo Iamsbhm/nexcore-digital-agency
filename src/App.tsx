@@ -171,10 +171,10 @@ export default function App() {
 
       {/* 2. PERSISTENT NAVIGATION BAR */}
       <nav 
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 flex items-center h-16 ${
           scrolled 
-            ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5 py-3' 
-            : 'bg-transparent py-5'
+            ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5' 
+            : 'bg-transparent'
         }`}
         id="main-navigation"
       >
@@ -315,7 +315,7 @@ export default function App() {
 
       {/* 3. HERO SECTION — Premium 3D */}
       <section
-        className="relative z-10 mt-16 md:mt-0 min-h-[calc(100vh-4rem)] md:min-h-screen flex flex-col overflow-hidden"
+        className="relative z-10 min-h-screen flex flex-col overflow-hidden"
         id="hero"
       >
         {/* 3D particles — scoped only to hero */}
@@ -343,7 +343,7 @@ export default function App() {
         <div className="absolute bottom-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c5a059]/[0.06] to-transparent pointer-events-none" />
 
         {/* ── CENTER CONTENT — flex-1 pushes stats to bottom ── */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-start md:justify-center text-center px-4 max-w-5xl mx-auto w-full gap-7 pt-8 md:pt-0">
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-start md:justify-center text-center px-4 max-w-5xl mx-auto w-full gap-6 pt-20 md:pt-0">
 
           {/* Status pill */}
           <motion.div
