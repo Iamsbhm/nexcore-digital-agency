@@ -148,18 +148,25 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-slate-300 font-sans selection:bg-[#c5a059]/30 selection:text-[#f7eedb] relative">
+    <div className="min-h-screen bg-[#06080e] text-slate-300 font-sans selection:bg-[#c5a059]/30 selection:text-[#f7eedb] relative">
 
-      {/* ── Background decoration (fixed, pointer-events-none, non-scrolling) ── */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <Particles3D />
-        {/* Grid line layout patterns */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.25]" />
-        <div className="absolute inset-0 bg-dot-pattern opacity-[0.5]" />
-        {/* Giant radial gold atmosphere glows */}
-        <div className="absolute top-[-10%] left-[-20%] w-[90%] h-[80%] bg-[#c5a059]/5 rounded-full blur-[160px]" />
-        <div className="absolute top-[40%] right-[-10%] w-[70%] h-[70%] bg-[#8c6e3d]/4 rounded-full blur-[140px]" />
-        <div className="absolute bottom-[2%] left-[-15%] w-[80%] h-[50%] bg-[#c5a059]/3 rounded-full blur-[160px]" />
+      {/* ── Static premium background ── */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
+        {/* Base deep dark */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, #080c14 0%, #06080e 40%, #090708 100%)' }} />
+        {/* Fine dot grid overlay */}
+        <div className="absolute inset-0 opacity-[0.18]" style={{
+          backgroundImage: 'radial-gradient(circle, rgba(197,160,89,0.35) 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+        }} />
+        {/* Vignette edges */}
+        <div className="absolute inset-0" style={{
+          background: 'radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.7) 100%)'
+        }} />
+        {/* Single static gold glow top-left */}
+        <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full blur-[180px]" style={{ background: 'rgba(197,160,89,0.04)' }} />
+        {/* Single static glow bottom-right */}
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[160px]" style={{ background: 'rgba(100,120,180,0.03)' }} />
       </div>
 
       {/* 2. PERSISTENT NAVIGATION BAR */}
@@ -308,6 +315,11 @@ export default function App() {
 
       {/* 3. HERO SECTION — Premium 3D */}
       <section className="relative z-10 min-h-[90vh] flex flex-col items-center justify-center px-4 md:px-8 overflow-hidden" id="hero">
+
+        {/* 3D particles — scoped only to hero */}
+        <div className="absolute inset-0 pointer-events-none">
+          <Particles3D />
+        </div>
 
         {/* ── Ambient drifting orbs ── */}
         <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] rounded-full bg-[#c5a059]/[0.06] blur-[100px] orb-drift pointer-events-none" />
