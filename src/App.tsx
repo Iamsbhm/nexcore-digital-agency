@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Compass, 
@@ -87,15 +87,18 @@ export default function App() {
     };
   }, []);
 
+  // Keep a stable ref to openBooking so the event listener never goes stale
+  const openBookingRef = useRef<(plan: string, price: string) => void>(() => {});
+
   // Listen for booking requests bubbled up from ServiceModal
   useEffect(() => {
     const handler = (e: Event) => {
       const { plan, price } = (e as CustomEvent).detail;
-      openBooking(plan, price);
+      // Small delay so service modal close animation finishes first
+      setTimeout(() => openBookingRef.current(plan, price), 80);
     };
     window.addEventListener('nexcore:openBooking', handler);
     return () => window.removeEventListener('nexcore:openBooking', handler);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openBooking = (planName: string, price: string = 'Custom') => {
@@ -103,6 +106,9 @@ export default function App() {
     setCalculatedPrice(price);
     setBookingOpen(true);
   };
+
+  // Keep ref always pointing to latest openBooking
+  openBookingRef.current = openBooking;
 
   // Smooth scroll helper — navigates home first if on an inner page
   const scrollToSection = (id: string) => {
