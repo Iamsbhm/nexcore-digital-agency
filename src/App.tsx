@@ -256,7 +256,7 @@ export default function App() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-[#06080e]/95 backdrop-blur-lg border-b border-white/5 overflow-hidden"
+              className="lg:hidden bg-[#06080e]/98 backdrop-blur-xl border-b border-white/5 overflow-hidden relative z-50"
               id="mobile-navigation-dropdown"
             >
               <div className="px-4 py-6 space-y-4">
@@ -268,9 +268,9 @@ export default function App() {
                 ]).map((link) => (
                   <button
                     key={link.label}
-                    onClick={() => scrollToSection(link.target)}
+                    onClick={() => { setMobileMenuOpen(false); scrollToSection(link.target); }}
                     id={`mobile-nav-link-${link.label.replace(/\s+/g, '-').toLowerCase()}`}
-                    className="w-full text-left py-2 text-xs font-semibold text-white/70 hover:text-white border-b border-white/5 hover:border-white/10 block font-mono"
+                    className="w-full text-left py-3 text-xs font-semibold text-white/70 hover:text-white border-b border-white/5 hover:border-white/10 block font-mono tracking-widest cursor-pointer"
                   >
                     ▶ {link.label.toUpperCase()}
                   </button>
@@ -278,9 +278,9 @@ export default function App() {
 
                 {/* About Us */}
                 <button
-                  onClick={() => navigateTo('about')}
+                  onClick={() => { setMobileMenuOpen(false); navigateTo('about'); }}
                   id="mobile-nav-link-about"
-                  className={`w-full text-left py-2 text-xs font-semibold border-b border-white/5 block font-mono ${
+                  className={`w-full text-left py-3 text-xs font-semibold border-b border-white/5 block font-mono tracking-widest cursor-pointer ${
                     currentPage === 'about' ? 'text-[#c5a059]' : 'text-white/70 hover:text-[#c5a059]'
                   }`}
                 >
@@ -302,7 +302,7 @@ export default function App() {
         </AnimatePresence>
       </nav>
 
-      <div className="pt-20 md:pt-28" />
+      <div className="h-20 md:h-28" />
 
       {/* ── Inner Pages ── */}
       {currentPage === 'about'        && <AboutPage openBooking={openBooking} />}
