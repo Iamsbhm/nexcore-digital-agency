@@ -343,7 +343,7 @@ export default function App() {
         <div className="absolute bottom-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c5a059]/[0.06] to-transparent pointer-events-none" />
 
         {/* ── CENTER CONTENT — flex-1 pushes stats to bottom ── */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto w-full gap-8 pt-24 pb-8">
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto w-full gap-8">
 
           {/* Status pill */}
           <motion.div
