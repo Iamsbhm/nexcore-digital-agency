@@ -313,139 +313,266 @@ export default function App() {
       {/* ── Home Content ── */}
       {currentPage === 'home' && <>
 
-      {/* 3. HERO SECTION — Premium 3D */}
-      <section className="relative z-10 min-h-[90vh] flex flex-col items-center justify-center px-4 md:px-8 overflow-hidden" id="hero">
+      {/* 3. HERO SECTION — Futuristic HUD Dashboard */}
+      <section className="relative z-10 min-h-screen flex flex-col overflow-hidden" id="hero">
 
         {/* 3D particles — scoped only to hero */}
         <div className="absolute inset-0 pointer-events-none">
           <Particles3D />
         </div>
 
-        {/* ── Ambient drifting orbs ── */}
-        <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] rounded-full bg-[#c5a059]/[0.06] blur-[100px] orb-drift pointer-events-none" />
-        <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] rounded-full bg-[#8c6e3d]/[0.05] blur-[120px] orb-drift pointer-events-none" style={{ animationDelay: '4s' }} />
-        <div className="absolute top-[40%] left-[50%] w-[300px] h-[300px] rounded-full bg-white/[0.015] blur-[80px] orb-drift pointer-events-none" style={{ animationDelay: '8s' }} />
+        {/* Scanline overlay */}
+        <div className="absolute inset-0 pointer-events-none z-[1]" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px)',
+        }} />
 
-        {/* ── Horizontal rule lines for depth ── */}
-        <div className="absolute top-[18%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.04] to-transparent pointer-events-none" />
-        <div className="absolute bottom-[18%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c5a059]/[0.08] to-transparent pointer-events-none" />
+        {/* Corner bracket decorations */}
+        <div className="absolute top-[72px] left-4 md:left-8 w-8 h-8 border-t-2 border-l-2 border-[#c5a059]/40 pointer-events-none z-10" />
+        <div className="absolute top-[72px] right-4 md:right-8 w-8 h-8 border-t-2 border-r-2 border-[#c5a059]/40 pointer-events-none z-10" />
+        <div className="absolute bottom-0 left-4 md:left-8 w-8 h-8 border-b-2 border-l-2 border-[#c5a059]/40 pointer-events-none z-10" />
+        <div className="absolute bottom-0 right-4 md:right-8 w-8 h-8 border-b-2 border-r-2 border-[#c5a059]/40 pointer-events-none z-10" />
 
-        <div className="relative z-10 text-center max-w-6xl mx-auto w-full space-y-12 pb-12 pt-2">
+        {/* ── TOP STATUS BAR ── */}
+        <div className="relative z-10 border-b border-[#c5a059]/15 bg-black/30 backdrop-blur-sm px-4 md:px-8 py-2 flex items-center justify-between mt-[64px]">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] animate-pulse" />
+              <span className="text-[9px] font-mono text-[#c5a059]/70 tracking-[0.3em] uppercase">NEXCORE DIGITAL STUDIO</span>
+            </div>
+            <span className="hidden md:block text-[8px] font-mono text-white/20 tracking-widest">ID: NXC-2024-PRIME</span>
+          </div>
+          <div className="flex items-center gap-6 text-[8px] font-mono text-white/30 tracking-widest">
+            <span className="hidden sm:block">LAT: 20.5937° N</span>
+            <span className="hidden sm:block">LONG: 78.9629° E</span>
+            <span className="hidden md:block">SIGNAL: ACTIVE</span>
+            <div className="flex items-center gap-1.5">
+              <span className="w-1 h-1 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-green-400/70 text-[8px]">ALL SYSTEMS ONLINE</span>
+            </div>
+            <span className="font-mono text-white/20">{currentTime}</span>
+          </div>
+        </div>
 
+        {/* ── MAIN HUD GRID ── */}
+        <div className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-[280px_1fr_260px] gap-0 min-h-0">
 
-          {/* ── 3D Perspective Headline ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: 'easeOut', delay: 0.1 }}
-            style={{ perspective: '1200px' }}
-            className="space-y-2"
-          >
-            {/* Line 1 */}
-            <div
-              style={{ transform: 'rotateX(6deg)', transformOrigin: 'center bottom' }}
-              className="overflow-hidden"
+          {/* LEFT PANEL */}
+          <div className="hidden lg:flex flex-col border-r border-[#c5a059]/10 bg-black/20 backdrop-blur-sm p-5 gap-4">
+            <div className="text-[8px] font-mono tracking-[0.35em] uppercase text-[#c5a059]/50 pb-2 border-b border-white/[0.05]">
+              Performance Metrics
+            </div>
+
+            {/* Metric rows */}
+            {[
+              { label: 'Projects Delivered', value: '150+', pct: 92 },
+              { label: 'Client Satisfaction', value: '98.4%', pct: 98 },
+              { label: 'On-Time Delivery', value: '96%', pct: 96 },
+              { label: 'Repeat Clients', value: '74%', pct: 74 },
+            ].map((m) => (
+              <div key={m.label} className="space-y-1.5">
+                <div className="flex justify-between items-center">
+                  <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest">{m.label}</span>
+                  <span className="text-[10px] font-mono font-bold text-[#c5a059]">{m.value}</span>
+                </div>
+                <div className="h-[2px] w-full bg-white/[0.06] rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${m.pct}%` }}
+                    transition={{ duration: 1.2, delay: 0.5, ease: 'easeOut' }}
+                    className="h-full rounded-full"
+                    style={{ background: 'linear-gradient(to right, #c5a059, #e8c97a)' }}
+                  />
+                </div>
+              </div>
+            ))}
+
+            <div className="mt-2 text-[8px] font-mono tracking-[0.35em] uppercase text-[#c5a059]/50 pb-2 border-b border-white/[0.05]">
+              Active Capabilities
+            </div>
+            {['Branding & Design', 'Web Development', 'Mobile Apps', 'AI & Automation'].map((cap, i) => (
+              <div key={cap} className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{
+                  backgroundColor: ['#c5a059', '#60a5fa', '#34d399', '#f43f5e'][i],
+                  animationDelay: `${i * 0.4}s`
+                }} />
+                <span className="text-[10px] font-mono text-white/50">{cap}</span>
+                <span className="ml-auto text-[8px] font-mono text-green-400/60 uppercase">LIVE</span>
+              </div>
+            ))}
+
+            <div className="mt-auto pt-4 border-t border-white/[0.05]">
+              <div className="text-[8px] font-mono text-white/20 tracking-widest uppercase mb-1">Studio Uptime</div>
+              <div className="text-2xl font-display font-black" style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                99.9%
+              </div>
+            </div>
+          </div>
+
+          {/* CENTER — Main content */}
+          <div className="flex flex-col items-center justify-center px-6 md:px-12 py-10 md:py-0 relative">
+
+            {/* HUD targeting reticle top */}
+            <div className="absolute top-6 left-1/2 -translate-x-1/2 flex items-center gap-3 pointer-events-none">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c5a059]/40" />
+              <span className="text-[8px] font-mono tracking-[0.4em] text-[#c5a059]/40 uppercase">NEXCORE // v2.4.1</span>
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c5a059]/40" />
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: 'easeOut', delay: 0.1 }}
+              className="text-center space-y-6 w-full max-w-3xl"
             >
-              <h1 className="text-[clamp(3.5rem,10vw,9rem)] font-display font-light text-white leading-[0.95] tracking-tight hero-3d-white">
-                We <span className="font-semibold">Build</span>
-              </h1>
-            </div>
-
-            {/* Line 2 – gold shimmer italic */}
-            <div
-              style={{ transform: 'rotateX(3deg)', transformOrigin: 'center bottom' }}
-            >
-              <h1 className="text-[clamp(3.5rem,10vw,9rem)] font-serif italic leading-[0.95] tracking-tight text-shimmer-gold hero-3d-text">
-                Digital Legacies
-              </h1>
-            </div>
-
-            {/* Gold rule */}
-            <div className="flex items-center justify-center gap-4 py-3">
-              <div className="h-px flex-1 max-w-[120px] bg-gradient-to-r from-transparent to-[#c5a059]/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
-              <div className="h-px flex-1 max-w-[120px] bg-gradient-to-l from-transparent to-[#c5a059]/50" />
-            </div>
-
-            {/* Line 3 */}
-            <div
-              style={{ transform: 'rotateX(-3deg)', transformOrigin: 'center top' }}
-            >
-              <h1 className="text-[clamp(2.5rem,7vw,7rem)] font-display font-light text-white/70 leading-[1] tracking-tight">
-                That <span className="font-serif italic text-white/40">Settle</span>{' '}
-                <span className="font-serif italic text-white/60">Perfected.</span>
-              </h1>
-            </div>
-          </motion.div>
-
-          {/* ── Sub-copy ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-            className="space-y-3"
-          >
-            <p className="text-lg md:text-xl text-white/60 font-display font-light tracking-wide">
-              Not just an agency. A <span className="text-[#c5a059] font-medium">growth engine</span> for ambitious brands.
-            </p>
-            <p className="text-sm text-white/30 max-w-lg mx-auto leading-relaxed font-light">
-              We design, engineer, and launch digital products that outperform — across branding, web, mobile, and AI.
-            </p>
-          </motion.div>
-
-          {/* ── Stats row ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
-            id="hero-stats-board"
-          >
-            {statsList.map((stat, sIdx) => (
-              <div
-                key={sIdx}
-                className="relative p-5 rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm text-center group hover:border-[#c5a059]/40 hover:bg-[#c5a059]/[0.04] transition-all duration-300 overflow-hidden"
+              {/* Agency type badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-3 px-4 py-2 border border-[#c5a059]/25 bg-[#c5a059]/[0.06] backdrop-blur-sm"
               >
-                {/* Inner glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#c5a059]/0 to-[#c5a059]/0 group-hover:from-[#c5a059]/[0.03] group-hover:to-transparent transition-all duration-300 rounded-2xl" />
-                <div className="absolute top-1.5 right-2.5 text-white/10 text-[9px] font-mono">0{sIdx + 1}</div>
-                <span className="text-3xl md:text-4xl font-display font-black text-white block tracking-tight group-hover:text-[#c5a059] transition-colors duration-300">
-                  {stat.value}
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] animate-ping" />
+                <span className="text-[9px] font-mono tracking-[0.4em] uppercase text-[#c5a059]/80">
+                  Premium Digital Agency — Operational
                 </span>
-                <span className="text-[9px] text-white/30 block mt-1.5 uppercase font-mono tracking-widest leading-none">
-                  {stat.label}
+              </motion.div>
+
+              {/* 3D Headline */}
+              <div style={{ perspective: '1400px' }}>
+                <div style={{ transform: 'rotateX(5deg)', transformOrigin: 'center bottom' }}>
+                  <h1 className="text-[clamp(3rem,9vw,8rem)] font-display font-light text-white leading-[0.92] tracking-tight hero-3d-white">
+                    We <span className="font-semibold">Build</span>
+                  </h1>
+                </div>
+                <div style={{ transform: 'rotateX(2deg)', transformOrigin: 'center center' }}>
+                  <h1 className="text-[clamp(3rem,9vw,8rem)] font-serif italic leading-[0.92] tracking-tight text-shimmer-gold hero-3d-text">
+                    Digital Legacies
+                  </h1>
+                </div>
+                <div style={{ transform: 'rotateX(-3deg)', transformOrigin: 'center top' }}>
+                  <h1 className="text-[clamp(2rem,5vw,5rem)] font-display font-light text-white/50 leading-[1.1] tracking-tight mt-2">
+                    That <span className="font-serif italic text-white/30">Never</span>{' '}
+                    <span className="font-serif italic text-white/40">Settle.</span>
+                  </h1>
+                </div>
+              </div>
+
+              {/* Gold rule */}
+              <div className="flex items-center justify-center gap-4">
+                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-transparent to-[#c5a059]/50" />
+                <span className="text-[8px] font-mono tracking-[0.4em] text-[#c5a059]/60 uppercase">EST. 2019 // INDIA</span>
+                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-l from-transparent to-[#c5a059]/50" />
+              </div>
+
+              <p className="text-sm md:text-base text-white/45 max-w-md mx-auto leading-relaxed font-light">
+                We design, engineer, and launch digital products that outperform — across branding, web, mobile, and AI.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                <button
+                  onClick={() => openBooking('GROWTH', '$2,999')}
+                  id="hero-book-btn"
+                  className="group relative flex items-center justify-center gap-2.5 py-3.5 px-8 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer shadow-[0_0_40px_rgba(197,160,89,0.25)] hover:shadow-[0_0_60px_rgba(197,160,89,0.15)] active:scale-95 overflow-hidden"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#f7e6b5]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="relative">⚡ Book Strategy Session</span>
+                </button>
+                <button
+                  onClick={() => scrollToSection('services-explorer-section')}
+                  id="hero-demo-btn"
+                  className="flex items-center justify-center gap-2 py-3.5 px-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] hover:border-[#c5a059]/30 uppercase text-[10px] font-mono tracking-[0.25em] transition-all cursor-pointer active:scale-95 text-white/50 hover:text-white"
+                >
+                  <span>View Services</span>
+                  <ArrowDownCircle className="w-3.5 h-3.5 text-[#c5a059]" />
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Bottom crosshair line */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 pointer-events-none">
+              <div className="h-px w-8 bg-[#c5a059]/20" />
+              <span className="text-[7px] font-mono tracking-[0.4em] text-white/15 uppercase">SCROLL TO EXPLORE</span>
+              <div className="h-px w-8 bg-[#c5a059]/20" />
+            </div>
+          </div>
+
+          {/* RIGHT PANEL */}
+          <div className="hidden lg:flex flex-col border-l border-[#c5a059]/10 bg-black/20 backdrop-blur-sm p-5 gap-4">
+            <div className="text-[8px] font-mono tracking-[0.35em] uppercase text-[#c5a059]/50 pb-2 border-b border-white/[0.05]">
+              Service Status
+            </div>
+
+            {[
+              { name: 'Design Studio',    status: 'ACTIVE',  dot: 'bg-[#c5a059]' },
+              { name: 'Dev Lab',          status: 'ACTIVE',  dot: 'bg-green-400' },
+              { name: 'Mobile Unit',      status: 'ACTIVE',  dot: 'bg-blue-400' },
+              { name: 'E-Commerce Hub',   status: 'ACTIVE',  dot: 'bg-amber-400' },
+              { name: 'AI Engine',        status: 'STANDBY', dot: 'bg-purple-400' },
+              { name: 'Support Desk',     status: 'ACTIVE',  dot: 'bg-green-400' },
+            ].map((svc) => (
+              <div key={svc.name} className="flex items-center justify-between py-1 border-b border-white/[0.04]">
+                <div className="flex items-center gap-2">
+                  <span className={`w-1.5 h-1.5 rounded-full ${svc.dot} animate-pulse`} />
+                  <span className="text-[10px] font-mono text-white/55">{svc.name}</span>
+                </div>
+                <span className={`text-[8px] font-mono tracking-widest uppercase ${svc.status === 'ACTIVE' ? 'text-green-400/70' : 'text-amber-400/60'}`}>
+                  {svc.status}
                 </span>
               </div>
             ))}
-          </motion.div>
 
-          {/* ── CTAs ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.65 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <button
-              onClick={() => openBooking('GROWTH', '$2,999')}
-              id="hero-book-btn"
-              className="group relative flex items-center justify-center gap-2.5 py-4 px-9 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer shadow-[0_0_40px_rgba(197,160,89,0.25)] hover:shadow-[0_0_60px_rgba(197,160,89,0.15)] active:scale-95 overflow-hidden"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-[#f7e6b5]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="relative">Book Strategy Session</span>
-            </button>
+            <div className="mt-2 text-[8px] font-mono tracking-[0.35em] uppercase text-[#c5a059]/50 pb-2 border-b border-white/[0.05]">
+              Next Milestone
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest">Q3 2025</span>
+              </div>
+              <p className="text-[11px] font-display font-bold text-white/80 leading-tight">AI-Powered CMS Launch</p>
+              <p className="text-[9px] font-mono text-white/30 leading-relaxed">Full content automation suite for enterprise clients.</p>
+            </div>
 
-            <button
-              onClick={() => scrollToSection('services-explorer-section')}
-              id="hero-demo-btn"
-              className="flex items-center justify-center gap-2 py-4 px-9 border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/20 uppercase text-[10px] font-mono tracking-[0.25em] transition-all cursor-pointer active:scale-95 text-white/50 hover:text-white"
-            >
-              <span>View Services</span>
-              <ArrowDownCircle className="w-3.5 h-3.5 text-[#c5a059] animate-bounce" />
-            </button>
-          </motion.div>
+            <div className="mt-auto pt-4 border-t border-white/[0.05] space-y-2">
+              <div className="text-[8px] font-mono text-white/20 tracking-widest uppercase">Completion Progress</div>
+              <div className="text-3xl font-display font-black" style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                78.4%
+              </div>
+              <div className="h-1 w-full bg-white/[0.06] rounded-full overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: '78.4%' }}
+                  transition={{ duration: 1.5, delay: 0.8, ease: 'easeOut' }}
+                  className="h-full rounded-full"
+                  style={{ background: 'linear-gradient(to right, #c5a059, #e8c97a)' }}
+                />
+              </div>
+              <button
+                onClick={() => openBooking('GROWTH', 'Custom')}
+                className="w-full mt-2 py-2.5 border border-[#c5a059]/30 hover:border-[#c5a059] hover:bg-[#c5a059]/10 text-[9px] font-mono tracking-[0.25em] uppercase text-[#c5a059]/70 hover:text-[#c5a059] transition-all cursor-pointer"
+              >
+                Open Communication Hub
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ── BOTTOM STATS BAR ── */}
+        <div className="relative z-10 border-t border-[#c5a059]/10 bg-black/25 backdrop-blur-sm px-4 md:px-8 py-3 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {statsList.map((stat, sIdx) => (
+            <div key={sIdx} className="flex items-center gap-3">
+              <span className="text-xl md:text-2xl font-display font-black" style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                {stat.value}
+              </span>
+              <span className="text-[9px] text-white/35 uppercase font-mono tracking-widest leading-tight">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </div>
       </section>
+
 
 
       {/* Marquee continuous text scroll footer banner */}
