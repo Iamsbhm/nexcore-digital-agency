@@ -171,10 +171,10 @@ export default function App() {
 
       {/* 2. PERSISTENT NAVIGATION BAR */}
       <nav 
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 flex items-center h-16 ${
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
           scrolled 
-            ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5' 
-            : 'bg-transparent'
+            ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5 py-3' 
+            : 'bg-transparent py-5'
         }`}
         id="main-navigation"
       >
