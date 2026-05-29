@@ -193,7 +193,7 @@ export default function App() {
             {([
               { label: 'SERVICES', target: 'services-explorer-section', scroll: true },
               { label: 'PROCESS',  target: 'process-section',           scroll: true },
-              { label: 'PRICING',  target: 'pricing-section',           scroll: true },
+              { label: 'WHY US',    target: 'why-us-section',             scroll: true },
               { label: 'REVIEWS',  target: 'testimonials-section',      scroll: true },
             ]).map((link) => (
               <button
@@ -256,7 +256,7 @@ export default function App() {
                 {([
                   { label: 'Capabilities Portfolio', target: 'services-explorer-section', scroll: true },
                   { label: 'Development Process',    target: 'process-section',           scroll: true },
-                  { label: 'Transparent Packages',   target: 'pricing-section',           scroll: true },
+                  { label: 'Why NexCore',            target: 'why-us-section',             scroll: true },
                   { label: 'Success Testimonials',   target: 'testimonials-section',      scroll: true },
                 ]).map((link) => (
                   <button
@@ -505,22 +505,115 @@ export default function App() {
 
       <div className="my-16 md:my-24" />
 
-      {/* 7. TRANSPARENT PACKAGES & SCOPE CALCULATOR */}
-      <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto animate-fade-in" id="pricing-section">
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-          <span className="text-[10px] font-mono tracking-widest text-pink-400 font-black uppercase">
-            — TRANSPARENT PRICING —
+      {/* 7. WHY CHOOSE US + TECH STACK */}
+      <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto animate-fade-in" id="why-us-section">
+
+        {/* ── WHY CHOOSE US ── */}
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
+          <span className="text-[10px] font-mono tracking-widest text-[#c5a059] font-black uppercase">
+            — OUR EDGE —
           </span>
           <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            Simple Packages
+            Why Choose NexCore
           </h2>
           <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-            No hidden fees. Choose the plan that fits your business, or configure scopes custom-wise.
+            We don't just build — we craft digital experiences that convert, scale, and leave lasting impressions.
           </p>
         </div>
 
-        {/* Combined Pricing card blocks & Custom estimator sliders */}
-        <PricingCalculator onBookCall={openBooking} />
+        {/* Why Us Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-24">
+          {[
+            { icon: '⚡', title: 'Blazing Fast Delivery', desc: 'We work in tight, focused sprints — most projects ship in 2–4 weeks without sacrificing quality.' },
+            { icon: '🎯', title: 'Conversion-First Design', desc: 'Every pixel is intentional. Our designs are engineered to guide users toward action and maximize ROI.' },
+            { icon: '🔒', title: 'Enterprise-Grade Security', desc: 'SSL, firewalls, penetration testing, and best-in-class authentication are baked in from day one.' },
+            { icon: '🌍', title: 'Global Client Base', desc: "We've delivered premium digital solutions to clients across 25+ countries on 5 continents." },
+            { icon: '🤝', title: 'Dedicated Project Manager', desc: 'Every project gets a dedicated PM — a single point of contact who keeps you informed at every step.' },
+            { icon: '♾️', title: 'Post-Launch Support', desc: "We don't disappear after launch. Ongoing maintenance, updates, and support are always available." },
+          ].map((card, i) => (
+            <div
+              key={i}
+              className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:border-[#c5a059]/40 hover:bg-[#c5a059]/[0.04] transition-all duration-300 cursor-default overflow-hidden"
+            >
+              {/* Top accent */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#c5a059] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: 'radial-gradient(ellipse at top left, rgba(197,160,89,0.07) 0%, transparent 60%)' }} />
+              <div className="text-3xl mb-4">{card.icon}</div>
+              <h3 className="text-sm font-display font-bold text-white mb-2 group-hover:text-[#c5a059] transition-colors">{card.title}</h3>
+              <p className="text-xs text-white/50 leading-relaxed">{card.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* ── TECH STACK ── */}
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
+          <span className="text-[10px] font-mono tracking-widest text-[#c5a059] font-black uppercase">
+            — TOOLS WE MASTER —
+          </span>
+          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
+            Our Tech Stack
+          </h2>
+          <p className="text-xs md:text-sm text-white/50 leading-relaxed">
+            Battle-tested technologies we use to build fast, scalable, and stunning digital products.
+          </p>
+        </div>
+
+        <div className="space-y-8">
+          {[
+            {
+              category: 'Frontend',
+              color: '#60a5fa',
+              techs: [
+                { name: 'React', icon: '⚛️' }, { name: 'Next.js', icon: '▲' }, { name: 'TypeScript', icon: '🔷' },
+                { name: 'Tailwind CSS', icon: '🌊' }, { name: 'Framer Motion', icon: '🎞️' }, { name: 'Webflow', icon: '🌐' },
+              ]
+            },
+            {
+              category: 'Backend & APIs',
+              color: '#34d399',
+              techs: [
+                { name: 'Node.js', icon: '🟢' }, { name: 'Python', icon: '🐍' }, { name: 'GraphQL', icon: '◈' },
+                { name: 'REST APIs', icon: '🔌' }, { name: 'Firebase', icon: '🔥' }, { name: 'Supabase', icon: '⚡' },
+              ]
+            },
+            {
+              category: 'Mobile & E-commerce',
+              color: '#f59e0b',
+              techs: [
+                { name: 'React Native', icon: '📱' }, { name: 'Flutter', icon: '🐦' }, { name: 'Swift', icon: '🍎' },
+                { name: 'Shopify', icon: '🛍️' }, { name: 'WooCommerce', icon: '🛒' }, { name: 'Stripe', icon: '💳' },
+              ]
+            },
+            {
+              category: 'AI & Cloud',
+              color: '#f43f5e',
+              techs: [
+                { name: 'OpenAI GPT', icon: '🤖' }, { name: 'LangChain', icon: '⛓️' }, { name: 'AWS', icon: '☁️' },
+                { name: 'Google Cloud', icon: '🌥️' }, { name: 'Docker', icon: '🐳' }, { name: 'Vercel', icon: '▲' },
+              ]
+            },
+          ].map((group) => (
+            <div key={group.category}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: group.color }} />
+                <span className="text-[10px] font-mono tracking-[0.25em] uppercase font-bold" style={{ color: group.color }}>{group.category}</span>
+                <div className="flex-1 h-[1px] bg-white/[0.05]" />
+              </div>
+              <div className="flex flex-wrap gap-2.5">
+                {group.techs.map((tech) => (
+                  <div
+                    key={tech.name}
+                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] hover:border-[#c5a059]/40 hover:bg-[#c5a059]/[0.06] transition-all duration-200 cursor-default"
+                  >
+                    <span className="text-base leading-none">{tech.icon}</span>
+                    <span className="text-[11px] font-mono font-semibold text-white/70 group-hover:text-[#c5a059] transition-colors tracking-wide">{tech.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <div className="my-16 md:my-24" />
