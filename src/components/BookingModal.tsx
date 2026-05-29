@@ -46,14 +46,11 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
   const [clientName, setClientName] = useState<string>('');
   const [clientEmail, setClientEmail] = useState<string>('');
   const [clientNote, setClientNote] = useState<string>('');
+  const [clientPhone, setClientPhone] = useState<string>('');
   const [isCopingLink, setIsCopingLink] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [sendError, setSendError] = useState<string>('');
 
-  // Optional plan selection — starts as the passed-in plan but user can change or deselect
-  const [chosenPlan, setChosenPlan] = useState<string | null>(
-    selectedPlan && selectedPlan !== '' ? selectedPlan : null
-  );
 
   if (!isOpen) return null;
 
@@ -77,11 +74,11 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
       // These variable names must match your EmailJS template
       from_name:    clientName,
       from_email:   clientEmail,
+      from_phone:   clientPhone,
       selected_date: selectedDate,
       selected_time: selectedTime,
-      chosen_plan:  displayPlan ? `${displayPlan.label} (${displayPlan.price})` : 'Not selected',
       message:      clientNote || 'No additional notes.',
-      to_name:      'NexCore Team',   // your name
+      to_name:      'NexCore Team',
     };
 
     try {
@@ -124,10 +121,10 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
     const start    = `${dateStr}T${timeSlot.start}00`;
     const end      = `${dateStr}T${timeSlot.end}00`;
 
-    const plan   = displayPlan ? `${displayPlan.label} Plan` : 'Strategy Session';
+    const plan   = 'Strategy Session';
     const title  = encodeURIComponent(`NexCore Strategy Call — ${plan}`);
     const details = encodeURIComponent(
-      `Strategy session booked via NexCore Digital Studio.\n\nClient: ${clientName}\nEmail: ${clientEmail}\nPlan: ${plan}\n\nNotes: ${clientNote || 'None'}`,
+      `Strategy session booked via NexCore Digital Studio.\n\nClient: ${clientName}\nEmail: ${clientEmail}\nPhone: +${clientPhone}\n\nNotes: ${clientNote || 'None'}`,
     );
     const guests = encodeURIComponent(clientEmail);
 
@@ -140,7 +137,6 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
     setTimeout(() => setIsCopingLink(false), 1200);
   };
 
-  const displayPlan = PLANS.find(p => p.id === chosenPlan);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -188,73 +184,6 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                 transition={{ duration: 0.2 }}
                 className="space-y-6"
               >
-                {/* ── 0. Optional Plan Selection ── */}
-                <div className="space-y-2.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-white/45 uppercase tracking-widest font-bold">
-                      Select a Plan <span className="text-white/25 normal-case tracking-normal font-normal">(Optional)</span>
-                    </span>
-                    {chosenPlan && (
-                      <button
-                        type="button"
-                        onClick={() => setChosenPlan(null)}
-                        className="text-[9px] font-mono text-white/25 hover:text-[#c5a059] transition-colors cursor-pointer"
-                      >
-                        Clear ✕
-                      </button>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2">
-                    {PLANS.map((plan) => {
-                      const isSelected = chosenPlan === plan.id;
-                      return (
-                        <button
-                          key={plan.id}
-                          type="button"
-                          onClick={() => setChosenPlan(isSelected ? null : plan.id)}
-                          className={`relative flex flex-col items-start gap-1 p-3 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
-                            isSelected
-                              ? 'border-[#c5a059]/50 bg-[#c5a059]/8 shadow-[0_0_20px_rgba(197,160,89,0.08)]'
-                              : 'border-white/[0.06] bg-white/[0.01] hover:border-white/15'
-                          }`}
-                        >
-                          {plan.popular && (
-                            <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-[8px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#c5a059] text-black tracking-wider">
-                              POPULAR
-                            </span>
-                          )}
-                          <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${isSelected ? 'text-[#c5a059]' : 'text-white/60'}`}>
-                            {plan.label}
-                          </span>
-                          <span className={`text-sm font-display font-bold ${isSelected ? 'text-white' : 'text-white/50'}`}>
-                            {plan.price}
-                          </span>
-                          <span className="text-[9px] text-white/30 leading-snug">{plan.desc}</span>
-                          {isSelected && (
-                            <span className="absolute top-2 right-2">
-                              <CheckCircle className="w-3 h-3 text-[#c5a059]" />
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Show selected plan summary */}
-                  {displayPlan && (
-                    <div className="px-3.5 py-2.5 rounded-lg border border-[#c5a059]/20 bg-[#c5a059]/[0.04] flex items-center justify-between">
-                      <span className="text-xs text-white/60">
-                        Discussing: <span className="text-[#c5a059] font-semibold">{displayPlan.label} Plan</span>
-                        {displayPlan.price !== 'Custom' && <span className="text-white/30 ml-1">({displayPlan.price})</span>}
-                      </span>
-                      <span className="text-[9px] font-mono text-white/25">Session focus</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="h-px bg-white/[0.05]" />
-
                 <form onSubmit={handleBookingSubmit} className="space-y-5">
                   {/* 1. Date selection */}
                   <div className="space-y-2">
@@ -336,6 +265,22 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                       </div>
                     </div>
 
+                    {/* Mobile Number — full width */}
+                    <div className="space-y-1">
+                      <label className="text-[11px] text-white/50 font-semibold block">Mobile Number:</label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30 text-xs font-mono select-none">+</span>
+                        <input
+                          type="tel"
+                          required
+                          value={clientPhone}
+                          onChange={(e) => setClientPhone(e.target.value)}
+                          id="booking-phone-input"
+                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 pl-6 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/20 transition-all font-mono"
+                          placeholder="1 234 567 8900"
+                        />
+                      </div>
+                    </div>
                     <div className="space-y-1">
                       <div className="flex justify-between items-center">
                         <label className="text-[11px] text-white/50 font-semibold block">Brief project description:</label>
@@ -396,8 +341,9 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
 
                 <p className="text-xs text-white/50 max-w-sm mx-auto leading-relaxed">
                   Hi <span className="text-white font-bold">{clientName}</span>, your strategy session
-                  {displayPlan && <> for the <span className="text-[#c5a059] font-bold">{displayPlan.label} Plan</span></>} has been confirmed.
-                  We sent meeting links to <span className="text-white font-mono font-bold">{clientEmail}</span>.
+                  has been confirmed. We'll reach you at{' '}
+                  <span className="text-[#c5a059] font-mono font-bold">+{clientPhone}</span> and sent
+                  meeting links to <span className="text-white font-mono font-bold">{clientEmail}</span>.
                 </p>
 
                 <div className="bg-white/[0.015] border border-white/[0.06] max-w-sm mx-auto rounded-xl p-4 space-y-3 text-left font-mono text-xs">
