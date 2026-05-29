@@ -315,7 +315,7 @@ export default function App() {
 
       {/* 3. HERO SECTION — Premium 3D */}
       <section
-        className="relative z-10 min-h-screen flex flex-col items-center justify-center overflow-hidden"
+        className="relative z-10 min-h-screen flex flex-col overflow-hidden"
         id="hero"
       >
         {/* 3D particles — scoped only to hero */}
@@ -342,8 +342,8 @@ export default function App() {
         <div className="absolute top-[22%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.03] to-transparent pointer-events-none" />
         <div className="absolute bottom-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c5a059]/[0.06] to-transparent pointer-events-none" />
 
-        {/* ── CENTER CONTENT ── */}
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto w-full flex flex-col items-center gap-8">
+        {/* ── CENTER CONTENT — flex-1 pushes stats to bottom ── */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto w-full gap-8 pt-24 pb-8">
 
           {/* Status pill */}
           <motion.div
@@ -388,14 +388,16 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* Minimal tagline */}
+          {/* Tagline */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            className="text-sm md:text-base text-white/35 max-w-sm mx-auto leading-relaxed font-light tracking-wide"
+            className="text-base md:text-lg text-white/40 max-w-md mx-auto leading-relaxed font-light tracking-wide"
           >
-            Branding · Web · Mobile · AI — built to outlast.
+            Where <span className="text-white/60 font-medium">bold ambition</span> meets{' '}
+            <span className="text-[#c5a059]/80 font-medium">digital mastery</span> —{' '}
+            brands built to <span className="text-white/60 font-medium">dominate</span> their space.
           </motion.p>
 
           {/* CTAs */}
@@ -424,20 +426,20 @@ export default function App() {
           </motion.div>
         </div>
 
-        {/* ── Bottom stats strip ── */}
+        {/* ── Bottom stats strip — in normal flow, no overlap ── */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center gap-8 md:gap-16 px-6 py-4 border-t border-white/[0.04]"
-          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.35), transparent)' }}
+          className="relative z-10 w-full flex items-center justify-center gap-8 md:gap-16 px-6 py-5 border-t border-white/[0.05]"
+          style={{ background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(8px)' }}
         >
           {statsList.map((stat, sIdx) => (
             <div key={sIdx} className="flex items-baseline gap-2">
-              <span className="text-lg md:text-xl font-display font-black" style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              <span className="text-xl md:text-2xl font-display font-black" style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 {stat.value}
               </span>
-              <span className="text-[8px] text-white/25 uppercase font-mono tracking-widest hidden sm:block">
+              <span className="text-[9px] text-white/30 uppercase font-mono tracking-widest hidden sm:block">
                 {stat.label}
               </span>
             </div>
