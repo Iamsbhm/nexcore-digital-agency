@@ -114,15 +114,17 @@ export default function App() {
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
     if (currentPage !== 'home') {
-      // Switch to home, then scroll after render settles
       setCurrentPage('home');
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 350);
+      }, 400);
     } else {
-      const element = document.getElementById(id);
-      if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Small delay so menu closes before scroll fires
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
     }
   };
 
@@ -249,57 +251,51 @@ export default function App() {
           </div>
         </div>
 
-        {/* Mobile dropdown draw */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-[#06080e]/98 backdrop-blur-xl border-b border-white/5 overflow-hidden relative z-50"
-              id="mobile-navigation-dropdown"
-            >
-              <div className="px-4 py-6 space-y-4">
-                {([
-                  { label: 'Capabilities Portfolio', target: 'services-explorer-section', scroll: true },
-                  { label: 'Development Process',    target: 'process-section',           scroll: true },
-                  { label: 'Why NexCore',            target: 'why-us-section',             scroll: true },
-                  { label: 'Success Testimonials',   target: 'testimonials-section',      scroll: true },
-                ]).map((link) => (
-                  <button
-                    key={link.label}
-                    onClick={() => { setMobileMenuOpen(false); scrollToSection(link.target); }}
-                    id={`mobile-nav-link-${link.label.replace(/\s+/g, '-').toLowerCase()}`}
-                    className="w-full text-left py-3 text-xs font-semibold text-white/70 hover:text-white border-b border-white/5 hover:border-white/10 block font-mono tracking-widest cursor-pointer"
-                  >
-                    ▶ {link.label.toUpperCase()}
-                  </button>
-                ))}
-
-                {/* About Us */}
+        {/* Mobile dropdown — instant close so animation doesn't block taps */}
+        {mobileMenuOpen && (
+          <div
+            className="lg:hidden bg-[#06080e]/98 backdrop-blur-xl border-b border-white/5"
+            id="mobile-navigation-dropdown"
+          >
+            <div className="px-4 py-4 space-y-1">
+              {([
+                { label: 'Capabilities Portfolio', target: 'services-explorer-section' },
+                { label: 'Development Process',    target: 'process-section'           },
+                { label: 'Why NexCore',            target: 'why-us-section'             },
+                { label: 'Success Testimonials',   target: 'testimonials-section'      },
+              ]).map((link) => (
                 <button
-                  onClick={() => { setMobileMenuOpen(false); navigateTo('about'); }}
-                  id="mobile-nav-link-about"
-                  className={`w-full text-left py-3 text-xs font-semibold border-b border-white/5 block font-mono tracking-widest cursor-pointer ${
-                    currentPage === 'about' ? 'text-[#c5a059]' : 'text-white/70 hover:text-[#c5a059]'
-                  }`}
+                  key={link.label}
+                  onClick={() => scrollToSection(link.target)}
+                  id={`mobile-nav-link-${link.label.replace(/\s+/g, '-').toLowerCase()}`}
+                  className="w-full text-left py-3.5 px-2 text-xs font-semibold text-white/70 hover:text-[#c5a059] border-b border-white/[0.05] last:border-0 block font-mono tracking-widest cursor-pointer active:text-[#c5a059] transition-colors"
                 >
-                  ▶ ABOUT US
+                  ▶ {link.label.toUpperCase()}
                 </button>
+              ))}
 
-                <div className="pt-2">
-                  <button
-                    onClick={() => { setMobileMenuOpen(false); openBooking('GROWTH', '$2,999'); }}
-                    id="mobile-nav-book-btn"
-                    className="w-full py-3 bg-[#c5a059] text-center font-bold font-mono tracking-wider text-xs rounded-lg uppercase text-black shadow-md cursor-pointer hover:shadow-[0_0_20px_rgba(197,160,89,0.3)] transition-all"
-                  >
-                    ★ Book Strategy Consultation
-                  </button>
-                </div>
+              <button
+                onClick={() => { setMobileMenuOpen(false); navigateTo('about'); }}
+                id="mobile-nav-link-about"
+                className={`w-full text-left py-3.5 px-2 text-xs font-semibold border-b border-white/[0.05] block font-mono tracking-widest cursor-pointer transition-colors ${
+                  currentPage === 'about' ? 'text-[#c5a059]' : 'text-white/70 hover:text-[#c5a059]'
+                }`}
+              >
+                ▶ ABOUT US
+              </button>
+
+              <div className="pt-3 pb-1">
+                <button
+                  onClick={() => { setMobileMenuOpen(false); openBooking('GROWTH', '$2,999'); }}
+                  id="mobile-nav-book-btn"
+                  className="w-full py-3.5 bg-[#c5a059] text-center font-bold font-mono tracking-wider text-xs rounded-lg uppercase text-black shadow-md cursor-pointer active:scale-95 transition-all"
+                >
+                  ★ Book Strategy Consultation
+                </button>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
+        )}
       </nav>
 
       <div className="h-20 md:h-28" />
@@ -343,7 +339,7 @@ export default function App() {
         <div className="absolute bottom-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c5a059]/[0.06] to-transparent pointer-events-none" />
 
         {/* ── CENTER CONTENT — flex-1 pushes stats to bottom ── */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-start md:justify-center text-center px-4 max-w-5xl mx-auto w-full gap-6 pt-20 md:pt-0">
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-start md:justify-center text-center px-4 max-w-5xl mx-auto w-full gap-6 pt-4 md:pt-0">
 
           {/* Status pill */}
           <motion.div
