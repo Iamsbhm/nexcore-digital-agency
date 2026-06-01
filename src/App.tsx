@@ -189,11 +189,11 @@ export default function App() {
             id="brand-logo-btn"
           >
             <div className="w-7 h-7 bg-gradient-to-tr from-[#c5a059] to-[#8c6e3d] rounded-sm rotate-45 flex items-center justify-center shadow-md shadow-[#c5a059]/10 group-hover:scale-105 transition-transform">
-              <span className="-rotate-45 block font-serif font-light italic text-white text-[11px]">n</span>
+              <span className="-rotate-45 block font-serif font-light italic text-white text-[11px]">p</span>
             </div>
             <div>
-              <span className="text-sm font-display font-semibold tracking-[0.2em] text-white block">NEXCORE</span>
-              <span className="text-[8px] font-mono tracking-[0.25em] text-[#c5a059] block">DIGITAL STUDIO</span>
+              <span className="text-sm font-display font-semibold tracking-[0.2em] text-white block">PIXEL VANCE</span>
+              <span className="text-[8px] font-mono tracking-[0.25em] text-[#c5a059] block">DIGITAL</span>
             </div>
           </button>
 
@@ -261,7 +261,7 @@ export default function App() {
               {([
                 { label: 'Capabilities Portfolio', target: 'services-explorer-section' },
                 { label: 'Development Process',    target: 'process-section'           },
-                { label: 'Why NexCore',            target: 'why-us-section'             },
+                { label: 'Why Pixel Vance',        target: 'why-us-section'             },
                 { label: 'Success Testimonials',   target: 'testimonials-section'      },
               ]).map((link) => (
                 <button
@@ -505,7 +505,7 @@ export default function App() {
             — OUR EDGE —
           </span>
           <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-white leading-none">
-            Why Choose <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>NexCore</span>
+            Why Choose <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Pixel Vance</span>
           </h2>
           <p className="text-sm text-white/40 max-w-xl mx-auto leading-relaxed">
             We don't just build — we craft digital experiences that convert, scale, and leave lasting impressions.
@@ -745,7 +745,7 @@ export default function App() {
                     <span className="-rotate-45 block font-serif font-light italic text-white text-[13px]">n</span>
                   </div>
                   <div>
-                    <span className="text-base font-display font-bold tracking-[0.2em] text-white block">NEXCORE</span>
+                    <span className="text-base font-display font-bold tracking-[0.2em] text-white block">PIXEL VANCE</span>
                     <span className="text-[8px] font-mono tracking-[0.3em] text-[#c5a059]/70 block">DIGITAL AGENCY</span>
                   </div>
                 </div>
@@ -776,7 +776,7 @@ export default function App() {
                 >
                   Book a Strategy Call →
                 </button>
-                <p className="text-[9px] font-mono text-white/20">hello@nexcore.agency</p>
+                <p className="text-[9px] font-mono text-white/20">hello@pixelvance.digital</p>
               </div>
             </div>
 
@@ -835,7 +835,7 @@ export default function App() {
                 <ul className="space-y-4">
                   <li>
                     <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Email</p>
-                    <a href="mailto:hello@nexcore.agency" className="text-[11px] text-white/45 hover:text-white transition-colors">hello@nexcore.agency</a>
+                    <a href="mailto:hello@pixelvance.digital" className="text-[11px] text-white/45 hover:text-white transition-colors">hello@pixelvance.digital</a>
                   </li>
                   <li>
                     <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Phone</p>
@@ -856,7 +856,7 @@ export default function App() {
             {/* Bottom bar */}
             <div className="mt-14 pt-6 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-3">
               <span className="text-[9px] font-mono text-white/20 tracking-wider">
-                © 2026 NexCore Digital Agency LLC. All rights reserved.
+                © 2026 Pixel Vance Digital. All rights reserved.
               </span>
               <div className="flex items-center gap-6">
                 <span className="text-[9px] font-mono text-white/20 hover:text-white/50 cursor-pointer transition-colors">Privacy Policy</span>

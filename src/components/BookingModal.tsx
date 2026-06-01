@@ -78,7 +78,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
       selected_date: selectedDate,
       selected_time: selectedTime,
       message:      clientNote || 'No additional notes.',
-      to_name:      'NexCore Team',
+      to_name:      'Pixel Vance Digital Team',
     };
 
     try {
@@ -122,9 +122,9 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
     const end      = `${dateStr}T${timeSlot.end}00`;
 
     const plan   = 'Strategy Session';
-    const title  = encodeURIComponent(`NexCore Strategy Call — ${plan}`);
+    const title  = encodeURIComponent(`Pixel Vance Digital Strategy Call — ${plan}`);
     const details = encodeURIComponent(
-      `Strategy session booked via NexCore Digital Studio.\n\nClient: ${clientName}\nEmail: ${clientEmail}\nPhone: +${clientPhone}\n\nNotes: ${clientNote || 'None'}`,
+      `Strategy session booked via Pixel Vance Digital.\n\nClient: ${clientName}\nEmail: ${clientEmail}\nPhone: +${clientPhone}\n\nNotes: ${clientNote || 'None'}`,
     );
     const guests = encodeURIComponent(clientEmail);
 

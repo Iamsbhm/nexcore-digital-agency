@@ -36,7 +36,7 @@ export default function AboutPage({ openBooking }: AboutPageProps) {
           <span className="font-serif italic text-[#c5a059]">Driven by Results.</span>
         </h1>
         <p className="text-sm text-white/40 max-w-xl mx-auto leading-relaxed">
-          NexCore was founded with one belief: businesses deserve digital experiences as extraordinary as their ambitions.
+          Pixel Vance Digital was founded with one belief: businesses deserve digital experiences as extraordinary as their ambitions.
         </p>
       </motion.div>
 
@@ -74,7 +74,7 @@ export default function AboutPage({ openBooking }: AboutPageProps) {
             <span className="font-serif italic text-[#c5a059]">full-scale digital powerhouse.</span>
           </h2>
           <p className="text-sm text-white/40 leading-relaxed">
-            Founded in 2018 in New York City, NexCore started as a two-person design studio focused on brand identity. Over seven years, we've grown into a full-spectrum digital agency with specialists across design, engineering, AI automation, and growth strategy.
+            Founded in 2018, Pixel Vance Digital started as a two-person design studio focused on brand identity. Over seven years, we've grown into a full-spectrum digital agency with specialists across design, engineering, AI automation, and growth strategy.
           </p>
           <p className="text-sm text-white/40 leading-relaxed">
             Today, we serve startups, scale-ups, and enterprise companies across the USA and internationally — delivering digital systems that don't just look extraordinary, but perform at the highest level.
