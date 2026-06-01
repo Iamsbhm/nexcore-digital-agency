@@ -422,25 +422,6 @@ export default function App() {
           </motion.div>
         </div>
 
-        {/* ── Bottom stats strip — in normal flow, no overlap ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="relative z-10 w-full flex items-center justify-center gap-8 md:gap-16 px-6 py-5 border-t border-white/[0.05]"
-          style={{ background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(8px)' }}
-        >
-          {statsList.map((stat, sIdx) => (
-            <div key={sIdx} className="flex items-baseline gap-2">
-              <span className="text-xl md:text-2xl font-display font-black" style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                {stat.value}
-              </span>
-              <span className="text-[9px] text-white/30 uppercase font-mono tracking-widest hidden sm:block">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </motion.div>
       </section>
 
 
