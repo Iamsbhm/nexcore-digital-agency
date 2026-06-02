@@ -934,10 +934,6 @@ export default function App() {
                     <a href="mailto:hello@pixelvance.digital" className="text-[11px] text-white/45 hover:text-white transition-colors">hello@pixelvance.digital</a>
                   </li>
                   <li>
-                    <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Phone</p>
-                    <a href="tel:+15551234567" className="text-[11px] text-white/45 hover:text-white transition-colors">+1 (555) 123-4567</a>
-                  </li>
-                  <li>
                     <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Hours</p>
                     <p className="text-[11px] text-white/45">Mon – Fri &nbsp;·&nbsp; 9am – 6pm EST</p>
                   </li>
