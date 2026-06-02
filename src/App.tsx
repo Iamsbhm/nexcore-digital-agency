@@ -213,35 +213,48 @@ export default function App() {
             id="brand-logo-btn"
             aria-label="Pixel Vance Digital — Go to homepage"
           >
-            {/* PV Logo Mark — inline SVG */}
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-              className="w-8 h-8 group-hover:scale-105 transition-transform drop-shadow-[0_0_8px_rgba(197,160,89,0.4)]"
+            {/* Pixel Art Logo Icon — matches brand reference image */}
+            <svg viewBox="0 0 28 32" width="28" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"
+              className="group-hover:scale-105 transition-transform drop-shadow-[0_0_12px_rgba(124,58,237,0.6)] flex-shrink-0"
               role="img" aria-label="Pixel Vance Digital logo">
               <title>Pixel Vance Digital Logo</title>
               <defs>
-                <linearGradient id="pv-nav-bg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#c5a059"/>
-                  <stop offset="1" stopColor="#6b4e1e"/>
-                </linearGradient>
-                <linearGradient id="pv-nav-v" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#ffffff"/>
-                  <stop offset="1" stopColor="rgba(255,255,255,0.85)"/>
+                <linearGradient id="pv-pixel-grad" x1="0" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#3b82f6"/>
+                  <stop offset="100%" stopColor="#7c3aed"/>
                 </linearGradient>
               </defs>
-              {/* Background rounded square */}
-              <rect width="32" height="32" rx="7" fill="url(#pv-nav-bg)"/>
-              {/* Subtle inner border */}
-              <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="6.25" stroke="white" strokeOpacity="0.15" strokeWidth="0.75"/>
-              {/* Pixel dot — top left */}
-              <rect x="7" y="7" width="4" height="4" rx="1" fill="white" fillOpacity="0.95"/>
-              {/* Pixel dot — top right */}
-              <rect x="21" y="7" width="4" height="4" rx="1" fill="white" fillOpacity="0.95"/>
-              {/* Bold V shape */}
-              <path d="M9 13 L16 24 L23 13" stroke="white" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round"/>
+              {/* Row 0: top accent pixels */}
+              <rect x="8" y="0" width="4" height="4" fill="url(#pv-pixel-grad)"/>
+              <rect x="12" y="0" width="4" height="4" fill="url(#pv-pixel-grad)"/>
+              {/* Row 1: upper head */}
+              <rect x="4" y="4" width="20" height="4" fill="url(#pv-pixel-grad)"/>
+              {/* Row 2: full width */}
+              <rect x="0" y="8" width="28" height="4" fill="url(#pv-pixel-grad)"/>
+              {/* Row 3: eyes row — white squares = eyes */}
+              <rect x="0" y="12" width="4" height="4" fill="url(#pv-pixel-grad)"/>
+              <rect x="4" y="12" width="4" height="4" fill="white"/>
+              <rect x="8" y="12" width="8" height="4" fill="url(#pv-pixel-grad)"/>
+              <rect x="16" y="12" width="4" height="4" fill="url(#pv-pixel-grad)"/>
+              <rect x="20" y="12" width="4" height="4" fill="white"/>
+              <rect x="24" y="12" width="4" height="4" fill="url(#pv-pixel-grad)"/>
+              {/* Row 4: full */}
+              <rect x="0" y="16" width="28" height="4" fill="url(#pv-pixel-grad)"/>
+              {/* Row 5: lower body split */}
+              <rect x="4" y="20" width="8" height="4" fill="url(#pv-pixel-grad)"/>
+              <rect x="16" y="20" width="8" height="4" fill="url(#pv-pixel-grad)"/>
+              {/* Row 6: legs */}
+              <rect x="8" y="24" width="4" height="4" fill="url(#pv-pixel-grad)"/>
+              <rect x="16" y="24" width="4" height="4" fill="url(#pv-pixel-grad)"/>
+              {/* Row 7: right foot */}
+              <rect x="16" y="28" width="4" height="4" fill="url(#pv-pixel-grad)"/>
             </svg>
             <div>
-              <span className="text-sm font-display font-semibold tracking-[0.2em] text-white block">PIXEL VANCE</span>
-              <span className="text-[8px] font-mono tracking-[0.25em] text-[#c5a059] block">DIGITAL</span>
+              <span
+                className="text-sm font-display font-bold tracking-[0.06em] block leading-tight"
+                style={{ background: 'linear-gradient(90deg, #3b82f6, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+              >Pixel Vance</span>
+              <span className="text-[9px] font-display font-bold tracking-[0.18em] text-white block mt-0.5">Digital</span>
             </div>
           </button>
 
@@ -798,23 +811,38 @@ export default function App() {
               {/* Logo + tagline + socials */}
               <div className="space-y-5 max-w-md">
                 <div className="flex items-center gap-3">
-                  {/* PV Logo Mark — footer (slightly larger) */}
-                  <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 drop-shadow-[0_0_12px_rgba(197,160,89,0.3)]">
+                  {/* Pixel Art Logo — footer version (slightly larger) */}
+                  <svg viewBox="0 0 28 32" width="36" height="41" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    className="drop-shadow-[0_0_14px_rgba(124,58,237,0.5)] flex-shrink-0">
                     <defs>
-                      <linearGradient id="pv-footer-bg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#c5a059"/>
-                        <stop offset="1" stopColor="#6b4e1e"/>
+                      <linearGradient id="pv-footer-pixel-grad" x1="0" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stopColor="#3b82f6"/>
+                        <stop offset="100%" stopColor="#7c3aed"/>
                       </linearGradient>
                     </defs>
-                    <rect width="36" height="36" rx="8" fill="url(#pv-footer-bg)"/>
-                    <rect x="0.75" y="0.75" width="34.5" height="34.5" rx="7.25" stroke="white" strokeOpacity="0.15" strokeWidth="0.75"/>
-                    <rect x="8" y="8" width="4.5" height="4.5" rx="1.2" fill="white" fillOpacity="0.95"/>
-                    <rect x="23.5" y="8" width="4.5" height="4.5" rx="1.2" fill="white" fillOpacity="0.95"/>
-                    <path d="M10 15 L18 27 L26 15" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <rect x="8" y="0" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="12" y="0" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="4" y="4" width="20" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="0" y="8" width="28" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="0" y="12" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="4" y="12" width="4" height="4" fill="white"/>
+                    <rect x="8" y="12" width="8" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="16" y="12" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="20" y="12" width="4" height="4" fill="white"/>
+                    <rect x="24" y="12" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="0" y="16" width="28" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="4" y="20" width="8" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="16" y="20" width="8" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="8" y="24" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="16" y="24" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
+                    <rect x="16" y="28" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
                   </svg>
                   <div>
-                    <span className="text-base font-display font-bold tracking-[0.2em] text-white block">PIXEL VANCE</span>
-                    <span className="text-[8px] font-mono tracking-[0.3em] text-[#c5a059]/70 block">DIGITAL AGENCY</span>
+                    <span
+                      className="text-base font-display font-bold tracking-[0.06em] block leading-tight"
+                      style={{ background: 'linear-gradient(90deg, #3b82f6, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+                    >Pixel Vance</span>
+                    <span className="text-[9px] font-display font-bold tracking-[0.2em] text-white/70 block mt-0.5">DIGITAL AGENCY</span>
                   </div>
                 </div>
                 <p className="text-sm text-white/35 leading-relaxed font-light">
