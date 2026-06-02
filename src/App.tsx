@@ -848,16 +848,23 @@ export default function App() {
                 <p className="text-sm text-white/35 leading-relaxed font-light">
                   We craft high-fidelity digital experiences for ambitious brands — from bespoke UI design to AI-powered growth systems.
                 </p>
-                {/* Social pills */}
+                {/* Social links */}
                 <div className="flex items-center gap-2.5">
-                  {[{ label: 'X' }, { label: 'in' }, { label: 'Be' }, { label: 'Dr' }].map((s) => (
-                    <button
+                  {[
+                    { label: 'in', href: 'https://www.linkedin.com/company/pixel-vance-digital/', title: 'LinkedIn' },
+                    { label: 'Dr', href: '#', title: 'Dribbble' }
+                  ].map((s) => (
+                    <a
                       key={s.label}
+                      href={s.href}
+                      target={s.href !== '#' ? '_blank' : undefined}
+                      rel={s.href !== '#' ? 'noopener noreferrer' : undefined}
                       id={`footer-social-${s.label.toLowerCase()}`}
-                      className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-[10px] font-bold font-mono text-white/35 hover:text-[#c5a059] hover:border-[#c5a059]/40 hover:bg-[#c5a059]/5 transition-all duration-200 cursor-pointer"
+                      title={s.title}
+                      className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-[10px] font-bold font-mono text-white/35 hover:text-[#c5a059] hover:border-[#c5a059]/40 hover:bg-[#c5a059]/5 transition-all duration-200"
                     >
                       {s.label}
-                    </button>
+                    </a>
                   ))}
                 </div>
               </div>
