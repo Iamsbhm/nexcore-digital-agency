@@ -879,7 +879,7 @@ export default function App() {
                 >
                   Book a Strategy Call →
                 </button>
-                <p className="text-[9px] font-mono text-white/20">hello@pixelvance.digital</p>
+                <p className="text-[9px] font-mono text-white/20">info@pixelvancedigital.com</p>
               </div>
             </div>
 
@@ -938,7 +938,7 @@ export default function App() {
                 <ul className="space-y-4">
                   <li>
                     <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Email</p>
-                    <a href="mailto:hello@pixelvance.digital" className="text-[11px] text-white/45 hover:text-white transition-colors">hello@pixelvance.digital</a>
+                    <a href="mailto:info@pixelvancedigital.com" className="text-[11px] text-white/45 hover:text-white transition-colors">info@pixelvancedigital.com</a>
                   </li>
                   <li>
                     <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Hours</p>
