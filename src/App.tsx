@@ -454,16 +454,15 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* Tagline */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            className="text-base md:text-lg text-white/40 max-w-md mx-auto leading-relaxed font-light tracking-wide"
+            className="text-base md:text-lg text-white/40 max-w-lg mx-auto leading-relaxed font-light tracking-wide"
           >
-            Premium <span className="text-[#c5a059]/80 font-medium">web design, SEO & AI automation</span> —{' '}
-            crafted for <span className="text-white/60 font-medium">ambitious US businesses</span> ready to{' '}
-            <span className="text-white/60 font-medium">dominate their market</span>.
+            High-fidelity <span className="text-[#c5a059]/80 font-medium">web design, bespoke development</span>, and{' '}
+            <span className="text-white/60 font-medium">conversion systems</span> —{' '}
+            built for <span className="text-white/60 font-medium">brands that demand perfection</span>.
           </motion.p>
 
           {/* CTAs */}
