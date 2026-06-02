@@ -87,6 +87,18 @@ export default function App() {
     };
   }, []);
 
+  // Dynamic page title — updates document.title per route (SEO)
+  useEffect(() => {
+    const pageTitles: Record<PageName, string> = {
+      home:           'Pixel Vance Digital — Premium Web Design & SEO Agency USA',
+      about:          'About Us | Pixel Vance Digital — Web Design & Digital Marketing',
+      portfolio:      'Portfolio | Web Design & Branding Work | Pixel Vance Digital',
+      'case-studies': 'Case Studies | Client Success Stories | Pixel Vance Digital',
+      blog:           'Blog | Web Design & Digital Marketing Tips | Pixel Vance Digital',
+    };
+    document.title = pageTitles[currentPage];
+  }, [currentPage]);
+
   // Keep a stable ref to openBooking so the event listener never goes stale
   const openBookingRef = useRef<(plan: string, price: string) => void>(() => {});
 
@@ -187,10 +199,13 @@ export default function App() {
             onClick={() => currentPage === 'home' ? scrollToSection('hero') : navigateTo('home')} 
             className="flex items-center gap-3 group text-left cursor-pointer transition-all"
             id="brand-logo-btn"
+            aria-label="Pixel Vance Digital — Go to homepage"
           >
             {/* PV Logo Mark — inline SVG */}
             <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-              className="w-8 h-8 group-hover:scale-105 transition-transform drop-shadow-[0_0_8px_rgba(197,160,89,0.4)]">
+              className="w-8 h-8 group-hover:scale-105 transition-transform drop-shadow-[0_0_8px_rgba(197,160,89,0.4)]"
+              role="img" aria-label="Pixel Vance Digital logo">
+              <title>Pixel Vance Digital Logo</title>
               <defs>
                 <linearGradient id="pv-nav-bg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
                   <stop stopColor="#c5a059"/>
@@ -383,25 +398,25 @@ export default function App() {
             style={{ perspective: '1600px' }}
             className="w-full"
           >
-            {/* Line 1 */}
+            {/* Line 1 — Single H1 for SEO (one H1 per page rule) */}
             <div style={{ transform: 'rotateX(8deg)', transformOrigin: 'center bottom' }}>
               <h1 className="text-[clamp(4rem,12vw,11rem)] font-display font-light text-white leading-[0.88] tracking-[-0.02em] hero-3d-white">
                 We <span className="font-bold">Build</span>
               </h1>
             </div>
 
-            {/* Line 2 — gold shimmer italic */}
+            {/* Line 2 — decorative (not H1, preserves visual hierarchy) */}
             <div style={{ transform: 'rotateX(3deg)', transformOrigin: 'center center' }}>
-              <h1 className="text-[clamp(4rem,12vw,11rem)] font-serif italic leading-[0.88] tracking-[-0.01em] text-shimmer-gold hero-3d-text">
+              <p className="text-[clamp(4rem,12vw,11rem)] font-serif italic leading-[0.88] tracking-[-0.01em] text-shimmer-gold hero-3d-text">
                 Digital Legacies
-              </h1>
+              </p>
             </div>
 
-            {/* Line 3 — ghost fade */}
+            {/* Line 3 — decorative ghost fade */}
             <div style={{ transform: 'rotateX(-4deg)', transformOrigin: 'center top' }}>
-              <h1 className="text-[clamp(2.5rem,7vw,7rem)] font-display font-extralight text-white/25 leading-[1.1] tracking-wide mt-1">
+              <p className="text-[clamp(2.5rem,7vw,7rem)] font-display font-extralight text-white/25 leading-[1.1] tracking-wide mt-1">
                 That Never Settle.
-              </h1>
+              </p>
             </div>
           </motion.div>
 
@@ -412,9 +427,9 @@ export default function App() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="text-base md:text-lg text-white/40 max-w-md mx-auto leading-relaxed font-light tracking-wide"
           >
-            Where <span className="text-white/60 font-medium">bold ambition</span> meets{' '}
-            <span className="text-[#c5a059]/80 font-medium">digital mastery</span> —{' '}
-            brands built to <span className="text-white/60 font-medium">dominate</span> their space.
+            Premium <span className="text-[#c5a059]/80 font-medium">web design, SEO & AI automation</span> —{' '}
+            crafted for <span className="text-white/60 font-medium">ambitious US businesses</span> ready to{' '}
+            <span className="text-white/60 font-medium">dominate their market</span>.
           </motion.p>
 
           {/* CTAs */}
@@ -484,10 +499,10 @@ export default function App() {
             — WHAT WE DO —
           </span>
           <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            Our High-Demand Services
+            Web Design, SEO & Digital Marketing Services
           </h2>
           <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-            Full-spectrum digital services crafted for the competitive USA market. Select different divisions to search specific deliverables.
+            Full-spectrum web design, SEO, AI automation & digital marketing services for US businesses. Select a division to explore deliverables.
           </p>
         </div>
 
@@ -504,10 +519,10 @@ export default function App() {
             — HOW WE WORK —
           </span>
           <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            Our 4-Step Process
+            Our 4-Step Web Design & Development Process
           </h2>
           <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-            Simple, transparent, and results-driven from day one. Walk through our milestones below.
+            Simple, transparent, and results-driven from day one. From strategy to launch — walk through our proven milestones.
           </p>
         </div>
 
@@ -526,10 +541,10 @@ export default function App() {
             — OUR EDGE —
           </span>
           <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-white leading-none">
-            Why Choose <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Pixel Vance</span>
+            Why Choose <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Pixel Vance Digital</span>
           </h2>
           <p className="text-sm text-white/40 max-w-xl mx-auto leading-relaxed">
-            We don't just build — we craft digital experiences that convert, scale, and leave lasting impressions.
+            The top-rated US web design agency that doesn't just build — we craft digital experiences that convert, scale, and dominate search rankings.
           </p>
         </div>
 
@@ -695,10 +710,10 @@ export default function App() {
             — CLIENT STORIES —
           </span>
           <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            What Our Clients Say
+            What Our US Clients Say
           </h2>
           <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-            Read direct verifications from partners scaling corporate operations across the world.
+            Real results from US businesses who partnered with Pixel Vance Digital for web design, SEO & digital marketing.
           </p>
         </div>
 
