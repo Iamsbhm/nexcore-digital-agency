@@ -1,13 +1,13 @@
-# NexCore Digital Studio — robots.txt
+# Pixel Vance Digital — robots.txt
 # Allow all search engines to crawl the site
 
 User-agent: *
 Allow: /
 
-# Block any private/utility paths (add more as needed)
+# Block private/utility paths
 Disallow: /api/
 Disallow: /.env
 Disallow: /node_modules/
 
-# Sitemap location — update with your real domain
-Sitemap: https://www.yourdomain.com/sitemap.xml
+# Sitemap location
+Sitemap: https://www.pixelvancedigital.com/sitemap.xml
