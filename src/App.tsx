@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Compass, 
@@ -24,22 +24,24 @@ import {
   HelpCircle
 } from 'lucide-react';
 
-// Subcomponents
+// Critical above-fold component — loaded eagerly for best LCP
 import Particles3D from './components/Particles3D';
-import AutomationSandbox from './components/AutomationSandbox';
-import SpatialConsole from './components/SpatialConsole';
-import ConversionGauge from './components/ConversionGauge';
-import ServiceSelector from './components/ServiceSelector';
-import InteractiveProcess from './components/InteractiveProcess';
-import PricingCalculator from './components/PricingCalculator';
-import TestimonialsSlider from './components/TestimonialsSlider';
-import BookingModal from './components/BookingModal';
 
-// Pages
-import AboutPage from './pages/AboutPage';
-import PortfolioPage from './pages/PortfolioPage';
-import CaseStudiesPage from './pages/CaseStudiesPage';
-import BlogPage from './pages/BlogPage';
+// Lazy-loaded below-fold components (splits JS bundle, improves LCP & TTI)
+const AutomationSandbox  = lazy(() => import('./components/AutomationSandbox'));
+const SpatialConsole     = lazy(() => import('./components/SpatialConsole'));
+const ConversionGauge    = lazy(() => import('./components/ConversionGauge'));
+const ServiceSelector    = lazy(() => import('./components/ServiceSelector'));
+const InteractiveProcess = lazy(() => import('./components/InteractiveProcess'));
+const PricingCalculator  = lazy(() => import('./components/PricingCalculator'));
+const TestimonialsSlider = lazy(() => import('./components/TestimonialsSlider'));
+const BookingModal       = lazy(() => import('./components/BookingModal'));
+
+// Lazy-loaded inner pages (not needed on first paint)
+const AboutPage       = lazy(() => import('./pages/AboutPage'));
+const PortfolioPage   = lazy(() => import('./pages/PortfolioPage'));
+const CaseStudiesPage = lazy(() => import('./pages/CaseStudiesPage'));
+const BlogPage        = lazy(() => import('./pages/BlogPage'));
 
 type PageName = 'home' | 'about' | 'portfolio' | 'case-studies' | 'blog';
 
@@ -336,11 +338,17 @@ export default function App() {
 
       <div className="h-20 md:h-28" />
 
-      {/* ── Inner Pages ── */}
-      {currentPage === 'about'        && <AboutPage openBooking={openBooking} />}
-      {currentPage === 'portfolio'    && <PortfolioPage openBooking={openBooking} />}
-      {currentPage === 'case-studies' && <CaseStudiesPage openBooking={openBooking} />}
-      {currentPage === 'blog'         && <BlogPage />}
+      {/* —— Inner Pages —— lazy loaded, shown only when navigated to */}
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <span className="w-8 h-8 border-2 border-[#c5a059] border-t-transparent rounded-full animate-spin" />
+        </div>
+      }>
+        {currentPage === 'about'        && <AboutPage openBooking={openBooking} />}
+        {currentPage === 'portfolio'    && <PortfolioPage openBooking={openBooking} />}
+        {currentPage === 'case-studies' && <CaseStudiesPage openBooking={openBooking} />}
+        {currentPage === 'blog'         && <BlogPage />}
+      </Suspense>
 
       {/* ── Home Content ── */}
       {currentPage === 'home' && <>
@@ -915,13 +923,15 @@ export default function App() {
         </div>
       </footer>
 
-      {/* 11. GLOBAL BOOKING SCHEDULER MODAL */}
-      <BookingModal 
-        isOpen={bookingOpen} 
-        onClose={() => setBookingOpen(false)} 
-        selectedPlan={selectedPlan}
-        calculatedPrice={calculatedPrice}
-      />
+      {/* 11. GLOBAL BOOKING SCHEDULER MODAL — lazy loaded, only fetched on first open */}
+      <Suspense fallback={null}>
+        <BookingModal 
+          isOpen={bookingOpen} 
+          onClose={() => setBookingOpen(false)} 
+          selectedPlan={selectedPlan}
+          calculatedPrice={calculatedPrice}
+        />
+      </Suspense>
     </div>
   );
 }
