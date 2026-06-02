@@ -166,6 +166,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#06080e] text-slate-300 font-sans selection:bg-[#c5a059]/30 selection:text-[#f7eedb] relative">
 
+      {/* Skip to main content — accessibility & screen reader */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[999] focus:px-4 focus:py-2 focus:bg-[#c5a059] focus:text-black focus:font-bold focus:rounded"
+      >
+        Skip to main content
+      </a>
+
       {/* ── Static premium background ── */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
         {/* Base deep dark */}
@@ -193,6 +201,8 @@ export default function App() {
             : 'bg-transparent py-5'
         }`}
         id="main-navigation"
+        role="navigation"
+        aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
           
@@ -337,6 +347,9 @@ export default function App() {
       </nav>
 
       <div className="h-20 md:h-28" />
+
+      {/* Main content landmark for accessibility & skip-nav */}
+      <main id="main-content">
 
       {/* —— Inner Pages —— lazy loaded, shown only when navigated to */}
       <Suspense fallback={
@@ -932,6 +945,7 @@ export default function App() {
           calculatedPrice={calculatedPrice}
         />
       </Suspense>
+      </main>
     </div>
   );
 }
