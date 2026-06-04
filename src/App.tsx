@@ -409,8 +409,8 @@ export default function App() {
         <div className="absolute bottom-16 right-6 md:right-10 w-6 h-6 border-b border-r border-[#c5a059]/30 pointer-events-none z-10" />
 
         {/* ── TWO-COLUMN HERO CONTENT ── */}
-        <div className="relative z-10 flex-1 flex items-center px-6 md:px-12 lg:px-20 max-w-8xl mx-auto w-full pt-24 pb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
+        <div className="relative z-10 flex-1 flex items-start pl-14 md:pl-20 lg:pl-28 pr-6 md:pr-12 lg:pr-16 max-w-8xl mx-auto w-full pt-32 md:pt-36 pb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full">
 
             {/* ── LEFT COLUMN — Text Content ── */}
             <div className="flex flex-col gap-7 lg:gap-8">
