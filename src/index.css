@@ -217,3 +217,61 @@ textarea:-webkit-autofill:focus {
   box-shadow: 0 0 0px 1000px #0c0a1c inset !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+/* 3D Isometric Floating Animations */
+@keyframes float-3d-a {
+  0%, 100% { transform: translate3d(75px, -15px, 45px) rotateX(-80deg); }
+  50%      { transform: translate3d(75px, -15px, 53px) rotateX(-80deg); }
+}
+.animate-float-3d-a {
+  animation: float-3d-a 7.5s ease-in-out infinite;
+}
+
+@keyframes float-3d-b {
+  0%, 100% { transform: translate3d(-120px, 10px, 30px) rotateX(-80deg); }
+  50%      { transform: translate3d(-120px, 10px, 37px) rotateX(-80deg); }
+}
+.animate-float-3d-b {
+  animation: float-3d-b 8.5s ease-in-out infinite;
+}
+
+@keyframes float-3d-smiley {
+  0%, 100% { transform: translate3d(-105px, -35px, 85px) rotateX(-80deg); }
+  50%      { transform: translate3d(-105px, -35px, 93px) rotateX(-80deg); }
+}
+.animate-float-3d-smiley {
+  animation: float-3d-smiley 6.8s ease-in-out infinite;
+}
+
+@keyframes float-3d-kiss {
+  0%, 100% { transform: translate3d(110px, -45px, 95px) rotateX(-80deg); }
+  50%      { transform: translate3d(110px, -45px, 104px) rotateX(-80deg); }
+}
+.animate-float-3d-kiss {
+  animation: float-3d-kiss 7.2s ease-in-out infinite;
+}
+
+@keyframes float-3d-cloud-a {
+  0%, 100% { transform: translate3d(-120px, -95px, 125px) rotateX(-80deg); }
+  50%      { transform: translate3d(-116px, -95px, 130px) rotateX(-80deg); }
+}
+.animate-float-3d-cloud-a {
+  animation: float-3d-cloud-a 9s ease-in-out infinite;
+}
+
+@keyframes float-3d-cloud-b {
+  0%, 100% { transform: translate3d(120px, -85px, 115px) rotateX(-80deg); }
+  50%      { transform: translate3d(117px, -85px, 121px) rotateX(-80deg); }
+}
+.animate-float-3d-cloud-b {
+  animation: float-3d-cloud-b 10s ease-in-out infinite;
+}
+
+@keyframes float-3d-star {
+  0%, 100% { transform: translate3d(35px, -55px, 135px) rotateX(-80deg); }
+  50%      { transform: translate3d(35px, -55px, 145px) rotateX(-80deg); }
+}
+.animate-float-3d-star {
+  animation: float-3d-star 6.2s ease-in-out infinite;
+}
+

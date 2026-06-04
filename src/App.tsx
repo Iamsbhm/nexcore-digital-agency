@@ -649,112 +649,91 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* ── FLOATING PANEL A: CODE SCREEN (Front Right) ── */}
+                    <div
+                      className="absolute z-10 w-[120px] h-[90px] bg-gradient-to-br from-[#1a0c2e]/98 to-[#0c051a]/99 border border-white/10 rounded-xl p-2.5 shadow-2xl flex flex-col justify-between animate-float-3d-a"
+                      style={{
+                        boxShadow: '0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(197,160,89,0.1)',
+                      }}
+                    >
+                      <div className="flex items-center justify-between border-b border-white/5 pb-1">
+                        <span className="text-[6px] font-mono text-purple-300 font-bold">App.tsx</span>
+                        <div className="w-3.5 h-3.5 rounded bg-[#c5a059]/10 flex items-center justify-center text-[8px] text-[#c5a059] font-bold">&lt;/&gt;</div>
+                      </div>
+                      <div className="flex-1 flex flex-col gap-1.5 mt-2 font-mono text-[5px] text-white/55 leading-none">
+                        <p><span className="text-[#c5a059]">const</span> Agency = () =&gt; &#123;</p>
+                        <p className="pl-2"><span className="text-purple-300">return</span> (</p>
+                        <p className="pl-4 text-green-300">&lt;<span className="text-[#c5a059]">InnovativeDesign</span> /&gt;</p>
+                        <p className="pl-2">);</p>
+                        <p>&#125;;</p>
+                      </div>
+                    </div>
+
+                    {/* ── FLOATING PANEL B: METRICS CHART (Front Left) ── */}
+                    <div
+                      className="absolute z-10 w-[110px] h-[85px] bg-[#ffffff] rounded-xl p-2.5 shadow-2xl flex flex-col justify-between animate-float-3d-b"
+                      style={{
+                        boxShadow: '0 15px 35px rgba(0,0,0,0.35)',
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[7px] font-mono text-slate-400 font-semibold">CONVERSIONS</span>
+                        <span className="text-[8px] font-mono text-[#c5a059] font-bold">+28%</span>
+                      </div>
+                      {/* Tiny Bar graph */}
+                      <div className="flex items-end justify-between h-9 mt-1.5 border-b border-slate-100 pb-0.5">
+                        <div className="w-2.5 h-[40%] bg-purple-200 rounded-sm" />
+                        <div className="w-2.5 h-[65%] bg-purple-300 rounded-sm" />
+                        <div className="w-2.5 h-[50%] bg-[#ebd9f1] rounded-sm" />
+                        <div className="w-2.5 h-[80%] bg-gradient-to-t from-[#c5a059] to-[#7c3aed] rounded-sm" />
+                        <div className="w-2.5 h-[95%] bg-[#c5a059]/80 rounded-sm" />
+                      </div>
+                      <div className="w-12 h-1.5 bg-slate-100 rounded-full mt-1.5 self-start" />
+                    </div>
+
+                    {/* ── FLOATING SMILEY EMOJI (Left side middle) ── */}
+                    <div
+                      className="absolute z-20 w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 border border-white/10 flex items-center justify-center shadow-lg text-sm animate-float-3d-smiley"
+                    >
+                      😊
+                    </div>
+
+                    {/* ── FLOATING KISS EMOJI (Right side middle) ── */}
+                    <div
+                      className="absolute z-20 w-9 h-9 rounded-full bg-gradient-to-br from-[#ebd9f1] to-purple-400 border border-white/10 flex items-center justify-center shadow-lg text-sm animate-float-3d-kiss"
+                    >
+                      😘
+                    </div>
+
+                    {/* ── FLOATING CLOUD A (Back Left) ── */}
+                    <div
+                      className="absolute z-1 w-14 h-8 opacity-40 animate-float-3d-cloud-a"
+                    >
+                      <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
+                        <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
+                      </svg>
+                    </div>
+
+                    {/* ── FLOATING CLOUD B (Back Right) ── */}
+                    <div
+                      className="absolute z-1 w-12 h-7 opacity-35 animate-float-3d-cloud-b"
+                    >
+                      <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
+                        <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
+                      </svg>
+                    </div>
+
+                    {/* ── FLOATING STAR BUBBLE (Center High) ── */}
+                    <div
+                      className="absolute z-20 w-8 h-8 rounded-full bg-gradient-to-br from-[#c5a059] to-[#8c6e3d] flex items-center justify-center shadow-lg text-[10px] text-white font-bold animate-float-3d-star"
+                      style={{
+                        boxShadow: '0 0 15px rgba(197,160,89,0.3)',
+                      }}
+                    >
+                      ⭐
+                    </div>
+
                   </div>
-
-                  {/* ── FLOATING PANEL A: CODE SCREEN (Front Right) ── */}
-                  <motion.div
-                    animate={{ y: [0, -8, 0] }}
-                    transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-                    className="absolute z-10 w-[120px] h-[90px] bg-gradient-to-br from-[#1a0c2e]/98 to-[#0c051a]/99 border border-white/10 rounded-xl p-2.5 shadow-2xl flex flex-col justify-between"
-                    style={{
-                      transform: 'translate3d(65px, 20px, 60px)',
-                      boxShadow: '0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(197,160,89,0.1)',
-                    }}
-                  >
-                    <div className="flex items-center justify-between border-b border-white/5 pb-1">
-                      <span className="text-[6px] font-mono text-purple-300 font-bold">App.tsx</span>
-                      <div className="w-3.5 h-3.5 rounded bg-[#c5a059]/10 flex items-center justify-center text-[8px] text-[#c5a059] font-bold">&lt;/&gt;</div>
-                    </div>
-                    <div className="flex-1 flex flex-col gap-1.5 mt-2 font-mono text-[5px] text-white/55 leading-none">
-                      <p><span className="text-[#c5a059]">const</span> Agency = () =&gt; &#123;</p>
-                      <p className="pl-2"><span className="text-purple-300">return</span> (</p>
-                      <p className="pl-4 text-green-300">&lt;<span className="text-[#c5a059]">InnovativeDesign</span> /&gt;</p>
-                      <p className="pl-2">);</p>
-                      <p>&#125;;</p>
-                    </div>
-                  </motion.div>
-
-                  {/* ── FLOATING PANEL B: METRICS CHART (Front Left) ── */}
-                  <motion.div
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                    className="absolute z-10 w-[110px] h-[85px] bg-[#ffffff] rounded-xl p-2.5 shadow-2xl flex flex-col justify-between"
-                    style={{
-                      transform: 'translate3d(-85px, 35px, 50px)',
-                      boxShadow: '0 15px 35px rgba(0,0,0,0.35)',
-                    }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-[7px] font-mono text-slate-400 font-semibold">CONVERSIONS</span>
-                      <span className="text-[8px] font-mono text-[#c5a059] font-bold">+28%</span>
-                    </div>
-                    {/* Tiny Bar graph */}
-                    <div className="flex items-end justify-between h-9 mt-1.5 border-b border-slate-100 pb-0.5">
-                      <div className="w-2.5 h-[40%] bg-purple-200 rounded-sm" />
-                      <div className="w-2.5 h-[65%] bg-purple-300 rounded-sm" />
-                      <div className="w-2.5 h-[50%] bg-[#ebd9f1] rounded-sm" />
-                      <div className="w-2.5 h-[80%] bg-gradient-to-t from-[#c5a059] to-[#7c3aed] rounded-sm" />
-                      <div className="w-2.5 h-[95%] bg-[#c5a059]/80 rounded-sm" />
-                    </div>
-                    <div className="w-12 h-1.5 bg-slate-100 rounded-full mt-1.5 self-start" />
-                  </motion.div>
-
-                  {/* ── FLOATING SMILEY EMOJI (Left side middle) ── */}
-                  <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                    className="absolute z-20 w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 border border-white/10 flex items-center justify-center shadow-lg text-sm"
-                    style={{ transform: 'translate3d(-95px, -35px, 90px)' }}
-                  >
-                    😊
-                  </motion.div>
-
-                  {/* ── FLOATING KISS EMOJI (Right side middle) ── */}
-                  <motion.div
-                    animate={{ y: [0, -9, 0] }}
-                    transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut", delay: 1.1 }}
-                    className="absolute z-20 w-9 h-9 rounded-full bg-gradient-to-br from-[#ebd9f1] to-purple-400 border border-white/10 flex items-center justify-center shadow-lg text-sm"
-                    style={{ transform: 'translate3d(90px, -50px, 95px)' }}
-                  >
-                    😘
-                  </motion.div>
-
-                  {/* ── FLOATING CLOUD A (Back Left) ── */}
-                  <motion.div
-                    animate={{ y: [0, -5, 0], x: [0, 4, 0] }}
-                    transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute z-1 w-14 h-8 opacity-40"
-                    style={{ transform: 'translate3d(-105px, -110px, 120px)' }}
-                  >
-                    <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
-                      <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
-                    </svg>
-                  </motion.div>
-
-                  {/* ── FLOATING CLOUD B (Back Right) ── */}
-                  <motion.div
-                    animate={{ y: [0, -6, 0], x: [0, -3, 0] }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                    className="absolute z-1 w-12 h-7 opacity-35"
-                    style={{ transform: 'translate3d(95px, -100px, 110px)' }}
-                  >
-                    <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
-                      <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
-                    </svg>
-                  </motion.div>
-
-                  {/* ── FLOATING STAR BUBBLE (Center High) ── */}
-                  <motion.div
-                    animate={{ y: [0, -12, 0] }}
-                    transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                    className="absolute z-20 w-8 h-8 rounded-full bg-gradient-to-br from-[#c5a059] to-[#8c6e3d] flex items-center justify-center shadow-lg text-[10px] text-white font-bold"
-                    style={{
-                      transform: 'translate3d(35px, -15px, 130px)',
-                      boxShadow: '0 0 15px rgba(197,160,89,0.3)',
-                    }}
-                  >
-                    ⭐
-                  </motion.div>
 
                 </div>
               </div>
