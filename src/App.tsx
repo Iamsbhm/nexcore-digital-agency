@@ -489,30 +489,8 @@ export default function App() {
                 </button>
               </motion.div>
 
-              {/* Micro stats row */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.85 }}
-                className="flex items-center gap-6 pt-2"
-              >
-                {[
-                  { v: '500+', l: 'Projects' },
-                  { v: '200+', l: 'Clients' },
-                  { v: '98%', l: 'Retention' },
-                ].map((s) => (
-                  <div key={s.l} className="flex flex-col">
-                    <span className="text-xl font-display font-bold text-white/80">{s.v}</span>
-                    <span className="text-[9px] font-mono tracking-widest text-white/25 uppercase">{s.l}</span>
-                  </div>
-                ))}
-                <div className="h-8 w-px bg-white/10 mx-1" />
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[9px] font-mono text-emerald-400/60 tracking-widest">Available Now</span>
-                </div>
-              </motion.div>
             </div>
+
 
             {/* ── RIGHT COLUMN — 3D Web Design Objects ── */}
             <motion.div
