@@ -410,11 +410,11 @@ export default function App() {
         <div className="absolute bottom-16 right-6 md:right-10 w-6 h-6 border-b border-r border-[#c5a059]/30 pointer-events-none z-10" />
 
         {/* ── TWO-COLUMN HERO CONTENT ── */}
-        <div className="relative z-10 w-full pl-20 md:pl-28 lg:pl-40 pr-6 md:pr-12 lg:pr-16" style={{ paddingTop: '72px', minHeight: '100vh', display: 'flex', alignItems: 'flex-start' }}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full">
+        <div className="relative z-10 w-full px-5 sm:px-8 md:px-12 lg:pl-40 lg:pr-16" style={{ paddingTop: '72px', minHeight: '100vh', display: 'flex', alignItems: 'flex-start' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
 
             {/* ── LEFT COLUMN — Text Content ── */}
-            <div className="flex flex-col gap-7 lg:gap-8">
+            <div className="flex flex-col gap-5 lg:gap-7 text-center lg:text-left items-center lg:items-start pt-4 lg:pt-0">
 
               {/* Status pill */}
               <motion.div
@@ -437,17 +437,17 @@ export default function App() {
                 style={{ perspective: '1400px' }}
               >
                 <div style={{ transform: 'rotateX(6deg)', transformOrigin: 'left bottom' }}>
-                  <h1 className="text-[clamp(3.2rem,7vw,6.5rem)] font-display font-light text-white leading-[0.9] tracking-[-0.02em]">
+                  <h1 className="text-[clamp(2.6rem,10vw,6.5rem)] font-display font-light text-white leading-[0.9] tracking-[-0.02em]">
                     We <span className="font-bold">Build</span>
                   </h1>
                 </div>
                 <div style={{ transform: 'rotateX(2deg)', transformOrigin: 'left center' }}>
-                  <p className="text-[clamp(3.2rem,7vw,6.5rem)] font-serif italic leading-[0.9] tracking-[-0.01em] text-shimmer-gold">
+                  <p className="text-[clamp(2.6rem,10vw,6.5rem)] font-serif italic leading-[0.9] tracking-[-0.01em] text-shimmer-gold">
                     Digital Legacies
                   </p>
                 </div>
                 <div style={{ transform: 'rotateX(-3deg)', transformOrigin: 'left top' }}>
-                  <p className="text-[clamp(1.6rem,3.5vw,3.2rem)] font-display font-extralight text-white/55 leading-[1.2] tracking-wide mt-2">
+                  <p className="text-[clamp(1.2rem,5vw,3.2rem)] font-display font-extralight text-white/55 leading-[1.2] tracking-wide mt-1">
                     That Never Settle.
                   </p>
                 </div>
@@ -458,7 +458,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.45 }}
-                className="text-base md:text-lg text-white/40 max-w-md leading-relaxed font-light tracking-wide"
+                className="text-sm md:text-base lg:text-lg text-white/40 max-w-md leading-relaxed font-light tracking-wide mx-auto lg:mx-0"
               >
                 High-fidelity <span className="text-[#c5a059]/80 font-medium">web design, bespoke development</span>, and{' '}
                 <span className="text-white/60 font-medium">conversion systems</span> —{' '}
@@ -470,12 +470,12 @@ export default function App() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex flex-col sm:flex-row items-start gap-3"
+                className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 w-full lg:w-auto"
               >
                 <button
                   onClick={() => openBooking('GROWTH', '$2,999')}
                   id="hero-book-btn"
-                  className="group relative flex items-center gap-2.5 py-3.5 px-9 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.28em] transition-all duration-300 cursor-pointer shadow-[0_0_48px_rgba(197,160,89,0.22)] hover:shadow-[0_0_64px_rgba(197,160,89,0.14)] active:scale-95 overflow-hidden"
+                  className="group relative flex items-center justify-center gap-2.5 py-3.5 px-8 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.28em] transition-all duration-300 cursor-pointer shadow-[0_0_48px_rgba(197,160,89,0.22)] hover:shadow-[0_0_64px_rgba(197,160,89,0.14)] active:scale-95 overflow-hidden w-full sm:w-auto"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-[#f7e6b5]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <span className="relative">Book Strategy Session</span>
@@ -483,7 +483,7 @@ export default function App() {
                 <button
                   onClick={() => scrollToSection('services-explorer-section')}
                   id="hero-demo-btn"
-                  className="flex items-center gap-2 py-3.5 px-9 border border-white/8 bg-white/[0.015] hover:bg-white/[0.05] hover:border-[#c5a059]/25 uppercase text-[10px] font-mono tracking-[0.28em] transition-all cursor-pointer active:scale-95 text-white/40 hover:text-white/80"
+                  className="flex items-center justify-center gap-2 py-3.5 px-8 border border-white/8 bg-white/[0.015] hover:bg-white/[0.05] hover:border-[#c5a059]/25 uppercase text-[10px] font-mono tracking-[0.28em] transition-all cursor-pointer active:scale-95 text-white/40 hover:text-white/80 w-full sm:w-auto"
                 >
                   Explore Services
                   <ArrowDownCircle className="w-3 h-3 text-[#c5a059]/60" />
