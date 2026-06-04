@@ -707,6 +707,60 @@ export default function App() {
                 <span style={{ fontSize: 9, color: 'rgba(167,139,250,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>✦ UI / UX Design</span>
               </div>
 
+              {/* ── FLOATING TAG — "Web Development" ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: '-2%',
+                  top: '36%',
+                  background: 'rgba(197,160,89,0.10)',
+                  border: '1px solid rgba(197,160,89,0.28)',
+                  borderRadius: 20,
+                  padding: '6px 14px',
+                  backdropFilter: 'blur(12px)',
+                  zIndex: 6,
+                  animation: 'hero-float-a 9.5s ease-in-out 0.7s infinite',
+                }}
+              >
+                <span style={{ fontSize: 9, color: 'rgba(247,230,181,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>💻 Web Development</span>
+              </div>
+
+              {/* ── FLOATING TAG — "Mobile App Dev" ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: '32%',
+                  top: '0%',
+                  background: 'rgba(236,72,153,0.10)',
+                  border: '1px solid rgba(236,72,153,0.28)',
+                  borderRadius: 20,
+                  padding: '6px 14px',
+                  backdropFilter: 'blur(12px)',
+                  zIndex: 6,
+                  animation: 'hero-float-b 10.5s ease-in-out 1.2s infinite',
+                }}
+              >
+                <span style={{ fontSize: 9, color: 'rgba(244,114,182,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>📱 Mobile App Dev</span>
+              </div>
+
+              {/* ── FLOATING TAG — "SEO Optimization" ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  right: '2%',
+                  top: '42%',
+                  background: 'rgba(16,185,129,0.10)',
+                  border: '1px solid rgba(16,185,129,0.28)',
+                  borderRadius: 20,
+                  padding: '6px 14px',
+                  backdropFilter: 'blur(12px)',
+                  zIndex: 6,
+                  animation: 'hero-float-c 11.5s ease-in-out 1.8s infinite',
+                }}
+              >
+                <span style={{ fontSize: 9, color: 'rgba(52,211,153,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>🔍 SEO Optimization</span>
+              </div>
+
               {/* ── FLOATING TAG — "AI Automation" ── */}
               <div
                 style={{
