@@ -190,12 +190,12 @@
 }
 
 .hero-graphic-container {
-  --hero-scale: 0.55;
+  --hero-scale: 0.46;
 }
 
 @media (min-width: 640px) {
   .hero-graphic-container {
-    --hero-scale: 0.78;
+    --hero-scale: 0.72;
   }
 }
 
