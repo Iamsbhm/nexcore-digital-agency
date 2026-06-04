@@ -65,6 +65,18 @@ export default function App() {
   // Live clock tracking for premium feel
   const [currentTime, setCurrentTime] = useState<string>('');
 
+  // Mouse tilt tracking state for 3D graphic interactivity
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: x * 18, y: -y * 18 });
+  };
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
   useEffect(() => {
     // Scroll event observer
     const handleScroll = () => {
@@ -495,12 +507,22 @@ export default function App() {
 
             {/* ── RIGHT COLUMN — 3D Web Design Objects ── */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
-              className="hidden lg:flex items-center justify-center relative h-[520px]"
+              className="flex items-center justify-center w-full max-w-[340px] sm:max-w-[480px] lg:max-w-none mx-auto my-6 lg:my-0"
               aria-hidden
             >
+              <div
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full flex items-center justify-center scale-[0.62] sm:scale-[0.85] lg:scale-100 origin-center cursor-default"
+                style={{
+                  transform: `perspective(1200px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
+                  transition: 'transform 0.2s cubic-bezier(0.1, 0.8, 0.2, 1)',
+                  transformStyle: 'preserve-3d',
+                }}
+              >
 
               {/* ── 3D BROWSER WINDOW — main focal object ── */}
               <div
@@ -718,6 +740,7 @@ export default function App() {
                   50%     { transform: translateY(-8px); }
                 }
               `}</style>
+              </div>
             </motion.div>
           </div>
         </div>
