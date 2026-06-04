@@ -572,239 +572,191 @@ export default function App() {
                     }}
                   />
 
-                  {/* ── 3D BROWSER SHOWCASE ── */}
+                  {/* ── 3D DASHBOARD SHOWCASE ── */}
                   <div 
                     className="relative flex items-center justify-center animate-browser-main"
                     style={{
-                      transform: 'rotateX(20deg) rotateY(-25deg) rotateZ(8deg)',
+                      transform: 'rotateX(55deg) rotateZ(-45deg)',
                       transformStyle: 'preserve-3d',
                     }}
                   >
-                    {/* MAIN BROWSER WINDOW */}
+                    
+                    {/* 1. Dashboard Navigation Sidebar */}
                     <div 
-                      className="w-[230px] h-[160px] bg-gradient-to-br from-[#120e29] via-[#090715] to-[#040308] border border-[#c5a059]/40 rounded-xl shadow-2xl p-2.5 flex flex-col justify-between"
+                      className="absolute w-16 h-[140px] bg-gradient-to-b from-[#1b153a]/95 to-[#0c071a]/98 border border-[#c5a059]/20 rounded-xl p-2 flex flex-col gap-2.5 shadow-2xl animate-dash-sidebar"
                       style={{
                         transformStyle: 'preserve-3d',
-                        boxShadow: '0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(197,160,89,0.15)',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
                       }}
                     >
-                      {/* Browser Window Header */}
-                      <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                        {/* Control dots */}
-                        <div className="flex gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
-                          <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
-                          <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
-                        </div>
-                        {/* Title Bar mock */}
-                        <div className="w-[120px] h-3 bg-white/5 rounded-sm flex items-center justify-center px-1">
-                          <span className="text-[5px] font-mono text-white/30 tracking-wider">nexcore.digital</span>
-                        </div>
-                        <div className="w-4" /> {/* Spacer */}
+                      <div className="flex gap-1 items-center pb-1 border-b border-white/5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                        <span className="text-[5px] font-mono text-white/40">DASH</span>
                       </div>
-
-                      {/* Content Grid */}
-                      <div className="flex-1 grid grid-cols-2 gap-2 mt-2">
-                        {/* Left Column (Landscape & Waveform) */}
-                        <div className="flex flex-col gap-2 justify-between">
-                          
-                          {/* 1. Landscape Mountain Card */}
-                          <div className="bg-[#0a0718]/90 border border-white/5 rounded p-1 flex flex-col justify-between overflow-hidden w-full h-[58px] relative">
-                            {/* SVG Mountains Graphic */}
-                            <div className="absolute inset-0 opacity-80 flex items-end">
-                              <svg className="w-full h-[32px]" viewBox="0 0 100 40" preserveAspectRatio="none">
-                                <defs>
-                                  <linearGradient id="mountGrad1" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor="#c5a059" stopOpacity="0.8" />
-                                    <stop offset="100%" stopColor="#8c6e3d" stopOpacity="0.2" />
-                                  </linearGradient>
-                                  <linearGradient id="mountGrad2" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.7" />
-                                    <stop offset="100%" stopColor="#1e1b4b" stopOpacity="0.1" />
-                                  </linearGradient>
-                                </defs>
-                                {/* Back Mountain */}
-                                <path d="M-10,40 L30,10 L70,40 Z" fill="url(#mountGrad2)" />
-                                {/* Front Mountain */}
-                                <path d="M15,40 L60,5 L110,40 Z" fill="url(#mountGrad1)" />
-                                {/* Glowing Sun */}
-                                <circle cx="75" cy="12" r="5" fill="#c5a059" opacity="0.9" />
-                              </svg>
-                            </div>
-                            <div className="flex justify-between items-center z-10">
-                              <span className="text-[5px] font-mono text-purple-300 opacity-60">DESIGN.JPG</span>
-                            </div>
-                          </div>
-
-                          {/* 2. Waveform Card */}
-                          <div className="bg-[#0a0718]/90 border border-white/5 rounded flex flex-col justify-between w-full h-[47px] p-1.5">
-                            <span className="text-[5px] font-mono text-[#c5a059] opacity-70 leading-none">AUDIO_WAVE.RAW</span>
-                            {/* Simulated waveform bars */}
-                            <div className="flex items-end justify-between h-[20px] px-1 mt-1">
-                              <div className="w-[2px] h-[30%] bg-purple-400 rounded-sm" />
-                              <div className="w-[2px] h-[55%] bg-purple-300 rounded-sm" />
-                              <div className="w-[2px] h-[80%] bg-[#c5a059] rounded-sm shadow-[0_0_4px_#c5a059]" />
-                              <div className="w-[2px] h-[40%] bg-purple-200 rounded-sm" />
-                              <div className="w-[2px] h-[95%] bg-[#c5a059] rounded-sm shadow-[0_0_4px_#c5a059]" />
-                              <div className="w-[2px] h-[65%] bg-purple-300 rounded-sm" />
-                              <div className="w-[2px] h-[85%] bg-[#c5a059] rounded-sm shadow-[0_0_4px_#c5a059]" />
-                              <div className="w-[2px] h-[25%] bg-purple-400 rounded-sm" />
-                            </div>
-                          </div>
-
+                      <div className="flex flex-col gap-2">
+                        {/* Sidebar active item */}
+                        <div className="w-full h-5 bg-[#c5a059]/10 border border-[#c5a059]/40 rounded-md flex items-center justify-center">
+                          <span className="text-[6px] text-[#c5a059] font-bold">⊞</span>
                         </div>
-
-                        {/* Right Column (Wireframe Mock) */}
-                        <div className="bg-[#0a0718]/90 border border-white/5 rounded p-1.5 flex flex-col justify-between w-full h-[113px]">
-                          {/* Mock Image Box with Cross Lines */}
-                          <div className="w-full h-[38px] border border-white/10 rounded relative overflow-hidden flex items-center justify-center">
-                            <svg className="absolute inset-0 w-full h-full text-white/5" preserveAspectRatio="none">
-                              <line x1="0" y1="0" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1" />
-                              <line x1="100%" y1="0" x2="0" y2="100%" stroke="currentColor" strokeWidth="1" />
-                            </svg>
-                            <span className="text-[5px] font-mono text-white/20 z-10 font-semibold">PREVIEW</span>
-                          </div>
-                          
-                          {/* Skeleton text */}
-                          <div className="flex flex-col gap-1 mt-1">
-                            <div className="w-[90%] h-1.5 bg-[#c5a059]/25 rounded-sm" />
-                            <div className="w-[75%] h-1 bg-white/10 rounded-sm" />
-                            <div className="w-[50%] h-1 bg-white/10 rounded-sm" />
-                          </div>
-
-                          {/* Wireframe Button */}
-                          <div className="w-full h-4 bg-gradient-to-r from-[#c5a059] to-[#8c6e3d] rounded flex items-center justify-between px-1.5 shadow-md mt-1 cursor-pointer">
-                            <span className="text-[5px] font-bold text-black font-mono">PUBLISH</span>
-                            <span className="text-[6px] text-black font-bold">→</span>
-                          </div>
-                        </div>
-
+                        {/* Sidebar inactive items */}
+                        <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⊟</div>
+                        <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⊘</div>
+                        <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⚙</div>
                       </div>
                     </div>
 
-                    {/* ── FLOATING Rating Pill (Top Center) ── */}
+                    {/* 2. Gold Premium VISA Card */}
                     <div 
-                      className="absolute z-20 w-[85px] h-[25px] bg-[#120e29]/90 border border-[#c5a059]/40 rounded-full px-2 flex items-center justify-between shadow-xl animate-browser-rating"
+                      className="absolute w-28 h-[75px] bg-gradient-to-br from-[#ebd095] via-[#c5a059] to-[#8c6e3d] border border-[#ffebad]/30 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl animate-dash-visa"
+                      style={{
+                        transformStyle: 'preserve-3d',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.7), 0 0 15px rgba(197,160,89,0.2)',
+                      }}
+                    >
+                      <div className="flex justify-between items-start">
+                        <span className="text-[6px] font-mono text-black font-black leading-none">VISA</span>
+                        <div className="w-4 h-3 bg-gradient-to-br from-yellow-100 to-yellow-600 rounded-sm opacity-80" /> {/* Chip */}
+                      </div>
+                      <div className="text-[8px] font-mono font-semibold text-black/75 tracking-wider">
+                        •••• •••• •••• 7539
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-[5px] font-mono text-black/60 font-bold uppercase">ALEX D.</span>
+                        <span className="text-[5px] font-mono text-black/60">12/28</span>
+                      </div>
+                    </div>
+
+                    {/* 3. Interactive Calendar Card */}
+                    <div 
+                      className="absolute w-[100px] h-[100px] bg-[#120e29]/90 border border-[#c5a059]/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-calendar"
                       style={{
                         backdropFilter: 'blur(8px)',
-                        boxShadow: '0 10px 25px rgba(0,0,0,0.5), 0 0 15px rgba(197,160,89,0.1)',
+                        boxShadow: '0 20px 45px rgba(0,0,0,0.6)',
+                        transformStyle: 'preserve-3d',
                       }}
                     >
-                      <span className="text-[6px] font-bold text-white tracking-widest font-mono">RATING</span>
-                      <div className="flex gap-[1px]">
-                        {[...Array(5)].map((_, i) => (
-                          <span key={i} className="text-[#c5a059] text-[7px]">★</span>
+                      <div className="flex justify-between items-center border-b border-white/5 pb-1">
+                        <span className="text-[6px] font-mono text-purple-200 font-bold">Nov 2026</span>
+                        <span className="text-[5px] text-white/30">◀ ▶</span>
+                      </div>
+                      {/* Grid representation */}
+                      <div className="grid grid-cols-7 gap-1 mt-1 text-[5px] font-mono text-white/55 text-center leading-none">
+                        {['S','M','T','W','T','F','S'].map((d, i) => (
+                          <span key={i} className="text-purple-300 font-bold">{d}</span>
                         ))}
+                        {[...Array(28)].map((_, i) => {
+                          const isSpecial = i + 1 === 15;
+                          return (
+                            <span 
+                              key={i} 
+                              className={`h-3.5 flex items-center justify-center rounded-sm ${isSpecial ? 'bg-[#c5a059] text-black font-bold' : ''}`}
+                            >
+                              {i + 1}
+                            </span>
+                          );
+                        })}
                       </div>
                     </div>
 
-                    {/* ── FLOATING 3D GOLD SEND DISC (Right side) ── */}
+                    {/* 4. Mock Asset Upload Card */}
                     <div 
-                      className="absolute z-20 w-11 h-11 animate-browser-send"
-                      style={{ transformStyle: 'preserve-3d' }}
+                      className="absolute w-[115px] h-[95px] bg-[#120e29]/90 border border-[#c5a059]/20 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl animate-dash-upload"
+                      style={{
+                        backdropFilter: 'blur(8px)',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
+                        transformStyle: 'preserve-3d',
+                      }}
                     >
-                      {/* Cylinder Side 3D Layers */}
-                      <div className="absolute inset-0 rounded-full bg-[#533a1e]" style={{ transform: 'translateZ(0px)' }} />
-                      <div className="absolute inset-0 rounded-full bg-[#6d4c24]" style={{ transform: 'translateZ(1px)' }} />
-                      <div className="absolute inset-0 rounded-full bg-[#845d2d]" style={{ transform: 'translateZ(2px)' }} />
-                      <div className="absolute inset-0 rounded-full bg-[#9c6f37]" style={{ transform: 'translateZ(3px)' }} />
-                      <div className="absolute inset-0 rounded-full bg-[#b28141]" style={{ transform: 'translateZ(4px)' }} />
-                      {/* Cylinder Top Layer */}
-                      <div 
-                        className="absolute inset-0 rounded-full bg-gradient-to-br from-[#ebd095] to-[#8c6e3d] border border-[#ffebad]/30 flex items-center justify-center shadow-inner"
-                        style={{ transform: 'translateZ(5px)' }}
-                      >
-                        <svg className="w-4 h-4 text-white -translate-x-[0.5px] translate-y-[0.5px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      {/* Simple image holder layout */}
+                      <div className="w-full h-8 border border-dashed border-white/10 rounded flex flex-col items-center justify-center opacity-70">
+                        <span className="text-[7px] text-[#c5a059]">🖼</span>
+                      </div>
+                      <span className="text-[5px] font-mono text-white/40 text-center">No images uploaded</span>
+                      <button className="w-full py-1 bg-[#c5a059] hover:bg-[#ebd095] text-black text-[5px] font-bold font-mono uppercase tracking-wider rounded-md active:scale-95 cursor-pointer">
+                        Update now
+                      </button>
+                    </div>
+
+                    {/* 5. Analytics Chart Card */}
+                    <div 
+                      className="absolute w-[130px] h-[90px] bg-[#120e29]/90 border border-[#c5a059]/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-chart"
+                      style={{
+                        backdropFilter: 'blur(8px)',
+                        boxShadow: '0 20px 50px rgba(0,0,0,0.7)',
+                        transformStyle: 'preserve-3d',
+                      }}
+                    >
+                      <div className="flex justify-between items-center">
+                        <span className="text-[6px] font-mono text-[#c5a059] font-bold">Chart Title</span>
+                        <span className="text-[5px] font-mono text-white/30">WEEKLY</span>
+                      </div>
+                      {/* Waveform line */}
+                      <div className="relative h-10 w-full flex items-end">
+                        {/* Simulated Grid Lines */}
+                        <div className="absolute inset-0 flex flex-col justify-between opacity-5 pointer-events-none">
+                          <div className="w-full h-[1px] bg-white" />
+                          <div className="w-full h-[1px] bg-white" />
+                          <div className="w-full h-[1px] bg-white" />
+                        </div>
+                        {/* Wavy path SVG */}
+                        <svg className="w-full h-full text-[#c5a059]" viewBox="0 0 100 40" preserveAspectRatio="none">
+                          <defs>
+                            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="#c5a059" stopOpacity="0.4" />
+                              <stop offset="100%" stopColor="#c5a059" stopOpacity="0.0" />
+                            </linearGradient>
+                          </defs>
+                          <path d="M0,35 Q15,5 30,25 T60,10 T90,30 L100,30 L100,40 L0,40 Z" fill="url(#chartGrad)" />
+                          <path d="M0,35 Q15,5 30,25 T60,10 T90,30 L100,30" fill="none" stroke="currentColor" strokeWidth="1.5" />
                         </svg>
                       </div>
-                    </div>
-
-                    {/* ── FLOATING 3D PURPLE PLUS DISC (Left side) ── */}
-                    <div 
-                      className="absolute z-20 w-11 h-11 animate-browser-plus"
-                      style={{ transformStyle: 'preserve-3d' }}
-                    >
-                      {/* Cylinder Side 3D Layers */}
-                      <div className="absolute inset-0 rounded-full bg-[#250f4c]" style={{ transform: 'translateZ(0px)' }} />
-                      <div className="absolute inset-0 rounded-full bg-[#36166e]" style={{ transform: 'translateZ(1px)' }} />
-                      <div className="absolute inset-0 rounded-full bg-[#4b1d98]" style={{ transform: 'translateZ(2px)' }} />
-                      <div className="absolute inset-0 rounded-full bg-[#5f24c0]" style={{ transform: 'translateZ(3px)' }} />
-                      <div className="absolute inset-0 rounded-full bg-[#722ce8]" style={{ transform: 'translateZ(4px)' }} />
-                      {/* Cylinder Top Layer */}
-                      <div 
-                        className="absolute inset-0 rounded-full bg-gradient-to-br from-[#a78bfa] to-[#5b21b6] border border-[#c084fc]/30 flex items-center justify-center shadow-inner"
-                        style={{ transform: 'translateZ(5px)' }}
-                      >
-                        <span className="text-white text-lg font-bold font-mono -translate-y-[1px]">+</span>
+                      <div className="flex justify-between items-center text-[5px] font-mono text-white/50 leading-none">
+                        <span>5.000,00 Orders</span>
+                        <span className="text-[#c5a059] font-bold">+14.2%</span>
                       </div>
                     </div>
 
-                    {/* ── FLOATING SPHERE A (Gold, bottom right) ── */}
+                    {/* 6. Stats Counter Card */}
                     <div 
-                      className="absolute z-20 w-9 h-9 rounded-full animate-browser-sphere-a"
+                      className="absolute w-[85px] h-[65px] bg-[#120e29]/90 border border-white/5 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-stats"
+                      style={{
+                        backdropFilter: 'blur(8px)',
+                        boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
+                        transformStyle: 'preserve-3d',
+                      }}
+                    >
+                      <span className="text-[5px] font-mono text-slate-400 font-bold">This Week</span>
+                      <div className="flex flex-col gap-0.5 mt-1">
+                        <span className="text-xs font-mono font-bold text-white leading-none">00</span>
+                        <span className="text-[5px] font-mono text-slate-500 leading-none">Label</span>
+                      </div>
+                      <div className="flex justify-between items-center pt-1 border-t border-white/5">
+                        <span className="text-[5px] font-mono text-white/30">ORDERS</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]/80 shadow-[0_0_4px_#c5a059]" />
+                      </div>
+                    </div>
+
+                    {/* ── FLOATING SPHERE A (Gold, Right side) ── */}
+                    <div 
+                      className="absolute z-20 w-8 h-8 rounded-full animate-dash-sphere-a"
                       style={{
                         background: 'radial-gradient(circle at 30% 30%, #ffebc2 0%, #c5a059 50%, #5e4618 90%, #201402 100%)',
-                        boxShadow: '0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 6px rgba(0,0,0,0.8), inset 0 2px 6px rgba(255,255,255,0.4)',
-                      }}
-                    />
-
-                    {/* ── FLOATING SPHERE B (Purple, middle left) ── */}
-                    <div 
-                      className="absolute z-20 w-7.5 h-7.5 rounded-full animate-browser-sphere-b"
-                      style={{
-                        background: 'radial-gradient(circle at 30% 30%, #f3e8ff 0%, #a78bfa 50%, #5b21b6 90%, #2e1065 100%)',
                         boxShadow: '0 8px 20px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.4)',
                       }}
                     />
 
-                    {/* ── FLOATING SPHERE C (Indigo, top right) ── */}
+                    {/* ── FLOATING SPHERE B (Purple, Center-Back) ── */}
                     <div 
-                      className="absolute z-20 w-6 h-6 rounded-full animate-browser-sphere-c"
+                      className="absolute z-20 w-7 h-7 rounded-full animate-dash-sphere-b"
                       style={{
-                        background: 'radial-gradient(circle at 30% 30%, #e0e7ff 0%, #818cf8 50%, #4338ca 90%, #1e1b4b 100%)',
-                        boxShadow: '0 6px 15px rgba(0,0,0,0.6), inset 0 -1px 4px rgba(0,0,0,0.8), inset 0 1px 4px rgba(255,255,255,0.4)',
+                        background: 'radial-gradient(circle at 30% 30%, #f3e8ff 0%, #a78bfa 50%, #5b21b6 90%, #2e1065 100%)',
+                        boxShadow: '0 6px 15px rgba(0,0,0,0.6), inset 0 -1.5px 4px rgba(0,0,0,0.8), inset 0 1.5px 4px rgba(255,255,255,0.4)',
                       }}
                     />
 
-                    {/* ── FLOATING MINI WINDOW A (Left side) ── */}
-                    <div 
-                      className="absolute z-10 w-[55px] h-[45px] bg-[#120e29]/75 border border-[#c5a059]/30 rounded-lg p-1.5 flex flex-col justify-between shadow-2xl animate-browser-window-a"
-                      style={{ backdropFilter: 'blur(5px)' }}
-                    >
-                      <div className="flex gap-[2px]">
-                        <span className="w-1 h-1 rounded-full bg-red-400/60" />
-                        <span className="w-1 h-1 rounded-full bg-yellow-400/60" />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <div className="w-[85%] h-1.5 bg-[#c5a059]/40 rounded-sm" />
-                        <div className="w-[60%] h-1 bg-white/10 rounded-sm" />
-                      </div>
-                    </div>
-
-                    {/* ── FLOATING MINI WINDOW B (Top right) ── */}
-                    <div 
-                      className="absolute z-10 w-[45px] h-[45px] bg-[#120e29]/75 border border-purple-500/20 rounded-lg p-1 flex items-center justify-center shadow-2xl animate-browser-window-b"
-                      style={{ backdropFilter: 'blur(5px)' }}
-                    >
-                      {/* Simple color wheel representation */}
-                      <div className="w-6 h-6 rounded-full border border-dashed border-[#c5a059]/40 flex items-center justify-center">
-                        <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-[#c5a059] to-[#7c3aed] opacity-80" />
-                      </div>
-                    </div>
-
-                    {/* ── FLOATING CLOUD A (Back Left) ── */}
+                    {/* ── FLOATING CLOUD (Back) ── */}
                     <div
-                      className="absolute z-0 w-14 h-8 opacity-45 animate-browser-cloud-a"
-                    >
-                      <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
-                        <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
-                      </svg>
-                    </div>
-
-                    {/* ── FLOATING CLOUD B (Front Right) ── */}
-                    <div
-                      className="absolute z-20 w-12 h-7 opacity-35 animate-browser-cloud-b"
+                      className="absolute z-0 w-12 h-7 opacity-40 animate-dash-cloud"
                     >
                       <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
                         <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
