@@ -24,8 +24,9 @@ import {
   HelpCircle
 } from 'lucide-react';
 
-// Critical above-fold component — loaded eagerly for best LCP
+// Critical above-fold components — loaded eagerly for best LCP
 import Particles3D from './components/Particles3D';
+import Spheres3D from './components/Spheres3D';
 
 // Lazy-loaded below-fold components (splits JS bundle, improves LCP & TTI)
 const AutomationSandbox  = lazy(() => import('./components/AutomationSandbox'));
@@ -174,23 +175,25 @@ export default function App() {
         Skip to main content
       </a>
 
-      {/* ── Static premium background ── */}
+      {/* ── Static premium background — deep navy-purple gradient matching 3D sphere style ── */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
-        {/* Base deep dark */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, #080c14 0%, #06080e 40%, #090708 100%)' }} />
-        {/* Fine dot grid overlay */}
-        <div className="absolute inset-0 opacity-[0.18]" style={{
-          backgroundImage: 'radial-gradient(circle, rgba(197,160,89,0.35) 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
+        {/* Base deep dark navy */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, #080c1a 0%, #06080e 40%, #0c0618 100%)' }} />
+        {/* Subtle dot grid overlay */}
+        <div className="absolute inset-0 opacity-[0.10]" style={{
+          backgroundImage: 'radial-gradient(circle, rgba(124,58,237,0.50) 1px, transparent 1px)',
+          backgroundSize: '36px 36px',
         }} />
         {/* Vignette edges */}
         <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.7) 100%)'
+          background: 'radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.75) 100%)'
         }} />
-        {/* Single static gold glow top-left */}
-        <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full blur-[180px]" style={{ background: 'rgba(197,160,89,0.04)' }} />
-        {/* Single static glow bottom-right */}
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[160px]" style={{ background: 'rgba(100,120,180,0.03)' }} />
+        {/* Blue-purple ambient glow top-right */}
+        <div className="absolute -top-[15%] right-[-5%] w-[55%] h-[55%] rounded-full blur-[200px]" style={{ background: 'rgba(76,29,149,0.25)' }} />
+        {/* Blue ambient glow left */}
+        <div className="absolute top-[20%] -left-[10%] w-[45%] h-[45%] rounded-full blur-[180px]" style={{ background: 'rgba(29,78,216,0.12)' }} />
+        {/* Bottom purple bleed */}
+        <div className="absolute bottom-[-5%] right-[20%] w-[50%] h-[40%] rounded-full blur-[160px]" style={{ background: 'rgba(88,28,135,0.18)' }} />
       </div>
 
       {/* 2. PERSISTENT NAVIGATION BAR */}
@@ -379,19 +382,24 @@ export default function App() {
       {/* ── Home Content ── */}
       {currentPage === 'home' && <>
 
-      {/* 3. HERO SECTION — Premium 3D */}
+      {/* 3. HERO SECTION — Premium 3D Spheres */}
       <section
         className="relative z-10 min-h-screen flex flex-col overflow-hidden"
         id="hero"
       >
-        {/* 3D particles — scoped only to hero */}
+        {/* 3D Floating Spheres — hero centrepiece */}
         <div className="absolute inset-0 pointer-events-none">
+          <Spheres3D />
+        </div>
+
+        {/* Keep particles as subtle secondary layer */}
+        <div className="absolute inset-0 pointer-events-none opacity-30">
           <Particles3D />
         </div>
 
         {/* Scanline overlay — ultra subtle */}
         <div className="absolute inset-0 pointer-events-none z-[1]" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px)',
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.025) 3px, rgba(0,0,0,0.025) 4px)',
         }} />
 
         {/* Ambient gold orb — center glow */}
