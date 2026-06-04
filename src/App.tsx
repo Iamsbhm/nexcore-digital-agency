@@ -21,7 +21,11 @@ import {
   ExternalLink,
   ShieldCheck,
   CheckCircle,
-  HelpCircle
+  HelpCircle,
+  Facebook,
+  Youtube,
+  Twitter,
+  Share2
 } from 'lucide-react';
 
 // Critical above-fold components — loaded eagerly for best LCP
@@ -423,524 +427,395 @@ export default function App() {
         <div className="absolute bottom-16 left-6 md:left-10 w-6 h-6 border-b border-l border-[#c5a059]/30 pointer-events-none z-10" />
         <div className="absolute bottom-16 right-6 md:right-10 w-6 h-6 border-b border-r border-[#c5a059]/30 pointer-events-none z-10" />
 
-        {/* ── TWO-COLUMN HERO CONTENT ── */}
-        <div className="relative z-10 w-full px-5 sm:px-8 md:px-12 lg:pl-40 lg:pr-16" style={{ paddingTop: '20px', minHeight: 'calc(100vh - 72px)', display: 'flex', alignItems: 'flex-start' }}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
+        {/* ── CENTRAL SPLIT VIEWPORT CARD ── */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 flex items-center justify-center min-h-[calc(100vh-140px)]">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full bg-[#080711]/60 border border-white/10 rounded-[32px] overflow-hidden shadow-[0_32px_90px_rgba(0,0,0,0.85)] backdrop-blur-md grid grid-cols-1 lg:grid-cols-12 min-h-[600px] lg:min-h-[640px]"
+          >
+            {/* ── LEFT COLUMN — Dark Glassmorphic & Deep Indigo Gradient ── */}
+            <div className="lg:col-span-5 bg-gradient-to-br from-[#0e0c21]/95 via-[#0a0818]/98 to-[#05040a]/99 p-8 sm:p-10 md:p-12 flex flex-col justify-between text-slate-100 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5">
+              {/* Spacer where the mock header used to be */}
+              <div className="h-6 w-full mb-8" />
 
-            {/* ── LEFT COLUMN — Text Content ── */}
-            <div className="flex flex-col gap-5 lg:gap-7 text-center lg:text-left items-center lg:items-start pt-4 lg:pt-0">
-
-              {/* Status pill */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="inline-flex items-center gap-2.5 px-4 py-1.5 border border-[#c5a059]/20 bg-[#c5a059]/[0.05] backdrop-blur-sm w-fit"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] animate-ping" />
-                <span className="text-[9px] font-mono tracking-[0.38em] uppercase text-[#c5a059]/70">
-                  Premium Digital Agency
-                </span>
-              </motion.div>
-
-              {/* Headline — left-aligned, 3D perspective */}
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                style={{ perspective: '1400px' }}
-              >
-                {/* 100% SEO-Indexable & Screen-Reader Accessible H1 */}
-                <h1 className="sr-only">We Build Digital Legacies That Never Settle.</h1>
-
-                {/* Visually transformed lines — hidden from screen readers to prevent duplicate announcements */}
-                <div aria-hidden="true">
-                  <div style={{ transform: 'rotateX(6deg)', transformOrigin: 'left bottom' }}>
-                    <p className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-display font-light text-white leading-[0.9] tracking-[-0.02em]">
-                      We <span className="font-bold">Build</span>
-                    </p>
-                  </div>
-                  <div style={{ transform: 'rotateX(2deg)', transformOrigin: 'left center' }}>
-                    <p className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-serif italic leading-[1.1] tracking-[-0.01em] text-shimmer-gold whitespace-nowrap pb-2">
-                      Digital Legacies
-                    </p>
-                  </div>
-                  <div style={{ transform: 'rotateX(-3deg)', transformOrigin: 'left top' }}>
-                    <p className="text-[clamp(1.2rem,5vw,3.2rem)] font-display font-extralight text-white/85 lg:text-white/55 leading-[1.2] tracking-wide mt-1">
-                      That Never Settle.
-                    </p>
-                  </div>
+              {/* Title Section */}
+              <div className="flex flex-col text-left my-auto">
+                <h1 className="sr-only">Innovative Web Design - Pixel Vance Digital</h1>
+                <div aria-hidden="true" className="space-y-1">
+                  <p className="font-display font-light text-[#c5a059] text-lg tracking-[0.2em] uppercase">
+                    Premium Agency
+                  </p>
+                  <p className="font-display font-extrabold uppercase text-[clamp(2.2rem,5.5vw,3.8rem)] leading-[0.95] tracking-[0.02em] text-white">
+                    Innovative
+                  </p>
+                  <p className="font-display font-extrabold uppercase text-[clamp(2.2rem,5.5vw,3.8rem)] leading-[0.95] tracking-[0.02em] text-[#c5a059] pb-2">
+                    Web Design
+                  </p>
                 </div>
-              </motion.div>
 
-              {/* Tagline */}
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.45 }}
-                className="font-mono text-[11px] md:text-xs lg:text-sm text-white max-w-md leading-relaxed tracking-wide mx-auto lg:mx-0 bg-black/40 backdrop-blur-md border border-white/5 px-5 py-4 rounded-xl lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0 shadow-lg lg:shadow-none"
-              >
-                High-fidelity <span className="text-[#c5a059] font-semibold">web design, bespoke development</span>, and{' '}
-                <span className="font-medium">conversion systems</span> built for{' '}
-                <span className="font-medium">brands that demand perfection</span>.
-              </motion.p>
+                {/* Gold Divider Bar */}
+                <div className="w-24 h-[4px] bg-[#c5a059] my-6 rounded-full self-start" />
 
-              {/* CTAs */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 w-full lg:w-auto"
-              >
-                <button
-                  onClick={() => openBooking('GROWTH', '$2,999')}
-                  id="hero-book-btn"
-                  className="group relative flex items-center justify-center gap-2.5 py-3.5 px-8 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.28em] transition-all duration-300 cursor-pointer shadow-[0_0_48px_rgba(197,160,89,0.22)] hover:shadow-[0_0_64px_rgba(197,160,89,0.14)] active:scale-95 overflow-hidden w-full sm:w-auto"
+                {/* Glass Card Description */}
+                <div className="bg-white/[0.02] border border-white/5 hover:border-[#c5a059]/20 rounded-2xl p-5 md:p-6 text-left relative overflow-hidden group transition-all duration-300 shadow-xl backdrop-blur-md">
+                  {/* Corner brackets */}
+                  <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#c5a059]/30 pointer-events-none" />
+                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#c5a059]/30 pointer-events-none" />
+                  
+                  <p className="font-mono text-xs sm:text-[13px] leading-relaxed text-white/90">
+                    Innovation in its modern meaning is <span className="text-[#c5a059] font-bold">"a new idea, creative thoughts, new imaginations</span> in form of device or method".
+                  </p>
+                </div>
+
+                {/* Left CTA: Start a Project */}
+                <div className="mt-8 flex justify-start">
+                  <button
+                    onClick={() => openBooking('GROWTH', '$2,999')}
+                    className="group relative flex items-center justify-center gap-2.5 py-3.5 px-9 border-2 border-[#c5a059]/80 text-[#c5a059] hover:text-black hover:bg-[#c5a059] uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer rounded-full active:scale-95 font-black shadow-md shadow-gold-500/10 hover:shadow-gold-500/25"
+                  >
+                    Start a Project
+                  </button>
+                </div>
+              </div>
+
+              {/* Bottom Navigation and Indicators */}
+              <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/5 w-full">
+                {/* Share Icon */}
+                <button 
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: 'Pixel Vance Digital',
+                        text: 'High-fidelity web design & bespoke development.',
+                        url: window.location.href,
+                      });
+                    } else {
+                      alert('Link copied to clipboard: ' + window.location.href);
+                    }
+                  }}
+                  className="w-9 h-9 rounded-full bg-white/[0.02] border border-white/10 hover:bg-white/10 text-[#c5a059] flex items-center justify-center shadow-sm hover:shadow transition-all cursor-pointer active:scale-90"
+                  title="Share Website"
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-[#f7e6b5]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="relative">Book Strategy Session</span>
+                  <Share2 className="w-4 h-4" />
                 </button>
-                <button
-                  onClick={() => scrollToSection('services-explorer-section')}
-                  id="hero-demo-btn"
-                  className="group flex items-center justify-center gap-2 py-3.5 px-8 border border-[#c5a059]/35 bg-[#c5a059]/[0.015] hover:bg-[#c5a059]/10 hover:border-[#c5a059] uppercase text-[10px] font-mono tracking-[0.28em] transition-all cursor-pointer active:scale-95 text-[#c5a059]/75 hover:text-[#c5a059] w-full sm:w-auto"
+
+                {/* Arrows */}
+                <div className="flex items-center gap-2.5">
+                  <button
+                    onClick={() => scrollToSection('infinite-marquee-section')}
+                    className="w-9 h-9 rounded-full bg-white/[0.02] border border-white/10 hover:bg-white/10 text-xs text-white hover:text-[#c5a059] hover:shadow transition-all flex items-center justify-center cursor-pointer active:scale-90"
+                    title="Previous Slide"
+                  >
+                    ◀
+                  </button>
+                  <button
+                    onClick={() => scrollToSection('services-explorer-section')}
+                    className="w-9 h-9 rounded-full bg-white/[0.02] border border-white/10 hover:bg-white/10 text-xs text-white hover:text-[#c5a059] hover:shadow transition-all flex items-center justify-center cursor-pointer active:scale-90"
+                    title="Next Slide"
+                  >
+                    ▶
+                  </button>
+                </div>
+
+                {/* Slide Number */}
+                <span className="text-3xl font-serif italic text-[#c5a059]/35 select-none font-bold">01</span>
+              </div>
+            </div>
+
+            {/* ── RIGHT COLUMN — Deep Rich Violet-to-Navy Gradient with Isometric 3D Laptop ── */}
+            <div className="lg:col-span-7 bg-gradient-to-br from-[#1e133d] via-[#0b081c] to-[#06040a] p-8 sm:p-10 md:p-12 flex flex-col justify-between relative overflow-hidden text-white min-h-[420px] lg:min-h-0">
+              {/* Floating Glow Background Elements for depth */}
+              <div className="absolute -top-[10%] left-[-5%] w-[45%] h-[45%] rounded-full bg-[#c5a059]/10 blur-[120px] pointer-events-none" />
+              <div className="absolute bottom-[10%] right-[-5%] w-[50%] h-[50%] rounded-full bg-[#7c3aed]/15 blur-[130px] pointer-events-none" />
+
+              {/* Spacer where the mock header used to be */}
+              <div className="h-6 w-full mb-6" />
+
+              {/* 3D Isometric Laptop Showcase Scene */}
+              <div className="relative w-full h-[260px] sm:h-[300px] md:h-[330px] lg:h-[350px] flex items-center justify-center overflow-visible my-auto z-10">
+                {/* Responsive Scale Wrapper */}
+                <div 
+                  className="relative w-[340px] h-[340px] flex items-center justify-center origin-center transition-all duration-300 hero-graphic-container"
+                  style={{
+                    transform: `perspective(1000px) rotateX(${tilt.y * 0.4}deg) rotateY(${tilt.x * 0.4}deg) scale(var(--hero-scale))`,
+                    transformStyle: 'preserve-3d',
+                  }}
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  Explore Services
-                  <ArrowDownCircle className="w-3 h-3 text-[#c5a059]/60 group-hover:text-[#c5a059] transition-colors" />
-                </button>
-              </motion.div>
+                  
+                  {/* BACKGROUND PLANT LEAVES SILHOUETTES */}
+                  <motion.div
+                    animate={{ y: [0, -4, 0], rotate: [0, 1.5, 0] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute z-0 pointer-events-none origin-bottom text-[#c5a059]/10"
+                    style={{ transform: "translate3d(-10px, -70px, -20px)" }}
+                  >
+                    <svg width="220" height="220" viewBox="0 0 200 200" fill="currentColor">
+                      {/* Left Leaf branch */}
+                      <path d="M100 180 C 70 140, 20 120, 25 80 C 27 60, 45 70, 55 90 C 40 50, 60 40, 75 75 C 65 30, 85 20, 95 60 C 97 15, 110 30, 105 80 C 112 30, 125 15, 127 60 C 137 20, 157 30, 147 75 C 162 40, 182 50, 167 90 C 177 70, 195 60, 197 80 C 202 120, 152 140, 122 180 Z" />
+                      {/* Right Leaf branch */}
+                      <path d="M100 180 C 110 140, 140 120, 135 80 C 133 60, 120 70, 110 90 C 120 50, 105 40, 95 75 C 105 30, 85 20, 80 60 C 78 15, 68 30, 72 80 C 65 30, 55 15, 53 60 C 45 20, 30 30, 38 75 C 25 40, 10 50, 20 90 C 12 70, 2 60, 0 80 C -5 120, 35 140, 65 180 Z" opacity="0.6" transform="scale(-1, 1) translate(-200, 0)" />
+                    </svg>
+                  </motion.div>
+
+                  {/* ISOMETRIC DECORATIVE GLOW ORB */}
+                  <div
+                    className="absolute pointer-events-none rounded-full blur-2xl opacity-40 z-1"
+                    style={{
+                      width: '240px',
+                      height: '240px',
+                      background: 'radial-gradient(circle, #c5a059 0%, #7c3aed 100%)',
+                      transform: 'translate3d(0, 0, -40px) rotateX(60deg) rotateZ(-45deg)',
+                    }}
+                  />
+
+                  {/* ── ISOMETRIC LAPTOP 3D ── */}
+                  <div 
+                    className="relative flex items-center justify-center"
+                    style={{
+                      transform: 'rotateX(60deg) rotateZ(-45deg)',
+                      transformStyle: 'preserve-3d',
+                    }}
+                  >
+                    
+                    {/* LAPTOP KEYBOARD BASE */}
+                    <div 
+                      className="w-[200px] h-[140px] bg-gradient-to-br from-[#1d1b2e] to-[#0f0a1c] rounded-xl shadow-2xl relative border border-white/5"
+                      style={{
+                        transformStyle: 'preserve-3d',
+                        borderBottom: '6px solid #0b0714',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
+                      }}
+                    >
+                      {/* Keyboard Key Lines Mockup */}
+                      <div className="absolute inset-x-3 top-4 bottom-8 flex flex-col gap-1.5 opacity-80">
+                        {[...Array(6)].map((_, i) => (
+                          <div key={i} className="flex gap-1">
+                            {[...Array(8)].map((_, j) => (
+                              <div 
+                                key={j} 
+                                className="h-1.5 bg-gradient-to-r from-[#c5a059] to-[#8c6e3d] rounded-sm flex-1 opacity-70"
+                                style={{
+                                  boxShadow: '0 0 4px rgba(197,160,89,0.3)',
+                                }}
+                              />
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                      
+                      {/* Touchpad Mock */}
+                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-14 h-4 bg-[#0a0712] rounded border border-white/5 opacity-55" />
+                    </div>
+
+                    {/* LAPTOP SCREEN (Tilted vertical rising back) */}
+                    <div 
+                      className="absolute w-[190px] h-[130px] bg-gradient-to-b from-[#1b152d] to-[#07050e] border-2 border-[#c5a059]/40 rounded-lg p-2 overflow-hidden"
+                      style={{
+                        transform: 'translate3d(-5px, -65px, 0px) rotateX(-80deg)',
+                        transformOrigin: 'bottom center',
+                        boxShadow: '0 0 30px rgba(197,160,89,0.15)',
+                        transformStyle: 'preserve-3d',
+                      }}
+                    >
+                      {/* Glowing Wireframe Graphics */}
+                      <div className="w-full h-full bg-[#0a0712]/95 rounded-md p-1.5 flex flex-col justify-between border border-white/5">
+                        <div className="flex justify-between items-center">
+                          <div className="flex gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
+                          </div>
+                          <span className="text-[6px] font-mono text-white/30">NEXCORE WIREFRAME</span>
+                        </div>
+                        <div className="flex-1 grid grid-cols-3 gap-1.5 mt-2">
+                          <div className="col-span-2 border border-white/5 rounded p-1 bg-white/[0.01] flex flex-col justify-between">
+                            <div className="w-full h-2 bg-[#c5a059]/20 rounded" />
+                            <div className="w-[70%] h-1 bg-white/20 rounded mt-1" />
+                            <div className="w-[90%] h-1 bg-white/20 rounded mt-0.5" />
+                            <div className="grid grid-cols-2 gap-1 mt-1.5">
+                              <div className="h-5 bg-[#c5a059]/10 border border-[#c5a059]/20 rounded" />
+                              <div className="h-5 bg-white/5 rounded" />
+                            </div>
+                          </div>
+                          <div className="border border-white/5 rounded p-1 bg-white/[0.01] flex flex-col gap-1 justify-center items-center">
+                            <div className="w-6 h-6 rounded-full border border-[#c5a059]/20 flex items-center justify-center text-[7px] text-[#c5a059] font-mono font-bold">75%</div>
+                            <div className="w-6 h-1 bg-white/20 rounded" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* ── FLOATING PANEL A: CODE SCREEN (Front Right) ── */}
+                  <motion.div
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                    className="absolute z-10 w-[120px] h-[90px] bg-gradient-to-br from-[#1a0c2e]/98 to-[#0c051a]/99 border border-white/10 rounded-xl p-2.5 shadow-2xl flex flex-col justify-between"
+                    style={{
+                      transform: 'translate3d(65px, 20px, 60px)',
+                      boxShadow: '0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(197,160,89,0.1)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between border-b border-white/5 pb-1">
+                      <span className="text-[6px] font-mono text-purple-300 font-bold">App.tsx</span>
+                      <div className="w-3.5 h-3.5 rounded bg-[#c5a059]/10 flex items-center justify-center text-[8px] text-[#c5a059] font-bold">&lt;/&gt;</div>
+                    </div>
+                    <div className="flex-1 flex flex-col gap-1.5 mt-2 font-mono text-[5px] text-white/55 leading-none">
+                      <p><span className="text-[#c5a059]">const</span> Agency = () =&gt; &#123;</p>
+                      <p className="pl-2"><span className="text-purple-300">return</span> (</p>
+                      <p className="pl-4 text-green-300">&lt;<span className="text-[#c5a059]">InnovativeDesign</span> /&gt;</p>
+                      <p className="pl-2">);</p>
+                      <p>&#125;;</p>
+                    </div>
+                  </motion.div>
+
+                  {/* ── FLOATING PANEL B: METRICS CHART (Front Left) ── */}
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                    className="absolute z-10 w-[110px] h-[85px] bg-[#ffffff] rounded-xl p-2.5 shadow-2xl flex flex-col justify-between"
+                    style={{
+                      transform: 'translate3d(-85px, 35px, 50px)',
+                      boxShadow: '0 15px 35px rgba(0,0,0,0.35)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[7px] font-mono text-slate-400 font-semibold">CONVERSIONS</span>
+                      <span className="text-[8px] font-mono text-[#c5a059] font-bold">+28%</span>
+                    </div>
+                    {/* Tiny Bar graph */}
+                    <div className="flex items-end justify-between h-9 mt-1.5 border-b border-slate-100 pb-0.5">
+                      <div className="w-2.5 h-[40%] bg-purple-200 rounded-sm" />
+                      <div className="w-2.5 h-[65%] bg-purple-300 rounded-sm" />
+                      <div className="w-2.5 h-[50%] bg-[#ebd9f1] rounded-sm" />
+                      <div className="w-2.5 h-[80%] bg-gradient-to-t from-[#c5a059] to-[#7c3aed] rounded-sm" />
+                      <div className="w-2.5 h-[95%] bg-[#c5a059]/80 rounded-sm" />
+                    </div>
+                    <div className="w-12 h-1.5 bg-slate-100 rounded-full mt-1.5 self-start" />
+                  </motion.div>
+
+                  {/* ── FLOATING SMILEY EMOJI (Left side middle) ── */}
+                  <motion.div
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                    className="absolute z-20 w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 border border-white/10 flex items-center justify-center shadow-lg text-sm"
+                    style={{ transform: 'translate3d(-95px, -35px, 90px)' }}
+                  >
+                    😊
+                  </motion.div>
+
+                  {/* ── FLOATING KISS EMOJI (Right side middle) ── */}
+                  <motion.div
+                    animate={{ y: [0, -9, 0] }}
+                    transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut", delay: 1.1 }}
+                    className="absolute z-20 w-9 h-9 rounded-full bg-gradient-to-br from-[#ebd9f1] to-purple-400 border border-white/10 flex items-center justify-center shadow-lg text-sm"
+                    style={{ transform: 'translate3d(90px, -50px, 95px)' }}
+                  >
+                    😘
+                  </motion.div>
+
+                  {/* ── FLOATING CLOUD A (Back Left) ── */}
+                  <motion.div
+                    animate={{ y: [0, -5, 0], x: [0, 4, 0] }}
+                    transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute z-1 w-14 h-8 opacity-40"
+                    style={{ transform: 'translate3d(-105px, -110px, 120px)' }}
+                  >
+                    <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
+                      <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
+                    </svg>
+                  </motion.div>
+
+                  {/* ── FLOATING CLOUD B (Back Right) ── */}
+                  <motion.div
+                    animate={{ y: [0, -6, 0], x: [0, -3, 0] }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                    className="absolute z-1 w-12 h-7 opacity-35"
+                    style={{ transform: 'translate3d(95px, -100px, 110px)' }}
+                  >
+                    <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
+                      <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
+                    </svg>
+                  </motion.div>
+
+                  {/* ── FLOATING STAR BUBBLE (Center High) ── */}
+                  <motion.div
+                    animate={{ y: [0, -12, 0] }}
+                    transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    className="absolute z-20 w-8 h-8 rounded-full bg-gradient-to-br from-[#c5a059] to-[#8c6e3d] flex items-center justify-center shadow-lg text-[10px] text-white font-bold"
+                    style={{
+                      transform: 'translate3d(35px, -15px, 130px)',
+                      boxShadow: '0 0 15px rgba(197,160,89,0.3)',
+                    }}
+                  >
+                    ⭐
+                  </motion.div>
+
+                </div>
+              </div>
+
+              {/* Bottom Buttons and Dot Indicators */}
+              <div className="flex flex-col items-center gap-4 z-10 w-full mt-6">
+                <div className="flex flex-wrap items-center gap-4 w-full justify-center lg:justify-start">
+                  <button
+                    onClick={() => openBooking('STRATEGY', 'Free')}
+                    className="py-3.5 px-7 sm:px-8 bg-[#c5a059] hover:bg-[#ebd095] text-black font-mono font-black uppercase text-[10px] tracking-widest transition-all duration-300 rounded-full active:scale-95 shadow-md shadow-gold-500/10 cursor-pointer"
+                  >
+                    Book Strategy Session
+                  </button>
+                  <button
+                    onClick={() => scrollToSection('services-explorer-section')}
+                    className="py-3.5 px-7 sm:px-8 border-2 border-[#c5a059]/60 hover:border-[#c5a059] text-[#c5a059] hover:bg-[#c5a059]/5 font-mono font-bold uppercase text-[10px] tracking-widest transition-all duration-300 rounded-full active:scale-95 cursor-pointer"
+                  >
+                    Explore Services
+                  </button>
+                </div>
+
+                {/* Dot Indicators */}
+                <div className="flex items-center gap-2 justify-center lg:justify-start w-full">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#c5a059] shadow-glow-blue" />
+                  <span className="w-2 h-2 rounded-full border border-white/40" />
+                  <span className="w-2 h-2 rounded-full border border-white/40" />
+                  <span className="w-2 h-2 rounded-full border border-white/40" />
+                </div>
+              </div>
+
+              {/* Social Sidebar Icons (Desktop Only) */}
+              <div className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 flex-col gap-5 z-20 bg-white/[0.02] border border-white/5 rounded-full p-2 backdrop-blur-sm">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-7 h-7 rounded-full border border-[#c5a059]/30 hover:border-[#c5a059] text-white flex items-center justify-center transition-all hover:scale-115"
+                >
+                  <Facebook className="w-3.5 h-3.5 text-[#c5a059]" />
+                </a>
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-7 h-7 rounded-full border border-[#c5a059]/30 hover:border-[#c5a059] text-white flex items-center justify-center transition-all hover:scale-115"
+                >
+                  <Youtube className="w-3.5 h-3.5 text-[#c5a059]" />
+                </a>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-7 h-7 rounded-full border border-[#c5a059]/30 hover:border-[#c5a059] text-white flex items-center justify-center transition-all hover:scale-115"
+                >
+                  <Twitter className="w-3.5 h-3.5 text-[#c5a059]" />
+                </a>
+              </div>
 
             </div>
 
-
-            {/* ── RIGHT COLUMN — 3D Web Design Objects ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
-              className="flex items-center justify-center w-full max-w-[340px] sm:max-w-[480px] lg:max-w-none mx-auto h-[300px] sm:h-[420px] lg:h-[520px] my-6 lg:my-0 relative overflow-visible"
-              aria-hidden
-            >
-              <div
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                className="absolute left-1/2 top-1/2 w-[520px] h-[520px] flex items-center justify-center origin-center cursor-default hero-graphic-container"
-                style={{
-                  transform: `translate(-50%, -50%) perspective(1200px) scale(var(--hero-scale)) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
-                  transition: 'transform 0.2s cubic-bezier(0.1, 0.8, 0.2, 1)',
-                  transformStyle: 'preserve-3d',
-                }}
-              >
-
-              {/* ── 3D GRAPHIC BACKGROUND DECORATIVE GLOW ORB ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 320,
-                  height: 320,
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, rgba(197,160,89,0.12) 0%, rgba(124,58,237,0.06) 100%)',
-                  left: '2%',
-                  top: '12%',
-                  filter: 'blur(8px)',
-                  zIndex: 1,
-                  pointerEvents: 'none',
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 280,
-                  height: 280,
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, rgba(197,160,89,0.3) 0%, rgba(140,110,61,0.15) 100%)',
-                  left: '5%',
-                  top: '15%',
-                  zIndex: 2,
-                  pointerEvents: 'none',
-                  border: '1px solid rgba(197,160,89,0.2)',
-                }}
-              />
-
-              {/* ── MAIN MONITOR BASEPLATE — center background ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 340,
-                  height: 240,
-                  left: '46%',
-                  top: '46%',
-                  transform: 'translate(-50%, -50%) perspective(900px) rotateY(-10deg) rotateX(3deg)',
-                  background: 'linear-gradient(135deg, rgba(20,18,36,0.96) 0%, rgba(10,8,20,0.99) 100%)',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(197,160,89,0.25)',
-                  boxShadow: '0 32px 80px rgba(0,0,0,0.8), 0 0 60px rgba(197,160,89,0.05)',
-                  zIndex: 3,
-                  animation: 'hero-float-a 8s ease-in-out infinite',
-                }}
-              >
-                {/* Screen inner content/grid mock */}
-                <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ display: 'flex', gap: 4 }}>
-                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#ef4444' }} />
-                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#f59e0b' }} />
-                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981' }} />
-                    </div>
-                    <div style={{ width: 100, height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.06)' }} />
-                  </div>
-                  <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 10, marginTop: 16 }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                      <div style={{ height: 12, borderRadius: 3, background: 'rgba(197,160,89,0.15)', border: '1px solid rgba(197,160,89,0.2)' }} />
-                      <div style={{ height: 8, borderRadius: 2, background: 'rgba(255,255,255,0.03)' }} />
-                      <div style={{ height: 8, borderRadius: 2, background: 'rgba(255,255,255,0.03)' }} />
-                      <div style={{ height: 8, borderRadius: 2, background: 'rgba(255,255,255,0.03)' }} />
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6 }}>
-                      {[...Array(6)].map((_, idx) => (
-                        <div key={idx} style={{ borderRadius: 4, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Monitor Stand */}
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 60,
-                  height: 40,
-                  left: '46%',
-                  top: '68%',
-                  transform: 'translate(-50%, 0) perspective(900px) rotateY(-10deg) rotateX(3deg)',
-                  background: 'linear-gradient(to bottom, rgba(20,18,36,0.98), rgba(5,4,10,0.99))',
-                  borderLeft: '1px solid rgba(197,160,89,0.2)',
-                  borderRight: '1px solid rgba(197,160,89,0.2)',
-                  zIndex: 2,
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 120,
-                  height: 8,
-                  left: '46%',
-                  top: '76%',
-                  transform: 'translate(-50%, 0) perspective(900px) rotateY(-10deg) rotateX(3deg)',
-                  background: 'rgba(197,160,89,0.25)',
-                  borderRadius: 4,
-                  zIndex: 2,
-                }}
-              />
-
-              {/* ── FLOATING STATS CHART CARD — top left ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 170,
-                  left: '2%',
-                  top: '18%',
-                  background: 'linear-gradient(135deg, rgba(25,22,46,0.97) 0%, rgba(12,10,25,0.99) 100%)',
-                  border: '1px solid rgba(197,160,89,0.3)',
-                  borderRadius: 10,
-                  padding: '12px 14px',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 20px 50px rgba(0,0,0,0.7)',
-                  zIndex: 5,
-                  animation: 'hero-float-b 8s ease-in-out 0.5s infinite',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                  <div style={{ display: 'flex', items: 'center', gap: 4 }}>
-                    <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#c5a059' }} />
-                    <span style={{ fontSize: 7, color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace' }}>LOREM IPSUM</span>
-                  </div>
-                  <div style={{ display: 'flex', gap: 2 }}>
-                    <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(255,255,255,0.3)' }} />
-                    <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(255,255,255,0.3)' }} />
-                  </div>
-                </div>
-                {/* Bar chart details */}
-                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', height: 45, paddingBottom: 4, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                  <div style={{ width: 12, height: '100%', background: 'linear-gradient(to top, #c5a059, #f7e6b5)', borderRadius: '2px 2px 0 0' }} />
-                  <div style={{ width: 12, height: '40%', background: 'rgba(255,255,255,0.1)', borderRadius: '2px 2px 0 0' }} />
-                  <div style={{ width: 12, height: '70%', background: 'linear-gradient(to top, #c5a059, #8c6e3d)', borderRadius: '2px 2px 0 0' }} />
-                  <div style={{ width: 12, height: '90%', background: 'rgba(255,255,255,0.8)', borderRadius: '2px 2px 0 0' }} />
-                  <div style={{ width: 12, height: '55%', background: 'linear-gradient(to top, #c5a059, #f7e6b5)', borderRadius: '2px 2px 0 0' }} />
-                </div>
-                <div style={{ marginTop: 8, height: 4, width: 80, borderRadius: 2, background: 'rgba(255,255,255,0.08)' }} />
-              </div>
-
-              {/* ── FLOATING CALENDAR CARD — center background ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 180,
-                  right: '12%',
-                  top: '10%',
-                  background: 'linear-gradient(135deg, rgba(20,18,36,0.96) 0%, rgba(12,10,25,0.98) 100%)',
-                  border: '1px solid rgba(197,160,89,0.22)',
-                  borderRadius: 12,
-                  padding: '12px 14px',
-                  backdropFilter: 'blur(25px)',
-                  boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
-                  zIndex: 4,
-                  animation: 'hero-float-c 9s ease-in-out infinite',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                  <span style={{ fontSize: 7, color: '#c5a059', fontFamily: 'monospace' }}>◀</span>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', fontFamily: 'monospace', letterSpacing: '0.1em' }}>JULY</span>
-                  <span style={{ fontSize: 7, color: '#c5a059', fontFamily: 'monospace' }}>▶</span>
-                </div>
-                {/* Calendar grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px', textAlign: 'center', fontSize: 6, color: 'rgba(255,255,255,0.25)', fontFamily: 'monospace' }}>
-                  {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
-                    <span key={i} style={{ fontWeight: 'bold' }}>{d}</span>
-                  ))}
-                  {[...Array(31)].map((_, idx) => (
-                    <span
-                      key={idx}
-                      style={{
-                        padding: '2px 0',
-                        color: idx + 1 === 29 ? '#black' : 'rgba(255,255,255,0.7)',
-                        background: idx + 1 === 29 ? '#c5a059' : 'transparent',
-                        borderRadius: idx + 1 === 29 ? 2 : 0,
-                        fontWeight: idx + 1 === 29 ? 'bold' : 'normal',
-                      }}
-                    >
-                      {idx + 1}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* ── FLOATING PROFILE CARD — middle left ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 120,
-                  left: '12%',
-                  top: '52%',
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(240,240,245,0.99) 100%)',
-                  borderRadius: 8,
-                  padding: '8px 10px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  boxShadow: '0 12px 30px rgba(0,0,0,0.5)',
-                  zIndex: 5,
-                  animation: 'hero-float-a 9.5s ease-in-out 1.2s infinite',
-                }}
-              >
-                <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(135deg, #c5a059, #8c6e3d)', display: 'flex', alignItems: 'center', justify: 'center' }}>
-                  <span style={{ fontSize: 8, color: '#ffffff' }}>👤</span>
-                </div>
-                <div>
-                  <div style={{ height: 5, width: 50, borderRadius: 2, background: '#0a0a0a', opacity: 0.8 }} />
-                  <div style={{ height: 3, width: 30, borderRadius: 1.5, background: 'rgba(0,0,0,0.3)', marginTop: 3 }} />
-                </div>
-              </div>
-
-              {/* ── FLOATING PHONE WITH PEDESTAL — foreground right ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  right: '6%',
-                  bottom: '10%',
-                  width: 130,
-                  height: 210,
-                  zIndex: 6,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              >
-                {/* Floating Phone device */}
-                <div
-                  style={{
-                    width: 100,
-                    height: 180,
-                    background: 'linear-gradient(135deg, rgba(20,18,36,0.98) 0%, rgba(8,6,20,0.99) 100%)',
-                    border: '2px solid rgba(197,160,89,0.35)',
-                    borderRadius: 20,
-                    padding: '8px',
-                    boxShadow: '0 24px 50px rgba(0,0,0,0.8), 0 0 32px rgba(197,160,89,0.08)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    animation: 'hero-float-b 7.5s ease-in-out infinite',
-                  }}
-                >
-                  {/* Phone speaker notch */}
-                  <div style={{ width: 35, height: 5, background: 'rgba(197,160,89,0.3)', borderRadius: 2.5, margin: '0 auto' }} />
-                  {/* Inner screen mockup */}
-                  <div style={{ flex: 1, marginTop: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-                    {/* User profile details */}
-                    <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg, #c5a059, #8c6e3d)', display: 'flex', alignItems: 'center', justify: 'center' }}>
-                      <span style={{ fontSize: 10, color: '#ffffff' }}>👤</span>
-                    </div>
-                    <div style={{ fontSize: 7, fontWeight: 'bold', color: '#c5a059', fontFamily: 'monospace', letterSpacing: '0.05em' }}>YOUR NAME</div>
-                    <div style={{ width: 56, height: 12, borderRadius: 3, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justify: 'center' }}>
-                      <span style={{ fontSize: 5, color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace' }}>Login</span>
-                    </div>
-                    {/* Radial progress ring mock */}
-                    <div style={{ position: 'relative', width: 44, height: 44, display: 'flex', alignItems: 'center', justify: 'center' }}>
-                      <svg width="44" height="44" viewBox="0 0 36 36">
-                        <path
-                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="rgba(255,255,255,0.05)"
-                          strokeWidth="2.5"
-                        />
-                        <path
-                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="#c5a059"
-                          strokeDasharray="75, 100"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <span style={{ position: 'absolute', fontSize: 7, fontWeight: 'bold', color: '#ffffff', fontFamily: 'monospace' }}>75%</span>
-                    </div>
-                  </div>
-                  {/* Phone bottom bar */}
-                  <div style={{ display: 'flex', gap: 3, justifyContent: 'center' }}>
-                    <div style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
-                    <div style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
-                    <div style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
-                  </div>
-                </div>
-
-                {/* Pedestal Cylinder Base */}
-                <div
-                  style={{
-                    width: 100,
-                    height: 18,
-                    background: 'linear-gradient(to bottom, rgba(30,27,55,0.99) 0%, rgba(10,8,22,0.99) 100%)',
-                    border: '1px solid rgba(197,160,89,0.3)',
-                    borderRadius: '50% / 50%',
-                    boxShadow: '0 10px 24px rgba(0,0,0,0.6)',
-                    marginTop: -10,
-                  }}
-                />
-              </div>
-
-              {/* ── FLOATING PILL: PASSWORD — middle bottom ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '42%',
-                  bottom: '24%',
-                  background: '#c5a059',
-                  border: '1px solid #f7e6b5',
-                  borderRadius: 4,
-                  padding: '4px 10px',
-                  boxShadow: '0 8px 20px rgba(197,160,89,0.25)',
-                  zIndex: 5,
-                  animation: 'hero-float-c 10s ease-in-out 0.8s infinite',
-                }}
-              >
-                <span style={{ fontSize: 7, color: '#0a0a0a', fontWeight: 'bold', fontFamily: 'monospace', letterSpacing: '0.05em' }}>Password</span>
-              </div>
-
-              {/* ── FLOATING PILL: UPLOAD — lower right ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  right: '25%',
-                  bottom: '22%',
-                  background: '#ffffff',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  borderRadius: 4,
-                  padding: '4px 10px',
-                  boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
-                  zIndex: 5,
-                  animation: 'hero-float-b 11s ease-in-out 1.5s infinite',
-                }}
-              >
-                <span style={{ fontSize: 7, color: '#0a0a0a', fontWeight: 'bold', fontFamily: 'monospace', letterSpacing: '0.05em' }}>Upload</span>
-              </div>
-
-              {/* ── FLOATING CARD GRID PANEL — bottom left ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 90,
-                  left: '18%',
-                  bottom: '12%',
-                  background: 'linear-gradient(135deg, rgba(20,18,36,0.96) 0%, rgba(12,10,25,0.98) 100%)',
-                  border: '1px solid rgba(197,160,89,0.25)',
-                  borderRadius: 8,
-                  padding: '8px',
-                  boxShadow: '0 15px 30px rgba(0,0,0,0.6)',
-                  zIndex: 5,
-                  animation: 'hero-float-c 10.5s ease-in-out 2s infinite',
-                }}
-              >
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 }}>
-                  {[...Array(4)].map((_, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        height: 24,
-                        borderRadius: 3,
-                        background: 'rgba(197,160,89,0.08)',
-                        border: '1px solid rgba(197,160,89,0.15)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <span style={{ fontSize: 6, color: '#c5a059' }}>📈</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* ── FLOATING PILLS: RIGHT ACTION BUTTONS ── */}
-              <div style={{ position: 'absolute', right: '0%', top: '28%', display: 'flex', flexDirection: 'column', gap: 6, zIndex: 5 }}>
-                {['▲', '◎', '▼'].map((act, idx) => (
-                  <div
-                    key={act}
-                    style={{
-                      width: 24,
-                      height: 24,
-                      borderRadius: 4,
-                      background: 'rgba(255,255,255,0.03)',
-                      border: '1px solid rgba(197,160,89,0.22)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
-                      animation: `hero-float-${idx === 0 ? 'a' : idx === 1 ? 'b' : 'c'} 8.5s ease-in-out ${idx * 0.4}s infinite`,
-                    }}
-                  >
-                    <span style={{ fontSize: 8, color: '#c5a059' }}>{act}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Keyframes */}
-              <style>{`
-                @keyframes hero-float-a {
-                  0%,100% { transform: translate(-58%,-52%) perspective(900px) rotateY(-12deg) rotateX(4deg) translateY(0px); }
-                  50%     { transform: translate(-58%,-52%) perspective(900px) rotateY(-12deg) rotateX(4deg) translateY(-18px); }
-                }
-                @keyframes hero-float-b {
-                  0%,100% { transform: translateY(0px); }
-                  50%     { transform: translateY(-12px); }
-                }
-                @keyframes hero-float-c {
-                  0%,100% { transform: translateY(0px); }
-                  50%     { transform: translateY(-8px); }
-                }
-              `}</style>
-              </div>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
 
       </section>
