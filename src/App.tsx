@@ -428,38 +428,38 @@ export default function App() {
         <div className="absolute bottom-16 right-6 md:right-10 w-6 h-6 border-b border-r border-[#c5a059]/30 pointer-events-none z-10" />
 
         {/* ── CENTRAL SPLIT VIEWPORT CARD ── */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 flex items-center justify-center min-h-[calc(100vh-140px)]">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full bg-[#080711]/60 border border-white/10 rounded-[32px] overflow-hidden shadow-[0_32px_90px_rgba(0,0,0,0.85)] backdrop-blur-md grid grid-cols-1 lg:grid-cols-12 min-h-[600px] lg:min-h-[640px]"
+            className="w-full bg-[#080711]/60 border border-white/10 rounded-[32px] overflow-hidden shadow-[0_32px_90px_rgba(0,0,0,0.85)] backdrop-blur-md grid grid-cols-1 lg:grid-cols-12"
           >
             {/* ── LEFT COLUMN — Dark Glassmorphic & Deep Indigo Gradient ── */}
-            <div className="lg:col-span-5 bg-gradient-to-br from-[#0e0c21]/95 via-[#0a0818]/98 to-[#05040a]/99 p-8 sm:p-10 md:p-12 flex flex-col justify-between text-slate-100 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5">
+            <div className="lg:col-span-5 bg-gradient-to-br from-[#0e0c21]/95 via-[#0a0818]/98 to-[#05040a]/99 p-6 sm:p-8 flex flex-col justify-between text-slate-100 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5">
               {/* Spacer where the mock header used to be */}
-              <div className="h-6 w-full mb-8" />
+              <div className="h-2 w-full mb-4" />
 
               {/* Title Section */}
               <div className="flex flex-col text-left my-auto">
                 <h1 className="sr-only">Innovative Web Design - Pixel Vance Digital</h1>
                 <div aria-hidden="true" className="space-y-1">
-                  <p className="font-display font-light text-[#c5a059] text-lg tracking-[0.2em] uppercase">
+                  <p className="font-display font-light text-[#c5a059] text-sm tracking-[0.2em] uppercase">
                     Premium Agency
                   </p>
-                  <p className="font-display font-extrabold uppercase text-[clamp(2.2rem,5.5vw,3.8rem)] leading-[0.95] tracking-[0.02em] text-white">
+                  <p className="font-display font-extrabold uppercase text-[clamp(2.0rem,5vw,3.2rem)] leading-[0.95] tracking-[0.02em] text-white">
                     Innovative
                   </p>
-                  <p className="font-display font-extrabold uppercase text-[clamp(2.2rem,5.5vw,3.8rem)] leading-[0.95] tracking-[0.02em] text-[#c5a059] pb-2">
+                  <p className="font-display font-extrabold uppercase text-[clamp(2.0rem,5vw,3.2rem)] leading-[0.95] tracking-[0.02em] text-[#c5a059] pb-2">
                     Web Design
                   </p>
                 </div>
 
                 {/* Gold Divider Bar */}
-                <div className="w-24 h-[4px] bg-[#c5a059] my-6 rounded-full self-start" />
+                <div className="w-24 h-[4px] bg-[#c5a059] my-4 rounded-full self-start" />
 
                 {/* Glass Card Description */}
-                <div className="bg-white/[0.02] border border-white/5 hover:border-[#c5a059]/20 rounded-2xl p-5 md:p-6 text-left relative overflow-hidden group transition-all duration-300 shadow-xl backdrop-blur-md">
+                <div className="bg-white/[0.02] border border-white/5 hover:border-[#c5a059]/20 rounded-2xl p-4 md:p-5 text-left relative overflow-hidden group transition-all duration-300 shadow-xl backdrop-blur-md">
                   {/* Corner brackets */}
                   <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#c5a059]/30 pointer-events-none" />
                   <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#c5a059]/30 pointer-events-none" />
@@ -470,10 +470,10 @@ export default function App() {
                 </div>
 
                 {/* Left CTA: Start a Project */}
-                <div className="mt-8 flex justify-start">
+                <div className="mt-4 flex justify-start">
                   <button
                     onClick={() => openBooking('GROWTH', '$2,999')}
-                    className="group relative flex items-center justify-center gap-2.5 py-3.5 px-9 border-2 border-[#c5a059]/80 text-[#c5a059] hover:text-black hover:bg-[#c5a059] uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer rounded-full active:scale-95 font-black shadow-md shadow-gold-500/10 hover:shadow-gold-500/25"
+                    className="group relative flex items-center justify-center gap-2.5 py-3 px-8 border-2 border-[#c5a059]/80 text-[#c5a059] hover:text-black hover:bg-[#c5a059] uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer rounded-full active:scale-95 font-black shadow-md shadow-gold-500/10 hover:shadow-gold-500/25"
                   >
                     Start a Project
                   </button>
@@ -525,19 +525,19 @@ export default function App() {
             </div>
 
             {/* ── RIGHT COLUMN — Deep Rich Violet-to-Navy Gradient with Isometric 3D Laptop ── */}
-            <div className="lg:col-span-7 bg-gradient-to-br from-[#1e133d] via-[#0b081c] to-[#06040a] p-8 sm:p-10 md:p-12 flex flex-col justify-between relative overflow-hidden text-white min-h-[420px] lg:min-h-0">
+            <div className="lg:col-span-7 bg-gradient-to-br from-[#1e133d] via-[#0b081c] to-[#06040a] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden text-white min-h-[420px] lg:min-h-0">
               {/* Floating Glow Background Elements for depth */}
               <div className="absolute -top-[10%] left-[-5%] w-[45%] h-[45%] rounded-full bg-[#c5a059]/10 blur-[120px] pointer-events-none" />
               <div className="absolute bottom-[10%] right-[-5%] w-[50%] h-[50%] rounded-full bg-[#7c3aed]/15 blur-[130px] pointer-events-none" />
 
               {/* Spacer where the mock header used to be */}
-              <div className="h-6 w-full mb-6" />
+              <div className="h-2 w-full mb-4" />
 
               {/* 3D Isometric Laptop Showcase Scene */}
-              <div className="relative w-full h-[260px] sm:h-[300px] md:h-[330px] lg:h-[350px] flex items-center justify-center overflow-visible my-auto z-10">
+              <div className="relative w-full h-[200px] sm:h-[240px] md:h-[260px] lg:h-[280px] flex items-center justify-center overflow-visible my-auto z-10">
                 {/* Responsive Scale Wrapper */}
                 <div 
-                  className="relative w-[340px] h-[340px] flex items-center justify-center origin-center transition-all duration-300 hero-graphic-container"
+                  className="relative w-[300px] h-[300px] flex items-center justify-center origin-center transition-all duration-300 hero-graphic-container"
                   style={{
                     transform: `perspective(1000px) rotateX(${tilt.y * 0.4}deg) rotateY(${tilt.x * 0.4}deg) scale(var(--hero-scale))`,
                     transformStyle: 'preserve-3d',
