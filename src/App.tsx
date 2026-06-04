@@ -447,7 +447,7 @@ export default function App() {
                   </p>
                 </div>
                 <div style={{ transform: 'rotateX(-3deg)', transformOrigin: 'left top' }}>
-                  <p className="text-[clamp(1.6rem,3.5vw,3.2rem)] font-display font-extralight text-white/20 leading-[1.2] tracking-wide mt-2">
+                  <p className="text-[clamp(1.6rem,3.5vw,3.2rem)] font-display font-extralight text-white/55 leading-[1.2] tracking-wide mt-2">
                     That Never Settle.
                   </p>
                 </div>
