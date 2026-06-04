@@ -313,7 +313,7 @@ export default function App() {
               id="nav-quick-consult-btn"
               className="hidden sm:flex items-center gap-1.5 py-2 px-5 border border-slate-700 text-[9px] font-mono uppercase tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all duration-300 cursor-pointer active:scale-95"
             >
-              <Calendar className="w-3.5 h-3.5" /> Book Call
+              <Calendar className="w-3.5 h-3.5" /> Start a Project
             </button>
 
             {/* Mobile menu trigger */}
