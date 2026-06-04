@@ -461,7 +461,7 @@ export default function App() {
                     </p>
                   </div>
                   <div style={{ transform: 'rotateX(2deg)', transformOrigin: 'left center' }}>
-                    <p className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-serif italic leading-[0.9] tracking-[-0.01em] text-shimmer-gold whitespace-nowrap">
+                    <p className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-serif italic leading-[1.1] tracking-[-0.01em] text-shimmer-gold whitespace-nowrap pb-2">
                       Digital Legacies
                     </p>
                   </div>
