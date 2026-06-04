@@ -478,7 +478,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.45 }}
-                className="text-sm md:text-base lg:text-lg text-white max-w-md leading-relaxed font-light tracking-wide mx-auto lg:mx-0 bg-black/40 backdrop-blur-md border border-white/5 px-5 py-4 rounded-xl lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0 shadow-lg lg:shadow-none"
+                className="font-mono text-[11px] md:text-xs lg:text-sm text-white max-w-md leading-relaxed tracking-wide mx-auto lg:mx-0 bg-black/40 backdrop-blur-md border border-white/5 px-5 py-4 rounded-xl lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0 shadow-lg lg:shadow-none"
               >
                 High-fidelity <span className="text-[#c5a059] font-semibold">web design, bespoke development</span>, and{' '}
                 <span className="font-medium">conversion systems</span> built for{' '}
