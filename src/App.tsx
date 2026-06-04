@@ -524,9 +524,9 @@ export default function App() {
               <div
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full flex items-center justify-center scale-[0.62] sm:scale-[0.85] lg:scale-100 origin-center cursor-default"
+                className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full flex items-center justify-center origin-center cursor-default hero-graphic-container"
                 style={{
-                  transform: `perspective(1200px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
+                  transform: `perspective(1200px) scale(var(--hero-scale)) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
                   transition: 'transform 0.2s cubic-bezier(0.1, 0.8, 0.2, 1)',
                   transformStyle: 'preserve-3d',
                 }}

@@ -188,3 +188,19 @@
     0 2px 4px rgba(0,0,0,0.5),
     0 8px 24px rgba(0,0,0,0.4);
 }
+
+.hero-graphic-container {
+  --hero-scale: 0.58;
+}
+
+@media (min-width: 640px) {
+  .hero-graphic-container {
+    --hero-scale: 0.8;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-graphic-container {
+    --hero-scale: 1;
+  }
+}
