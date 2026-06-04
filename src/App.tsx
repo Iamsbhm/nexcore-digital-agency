@@ -402,7 +402,7 @@ export default function App() {
 
       {/* 3. HERO SECTION — Premium 3D Split Layout */}
       <section
-        className="relative z-10 overflow-hidden"
+        className="relative z-10 overflow-hidden flex items-center justify-center"
         style={{ minHeight: 'calc(100vh - 72px)' }}
         id="hero"
       >
