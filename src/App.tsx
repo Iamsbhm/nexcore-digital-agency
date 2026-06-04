@@ -448,20 +448,26 @@ export default function App() {
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                 style={{ perspective: '1400px' }}
               >
-                <div style={{ transform: 'rotateX(6deg)', transformOrigin: 'left bottom' }}>
-                  <h1 className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-display font-light text-white leading-[0.9] tracking-[-0.02em]">
-                    We <span className="font-bold">Build</span>
-                  </h1>
-                </div>
-                <div style={{ transform: 'rotateX(2deg)', transformOrigin: 'left center' }}>
-                  <p className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-serif italic leading-[0.9] tracking-[-0.01em] text-shimmer-gold whitespace-nowrap">
-                    Digital Legacies
-                  </p>
-                </div>
-                <div style={{ transform: 'rotateX(-3deg)', transformOrigin: 'left top' }}>
-                  <p className="text-[clamp(1.2rem,5vw,3.2rem)] font-display font-extralight text-white/85 lg:text-white/55 leading-[1.2] tracking-wide mt-1">
-                    That Never Settle.
-                  </p>
+                {/* 100% SEO-Indexable & Screen-Reader Accessible H1 */}
+                <h1 className="sr-only">We Build Digital Legacies That Never Settle.</h1>
+
+                {/* Visually transformed lines — hidden from screen readers to prevent duplicate announcements */}
+                <div aria-hidden="true">
+                  <div style={{ transform: 'rotateX(6deg)', transformOrigin: 'left bottom' }}>
+                    <p className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-display font-light text-white leading-[0.9] tracking-[-0.02em]">
+                      We <span className="font-bold">Build</span>
+                    </p>
+                  </div>
+                  <div style={{ transform: 'rotateX(2deg)', transformOrigin: 'left center' }}>
+                    <p className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-serif italic leading-[0.9] tracking-[-0.01em] text-shimmer-gold whitespace-nowrap">
+                      Digital Legacies
+                    </p>
+                  </div>
+                  <div style={{ transform: 'rotateX(-3deg)', transformOrigin: 'left top' }}>
+                    <p className="text-[clamp(1.2rem,5vw,3.2rem)] font-display font-extralight text-white/85 lg:text-white/55 leading-[1.2] tracking-wide mt-1">
+                      That Never Settle.
+                    </p>
+                  </div>
                 </div>
               </motion.div>
 
