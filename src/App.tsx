@@ -389,7 +389,7 @@ export default function App() {
         id="hero"
       >
         {/* 3D Floating Spheres — background */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none opacity-30 lg:opacity-100 transition-opacity duration-700">
           <Spheres3D />
         </div>
 
@@ -447,7 +447,7 @@ export default function App() {
                   </p>
                 </div>
                 <div style={{ transform: 'rotateX(-3deg)', transformOrigin: 'left top' }}>
-                  <p className="text-[clamp(1.2rem,5vw,3.2rem)] font-display font-extralight text-white/55 leading-[1.2] tracking-wide mt-1">
+                  <p className="text-[clamp(1.2rem,5vw,3.2rem)] font-display font-extralight text-white/85 lg:text-white/55 leading-[1.2] tracking-wide mt-1">
                     That Never Settle.
                   </p>
                 </div>
@@ -458,11 +458,11 @@ export default function App() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.45 }}
-                className="text-sm md:text-base lg:text-lg text-white/40 max-w-md leading-relaxed font-light tracking-wide mx-auto lg:mx-0"
+                className="text-sm md:text-base lg:text-lg text-white/90 lg:text-white/55 max-w-md leading-relaxed font-light tracking-wide mx-auto lg:mx-0 bg-black/40 backdrop-blur-md border border-white/5 px-5 py-4 rounded-xl lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0 shadow-lg lg:shadow-none"
               >
-                High-fidelity <span className="text-[#c5a059]/80 font-medium">web design, bespoke development</span>, and{' '}
-                <span className="text-white/60 font-medium">conversion systems</span> —{' '}
-                built for <span className="text-white/60 font-medium">brands that demand perfection</span>.
+                High-fidelity <span className="text-[#c5a059] font-semibold">web design, bespoke development</span>, and{' '}
+                <span className="text-white font-medium">conversion systems</span> —{' '}
+                built for <span className="text-white font-medium">brands that demand perfection</span>.
               </motion.p>
 
               {/* CTAs */}
