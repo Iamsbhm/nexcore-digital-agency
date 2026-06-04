@@ -384,7 +384,8 @@ export default function App() {
 
       {/* 3. HERO SECTION — Premium 3D Split Layout */}
       <section
-        className="relative z-10 min-h-screen flex flex-col overflow-hidden"
+        className="relative z-10 overflow-hidden"
+        style={{ minHeight: '100vh' }}
         id="hero"
       >
         {/* 3D Floating Spheres — background */}
@@ -409,7 +410,7 @@ export default function App() {
         <div className="absolute bottom-16 right-6 md:right-10 w-6 h-6 border-b border-r border-[#c5a059]/30 pointer-events-none z-10" />
 
         {/* ── TWO-COLUMN HERO CONTENT ── */}
-        <div className="relative z-10 w-full pl-20 md:pl-28 lg:pl-40 pr-6 md:pr-12 lg:pr-16" style={{ paddingTop: '70px', minHeight: '100vh', display: 'flex', alignItems: 'flex-start' }}>
+        <div className="relative z-10 w-full pl-20 md:pl-28 lg:pl-40 pr-6 md:pr-12 lg:pr-16" style={{ paddingTop: '72px', minHeight: '100vh', display: 'flex', alignItems: 'flex-start' }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full">
 
             {/* ── LEFT COLUMN — Text Content ── */}
