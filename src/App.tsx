@@ -362,7 +362,7 @@ export default function App() {
         )}
       </nav>
 
-      <div className="h-20 md:h-28" />
+      <div className="h-[72px]" />
 
       {/* Main content landmark for accessibility & skip-nav */}
       <main id="main-content">
@@ -385,7 +385,7 @@ export default function App() {
       {/* 3. HERO SECTION — Premium 3D Split Layout */}
       <section
         className="relative z-10 overflow-hidden"
-        style={{ minHeight: '100vh' }}
+        style={{ minHeight: 'calc(100vh - 72px)' }}
         id="hero"
       >
         {/* 3D Floating Spheres — background */}
@@ -404,13 +404,13 @@ export default function App() {
         }} />
 
         {/* Corner HUD brackets */}
-        <div className="absolute top-20 left-6 md:left-10 w-6 h-6 border-t border-l border-[#c5a059]/30 pointer-events-none z-10" />
-        <div className="absolute top-20 right-6 md:right-10 w-6 h-6 border-t border-r border-[#c5a059]/30 pointer-events-none z-10" />
+        <div className="absolute top-6 md:top-8 left-6 md:left-10 w-6 h-6 border-t border-l border-[#c5a059]/30 pointer-events-none z-10" />
+        <div className="absolute top-6 md:top-8 right-6 md:right-10 w-6 h-6 border-t border-r border-[#c5a059]/30 pointer-events-none z-10" />
         <div className="absolute bottom-16 left-6 md:left-10 w-6 h-6 border-b border-l border-[#c5a059]/30 pointer-events-none z-10" />
         <div className="absolute bottom-16 right-6 md:right-10 w-6 h-6 border-b border-r border-[#c5a059]/30 pointer-events-none z-10" />
 
         {/* ── TWO-COLUMN HERO CONTENT ── */}
-        <div className="relative z-10 w-full px-5 sm:px-8 md:px-12 lg:pl-40 lg:pr-16" style={{ paddingTop: '72px', minHeight: '100vh', display: 'flex', alignItems: 'flex-start' }}>
+        <div className="relative z-10 w-full px-5 sm:px-8 md:px-12 lg:pl-40 lg:pr-16" style={{ paddingTop: '20px', minHeight: 'calc(100vh - 72px)', display: 'flex', alignItems: 'flex-start' }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
 
             {/* ── LEFT COLUMN — Text Content ── */}
