@@ -311,9 +311,11 @@ export default function App() {
             <button
               onClick={() => openBooking('GROWTH', '$2,999')}
               id="nav-quick-consult-btn"
-              className="hidden sm:flex items-center gap-1.5 py-2 px-5 border border-slate-700 text-[9px] font-mono uppercase tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all duration-300 cursor-pointer active:scale-95"
+              className="flex items-center gap-1 py-1.5 px-3 sm:py-2 sm:px-5 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] transition-all duration-300 cursor-pointer active:scale-95 shadow-[0_0_20px_rgba(197,160,89,0.15)]"
             >
-              <Calendar className="w-3.5 h-3.5" /> Start a Project
+              <Calendar className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+              <span className="inline sm:hidden">Start Project</span>
+              <span className="hidden sm:inline">Start a Project</span>
             </button>
 
             {/* Mobile menu trigger */}
@@ -366,7 +368,7 @@ export default function App() {
                   id="mobile-nav-book-btn"
                   className="w-full py-3.5 bg-[#c5a059] text-center font-bold font-mono tracking-wider text-xs rounded-lg uppercase text-black shadow-md cursor-pointer active:scale-95 transition-all"
                 >
-                  ★ Book Strategy Consultation
+                  ★ Start a Project
                 </button>
               </div>
             </div>
