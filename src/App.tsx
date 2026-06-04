@@ -534,7 +534,7 @@ export default function App() {
               <div className="h-2 w-full mb-4" />
 
               {/* 3D Isometric Laptop Showcase Scene */}
-              <div className="relative w-full h-[200px] sm:h-[240px] md:h-[260px] lg:h-[280px] flex items-center justify-center overflow-visible my-auto z-10">
+              <div className="relative w-full h-[250px] sm:h-[280px] md:h-[300px] lg:h-[340px] flex items-center justify-center overflow-visible my-auto z-10">
                 {/* Responsive Scale Wrapper */}
                 <div 
                   className="relative w-[300px] h-[300px] flex items-center justify-center origin-center transition-all duration-300 hero-graphic-container"

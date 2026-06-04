@@ -190,20 +190,21 @@
 }
 
 .hero-graphic-container {
-  --hero-scale: 0.42;
+  --hero-scale: 0.72;
 }
 
 @media (min-width: 640px) {
   .hero-graphic-container {
-    --hero-scale: 0.65;
+    --hero-scale: 0.90;
   }
 }
 
 @media (min-width: 1024px) {
   .hero-graphic-container {
-    --hero-scale: 0.85;
+    --hero-scale: 1.15;
   }
 }
+
 
 /* Custom autofill styles to keep text white and background dark */
 input:-webkit-autofill,
