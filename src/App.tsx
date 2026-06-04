@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense, MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Compass, 
@@ -67,7 +67,7 @@ export default function App() {
 
   // Mouse tilt tracking state for 3D graphic interactivity
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
