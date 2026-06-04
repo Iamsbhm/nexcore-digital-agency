@@ -478,11 +478,11 @@ export default function App() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.45 }}
-                className="text-sm md:text-base lg:text-lg text-white/90 lg:text-white/55 max-w-md leading-relaxed font-light tracking-wide mx-auto lg:mx-0 bg-black/40 backdrop-blur-md border border-white/5 px-5 py-4 rounded-xl lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0 shadow-lg lg:shadow-none"
+                className="text-sm md:text-base lg:text-lg text-white max-w-md leading-relaxed font-light tracking-wide mx-auto lg:mx-0 bg-black/40 backdrop-blur-md border border-white/5 px-5 py-4 rounded-xl lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0 shadow-lg lg:shadow-none"
               >
                 High-fidelity <span className="text-[#c5a059] font-semibold">web design, bespoke development</span>, and{' '}
-                <span className="text-white font-medium">conversion systems</span> —{' '}
-                built for <span className="text-white font-medium">brands that demand perfection</span>.
+                <span className="font-medium">conversion systems</span> built for{' '}
+                <span className="font-medium">brands that demand perfection</span>.
               </motion.p>
 
               {/* CTAs */}
