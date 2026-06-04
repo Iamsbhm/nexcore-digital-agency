@@ -449,12 +449,12 @@ export default function App() {
                 style={{ perspective: '1400px' }}
               >
                 <div style={{ transform: 'rotateX(6deg)', transformOrigin: 'left bottom' }}>
-                  <h1 className="text-[clamp(2.6rem,10vw,6.5rem)] font-display font-light text-white leading-[0.9] tracking-[-0.02em]">
+                  <h1 className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-display font-light text-white leading-[0.9] tracking-[-0.02em]">
                     We <span className="font-bold">Build</span>
                   </h1>
                 </div>
                 <div style={{ transform: 'rotateX(2deg)', transformOrigin: 'left center' }}>
-                  <p className="text-[clamp(2.6rem,10vw,6.5rem)] font-serif italic leading-[0.9] tracking-[-0.01em] text-shimmer-gold">
+                  <p className="text-[clamp(2.2rem,6.2vw,5.2rem)] font-serif italic leading-[0.9] tracking-[-0.01em] text-shimmer-gold whitespace-nowrap">
                     Digital Legacies
                   </p>
                 </div>
