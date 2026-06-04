@@ -572,165 +572,243 @@ export default function App() {
                     }}
                   />
 
-                  {/* ── ISOMETRIC LAPTOP 3D ── */}
+                  {/* ── 3D BROWSER SHOWCASE ── */}
                   <div 
-                    className="relative flex items-center justify-center"
+                    className="relative flex items-center justify-center animate-browser-main"
                     style={{
-                      transform: 'rotateX(60deg) rotateZ(-45deg)',
+                      transform: 'rotateX(20deg) rotateY(-25deg) rotateZ(8deg)',
                       transformStyle: 'preserve-3d',
                     }}
                   >
-                    
-                    {/* LAPTOP KEYBOARD BASE */}
+                    {/* MAIN BROWSER WINDOW */}
                     <div 
-                      className="w-[200px] h-[140px] bg-gradient-to-br from-[#1d1b2e] to-[#0f0a1c] rounded-xl shadow-2xl relative border border-white/5"
+                      className="w-[230px] h-[160px] bg-gradient-to-br from-[#120e29] via-[#090715] to-[#040308] border border-[#c5a059]/40 rounded-xl shadow-2xl p-2.5 flex flex-col justify-between"
                       style={{
                         transformStyle: 'preserve-3d',
-                        borderBottom: '6px solid #0b0714',
-                        boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
+                        boxShadow: '0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(197,160,89,0.15)',
                       }}
                     >
-                      {/* Keyboard Key Lines Mockup */}
-                      <div className="absolute inset-x-3 top-4 bottom-8 flex flex-col gap-1.5 opacity-80">
-                        {[...Array(6)].map((_, i) => (
-                          <div key={i} className="flex gap-1">
-                            {[...Array(8)].map((_, j) => (
-                              <div 
-                                key={j} 
-                                className="h-1.5 bg-gradient-to-r from-[#c5a059] to-[#8c6e3d] rounded-sm flex-1 opacity-70"
-                                style={{
-                                  boxShadow: '0 0 4px rgba(197,160,89,0.3)',
-                                }}
-                              />
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                      
-                      {/* Touchpad Mock */}
-                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-14 h-4 bg-[#0a0712] rounded border border-white/5 opacity-55" />
-                    </div>
-
-                    {/* LAPTOP SCREEN (Tilted vertical rising back) */}
-                    <div 
-                      className="absolute w-[190px] h-[130px] bg-gradient-to-b from-[#1b152d] to-[#07050e] border-2 border-[#c5a059]/40 rounded-lg p-2 overflow-hidden"
-                      style={{
-                        transform: 'translate3d(-5px, -65px, 0px) rotateX(-80deg)',
-                        transformOrigin: 'bottom center',
-                        boxShadow: '0 0 30px rgba(197,160,89,0.15)',
-                        transformStyle: 'preserve-3d',
-                      }}
-                    >
-                      {/* Glowing Wireframe Graphics */}
-                      <div className="w-full h-full bg-[#0a0712]/95 rounded-md p-1.5 flex flex-col justify-between border border-white/5">
-                        <div className="flex justify-between items-center">
-                          <div className="flex gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
-                            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
-                            <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
-                          </div>
-                          <span className="text-[6px] font-mono text-white/30">NEXCORE WIREFRAME</span>
+                      {/* Browser Window Header */}
+                      <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                        {/* Control dots */}
+                        <div className="flex gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
                         </div>
-                        <div className="flex-1 grid grid-cols-3 gap-1.5 mt-2">
-                          <div className="col-span-2 border border-white/5 rounded p-1 bg-white/[0.01] flex flex-col justify-between">
-                            <div className="w-full h-2 bg-[#c5a059]/20 rounded" />
-                            <div className="w-[70%] h-1 bg-white/20 rounded mt-1" />
-                            <div className="w-[90%] h-1 bg-white/20 rounded mt-0.5" />
-                            <div className="grid grid-cols-2 gap-1 mt-1.5">
-                              <div className="h-5 bg-[#c5a059]/10 border border-[#c5a059]/20 rounded" />
-                              <div className="h-5 bg-white/5 rounded" />
+                        {/* Title Bar mock */}
+                        <div className="w-[120px] h-3 bg-white/5 rounded-sm flex items-center justify-center px-1">
+                          <span className="text-[5px] font-mono text-white/30 tracking-wider">nexcore.digital</span>
+                        </div>
+                        <div className="w-4" /> {/* Spacer */}
+                      </div>
+
+                      {/* Content Grid */}
+                      <div className="flex-1 grid grid-cols-2 gap-2 mt-2">
+                        {/* Left Column (Landscape & Waveform) */}
+                        <div className="flex flex-col gap-2 justify-between">
+                          
+                          {/* 1. Landscape Mountain Card */}
+                          <div className="bg-[#0a0718]/90 border border-white/5 rounded p-1 flex flex-col justify-between overflow-hidden w-full h-[58px] relative">
+                            {/* SVG Mountains Graphic */}
+                            <div className="absolute inset-0 opacity-80 flex items-end">
+                              <svg className="w-full h-[32px]" viewBox="0 0 100 40" preserveAspectRatio="none">
+                                <defs>
+                                  <linearGradient id="mountGrad1" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#c5a059" stopOpacity="0.8" />
+                                    <stop offset="100%" stopColor="#8c6e3d" stopOpacity="0.2" />
+                                  </linearGradient>
+                                  <linearGradient id="mountGrad2" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.7" />
+                                    <stop offset="100%" stopColor="#1e1b4b" stopOpacity="0.1" />
+                                  </linearGradient>
+                                </defs>
+                                {/* Back Mountain */}
+                                <path d="M-10,40 L30,10 L70,40 Z" fill="url(#mountGrad2)" />
+                                {/* Front Mountain */}
+                                <path d="M15,40 L60,5 L110,40 Z" fill="url(#mountGrad1)" />
+                                {/* Glowing Sun */}
+                                <circle cx="75" cy="12" r="5" fill="#c5a059" opacity="0.9" />
+                              </svg>
+                            </div>
+                            <div className="flex justify-between items-center z-10">
+                              <span className="text-[5px] font-mono text-purple-300 opacity-60">DESIGN.JPG</span>
                             </div>
                           </div>
-                          <div className="border border-white/5 rounded p-1 bg-white/[0.01] flex flex-col gap-1 justify-center items-center">
-                            <div className="w-6 h-6 rounded-full border border-[#c5a059]/20 flex items-center justify-center text-[7px] text-[#c5a059] font-mono font-bold">75%</div>
-                            <div className="w-6 h-1 bg-white/20 rounded" />
+
+                          {/* 2. Waveform Card */}
+                          <div className="bg-[#0a0718]/90 border border-white/5 rounded flex flex-col justify-between w-full h-[47px] p-1.5">
+                            <span className="text-[5px] font-mono text-[#c5a059] opacity-70 leading-none">AUDIO_WAVE.RAW</span>
+                            {/* Simulated waveform bars */}
+                            <div className="flex items-end justify-between h-[20px] px-1 mt-1">
+                              <div className="w-[2px] h-[30%] bg-purple-400 rounded-sm" />
+                              <div className="w-[2px] h-[55%] bg-purple-300 rounded-sm" />
+                              <div className="w-[2px] h-[80%] bg-[#c5a059] rounded-sm shadow-[0_0_4px_#c5a059]" />
+                              <div className="w-[2px] h-[40%] bg-purple-200 rounded-sm" />
+                              <div className="w-[2px] h-[95%] bg-[#c5a059] rounded-sm shadow-[0_0_4px_#c5a059]" />
+                              <div className="w-[2px] h-[65%] bg-purple-300 rounded-sm" />
+                              <div className="w-[2px] h-[85%] bg-[#c5a059] rounded-sm shadow-[0_0_4px_#c5a059]" />
+                              <div className="w-[2px] h-[25%] bg-purple-400 rounded-sm" />
+                            </div>
+                          </div>
+
+                        </div>
+
+                        {/* Right Column (Wireframe Mock) */}
+                        <div className="bg-[#0a0718]/90 border border-white/5 rounded p-1.5 flex flex-col justify-between w-full h-[113px]">
+                          {/* Mock Image Box with Cross Lines */}
+                          <div className="w-full h-[38px] border border-white/10 rounded relative overflow-hidden flex items-center justify-center">
+                            <svg className="absolute inset-0 w-full h-full text-white/5" preserveAspectRatio="none">
+                              <line x1="0" y1="0" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1" />
+                              <line x1="100%" y1="0" x2="0" y2="100%" stroke="currentColor" strokeWidth="1" />
+                            </svg>
+                            <span className="text-[5px] font-mono text-white/20 z-10 font-semibold">PREVIEW</span>
+                          </div>
+                          
+                          {/* Skeleton text */}
+                          <div className="flex flex-col gap-1 mt-1">
+                            <div className="w-[90%] h-1.5 bg-[#c5a059]/25 rounded-sm" />
+                            <div className="w-[75%] h-1 bg-white/10 rounded-sm" />
+                            <div className="w-[50%] h-1 bg-white/10 rounded-sm" />
+                          </div>
+
+                          {/* Wireframe Button */}
+                          <div className="w-full h-4 bg-gradient-to-r from-[#c5a059] to-[#8c6e3d] rounded flex items-center justify-between px-1.5 shadow-md mt-1 cursor-pointer">
+                            <span className="text-[5px] font-bold text-black font-mono">PUBLISH</span>
+                            <span className="text-[6px] text-black font-bold">→</span>
                           </div>
                         </div>
+
                       </div>
                     </div>
 
-                    {/* ── FLOATING PANEL A: CODE SCREEN (Front Right) ── */}
-                    <div
-                      className="absolute z-10 w-[120px] h-[90px] bg-gradient-to-br from-[#1a0c2e]/98 to-[#0c051a]/99 border border-white/10 rounded-xl p-2.5 shadow-2xl flex flex-col justify-between animate-float-3d-a"
+                    {/* ── FLOATING Rating Pill (Top Center) ── */}
+                    <div 
+                      className="absolute z-20 w-[85px] h-[25px] bg-[#120e29]/90 border border-[#c5a059]/40 rounded-full px-2 flex items-center justify-between shadow-xl animate-browser-rating"
                       style={{
-                        boxShadow: '0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(197,160,89,0.1)',
+                        backdropFilter: 'blur(8px)',
+                        boxShadow: '0 10px 25px rgba(0,0,0,0.5), 0 0 15px rgba(197,160,89,0.1)',
                       }}
                     >
-                      <div className="flex items-center justify-between border-b border-white/5 pb-1">
-                        <span className="text-[6px] font-mono text-purple-300 font-bold">App.tsx</span>
-                        <div className="w-3.5 h-3.5 rounded bg-[#c5a059]/10 flex items-center justify-center text-[8px] text-[#c5a059] font-bold">&lt;/&gt;</div>
-                      </div>
-                      <div className="flex-1 flex flex-col gap-1.5 mt-2 font-mono text-[5px] text-white/55 leading-none">
-                        <p><span className="text-[#c5a059]">const</span> Agency = () =&gt; &#123;</p>
-                        <p className="pl-2"><span className="text-purple-300">return</span> (</p>
-                        <p className="pl-4 text-green-300">&lt;<span className="text-[#c5a059]">InnovativeDesign</span> /&gt;</p>
-                        <p className="pl-2">);</p>
-                        <p>&#125;;</p>
+                      <span className="text-[6px] font-bold text-white tracking-widest font-mono">RATING</span>
+                      <div className="flex gap-[1px]">
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className="text-[#c5a059] text-[7px]">★</span>
+                        ))}
                       </div>
                     </div>
 
-                    {/* ── FLOATING PANEL B: METRICS CHART (Front Left) ── */}
-                    <div
-                      className="absolute z-10 w-[110px] h-[85px] bg-[#ffffff] rounded-xl p-2.5 shadow-2xl flex flex-col justify-between animate-float-3d-b"
+                    {/* ── FLOATING 3D GOLD SEND DISC (Right side) ── */}
+                    <div 
+                      className="absolute z-20 w-11 h-11 animate-browser-send"
+                      style={{ transformStyle: 'preserve-3d' }}
+                    >
+                      {/* Cylinder Side 3D Layers */}
+                      <div className="absolute inset-0 rounded-full bg-[#533a1e]" style={{ transform: 'translateZ(0px)' }} />
+                      <div className="absolute inset-0 rounded-full bg-[#6d4c24]" style={{ transform: 'translateZ(1px)' }} />
+                      <div className="absolute inset-0 rounded-full bg-[#845d2d]" style={{ transform: 'translateZ(2px)' }} />
+                      <div className="absolute inset-0 rounded-full bg-[#9c6f37]" style={{ transform: 'translateZ(3px)' }} />
+                      <div className="absolute inset-0 rounded-full bg-[#b28141]" style={{ transform: 'translateZ(4px)' }} />
+                      {/* Cylinder Top Layer */}
+                      <div 
+                        className="absolute inset-0 rounded-full bg-gradient-to-br from-[#ebd095] to-[#8c6e3d] border border-[#ffebad]/30 flex items-center justify-center shadow-inner"
+                        style={{ transform: 'translateZ(5px)' }}
+                      >
+                        <svg className="w-4 h-4 text-white -translate-x-[0.5px] translate-y-[0.5px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* ── FLOATING 3D PURPLE PLUS DISC (Left side) ── */}
+                    <div 
+                      className="absolute z-20 w-11 h-11 animate-browser-plus"
+                      style={{ transformStyle: 'preserve-3d' }}
+                    >
+                      {/* Cylinder Side 3D Layers */}
+                      <div className="absolute inset-0 rounded-full bg-[#250f4c]" style={{ transform: 'translateZ(0px)' }} />
+                      <div className="absolute inset-0 rounded-full bg-[#36166e]" style={{ transform: 'translateZ(1px)' }} />
+                      <div className="absolute inset-0 rounded-full bg-[#4b1d98]" style={{ transform: 'translateZ(2px)' }} />
+                      <div className="absolute inset-0 rounded-full bg-[#5f24c0]" style={{ transform: 'translateZ(3px)' }} />
+                      <div className="absolute inset-0 rounded-full bg-[#722ce8]" style={{ transform: 'translateZ(4px)' }} />
+                      {/* Cylinder Top Layer */}
+                      <div 
+                        className="absolute inset-0 rounded-full bg-gradient-to-br from-[#a78bfa] to-[#5b21b6] border border-[#c084fc]/30 flex items-center justify-center shadow-inner"
+                        style={{ transform: 'translateZ(5px)' }}
+                      >
+                        <span className="text-white text-lg font-bold font-mono -translate-y-[1px]">+</span>
+                      </div>
+                    </div>
+
+                    {/* ── FLOATING SPHERE A (Gold, bottom right) ── */}
+                    <div 
+                      className="absolute z-20 w-9 h-9 rounded-full animate-browser-sphere-a"
                       style={{
-                        boxShadow: '0 15px 35px rgba(0,0,0,0.35)',
+                        background: 'radial-gradient(circle at 30% 30%, #ffebc2 0%, #c5a059 50%, #5e4618 90%, #201402 100%)',
+                        boxShadow: '0 10px 25px rgba(0,0,0,0.6), inset 0 -2px 6px rgba(0,0,0,0.8), inset 0 2px 6px rgba(255,255,255,0.4)',
                       }}
+                    />
+
+                    {/* ── FLOATING SPHERE B (Purple, middle left) ── */}
+                    <div 
+                      className="absolute z-20 w-7.5 h-7.5 rounded-full animate-browser-sphere-b"
+                      style={{
+                        background: 'radial-gradient(circle at 30% 30%, #f3e8ff 0%, #a78bfa 50%, #5b21b6 90%, #2e1065 100%)',
+                        boxShadow: '0 8px 20px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.4)',
+                      }}
+                    />
+
+                    {/* ── FLOATING SPHERE C (Indigo, top right) ── */}
+                    <div 
+                      className="absolute z-20 w-6 h-6 rounded-full animate-browser-sphere-c"
+                      style={{
+                        background: 'radial-gradient(circle at 30% 30%, #e0e7ff 0%, #818cf8 50%, #4338ca 90%, #1e1b4b 100%)',
+                        boxShadow: '0 6px 15px rgba(0,0,0,0.6), inset 0 -1px 4px rgba(0,0,0,0.8), inset 0 1px 4px rgba(255,255,255,0.4)',
+                      }}
+                    />
+
+                    {/* ── FLOATING MINI WINDOW A (Left side) ── */}
+                    <div 
+                      className="absolute z-10 w-[55px] h-[45px] bg-[#120e29]/75 border border-[#c5a059]/30 rounded-lg p-1.5 flex flex-col justify-between shadow-2xl animate-browser-window-a"
+                      style={{ backdropFilter: 'blur(5px)' }}
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="text-[7px] font-mono text-slate-400 font-semibold">CONVERSIONS</span>
-                        <span className="text-[8px] font-mono text-[#c5a059] font-bold">+28%</span>
+                      <div className="flex gap-[2px]">
+                        <span className="w-1 h-1 rounded-full bg-red-400/60" />
+                        <span className="w-1 h-1 rounded-full bg-yellow-400/60" />
                       </div>
-                      {/* Tiny Bar graph */}
-                      <div className="flex items-end justify-between h-9 mt-1.5 border-b border-slate-100 pb-0.5">
-                        <div className="w-2.5 h-[40%] bg-purple-200 rounded-sm" />
-                        <div className="w-2.5 h-[65%] bg-purple-300 rounded-sm" />
-                        <div className="w-2.5 h-[50%] bg-[#ebd9f1] rounded-sm" />
-                        <div className="w-2.5 h-[80%] bg-gradient-to-t from-[#c5a059] to-[#7c3aed] rounded-sm" />
-                        <div className="w-2.5 h-[95%] bg-[#c5a059]/80 rounded-sm" />
+                      <div className="flex flex-col gap-1">
+                        <div className="w-[85%] h-1.5 bg-[#c5a059]/40 rounded-sm" />
+                        <div className="w-[60%] h-1 bg-white/10 rounded-sm" />
                       </div>
-                      <div className="w-12 h-1.5 bg-slate-100 rounded-full mt-1.5 self-start" />
                     </div>
 
-                    {/* ── FLOATING SMILEY EMOJI (Left side middle) ── */}
-                    <div
-                      className="absolute z-20 w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 border border-white/10 flex items-center justify-center shadow-lg text-sm animate-float-3d-smiley"
+                    {/* ── FLOATING MINI WINDOW B (Top right) ── */}
+                    <div 
+                      className="absolute z-10 w-[45px] h-[45px] bg-[#120e29]/75 border border-purple-500/20 rounded-lg p-1 flex items-center justify-center shadow-2xl animate-browser-window-b"
+                      style={{ backdropFilter: 'blur(5px)' }}
                     >
-                      😊
-                    </div>
-
-                    {/* ── FLOATING KISS EMOJI (Right side middle) ── */}
-                    <div
-                      className="absolute z-20 w-9 h-9 rounded-full bg-gradient-to-br from-[#ebd9f1] to-purple-400 border border-white/10 flex items-center justify-center shadow-lg text-sm animate-float-3d-kiss"
-                    >
-                      😘
+                      {/* Simple color wheel representation */}
+                      <div className="w-6 h-6 rounded-full border border-dashed border-[#c5a059]/40 flex items-center justify-center">
+                        <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-[#c5a059] to-[#7c3aed] opacity-80" />
+                      </div>
                     </div>
 
                     {/* ── FLOATING CLOUD A (Back Left) ── */}
                     <div
-                      className="absolute z-1 w-14 h-8 opacity-40 animate-float-3d-cloud-a"
+                      className="absolute z-0 w-14 h-8 opacity-45 animate-browser-cloud-a"
                     >
                       <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
                         <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
                       </svg>
                     </div>
 
-                    {/* ── FLOATING CLOUD B (Back Right) ── */}
+                    {/* ── FLOATING CLOUD B (Front Right) ── */}
                     <div
-                      className="absolute z-1 w-12 h-7 opacity-35 animate-float-3d-cloud-b"
+                      className="absolute z-20 w-12 h-7 opacity-35 animate-browser-cloud-b"
                     >
                       <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
                         <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
                       </svg>
-                    </div>
-
-                    {/* ── FLOATING STAR BUBBLE (Center High) ── */}
-                    <div
-                      className="absolute z-20 w-8 h-8 rounded-full bg-gradient-to-br from-[#c5a059] to-[#8c6e3d] flex items-center justify-center shadow-lg text-[10px] text-white font-bold animate-float-3d-star"
-                      style={{
-                        boxShadow: '0 0 15px rgba(197,160,89,0.3)',
-                      }}
-                    >
-                      ⭐
                     </div>
 
                   </div>
