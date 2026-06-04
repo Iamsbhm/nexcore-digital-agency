@@ -532,259 +532,395 @@ export default function App() {
                 }}
               >
 
-              {/* ── 3D BROWSER WINDOW — main focal object ── */}
+              {/* ── 3D GRAPHIC BACKGROUND DECORATIVE GLOW ORB ── */}
               <div
-                className="absolute"
                 style={{
-                  width: 360,
-                  left: '50%',
-                  top: '50%',
-                  transform: 'translate(-58%, -52%) perspective(900px) rotateY(-12deg) rotateX(4deg)',
-                  transformOrigin: 'center center',
-                  animation: 'hero-float-a 7s ease-in-out infinite',
-                  zIndex: 4,
+                  position: 'absolute',
+                  width: 320,
+                  height: 320,
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, rgba(197,160,89,0.12) 0%, rgba(124,58,237,0.06) 100%)',
+                  left: '2%',
+                  top: '12%',
+                  filter: 'blur(8px)',
+                  zIndex: 1,
+                  pointerEvents: 'none',
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 280,
+                  height: 280,
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, rgba(197,160,89,0.3) 0%, rgba(140,110,61,0.15) 100%)',
+                  left: '5%',
+                  top: '15%',
+                  zIndex: 2,
+                  pointerEvents: 'none',
+                  border: '1px solid rgba(197,160,89,0.2)',
+                }}
+              />
+
+              {/* ── MAIN MONITOR BASEPLATE — center background ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 340,
+                  height: 240,
+                  left: '46%',
+                  top: '46%',
+                  transform: 'translate(-50%, -50%) perspective(900px) rotateY(-10deg) rotateX(3deg)',
+                  background: 'linear-gradient(135deg, rgba(20,18,36,0.96) 0%, rgba(10,8,20,0.99) 100%)',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(197,160,89,0.25)',
+                  boxShadow: '0 32px 80px rgba(0,0,0,0.8), 0 0 60px rgba(197,160,89,0.05)',
+                  zIndex: 3,
+                  animation: 'hero-float-a 8s ease-in-out infinite',
                 }}
               >
-                {/* Browser chrome bar */}
-                <div style={{
-                  background: 'linear-gradient(135deg, rgba(30,27,60,0.95) 0%, rgba(15,12,35,0.98) 100%)',
-                  borderRadius: '12px 12px 0 0',
-                  padding: '10px 14px',
-                  border: '1px solid rgba(124,58,237,0.35)',
-                  borderBottom: 'none',
+                {/* Screen inner content/grid mock */}
+                <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: 4 }}>
+                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#ef4444' }} />
+                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#f59e0b' }} />
+                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981' }} />
+                    </div>
+                    <div style={{ width: 100, height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.06)' }} />
+                  </div>
+                  <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 10, marginTop: 16 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                      <div style={{ height: 12, borderRadius: 3, background: 'rgba(197,160,89,0.15)', border: '1px solid rgba(197,160,89,0.2)' }} />
+                      <div style={{ height: 8, borderRadius: 2, background: 'rgba(255,255,255,0.03)' }} />
+                      <div style={{ height: 8, borderRadius: 2, background: 'rgba(255,255,255,0.03)' }} />
+                      <div style={{ height: 8, borderRadius: 2, background: 'rgba(255,255,255,0.03)' }} />
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6 }}>
+                      {[...Array(6)].map((_, idx) => (
+                        <div key={idx} style={{ borderRadius: 4, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Monitor Stand */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 60,
+                  height: 40,
+                  left: '46%',
+                  top: '68%',
+                  transform: 'translate(-50%, 0) perspective(900px) rotateY(-10deg) rotateX(3deg)',
+                  background: 'linear-gradient(to bottom, rgba(20,18,36,0.98), rgba(5,4,10,0.99))',
+                  borderLeft: '1px solid rgba(197,160,89,0.2)',
+                  borderRight: '1px solid rgba(197,160,89,0.2)',
+                  zIndex: 2,
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 120,
+                  height: 8,
+                  left: '46%',
+                  top: '76%',
+                  transform: 'translate(-50%, 0) perspective(900px) rotateY(-10deg) rotateX(3deg)',
+                  background: 'rgba(197,160,89,0.25)',
+                  borderRadius: 4,
+                  zIndex: 2,
+                }}
+              />
+
+              {/* ── FLOATING STATS CHART CARD — top left ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 170,
+                  left: '2%',
+                  top: '18%',
+                  background: 'linear-gradient(135deg, rgba(25,22,46,0.97) 0%, rgba(12,10,25,0.99) 100%)',
+                  border: '1px solid rgba(197,160,89,0.3)',
+                  borderRadius: 10,
+                  padding: '12px 14px',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 20px 50px rgba(0,0,0,0.7)',
+                  zIndex: 5,
+                  animation: 'hero-float-b 8s ease-in-out 0.5s infinite',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <div style={{ display: 'flex', items: 'center', gap: 4 }}>
+                    <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#c5a059' }} />
+                    <span style={{ fontSize: 7, color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace' }}>LOREM IPSUM</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 2 }}>
+                    <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(255,255,255,0.3)' }} />
+                    <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(255,255,255,0.3)' }} />
+                  </div>
+                </div>
+                {/* Bar chart details */}
+                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', height: 45, paddingBottom: 4, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div style={{ width: 12, height: '100%', background: 'linear-gradient(to top, #c5a059, #f7e6b5)', borderRadius: '2px 2px 0 0' }} />
+                  <div style={{ width: 12, height: '40%', background: 'rgba(255,255,255,0.1)', borderRadius: '2px 2px 0 0' }} />
+                  <div style={{ width: 12, height: '70%', background: 'linear-gradient(to top, #c5a059, #8c6e3d)', borderRadius: '2px 2px 0 0' }} />
+                  <div style={{ width: 12, height: '90%', background: 'rgba(255,255,255,0.8)', borderRadius: '2px 2px 0 0' }} />
+                  <div style={{ width: 12, height: '55%', background: 'linear-gradient(to top, #c5a059, #f7e6b5)', borderRadius: '2px 2px 0 0' }} />
+                </div>
+                <div style={{ marginTop: 8, height: 4, width: 80, borderRadius: 2, background: 'rgba(255,255,255,0.08)' }} />
+              </div>
+
+              {/* ── FLOATING CALENDAR CARD — center background ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 180,
+                  right: '12%',
+                  top: '10%',
+                  background: 'linear-gradient(135deg, rgba(20,18,36,0.96) 0%, rgba(12,10,25,0.98) 100%)',
+                  border: '1px solid rgba(197,160,89,0.22)',
+                  borderRadius: 12,
+                  padding: '12px 14px',
+                  backdropFilter: 'blur(25px)',
+                  boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
+                  zIndex: 4,
+                  animation: 'hero-float-c 9s ease-in-out infinite',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                  <span style={{ fontSize: 7, color: '#c5a059', fontFamily: 'monospace' }}>◀</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: '#ffffff', fontFamily: 'monospace', letterSpacing: '0.1em' }}>JULY</span>
+                  <span style={{ fontSize: 7, color: '#c5a059', fontFamily: 'monospace' }}>▶</span>
+                </div>
+                {/* Calendar grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px', textAlign: 'center', fontSize: 6, color: 'rgba(255,255,255,0.25)', fontFamily: 'monospace' }}>
+                  {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
+                    <span key={i} style={{ fontWeight: 'bold' }}>{d}</span>
+                  ))}
+                  {[...Array(31)].map((_, idx) => (
+                    <span
+                      key={idx}
+                      style={{
+                        padding: '2px 0',
+                        color: idx + 1 === 29 ? '#black' : 'rgba(255,255,255,0.7)',
+                        background: idx + 1 === 29 ? '#c5a059' : 'transparent',
+                        borderRadius: idx + 1 === 29 ? 2 : 0,
+                        fontWeight: idx + 1 === 29 ? 'bold' : 'normal',
+                      }}
+                    >
+                      {idx + 1}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── FLOATING PROFILE CARD — middle left ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 120,
+                  left: '12%',
+                  top: '52%',
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(240,240,245,0.99) 100%)',
+                  borderRadius: 8,
+                  padding: '8px 10px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 6,
-                  backdropFilter: 'blur(20px)',
-                }}>
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444', opacity: 0.8 }} />
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#f59e0b', opacity: 0.8 }} />
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981', opacity: 0.8 }} />
-                  <div style={{ flex: 1, height: 18, borderRadius: 4, background: 'rgba(255,255,255,0.05)', marginLeft: 8, display: 'flex', alignItems: 'center', padding: '0 8px' }}>
-                    <span style={{ fontSize: 8, color: 'rgba(255,255,255,0.25)', fontFamily: 'monospace' }}>pixelvancedigital.com</span>
-                  </div>
+                  gap: 8,
+                  boxShadow: '0 12px 30px rgba(0,0,0,0.5)',
+                  zIndex: 5,
+                  animation: 'hero-float-a 9.5s ease-in-out 1.2s infinite',
+                }}
+              >
+                <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'linear-gradient(135deg, #c5a059, #8c6e3d)', display: 'flex', alignItems: 'center', justify: 'center' }}>
+                  <span style={{ fontSize: 8, color: '#ffffff' }}>👤</span>
                 </div>
-                {/* Browser body */}
-                <div style={{
-                  background: 'linear-gradient(160deg, rgba(15,10,40,0.97) 0%, rgba(8,6,20,0.99) 100%)',
-                  borderRadius: '0 0 12px 12px',
-                  border: '1px solid rgba(124,58,237,0.35)',
-                  borderTop: 'none',
-                  overflow: 'hidden',
-                  boxShadow: '0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(124,58,237,0.12)',
-                  padding: 16,
+                <div>
+                  <div style={{ height: 5, width: 50, borderRadius: 2, background: '#0a0a0a', opacity: 0.8 }} />
+                  <div style={{ height: 3, width: 30, borderRadius: 1.5, background: 'rgba(0,0,0,0.3)', marginTop: 3 }} />
+                </div>
+              </div>
+
+              {/* ── FLOATING PHONE WITH PEDESTAL — foreground right ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  right: '6%',
+                  bottom: '10%',
+                  width: 130,
+                  height: 210,
+                  zIndex: 6,
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 10,
-                }}>
-                  {/* Hero mockup inside browser */}
-                  <div style={{ height: 8, width: 140, borderRadius: 4, background: 'linear-gradient(90deg,#3b82f6,#7c3aed)', marginBottom: 4 }} />
-                  <div style={{ height: 5, width: 200, borderRadius: 3, background: 'rgba(255,255,255,0.08)' }} />
-                  <div style={{ height: 5, width: 170, borderRadius: 3, background: 'rgba(255,255,255,0.05)' }} />
-                  <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
-                    <div style={{ height: 26, width: 90, borderRadius: 4, background: 'linear-gradient(90deg,#c5a059,#f7e6b5)', opacity: 0.9 }} />
-                    <div style={{ height: 26, width: 76, borderRadius: 4, border: '1px solid rgba(255,255,255,0.12)', background: 'transparent' }} />
-                  </div>
-                  {/* Website mockup grid */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6, marginTop: 8 }}>
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} style={{
-                        height: 50,
-                        borderRadius: 6,
-                        background: i === 0
-                          ? 'linear-gradient(135deg,rgba(59,130,246,0.25),rgba(124,58,237,0.25))'
-                          : 'rgba(255,255,255,0.03)',
-                        border: '1px solid rgba(124,58,237,0.15)',
-                      }} />
-                    ))}
-                  </div>
-                  {/* Glow bar */}
-                  <div style={{ height: 1, width: '100%', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.5), rgba(59,130,246,0.5), transparent)', marginTop: 6 }} />
-                </div>
-              </div>
-
-              {/* ── FLOATING CODE EDITOR CARD — top right ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  width: 210,
-                  right: '2%',
-                  top: '6%',
-                  background: 'linear-gradient(135deg, rgba(10,8,28,0.95) 0%, rgba(20,15,50,0.97) 100%)',
-                  border: '1px solid rgba(59,130,246,0.25)',
-                  borderRadius: 10,
-                  padding: '10px 14px',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 16px 48px rgba(0,0,0,0.6), 0 0 30px rgba(59,130,246,0.08)',
-                  zIndex: 5,
-                  animation: 'hero-float-b 9s ease-in-out 1s infinite',
+                  alignItems: 'center',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b82f6' }} />
-                  <span style={{ fontSize: 8, color: 'rgba(255,255,255,0.3)', fontFamily: 'monospace' }}>index.tsx</span>
+                {/* Floating Phone device */}
+                <div
+                  style={{
+                    width: 100,
+                    height: 180,
+                    background: 'linear-gradient(135deg, rgba(20,18,36,0.98) 0%, rgba(8,6,20,0.99) 100%)',
+                    border: '2px solid rgba(197,160,89,0.35)',
+                    borderRadius: 20,
+                    padding: '8px',
+                    boxShadow: '0 24px 50px rgba(0,0,0,0.8), 0 0 32px rgba(197,160,89,0.08)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    animation: 'hero-float-b 7.5s ease-in-out infinite',
+                  }}
+                >
+                  {/* Phone speaker notch */}
+                  <div style={{ width: 35, height: 5, background: 'rgba(197,160,89,0.3)', borderRadius: 2.5, margin: '0 auto' }} />
+                  {/* Inner screen mockup */}
+                  <div style={{ flex: 1, marginTop: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+                    {/* User profile details */}
+                    <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg, #c5a059, #8c6e3d)', display: 'flex', alignItems: 'center', justify: 'center' }}>
+                      <span style={{ fontSize: 10, color: '#ffffff' }}>👤</span>
+                    </div>
+                    <div style={{ fontSize: 7, fontWeight: 'bold', color: '#c5a059', fontFamily: 'monospace', letterSpacing: '0.05em' }}>YOUR NAME</div>
+                    <div style={{ width: 56, height: 12, borderRadius: 3, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justify: 'center' }}>
+                      <span style={{ fontSize: 5, color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace' }}>Login</span>
+                    </div>
+                    {/* Radial progress ring mock */}
+                    <div style={{ position: 'relative', width: 44, height: 44, display: 'flex', alignItems: 'center', justify: 'center' }}>
+                      <svg width="44" height="44" viewBox="0 0 36 36">
+                        <path
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="rgba(255,255,255,0.05)"
+                          strokeWidth="2.5"
+                        />
+                        <path
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#c5a059"
+                          strokeDasharray="75, 100"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <span style={{ position: 'absolute', fontSize: 7, fontWeight: 'bold', color: '#ffffff', fontFamily: 'monospace' }}>75%</span>
+                    </div>
+                  </div>
+                  {/* Phone bottom bar */}
+                  <div style={{ display: 'flex', gap: 3, justifyContent: 'center' }}>
+                    <div style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
+                    <div style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
+                    <div style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
+                  </div>
                 </div>
-                {[
-                  { color: '#7c3aed', w: 60, text: 'function' },
-                  { color: '#3b82f6', w: 90, text: 'HeroSection' },
-                  { color: 'rgba(255,255,255,0.15)', w: 50, text: '() {' },
-                ].map((l, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 5 }}>
-                    <span style={{ fontSize: 7, color: 'rgba(255,255,255,0.12)', fontFamily: 'monospace', width: 12 }}>{i + 1}</span>
-                    <div style={{ height: 6, borderRadius: 3, background: l.color, width: l.w, opacity: 0.8 }} />
-                  </div>
-                ))}
-                {[45, 80, 60, 35, 70].map((w, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                    <span style={{ fontSize: 7, color: 'rgba(255,255,255,0.08)', fontFamily: 'monospace', width: 12 }}>{i + 4}</span>
-                    <div style={{ height: 5, borderRadius: 3, background: 'rgba(255,255,255,0.07)', width: w, marginLeft: i < 3 ? 10 : 0 }} />
-                  </div>
-                ))}
+
+                {/* Pedestal Cylinder Base */}
+                <div
+                  style={{
+                    width: 100,
+                    height: 18,
+                    background: 'linear-gradient(to bottom, rgba(30,27,55,0.99) 0%, rgba(10,8,22,0.99) 100%)',
+                    border: '1px solid rgba(197,160,89,0.3)',
+                    borderRadius: '50% / 50%',
+                    boxShadow: '0 10px 24px rgba(0,0,0,0.6)',
+                    marginTop: -10,
+                  }}
+                />
               </div>
 
-              {/* ── METRIC CARD — SEO Score ── */}
+              {/* ── FLOATING PILL: PASSWORD — middle bottom ── */}
               <div
                 style={{
                   position: 'absolute',
-                  width: 150,
-                  right: '4%',
+                  left: '42%',
+                  bottom: '24%',
+                  background: '#c5a059',
+                  border: '1px solid #f7e6b5',
+                  borderRadius: 4,
+                  padding: '4px 10px',
+                  boxShadow: '0 8px 20px rgba(197,160,89,0.25)',
+                  zIndex: 5,
+                  animation: 'hero-float-c 10s ease-in-out 0.8s infinite',
+                }}
+              >
+                <span style={{ fontSize: 7, color: '#0a0a0a', fontWeight: 'bold', fontFamily: 'monospace', letterSpacing: '0.05em' }}>Password</span>
+              </div>
+
+              {/* ── FLOATING PILL: UPLOAD — lower right ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  right: '25%',
                   bottom: '22%',
-                  background: 'linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(6,8,14,0.96) 100%)',
-                  border: '1px solid rgba(16,185,129,0.25)',
-                  borderRadius: 10,
-                  padding: '12px 14px',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 12px 40px rgba(0,0,0,0.6), 0 0 24px rgba(16,185,129,0.08)',
+                  background: '#ffffff',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  borderRadius: 4,
+                  padding: '4px 10px',
+                  boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
                   zIndex: 5,
-                  animation: 'hero-float-c 8s ease-in-out 2s infinite',
+                  animation: 'hero-float-b 11s ease-in-out 1.5s infinite',
                 }}
               >
-                <span style={{ fontSize: 7, color: 'rgba(16,185,129,0.7)', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em' }}>SEO Score</span>
-                <div style={{ fontSize: 32, fontWeight: 800, color: '#ffffff', lineHeight: 1.1, marginTop: 4 }}>100</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6 }}>
-                  <div style={{ flex: 1, height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.06)' }}>
-                    <div style={{ width: '100%', height: '100%', borderRadius: 2, background: 'linear-gradient(90deg,#10b981,#34d399)' }} />
-                  </div>
-                  <span style={{ fontSize: 7, color: 'rgba(16,185,129,0.7)', fontFamily: 'monospace' }}>✓</span>
-                </div>
+                <span style={{ fontSize: 7, color: '#0a0a0a', fontWeight: 'bold', fontFamily: 'monospace', letterSpacing: '0.05em' }}>Upload</span>
               </div>
 
-              {/* ── METRIC CARD — Performance ── */}
+              {/* ── FLOATING CARD GRID PANEL — bottom left ── */}
               <div
                 style={{
                   position: 'absolute',
-                  width: 150,
-                  left: '0%',
-                  bottom: '14%',
-                  background: 'linear-gradient(135deg, rgba(197,160,89,0.08) 0%, rgba(6,8,14,0.96) 100%)',
-                  border: '1px solid rgba(197,160,89,0.22)',
-                  borderRadius: 10,
-                  padding: '12px 14px',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 12px 40px rgba(0,0,0,0.6), 0 0 24px rgba(197,160,89,0.06)',
+                  width: 90,
+                  left: '18%',
+                  bottom: '12%',
+                  background: 'linear-gradient(135deg, rgba(20,18,36,0.96) 0%, rgba(12,10,25,0.98) 100%)',
+                  border: '1px solid rgba(197,160,89,0.25)',
+                  borderRadius: 8,
+                  padding: '8px',
+                  boxShadow: '0 15px 30px rgba(0,0,0,0.6)',
                   zIndex: 5,
-                  animation: 'hero-float-a 10s ease-in-out 0.5s infinite',
+                  animation: 'hero-float-c 10.5s ease-in-out 2s infinite',
                 }}
               >
-                <span style={{ fontSize: 7, color: 'rgba(197,160,89,0.7)', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Performance</span>
-                <div style={{ fontSize: 32, fontWeight: 800, color: '#ffffff', lineHeight: 1.1, marginTop: 4 }}>98<span style={{ fontSize: 14, color: 'rgba(255,255,255,0.3)' }}>%</span></div>
-                <div style={{ display: 'flex', gap: 3, marginTop: 6 }}>
-                  {[85, 100, 90, 98, 95, 100, 88].map((h, i) => (
-                    <div key={i} style={{ flex: 1, height: 18, borderRadius: 2, background: 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'flex-end' }}>
-                      <div style={{ width: '100%', height: `${h}%`, borderRadius: 2, background: `rgba(197,160,89,${0.3 + i * 0.1})` }} />
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 }}>
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        height: 24,
+                        borderRadius: 3,
+                        background: 'rgba(197,160,89,0.08)',
+                        border: '1px solid rgba(197,160,89,0.15)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <span style={{ fontSize: 6, color: '#c5a059' }}>📈</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* ── FLOATING TAG — "UI/UX Design" ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '2%',
-                  top: '8%',
-                  background: 'rgba(124,58,237,0.12)',
-                  border: '1px solid rgba(124,58,237,0.30)',
-                  borderRadius: 20,
-                  padding: '6px 14px',
-                  backdropFilter: 'blur(12px)',
-                  zIndex: 6,
-                  animation: 'hero-float-b 11s ease-in-out 1.5s infinite',
-                }}
-              >
-                <span style={{ fontSize: 9, color: 'rgba(167,139,250,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>✦ UI / UX Design</span>
-              </div>
-
-              {/* ── FLOATING TAG — "Web Development" ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '-2%',
-                  top: '36%',
-                  background: 'rgba(197,160,89,0.10)',
-                  border: '1px solid rgba(197,160,89,0.28)',
-                  borderRadius: 20,
-                  padding: '6px 14px',
-                  backdropFilter: 'blur(12px)',
-                  zIndex: 6,
-                  animation: 'hero-float-a 9.5s ease-in-out 0.7s infinite',
-                }}
-              >
-                <span style={{ fontSize: 9, color: 'rgba(247,230,181,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>💻 Web Development</span>
-              </div>
-
-              {/* ── FLOATING TAG — "Mobile App Dev" ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '32%',
-                  top: '0%',
-                  background: 'rgba(236,72,153,0.10)',
-                  border: '1px solid rgba(236,72,153,0.28)',
-                  borderRadius: 20,
-                  padding: '6px 14px',
-                  backdropFilter: 'blur(12px)',
-                  zIndex: 6,
-                  animation: 'hero-float-b 10.5s ease-in-out 1.2s infinite',
-                }}
-              >
-                <span style={{ fontSize: 9, color: 'rgba(244,114,182,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>📱 Mobile App Dev</span>
-              </div>
-
-              {/* ── FLOATING TAG — "SEO Optimization" ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  right: '2%',
-                  top: '42%',
-                  background: 'rgba(16,185,129,0.10)',
-                  border: '1px solid rgba(16,185,129,0.28)',
-                  borderRadius: 20,
-                  padding: '6px 14px',
-                  backdropFilter: 'blur(12px)',
-                  zIndex: 6,
-                  animation: 'hero-float-c 11.5s ease-in-out 1.8s infinite',
-                }}
-              >
-                <span style={{ fontSize: 9, color: 'rgba(52,211,153,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>🔍 SEO Optimization</span>
-              </div>
-
-              {/* ── FLOATING TAG — "AI Automation" ── */}
-              <div
-                style={{
-                  position: 'absolute',
-                  right: '6%',
-                  bottom: '5%',
-                  background: 'rgba(59,130,246,0.10)',
-                  border: '1px solid rgba(59,130,246,0.28)',
-                  borderRadius: 20,
-                  padding: '6px 14px',
-                  backdropFilter: 'blur(12px)',
-                  zIndex: 6,
-                  animation: 'hero-float-c 12s ease-in-out 3s infinite',
-                }}
-              >
-                <span style={{ fontSize: 9, color: 'rgba(96,165,250,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>⚡ AI Automation</span>
+              {/* ── FLOATING PILLS: RIGHT ACTION BUTTONS ── */}
+              <div style={{ position: 'absolute', right: '0%', top: '28%', display: 'flex', flexDirection: 'column', gap: 6, zIndex: 5 }}>
+                {['▲', '◎', '▼'].map((act, idx) => (
+                  <div
+                    key={act}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: 4,
+                      background: 'rgba(255,255,255,0.03)',
+                      border: '1px solid rgba(197,160,89,0.22)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
+                      animation: `hero-float-${idx === 0 ? 'a' : idx === 1 ? 'b' : 'c'} 8.5s ease-in-out ${idx * 0.4}s infinite`,
+                    }}
+                  >
+                    <span style={{ fontSize: 8, color: '#c5a059' }}>{act}</span>
+                  </div>
+                ))}
               </div>
 
               {/* Keyframes */}
