@@ -382,29 +382,25 @@ export default function App() {
       {/* ── Home Content ── */}
       {currentPage === 'home' && <>
 
-      {/* 3. HERO SECTION — Premium 3D Spheres */}
+      {/* 3. HERO SECTION — Premium 3D Split Layout */}
       <section
         className="relative z-10 min-h-screen flex flex-col overflow-hidden"
         id="hero"
       >
-        {/* 3D Floating Spheres — hero centrepiece */}
+        {/* 3D Floating Spheres — background */}
         <div className="absolute inset-0 pointer-events-none">
           <Spheres3D />
         </div>
 
-        {/* Keep particles as subtle secondary layer */}
-        <div className="absolute inset-0 pointer-events-none opacity-30">
+        {/* Particles subtle secondary layer */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
           <Particles3D />
         </div>
 
-        {/* Scanline overlay — ultra subtle */}
+        {/* Scanline overlay */}
         <div className="absolute inset-0 pointer-events-none z-[1]" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.025) 3px, rgba(0,0,0,0.025) 4px)',
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.02) 3px, rgba(0,0,0,0.02) 4px)',
         }} />
-
-        {/* Ambient gold orb — center glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, rgba(197,160,89,0.04) 0%, transparent 65%)' }} />
 
         {/* Corner HUD brackets */}
         <div className="absolute top-20 left-6 md:left-10 w-6 h-6 border-t border-l border-[#c5a059]/30 pointer-events-none z-10" />
@@ -412,91 +408,339 @@ export default function App() {
         <div className="absolute bottom-16 left-6 md:left-10 w-6 h-6 border-b border-l border-[#c5a059]/30 pointer-events-none z-10" />
         <div className="absolute bottom-16 right-6 md:right-10 w-6 h-6 border-b border-r border-[#c5a059]/30 pointer-events-none z-10" />
 
-        {/* Horizontal depth lines */}
-        <div className="absolute top-[22%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.03] to-transparent pointer-events-none" />
-        <div className="absolute bottom-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c5a059]/[0.06] to-transparent pointer-events-none" />
+        {/* ── TWO-COLUMN HERO CONTENT ── */}
+        <div className="relative z-10 flex-1 flex items-center px-6 md:px-12 lg:px-20 max-w-8xl mx-auto w-full pt-24 pb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
 
-        {/* ── CENTER CONTENT — flex-1 pushes stats to bottom ── */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-start md:justify-center text-center px-4 max-w-5xl mx-auto w-full gap-6 pt-4 md:pt-0">
+            {/* ── LEFT COLUMN — Text Content ── */}
+            <div className="flex flex-col gap-7 lg:gap-8">
 
-          {/* Status pill */}
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 border border-[#c5a059]/20 bg-[#c5a059]/[0.05] backdrop-blur-sm"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] animate-ping" />
-            <span className="text-[9px] font-mono tracking-[0.38em] uppercase text-[#c5a059]/70">
-              Premium Digital Agency
-            </span>
-          </motion.div>
+              {/* Status pill */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="inline-flex items-center gap-2.5 px-4 py-1.5 border border-[#c5a059]/20 bg-[#c5a059]/[0.05] backdrop-blur-sm w-fit"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] animate-ping" />
+                <span className="text-[9px] font-mono tracking-[0.38em] uppercase text-[#c5a059]/70">
+                  Premium Digital Agency
+                </span>
+              </motion.div>
 
-          {/* 3D Perspective Headline */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            style={{ perspective: '1600px' }}
-            className="w-full"
-          >
-            {/* Line 1 — Single H1 for SEO (one H1 per page rule) */}
-            <div style={{ transform: 'rotateX(8deg)', transformOrigin: 'center bottom' }}>
-              <h1 className="text-[clamp(4rem,12vw,11rem)] font-display font-light text-white leading-[0.88] tracking-[-0.02em] hero-3d-white">
-                We <span className="font-bold">Build</span>
-              </h1>
+              {/* Headline — left-aligned, 3D perspective */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                style={{ perspective: '1400px' }}
+              >
+                <div style={{ transform: 'rotateX(6deg)', transformOrigin: 'left bottom' }}>
+                  <h1 className="text-[clamp(3.2rem,7vw,6.5rem)] font-display font-light text-white leading-[0.9] tracking-[-0.02em]">
+                    We <span className="font-bold">Build</span>
+                  </h1>
+                </div>
+                <div style={{ transform: 'rotateX(2deg)', transformOrigin: 'left center' }}>
+                  <p className="text-[clamp(3.2rem,7vw,6.5rem)] font-serif italic leading-[0.9] tracking-[-0.01em] text-shimmer-gold">
+                    Digital Legacies
+                  </p>
+                </div>
+                <div style={{ transform: 'rotateX(-3deg)', transformOrigin: 'left top' }}>
+                  <p className="text-[clamp(1.6rem,3.5vw,3.2rem)] font-display font-extralight text-white/20 leading-[1.2] tracking-wide mt-2">
+                    That Never Settle.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Tagline */}
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.45 }}
+                className="text-base md:text-lg text-white/40 max-w-md leading-relaxed font-light tracking-wide"
+              >
+                High-fidelity <span className="text-[#c5a059]/80 font-medium">web design, bespoke development</span>, and{' '}
+                <span className="text-white/60 font-medium">conversion systems</span> —{' '}
+                built for <span className="text-white/60 font-medium">brands that demand perfection</span>.
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="flex flex-col sm:flex-row items-start gap-3"
+              >
+                <button
+                  onClick={() => openBooking('GROWTH', '$2,999')}
+                  id="hero-book-btn"
+                  className="group relative flex items-center gap-2.5 py-3.5 px-9 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.28em] transition-all duration-300 cursor-pointer shadow-[0_0_48px_rgba(197,160,89,0.22)] hover:shadow-[0_0_64px_rgba(197,160,89,0.14)] active:scale-95 overflow-hidden"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#f7e6b5]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="relative">Book Strategy Session</span>
+                </button>
+                <button
+                  onClick={() => scrollToSection('services-explorer-section')}
+                  id="hero-demo-btn"
+                  className="flex items-center gap-2 py-3.5 px-9 border border-white/8 bg-white/[0.015] hover:bg-white/[0.05] hover:border-[#c5a059]/25 uppercase text-[10px] font-mono tracking-[0.28em] transition-all cursor-pointer active:scale-95 text-white/40 hover:text-white/80"
+                >
+                  Explore Services
+                  <ArrowDownCircle className="w-3 h-3 text-[#c5a059]/60" />
+                </button>
+              </motion.div>
+
+              {/* Micro stats row */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.85 }}
+                className="flex items-center gap-6 pt-2"
+              >
+                {[
+                  { v: '500+', l: 'Projects' },
+                  { v: '200+', l: 'Clients' },
+                  { v: '98%', l: 'Retention' },
+                ].map((s) => (
+                  <div key={s.l} className="flex flex-col">
+                    <span className="text-xl font-display font-bold text-white/80">{s.v}</span>
+                    <span className="text-[9px] font-mono tracking-widest text-white/25 uppercase">{s.l}</span>
+                  </div>
+                ))}
+                <div className="h-8 w-px bg-white/10 mx-1" />
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[9px] font-mono text-emerald-400/60 tracking-widest">Available Now</span>
+                </div>
+              </motion.div>
             </div>
 
-            {/* Line 2 — decorative (not H1, preserves visual hierarchy) */}
-            <div style={{ transform: 'rotateX(3deg)', transformOrigin: 'center center' }}>
-              <p className="text-[clamp(4rem,12vw,11rem)] font-serif italic leading-[0.88] tracking-[-0.01em] text-shimmer-gold hero-3d-text">
-                Digital Legacies
-              </p>
-            </div>
-
-            {/* Line 3 — decorative ghost fade */}
-            <div style={{ transform: 'rotateX(-4deg)', transformOrigin: 'center top' }}>
-              <p className="text-[clamp(2.5rem,7vw,7rem)] font-display font-extralight text-white/25 leading-[1.1] tracking-wide mt-1">
-                That Never Settle.
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="text-base md:text-lg text-white/40 max-w-lg mx-auto leading-relaxed font-light tracking-wide"
-          >
-            High-fidelity <span className="text-[#c5a059]/80 font-medium">web design, bespoke development</span>, and{' '}
-            <span className="text-white/60 font-medium">conversion systems</span> —{' '}
-            built for <span className="text-white/60 font-medium">brands that demand perfection</span>.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.65 }}
-            className="flex flex-col sm:flex-row items-center gap-3"
-          >
-            <button
-              onClick={() => openBooking('GROWTH', '$2,999')}
-              id="hero-book-btn"
-              className="group relative flex items-center gap-2.5 py-3.5 px-9 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.28em] transition-all duration-300 cursor-pointer shadow-[0_0_48px_rgba(197,160,89,0.22)] hover:shadow-[0_0_64px_rgba(197,160,89,0.14)] active:scale-95 overflow-hidden"
+            {/* ── RIGHT COLUMN — 3D Web Design Objects ── */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+              className="hidden lg:flex items-center justify-center relative h-[520px]"
+              aria-hidden
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-[#f7e6b5]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="relative">Book Strategy Session</span>
-            </button>
-            <button
-              onClick={() => scrollToSection('services-explorer-section')}
-              id="hero-demo-btn"
-              className="flex items-center gap-2 py-3.5 px-9 border border-white/8 bg-white/[0.015] hover:bg-white/[0.05] hover:border-[#c5a059]/25 uppercase text-[10px] font-mono tracking-[0.28em] transition-all cursor-pointer active:scale-95 text-white/40 hover:text-white/80"
-            >
-              Explore Services
-              <ArrowDownCircle className="w-3 h-3 text-[#c5a059]/60" />
-            </button>
-          </motion.div>
+
+              {/* ── 3D BROWSER WINDOW — main focal object ── */}
+              <div
+                className="absolute"
+                style={{
+                  width: 360,
+                  left: '50%',
+                  top: '50%',
+                  transform: 'translate(-58%, -52%) perspective(900px) rotateY(-12deg) rotateX(4deg)',
+                  transformOrigin: 'center center',
+                  animation: 'hero-float-a 7s ease-in-out infinite',
+                  zIndex: 4,
+                }}
+              >
+                {/* Browser chrome bar */}
+                <div style={{
+                  background: 'linear-gradient(135deg, rgba(30,27,60,0.95) 0%, rgba(15,12,35,0.98) 100%)',
+                  borderRadius: '12px 12px 0 0',
+                  padding: '10px 14px',
+                  border: '1px solid rgba(124,58,237,0.35)',
+                  borderBottom: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  backdropFilter: 'blur(20px)',
+                }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444', opacity: 0.8 }} />
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#f59e0b', opacity: 0.8 }} />
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981', opacity: 0.8 }} />
+                  <div style={{ flex: 1, height: 18, borderRadius: 4, background: 'rgba(255,255,255,0.05)', marginLeft: 8, display: 'flex', alignItems: 'center', padding: '0 8px' }}>
+                    <span style={{ fontSize: 8, color: 'rgba(255,255,255,0.25)', fontFamily: 'monospace' }}>pixelvancedigital.com</span>
+                  </div>
+                </div>
+                {/* Browser body */}
+                <div style={{
+                  background: 'linear-gradient(160deg, rgba(15,10,40,0.97) 0%, rgba(8,6,20,0.99) 100%)',
+                  borderRadius: '0 0 12px 12px',
+                  border: '1px solid rgba(124,58,237,0.35)',
+                  borderTop: 'none',
+                  overflow: 'hidden',
+                  boxShadow: '0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(124,58,237,0.12)',
+                  padding: 16,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 10,
+                }}>
+                  {/* Hero mockup inside browser */}
+                  <div style={{ height: 8, width: 140, borderRadius: 4, background: 'linear-gradient(90deg,#3b82f6,#7c3aed)', marginBottom: 4 }} />
+                  <div style={{ height: 5, width: 200, borderRadius: 3, background: 'rgba(255,255,255,0.08)' }} />
+                  <div style={{ height: 5, width: 170, borderRadius: 3, background: 'rgba(255,255,255,0.05)' }} />
+                  <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
+                    <div style={{ height: 26, width: 90, borderRadius: 4, background: 'linear-gradient(90deg,#c5a059,#f7e6b5)', opacity: 0.9 }} />
+                    <div style={{ height: 26, width: 76, borderRadius: 4, border: '1px solid rgba(255,255,255,0.12)', background: 'transparent' }} />
+                  </div>
+                  {/* Website mockup grid */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6, marginTop: 8 }}>
+                    {[...Array(6)].map((_, i) => (
+                      <div key={i} style={{
+                        height: 50,
+                        borderRadius: 6,
+                        background: i === 0
+                          ? 'linear-gradient(135deg,rgba(59,130,246,0.25),rgba(124,58,237,0.25))'
+                          : 'rgba(255,255,255,0.03)',
+                        border: '1px solid rgba(124,58,237,0.15)',
+                      }} />
+                    ))}
+                  </div>
+                  {/* Glow bar */}
+                  <div style={{ height: 1, width: '100%', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.5), rgba(59,130,246,0.5), transparent)', marginTop: 6 }} />
+                </div>
+              </div>
+
+              {/* ── FLOATING CODE EDITOR CARD — top right ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 210,
+                  right: '2%',
+                  top: '6%',
+                  background: 'linear-gradient(135deg, rgba(10,8,28,0.95) 0%, rgba(20,15,50,0.97) 100%)',
+                  border: '1px solid rgba(59,130,246,0.25)',
+                  borderRadius: 10,
+                  padding: '10px 14px',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 16px 48px rgba(0,0,0,0.6), 0 0 30px rgba(59,130,246,0.08)',
+                  zIndex: 5,
+                  animation: 'hero-float-b 9s ease-in-out 1s infinite',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b82f6' }} />
+                  <span style={{ fontSize: 8, color: 'rgba(255,255,255,0.3)', fontFamily: 'monospace' }}>index.tsx</span>
+                </div>
+                {[
+                  { color: '#7c3aed', w: 60, text: 'function' },
+                  { color: '#3b82f6', w: 90, text: 'HeroSection' },
+                  { color: 'rgba(255,255,255,0.15)', w: 50, text: '() {' },
+                ].map((l, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 5 }}>
+                    <span style={{ fontSize: 7, color: 'rgba(255,255,255,0.12)', fontFamily: 'monospace', width: 12 }}>{i + 1}</span>
+                    <div style={{ height: 6, borderRadius: 3, background: l.color, width: l.w, opacity: 0.8 }} />
+                  </div>
+                ))}
+                {[45, 80, 60, 35, 70].map((w, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                    <span style={{ fontSize: 7, color: 'rgba(255,255,255,0.08)', fontFamily: 'monospace', width: 12 }}>{i + 4}</span>
+                    <div style={{ height: 5, borderRadius: 3, background: 'rgba(255,255,255,0.07)', width: w, marginLeft: i < 3 ? 10 : 0 }} />
+                  </div>
+                ))}
+              </div>
+
+              {/* ── METRIC CARD — SEO Score ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 150,
+                  right: '4%',
+                  bottom: '22%',
+                  background: 'linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(6,8,14,0.96) 100%)',
+                  border: '1px solid rgba(16,185,129,0.25)',
+                  borderRadius: 10,
+                  padding: '12px 14px',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 12px 40px rgba(0,0,0,0.6), 0 0 24px rgba(16,185,129,0.08)',
+                  zIndex: 5,
+                  animation: 'hero-float-c 8s ease-in-out 2s infinite',
+                }}
+              >
+                <span style={{ fontSize: 7, color: 'rgba(16,185,129,0.7)', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em' }}>SEO Score</span>
+                <div style={{ fontSize: 32, fontWeight: 800, color: '#ffffff', lineHeight: 1.1, marginTop: 4 }}>100</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6 }}>
+                  <div style={{ flex: 1, height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.06)' }}>
+                    <div style={{ width: '100%', height: '100%', borderRadius: 2, background: 'linear-gradient(90deg,#10b981,#34d399)' }} />
+                  </div>
+                  <span style={{ fontSize: 7, color: 'rgba(16,185,129,0.7)', fontFamily: 'monospace' }}>✓</span>
+                </div>
+              </div>
+
+              {/* ── METRIC CARD — Performance ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: 150,
+                  left: '0%',
+                  bottom: '14%',
+                  background: 'linear-gradient(135deg, rgba(197,160,89,0.08) 0%, rgba(6,8,14,0.96) 100%)',
+                  border: '1px solid rgba(197,160,89,0.22)',
+                  borderRadius: 10,
+                  padding: '12px 14px',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 12px 40px rgba(0,0,0,0.6), 0 0 24px rgba(197,160,89,0.06)',
+                  zIndex: 5,
+                  animation: 'hero-float-a 10s ease-in-out 0.5s infinite',
+                }}
+              >
+                <span style={{ fontSize: 7, color: 'rgba(197,160,89,0.7)', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Performance</span>
+                <div style={{ fontSize: 32, fontWeight: 800, color: '#ffffff', lineHeight: 1.1, marginTop: 4 }}>98<span style={{ fontSize: 14, color: 'rgba(255,255,255,0.3)' }}>%</span></div>
+                <div style={{ display: 'flex', gap: 3, marginTop: 6 }}>
+                  {[85, 100, 90, 98, 95, 100, 88].map((h, i) => (
+                    <div key={i} style={{ flex: 1, height: 18, borderRadius: 2, background: 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'flex-end' }}>
+                      <div style={{ width: '100%', height: `${h}%`, borderRadius: 2, background: `rgba(197,160,89,${0.3 + i * 0.1})` }} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── FLOATING TAG — "UI/UX Design" ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: '2%',
+                  top: '8%',
+                  background: 'rgba(124,58,237,0.12)',
+                  border: '1px solid rgba(124,58,237,0.30)',
+                  borderRadius: 20,
+                  padding: '6px 14px',
+                  backdropFilter: 'blur(12px)',
+                  zIndex: 6,
+                  animation: 'hero-float-b 11s ease-in-out 1.5s infinite',
+                }}
+              >
+                <span style={{ fontSize: 9, color: 'rgba(167,139,250,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>✦ UI / UX Design</span>
+              </div>
+
+              {/* ── FLOATING TAG — "AI Automation" ── */}
+              <div
+                style={{
+                  position: 'absolute',
+                  right: '6%',
+                  bottom: '5%',
+                  background: 'rgba(59,130,246,0.10)',
+                  border: '1px solid rgba(59,130,246,0.28)',
+                  borderRadius: 20,
+                  padding: '6px 14px',
+                  backdropFilter: 'blur(12px)',
+                  zIndex: 6,
+                  animation: 'hero-float-c 12s ease-in-out 3s infinite',
+                }}
+              >
+                <span style={{ fontSize: 9, color: 'rgba(96,165,250,0.85)', fontFamily: 'monospace', letterSpacing: '0.12em' }}>⚡ AI Automation</span>
+              </div>
+
+              {/* Keyframes */}
+              <style>{`
+                @keyframes hero-float-a {
+                  0%,100% { transform: translate(-58%,-52%) perspective(900px) rotateY(-12deg) rotateX(4deg) translateY(0px); }
+                  50%     { transform: translate(-58%,-52%) perspective(900px) rotateY(-12deg) rotateX(4deg) translateY(-18px); }
+                }
+                @keyframes hero-float-b {
+                  0%,100% { transform: translateY(0px); }
+                  50%     { transform: translateY(-12px); }
+                }
+                @keyframes hero-float-c {
+                  0%,100% { transform: translateY(0px); }
+                  50%     { transform: translateY(-8px); }
+                }
+              `}</style>
+            </motion.div>
+          </div>
         </div>
 
       </section>
