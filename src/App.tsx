@@ -526,10 +526,10 @@ export default function App() {
                     {/* Left CTA */}
                     <div className="mt-4 flex justify-start">
                       <button
-                        onClick={heroSlides[activeHeroSlide].onCtaClick}
+                        onClick={() => openBooking('GROWTH', '$2,999')}
                         className="group relative flex items-center justify-center gap-2.5 py-3 px-8 border-2 border-[#c5a059]/80 text-[#c5a059] hover:text-black hover:bg-[#c5a059] uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer rounded-full active:scale-95 font-black shadow-md shadow-gold-500/10 hover:shadow-gold-500/25"
                       >
-                        {heroSlides[activeHeroSlide].ctaText}
+                        Start a Project
                       </button>
                     </div>
                   </motion.div>
