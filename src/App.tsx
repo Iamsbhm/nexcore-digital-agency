@@ -856,110 +856,227 @@ export default function App() {
 
                         {/* Laptop screen standing vertically */}
                         <div 
-                          className="absolute w-44 h-30 bg-[#070514]/98 border border-[#c5a059]/30 rounded-xl overflow-hidden shadow-[0_-8px_30px_rgba(124,58,237,0.3)]"
+                          className="absolute w-44 h-30 bg-[#070514] border border-[#c5a059]/30 rounded-xl overflow-hidden shadow-[0_-8px_30px_rgba(124,58,237,0.3)]"
                           style={{
                             transform: 'rotateX(5deg) translate3d(0, -22px, 0px)',
                             transformStyle: 'preserve-3d',
                           }}
                         >
-                          {/* Screen content - IDE Mock */}
-                          <div className="w-full h-full p-2.5 font-mono text-[5.5px] flex flex-col justify-between select-none text-left">
-                            <div className="flex justify-between items-center border-b border-white/5 pb-1">
-                              <div className="flex gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-red-500/70" />
-                                <span className="w-1.5 h-1.5 rounded-full bg-yellow-500/70" />
-                                <span className="w-1.5 h-1.5 rounded-full bg-green-500/70" />
-                              </div>
-                              <span className="text-[4px] text-white/30">digital-agency.tsx</span>
+                          {/* Inner Screen Wallpaper & Circular Glow */}
+                          <div className="w-full h-full relative bg-gradient-to-br from-[#120a2e] to-[#04020a] overflow-hidden flex items-center justify-center">
+                            <div className="absolute w-24 h-24 rounded-full bg-[#c5a059]/10 blur-xl pointer-events-none" />
+                            <div className="absolute top-1.5 right-2 flex gap-0.5 z-10">
+                              <span className="w-1 h-1 rounded-full bg-red-500/60" />
+                              <span className="w-1 h-1 rounded-full bg-yellow-500/60" />
+                              <span className="w-1 h-1 rounded-full bg-green-500/60" />
                             </div>
-                            <div className="flex-1 py-2 flex flex-col gap-1.5 text-white/70">
-                              <div><span className="text-purple-400">import</span> React <span className="text-purple-400">from</span> <span className="text-yellow-200">'react'</span>;</div>
-                              <div><span className="text-blue-400 font-bold">const</span> NexcoreAgency = () =&gt; &#123;</div>
-                              <div className="pl-3"><span className="text-blue-400">const</span> [design] = useState(<span className="text-[#c5a059]">'premium'</span>);</div>
-                              <div className="pl-3 text-emerald-400">return &lt;<span className="text-purple-300">WowInterface</span> scaling=&#123;true&#125; /&gt;</div>
-                              <div>&#125;;</div>
-                            </div>
-                            <div className="flex justify-between items-center text-[4px] text-[#c5a059]/60 border-t border-white/5 pt-1">
-                              <span>UTF-8</span>
-                              <span>TypeScript JSX</span>
-                            </div>
+                            <span className="text-[5px] font-mono text-white/20 select-none uppercase tracking-[0.2em] mt-8">Nexcore Digital</span>
                           </div>
                         </div>
 
-                        {/* Floating Code Panel Left */}
+                        {/* 1. Red Movie Strip Video Card */}
                         <motion.div
                           animate={{ y: [0, -6, 0] }}
                           transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute w-28 h-20 bg-[#120e29]/95 border border-[#c5a059]/30 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl"
+                          className="absolute w-20 h-14 bg-gradient-to-br from-red-600 to-red-700 border border-red-400/40 rounded-lg p-1.5 flex flex-col justify-between shadow-2xl"
                           style={{
-                            transform: 'translate3d(-105px, -30px, 45px)',
-                            backdropFilter: 'blur(8px)',
+                            transform: 'translate3d(-20px, -45px, 20px)',
+                            transformStyle: 'preserve-3d',
+                            boxShadow: '0 15px 30px rgba(0,0,0,0.5)'
                           }}
                         >
-                          <div className="flex justify-between items-center border-b border-white/5 pb-1">
-                            <span className="text-[5.5px] font-mono text-[#c5a059] font-black uppercase">Tailwind Engine</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          <div className="flex justify-between items-center opacity-60">
+                            {[...Array(4)].map((_, i) => (
+                              <span key={i} className="w-1.5 h-1 bg-black rounded-full" />
+                            ))}
                           </div>
-                          <div className="flex flex-col gap-1 my-1">
-                            <div className="w-12 h-1 bg-[#c5a059]/30 rounded" />
-                            <div className="w-16 h-1 bg-[#c5a059]/15 rounded" />
-                            <div className="w-8 h-1 bg-[#c5a059]/20 rounded" />
+                          <div className="flex-1 flex items-center justify-center text-white text-[8px] font-bold">▶</div>
+                          <div className="flex justify-between items-center opacity-60">
+                            {[...Array(4)].map((_, i) => (
+                              <span key={i} className="w-1.5 h-1 bg-black rounded-full" />
+                            ))}
                           </div>
-                          <span className="text-[5px] font-mono text-white/40">Compiled: 18ms</span>
                         </motion.div>
 
-                        {/* Floating Code Panel Right */}
+                        {/* 2. Blue Message Box */}
                         <motion.div
-                          animate={{ y: [0, 8, 0] }}
-                          transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute w-24 h-16 bg-[#120e29]/95 border border-purple-500/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl"
+                          animate={{ y: [0, 5, 0] }}
+                          transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                          className="absolute w-16 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 border border-blue-400/40 rounded-lg p-1.5 flex flex-col justify-between shadow-2xl"
                           style={{
-                            transform: 'translate3d(105px, -45px, 50px)',
-                            backdropFilter: 'blur(8px)',
+                            transform: 'translate3d(-52px, 5px, 30px)',
+                            transformStyle: 'preserve-3d',
+                            boxShadow: '0 15px 30px rgba(0,0,0,0.5)'
                           }}
                         >
-                          <span className="text-[5.5px] font-mono text-purple-300 font-bold uppercase">React Hooks</span>
-                          <div className="flex flex-col gap-1 my-1">
-                            <div className="w-14 h-1 bg-purple-500/30 rounded" />
-                            <div className="w-9 h-1 bg-purple-500/20 rounded" />
+                          <div className="flex flex-col gap-1 text-left">
+                            <div className="w-10 h-1 bg-white rounded-full" />
+                            <div className="w-7 h-1 bg-white/60 rounded-full" />
                           </div>
-                          <span className="text-[5px] font-mono text-green-400 font-bold">useMemo()</span>
+                          <div className="w-3 h-3 bg-white/10 rounded-full self-end flex items-center justify-center text-white text-[5px]">⚡</div>
                         </motion.div>
 
-                        {/* Smiley/Tech Emoji Bubbles */}
+                        {/* 3. Green Landscape Image Card */}
                         <motion.div
-                          animate={{ y: [0, -8, 0] }}
-                          transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute w-8 h-8 rounded-full bg-gradient-to-br from-[#ffebc2] to-[#c5a059] flex items-center justify-center shadow-lg border border-white/10"
+                          animate={{ y: [0, -5, 0] }}
+                          transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+                          className="absolute w-24 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 border border-emerald-400/40 rounded-lg p-2 flex flex-col justify-between shadow-2xl"
                           style={{
-                            transform: 'translate3d(-60px, -95px, 60px)',
+                            transform: 'translate3d(32px, -22px, 35px)',
+                            transformStyle: 'preserve-3d',
+                            boxShadow: '0 15px 35px rgba(0,0,0,0.5)'
                           }}
                         >
-                          <span className="text-xs">⚡</span>
+                          <div className="flex-1 relative overflow-hidden bg-emerald-950/40 rounded flex items-end">
+                            <svg className="w-full h-8 text-emerald-400/45" viewBox="0 0 100 40" preserveAspectRatio="none">
+                              <path d="M0,40 L30,15 L60,32 L85,8 L100,40 Z" fill="currentColor" />
+                            </svg>
+                            <div className="absolute top-1.5 right-2 w-2.5 h-2.5 bg-yellow-400 rounded-full shadow-[0_0_6px_#facc15]" />
+                          </div>
+                          <span className="text-[5px] text-white/70 font-mono text-left mt-1 leading-none">landscape.png</span>
                         </motion.div>
 
+                        {/* 4. Orange Play Card */}
                         <motion.div
-                          animate={{ y: [0, 8, 0] }}
-                          transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute w-7 h-7 rounded-full bg-gradient-to-br from-purple-400 to-indigo-600 flex items-center justify-center shadow-lg border border-white/10"
+                          animate={{ y: [0, 4, 0] }}
+                          transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+                          className="absolute w-18 h-12 bg-gradient-to-br from-amber-500 to-orange-600 border border-amber-400/45 rounded-lg p-1.5 flex flex-col justify-between shadow-2xl"
                           style={{
-                            transform: 'translate3d(65px, -100px, 70px)',
+                            transform: 'translate3d(42px, 22px, 15px)',
+                            transformStyle: 'preserve-3d',
+                            boxShadow: '0 15px 30px rgba(0,0,0,0.5)'
                           }}
                         >
-                          <span className="text-[10px]">✨</span>
+                          <div className="flex-1 flex items-center justify-center bg-black/10 rounded">
+                            <span className="text-white text-[8px] font-bold">▶</span>
+                          </div>
                         </motion.div>
 
-                        {/* Secondary floating sphere */}
-                        <motion.div 
-                          animate={{ y: [0, -10, 0] }}
-                          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute z-20 w-6 h-6 rounded-full"
-                          style={{
-                            transform: 'translate3d(-120px, 60px, 65px)',
-                            background: 'radial-gradient(circle at 30% 30%, #f3e8ff 0%, #a78bfa 50%, #5b21b6 90%)',
-                            boxShadow: '0 6px 15px rgba(0,0,0,0.6)',
+                        {/* 5. 3D Rocket Flying */}
+                        <motion.div
+                          animate={{ 
+                            y: [0, -10, 0],
+                            x: [0, -4, 0]
                           }}
-                        />
+                          transition={{ 
+                            duration: 5, 
+                            repeat: Infinity, 
+                            ease: "easeInOut" 
+                          }}
+                          className="absolute"
+                          style={{
+                            transform: 'translate3d(-110px, -55px, 60px) rotateX(10deg) rotateY(15deg) rotateZ(-10deg)',
+                            transformStyle: 'preserve-3d',
+                          }}
+                        >
+                          {/* Faint trail paths */}
+                          <svg className="absolute -left-12 -bottom-16 w-28 h-28 opacity-15 text-white/50 pointer-events-none" viewBox="0 0 100 100" fill="none">
+                            <path d="M10,90 Q40,40 80,10" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+                            <path d="M5,80 Q35,30 75,5" stroke="currentColor" strokeWidth="0.7" strokeDasharray="2,2" />
+                          </svg>
+
+                          <div className="relative w-12 h-24 flex flex-col items-center" style={{ transformStyle: 'preserve-3d' }}>
+                            {/* Nose Cone */}
+                            <div className="w-6 h-6 bg-[#c5a059] rounded-t-full shadow-md z-10" />
+                            {/* Body */}
+                            <div className="w-8 h-14 bg-gradient-to-b from-white via-slate-100 to-slate-200 border border-white/10 rounded-b-xl flex justify-center items-center relative shadow-lg shadow-black/40">
+                              {/* Window */}
+                              <div className="w-3.5 h-3.5 rounded-full bg-cyan-500 border border-slate-300 shadow-inner flex items-center justify-center relative">
+                                <span className="w-1.5 h-1.5 rounded-full bg-white/50 absolute top-0.5 left-0.5" />
+                              </div>
+                            </div>
+                            {/* Fins */}
+                            <div 
+                              className="absolute left-[-6px] bottom-3 w-4 h-8 bg-[#c5a059] rounded-l-full shadow-md"
+                              style={{
+                                transform: 'rotateY(-45deg) translateZ(-2px)'
+                              }}
+                            />
+                            <div 
+                              className="absolute right-[-6px] bottom-3 w-4 h-8 bg-[#c5a059] rounded-r-full shadow-md"
+                              style={{
+                                transform: 'rotateY(45deg) translateZ(-2px)'
+                              }}
+                            />
+                            <div 
+                              className="absolute bottom-3 w-1.5 h-8 bg-[#a6823c] rounded-full shadow-md"
+                              style={{
+                                transform: 'translateZ(6px)'
+                              }}
+                            />
+
+                            {/* Flame */}
+                            <motion.div
+                              animate={{ 
+                                scaleY: [1, 1.3, 0.9, 1.2, 1],
+                                scaleX: [1, 1.1, 0.95, 1.05, 1]
+                              }}
+                              transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+                              className="w-4 h-8 bg-gradient-to-b from-amber-400 via-orange-500 to-transparent rounded-b-full origin-top"
+                              style={{
+                                transform: 'translateY(-1px) translateZ(0)'
+                              }}
+                            />
+                          </div>
+                        </motion.div>
+
+                        {/* 6. Floating Low-Poly Pyramids/Crystals */}
+                        {/* Gold Crystal (Left) */}
+                        <motion.div
+                          animate={{ 
+                            y: [0, -12, 0],
+                            rotateZ: [0, 8, 0]
+                          }}
+                          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute pointer-events-none"
+                          style={{
+                            transform: 'translate3d(-145px, 45px, 20px)',
+                          }}
+                        >
+                          <svg width="40" height="45" viewBox="0 0 40 45" fill="none">
+                            <path d="M20,0 L40,30 L20,45 Z" fill="#8c6e3d" opacity="0.85" />
+                            <path d="M20,0 L0,30 L20,45 Z" fill="#c5a059" opacity="0.95" />
+                            <path d="M0,30 L40,30 L20,45 Z" fill="#5e4618" opacity="0.75" />
+                          </svg>
+                        </motion.div>
+
+                        {/* Purple Crystal (Right) */}
+                        <motion.div
+                          animate={{ 
+                            y: [0, 10, 0],
+                            rotateZ: [0, -6, 0]
+                          }}
+                          transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                          className="absolute pointer-events-none"
+                          style={{
+                            transform: 'translate3d(145px, -70px, 30px)',
+                          }}
+                        >
+                          <svg width="32" height="36" viewBox="0 0 30 35" fill="none">
+                            <path d="M15,0 L30,22 L15,35 Z" fill="#7c3aed" opacity="0.8" />
+                            <path d="M15,0 L0,22 L15,35 Z" fill="#a78bfa" opacity="0.9" />
+                            <path d="M0,22 L30,22 L15,35 Z" fill="#5b21b6" opacity="0.7" />
+                          </svg>
+                        </motion.div>
+
+                        {/* Smaller Accent Crystal */}
+                        <motion.div
+                          animate={{ 
+                            y: [0, -8, 0],
+                            rotateY: [0, 360]
+                          }}
+                          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute pointer-events-none"
+                          style={{
+                            transform: 'translate3d(85px, -110px, -10px)',
+                          }}
+                        >
+                          <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+                            <path d="M10,0 L20,15 L10,24 Z" fill="#c5a059" opacity="0.8" />
+                            <path d="M10,0 L0,15 L10,24 Z" fill="#ebd095" opacity="0.9" />
+                            <path d="M0,15 L20,15 L10,24 Z" fill="#8c6e3d" opacity="0.7" />
+                          </svg>
+                        </motion.div>
                       </motion.div>
                     )}
 
