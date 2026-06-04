@@ -70,6 +70,7 @@ export default function App() {
 
   // Mouse tilt tracking state for 3D graphic interactivity
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [activeHeroSlide, setActiveHeroSlide] = useState<number>(0);
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -157,6 +158,51 @@ export default function App() {
       }, 50);
     }
   };
+
+  // Hero carousel slides configurations
+  const heroSlides = [
+    {
+      tag: "Premium Agency",
+      titleLine1: "Innovative",
+      titleLine2: "Web Design",
+      description: <>Innovation in its modern meaning is <span className="text-[#c5a059] font-bold">"a new idea, creative thoughts, new imaginations</span> in form of device or method".</>,
+      ctaText: "Start a Project",
+      onCtaClick: () => openBooking('GROWTH', '$2,999')
+    },
+    {
+      tag: "Bespoke Development",
+      titleLine1: "Next-Gen",
+      titleLine2: "React Systems",
+      description: <>Engineering high-performance software with <span className="text-[#c5a059] font-bold">clean architectures, rich micro-interactions,</span> and pixel-perfect responsiveness.</>,
+      ctaText: "Explore Tech",
+      onCtaClick: () => scrollToSection('services-explorer-section')
+    },
+    {
+      tag: "Organic Growth",
+      titleLine1: "Dominant",
+      titleLine2: "SEO Tactics",
+      description: <>Dominate local and national rankings using <span className="text-[#c5a059] font-bold">advanced search marketing strategies</span> that drive qualified client bookings.</>,
+      ctaText: "Audit Site",
+      onCtaClick: () => scrollToSection('why-us-section')
+    },
+    {
+      tag: "Secure Infrastructure",
+      titleLine1: "Scalable",
+      titleLine2: "Cloud Nodes",
+      description: <>Deploying robust, containerized architectures on AWS/Vercel with <span className="text-[#c5a059] font-bold">automated failovers, load balancing, and database clustering</span>.</>,
+      ctaText: "Scale Server",
+      onCtaClick: () => openBooking('SCALE', '$4,999')
+    }
+  ];
+
+  // Autoplay hero carousel
+  useEffect(() => {
+    if (currentPage !== 'home') return;
+    const interval = setInterval(() => {
+      setActiveHeroSlide((prev) => (prev === 3 ? 0 : prev + 1));
+    }, 7000);
+    return () => clearInterval(interval);
+  }, [currentPage]);
 
   // Page navigation helper
   const navigateTo = (page: PageName) => {
@@ -440,43 +486,54 @@ export default function App() {
               <div className="h-2 w-full mb-4" />
 
               {/* Title Section */}
-              <div className="flex flex-col text-left my-auto">
-                <h1 className="sr-only">Innovative Web Design - Pixel Vance Digital</h1>
-                <div aria-hidden="true" className="space-y-1">
-                  <p className="font-display font-light text-[#c5a059] text-sm tracking-[0.2em] uppercase">
-                    Premium Agency
-                  </p>
-                  <p className="font-display font-extrabold uppercase text-[clamp(2.0rem,5vw,3.2rem)] leading-[0.95] tracking-[0.02em] text-white">
-                    Innovative
-                  </p>
-                  <p className="font-display font-extrabold uppercase text-[clamp(2.0rem,5vw,3.2rem)] leading-[0.95] tracking-[0.02em] text-[#c5a059] pb-2">
-                    Web Design
-                  </p>
-                </div>
-
-                {/* Gold Divider Bar */}
-                <div className="w-24 h-[4px] bg-[#c5a059] my-4 rounded-full self-start" />
-
-                {/* Glass Card Description */}
-                <div className="bg-white/[0.02] border border-white/5 hover:border-[#c5a059]/20 rounded-2xl p-4 md:p-5 text-left relative overflow-hidden group transition-all duration-300 shadow-xl backdrop-blur-md">
-                  {/* Corner brackets */}
-                  <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#c5a059]/30 pointer-events-none" />
-                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#c5a059]/30 pointer-events-none" />
-                  
-                  <p className="font-mono text-xs sm:text-[13px] leading-relaxed text-white/90">
-                    Innovation in its modern meaning is <span className="text-[#c5a059] font-bold">"a new idea, creative thoughts, new imaginations</span> in form of device or method".
-                  </p>
-                </div>
-
-                {/* Left CTA: Start a Project */}
-                <div className="mt-4 flex justify-start">
-                  <button
-                    onClick={() => openBooking('GROWTH', '$2,999')}
-                    className="group relative flex items-center justify-center gap-2.5 py-3 px-8 border-2 border-[#c5a059]/80 text-[#c5a059] hover:text-black hover:bg-[#c5a059] uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer rounded-full active:scale-95 font-black shadow-md shadow-gold-500/10 hover:shadow-gold-500/25"
+              <div className="my-auto min-h-[300px] flex flex-col justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeHeroSlide}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                    className="flex flex-col text-left w-full"
                   >
-                    Start a Project
-                  </button>
-                </div>
+                    <h1 className="sr-only">Innovative Web Design - Pixel Vance Digital</h1>
+                    <div aria-hidden="true" className="space-y-1">
+                      <p className="font-display font-light text-[#c5a059] text-sm tracking-[0.2em] uppercase">
+                        {heroSlides[activeHeroSlide].tag}
+                      </p>
+                      <p className="font-display font-extrabold uppercase text-[clamp(2.0rem,5vw,3.2rem)] leading-[0.95] tracking-[0.02em] text-white">
+                        {heroSlides[activeHeroSlide].titleLine1}
+                      </p>
+                      <p className="font-display font-extrabold uppercase text-[clamp(2.0rem,5vw,3.2rem)] leading-[0.95] tracking-[0.02em] text-[#c5a059] pb-2">
+                        {heroSlides[activeHeroSlide].titleLine2}
+                      </p>
+                    </div>
+
+                    {/* Gold Divider Bar */}
+                    <div className="w-24 h-[4px] bg-[#c5a059] my-4 rounded-full self-start" />
+
+                    {/* Glass Card Description */}
+                    <div className="bg-white/[0.02] border border-white/5 hover:border-[#c5a059]/20 rounded-2xl p-4 md:p-5 text-left relative overflow-hidden group transition-all duration-300 shadow-xl backdrop-blur-md">
+                      {/* Corner brackets */}
+                      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#c5a059]/30 pointer-events-none" />
+                      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#c5a059]/30 pointer-events-none" />
+                      
+                      <p className="font-mono text-xs sm:text-[13px] leading-relaxed text-white/90">
+                        {heroSlides[activeHeroSlide].description}
+                      </p>
+                    </div>
+
+                    {/* Left CTA */}
+                    <div className="mt-4 flex justify-start">
+                      <button
+                        onClick={heroSlides[activeHeroSlide].onCtaClick}
+                        className="group relative flex items-center justify-center gap-2.5 py-3 px-8 border-2 border-[#c5a059]/80 text-[#c5a059] hover:text-black hover:bg-[#c5a059] uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer rounded-full active:scale-95 font-black shadow-md shadow-gold-500/10 hover:shadow-gold-500/25"
+                      >
+                        {heroSlides[activeHeroSlide].ctaText}
+                      </button>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               {/* Bottom Navigation and Indicators */}
@@ -503,14 +560,14 @@ export default function App() {
                 {/* Arrows */}
                 <div className="flex items-center gap-2.5">
                   <button
-                    onClick={() => scrollToSection('infinite-marquee-section')}
+                    onClick={() => setActiveHeroSlide((prev) => (prev === 0 ? 3 : prev - 1))}
                     className="w-9 h-9 rounded-full bg-white/[0.02] border border-white/10 hover:bg-white/10 text-xs text-white hover:text-[#c5a059] hover:shadow transition-all flex items-center justify-center cursor-pointer active:scale-90"
                     title="Previous Slide"
                   >
                     ◀
                   </button>
                   <button
-                    onClick={() => scrollToSection('services-explorer-section')}
+                    onClick={() => setActiveHeroSlide((prev) => (prev === 3 ? 0 : prev + 1))}
                     className="w-9 h-9 rounded-full bg-white/[0.02] border border-white/10 hover:bg-white/10 text-xs text-white hover:text-[#c5a059] hover:shadow transition-all flex items-center justify-center cursor-pointer active:scale-90"
                     title="Next Slide"
                   >
@@ -519,7 +576,7 @@ export default function App() {
                 </div>
 
                 {/* Slide Number */}
-                <span className="text-3xl font-serif italic text-[#c5a059]/35 select-none font-bold">01</span>
+                <span className="text-3xl font-serif italic text-[#c5a059]/35 select-none font-bold">0{activeHeroSlide + 1}</span>
               </div>
             </div>
 
@@ -571,199 +628,601 @@ export default function App() {
                     }}
                   />
 
-                  {/* ── 3D DASHBOARD SHOWCASE ── */}
-                  <div 
-                    className="relative flex items-center justify-center animate-browser-main"
-                    style={{
-                      transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
-                      transformStyle: 'preserve-3d',
-                    }}
-                  >
-                    
-                    {/* 1. Dashboard Navigation Sidebar */}
-                    <div 
-                      className="absolute w-16 h-[140px] bg-gradient-to-b from-[#1b153a]/95 to-[#0c071a]/98 border border-[#c5a059]/20 rounded-xl p-2 flex flex-col gap-2.5 shadow-2xl animate-dash-sidebar"
-                      style={{
-                        transformStyle: 'preserve-3d',
-                        boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
-                      }}
-                    >
-                      <div className="flex gap-1 items-center pb-1 border-b border-white/5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
-                        <span className="text-[5px] font-mono text-white/40">DASH</span>
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        {/* Sidebar active item */}
-                        <div className="w-full h-5 bg-[#c5a059]/10 border border-[#c5a059]/40 rounded-md flex items-center justify-center">
-                          <span className="text-[6px] text-[#c5a059] font-bold">⊞</span>
+                  {/* ── 3D SCENES CAROUSEL ── */}
+                  <AnimatePresence mode="wait">
+                    {activeHeroSlide === 0 && (
+                      <motion.div
+                        key="scene-dashboard"
+                        initial={{ opacity: 0, scale: 0.85 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.85 }}
+                        transition={{ duration: 0.45 }}
+                        className="relative flex items-center justify-center animate-browser-main"
+                        style={{
+                          transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
+                          transformStyle: 'preserve-3d',
+                        }}
+                      >
+                        {/* 1. Dashboard Navigation Sidebar */}
+                        <div 
+                          className="absolute w-16 h-[140px] bg-gradient-to-b from-[#1b153a]/95 to-[#0c071a]/98 border border-[#c5a059]/20 rounded-xl p-2 flex flex-col gap-2.5 shadow-2xl animate-dash-sidebar"
+                          style={{
+                            transformStyle: 'preserve-3d',
+                            boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
+                          }}
+                        >
+                          <div className="flex gap-1 items-center pb-1 border-b border-white/5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                            <span className="text-[5px] font-mono text-white/40">DASH</span>
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <div className="w-full h-5 bg-[#c5a059]/10 border border-[#c5a059]/40 rounded-md flex items-center justify-center">
+                              <span className="text-[6px] text-[#c5a059] font-bold">⊞</span>
+                            </div>
+                            <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⊟</div>
+                            <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⊘</div>
+                            <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⚙</div>
+                          </div>
                         </div>
-                        {/* Sidebar inactive items */}
-                        <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⊟</div>
-                        <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⊘</div>
-                        <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⚙</div>
-                      </div>
-                    </div>
 
-                    {/* 2. Gold Premium VISA Card */}
-                    <div 
-                      className="absolute w-28 h-[75px] bg-gradient-to-br from-[#ebd095] via-[#c5a059] to-[#8c6e3d] border border-[#ffebad]/30 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl animate-dash-visa"
-                      style={{
-                        transformStyle: 'preserve-3d',
-                        boxShadow: '0 20px 40px rgba(0,0,0,0.7), 0 0 15px rgba(197,160,89,0.2)',
-                      }}
-                    >
-                      <div className="flex justify-between items-start">
-                        <span className="text-[6px] font-mono text-black font-black leading-none">VISA</span>
-                        <div className="w-4 h-3 bg-gradient-to-br from-yellow-100 to-yellow-600 rounded-sm opacity-80" /> {/* Chip */}
-                      </div>
-                      <div className="text-[8px] font-mono font-semibold text-black/75 tracking-wider">
-                        •••• •••• •••• 7539
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-[5px] font-mono text-black/60 font-bold uppercase">ALEX D.</span>
-                        <span className="text-[5px] font-mono text-black/60">12/28</span>
-                      </div>
-                    </div>
-
-                    {/* 3. Interactive Calendar Card */}
-                    <div 
-                      className="absolute w-[100px] h-[100px] bg-[#120e29]/90 border border-[#c5a059]/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-calendar"
-                      style={{
-                        backdropFilter: 'blur(8px)',
-                        boxShadow: '0 20px 45px rgba(0,0,0,0.6)',
-                        transformStyle: 'preserve-3d',
-                      }}
-                    >
-                      <div className="flex justify-between items-center border-b border-white/5 pb-1">
-                        <span className="text-[6px] font-mono text-purple-200 font-bold">Nov 2026</span>
-                        <span className="text-[5px] text-white/30">◀ ▶</span>
-                      </div>
-                      {/* Grid representation */}
-                      <div className="grid grid-cols-7 gap-1 mt-1 text-[5px] font-mono text-white/55 text-center leading-none">
-                        {['S','M','T','W','T','F','S'].map((d, i) => (
-                          <span key={i} className="text-purple-300 font-bold">{d}</span>
-                        ))}
-                        {[...Array(28)].map((_, i) => {
-                          const isSpecial = i + 1 === 15;
-                          return (
-                            <span 
-                              key={i} 
-                              className={`h-3.5 flex items-center justify-center rounded-sm ${isSpecial ? 'bg-[#c5a059] text-black font-bold' : ''}`}
-                            >
-                              {i + 1}
-                            </span>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* 4. Mock Asset Upload Card */}
-                    <div 
-                      className="absolute w-[115px] h-[95px] bg-[#120e29]/90 border border-[#c5a059]/20 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl animate-dash-upload"
-                      style={{
-                        backdropFilter: 'blur(8px)',
-                        boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
-                        transformStyle: 'preserve-3d',
-                      }}
-                    >
-                      {/* Simple image holder layout */}
-                      <div className="w-full h-8 border border-dashed border-white/10 rounded flex flex-col items-center justify-center opacity-70">
-                        <span className="text-[7px] text-[#c5a059]">🖼</span>
-                      </div>
-                      <span className="text-[5px] font-mono text-white/40 text-center">No images uploaded</span>
-                      <button className="w-full py-1 bg-[#c5a059] hover:bg-[#ebd095] text-black text-[5px] font-bold font-mono uppercase tracking-wider rounded-md active:scale-95 cursor-pointer">
-                        Update now
-                      </button>
-                    </div>
-
-                    {/* 5. Analytics Chart Card */}
-                    <div 
-                      className="absolute w-[130px] h-[90px] bg-[#120e29]/90 border border-[#c5a059]/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-chart"
-                      style={{
-                        backdropFilter: 'blur(8px)',
-                        boxShadow: '0 20px 50px rgba(0,0,0,0.7)',
-                        transformStyle: 'preserve-3d',
-                      }}
-                    >
-                      <div className="flex justify-between items-center">
-                        <span className="text-[6px] font-mono text-[#c5a059] font-bold">Chart Title</span>
-                        <span className="text-[5px] font-mono text-white/30">WEEKLY</span>
-                      </div>
-                      {/* Waveform line */}
-                      <div className="relative h-10 w-full flex items-end">
-                        {/* Simulated Grid Lines */}
-                        <div className="absolute inset-0 flex flex-col justify-between opacity-5 pointer-events-none">
-                          <div className="w-full h-[1px] bg-white" />
-                          <div className="w-full h-[1px] bg-white" />
-                          <div className="w-full h-[1px] bg-white" />
+                        {/* 2. Gold Premium VISA Card */}
+                        <div 
+                          className="absolute w-28 h-[75px] bg-gradient-to-br from-[#ebd095] via-[#c5a059] to-[#8c6e3d] border border-[#ffebad]/30 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl animate-dash-visa"
+                          style={{
+                            transformStyle: 'preserve-3d',
+                            boxShadow: '0 20px 40px rgba(0,0,0,0.7), 0 0 15px rgba(197,160,89,0.2)',
+                          }}
+                        >
+                          <div className="flex justify-between items-start">
+                            <span className="text-[6px] font-mono text-black font-black leading-none">VISA</span>
+                            <div className="w-4 h-3 bg-gradient-to-br from-yellow-100 to-yellow-600 rounded-sm opacity-80" />
+                          </div>
+                          <div className="text-[8px] font-mono font-semibold text-black/75 tracking-wider">
+                            •••• •••• •••• 7539
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-[5px] font-mono text-black/60 font-bold uppercase">ALEX D.</span>
+                            <span className="text-[5px] font-mono text-black/60">12/28</span>
+                          </div>
                         </div>
-                        {/* Wavy path SVG */}
-                        <svg className="w-full h-full text-[#c5a059]" viewBox="0 0 100 40" preserveAspectRatio="none">
-                          <defs>
-                            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#c5a059" stopOpacity="0.4" />
-                              <stop offset="100%" stopColor="#c5a059" stopOpacity="0.0" />
-                            </linearGradient>
-                          </defs>
-                          <path d="M0,35 Q15,5 30,25 T60,10 T90,30 L100,30 L100,40 L0,40 Z" fill="url(#chartGrad)" />
-                          <path d="M0,35 Q15,5 30,25 T60,10 T90,30 L100,30" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                        </svg>
-                      </div>
-                      <div className="flex justify-between items-center text-[5px] font-mono text-white/50 leading-none">
-                        <span>5.000,00 Orders</span>
-                        <span className="text-[#c5a059] font-bold">+14.2%</span>
-                      </div>
-                    </div>
 
-                    {/* 6. Stats Counter Card */}
-                    <div 
-                      className="absolute w-[85px] h-[65px] bg-[#120e29]/90 border border-white/5 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-stats"
-                      style={{
-                        backdropFilter: 'blur(8px)',
-                        boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
-                        transformStyle: 'preserve-3d',
-                      }}
-                    >
-                      <span className="text-[5px] font-mono text-slate-400 font-bold">This Week</span>
-                      <div className="flex flex-col gap-0.5 mt-1">
-                        <span className="text-xs font-mono font-bold text-white leading-none">00</span>
-                        <span className="text-[5px] font-mono text-slate-500 leading-none">Label</span>
-                      </div>
-                      <div className="flex justify-between items-center pt-1 border-t border-white/5">
-                        <span className="text-[5px] font-mono text-white/30">ORDERS</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]/80 shadow-[0_0_4px_#c5a059]" />
-                      </div>
-                    </div>
+                        {/* 3. Interactive Calendar Card */}
+                        <div 
+                          className="absolute w-[100px] h-[100px] bg-[#120e29]/90 border border-[#c5a059]/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-calendar"
+                          style={{
+                            backdropFilter: 'blur(8px)',
+                            boxShadow: '0 20px 45px rgba(0,0,0,0.6)',
+                            transformStyle: 'preserve-3d',
+                          }}
+                        >
+                          <div className="flex justify-between items-center border-b border-white/5 pb-1">
+                            <span className="text-[6px] font-mono text-purple-200 font-bold">Nov 2026</span>
+                            <span className="text-[5px] text-white/30">◀ ▶</span>
+                          </div>
+                          <div className="grid grid-cols-7 gap-1 mt-1 text-[5px] font-mono text-white/55 text-center leading-none">
+                            {['S','M','T','W','T','F','S'].map((d, i) => (
+                              <span key={i} className="text-purple-300 font-bold">{d}</span>
+                            ))}
+                            {[...Array(28)].map((_, i) => {
+                              const isSpecial = i + 1 === 15;
+                              return (
+                                <span 
+                                  key={i} 
+                                  className={`h-3.5 flex items-center justify-center rounded-sm ${isSpecial ? 'bg-[#c5a059] text-black font-bold' : ''}`}
+                                >
+                                  {i + 1}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        </div>
 
-                    {/* ── FLOATING SPHERE A (Gold, Right side) ── */}
-                    <div 
-                      className="absolute z-20 w-8 h-8 rounded-full animate-dash-sphere-a"
-                      style={{
-                        background: 'radial-gradient(circle at 30% 30%, #ffebc2 0%, #c5a059 50%, #5e4618 90%, #201402 100%)',
-                        boxShadow: '0 8px 20px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.4)',
-                      }}
-                    />
+                        {/* 4. Mock Asset Upload Card */}
+                        <div 
+                          className="absolute w-[115px] h-[95px] bg-[#120e29]/90 border border-[#c5a059]/20 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl animate-dash-upload"
+                          style={{
+                            backdropFilter: 'blur(8px)',
+                            boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
+                            transformStyle: 'preserve-3d',
+                          }}
+                        >
+                          <div className="w-full h-8 border border-dashed border-white/10 rounded flex flex-col items-center justify-center opacity-70">
+                            <span className="text-[7px] text-[#c5a059]">🖼</span>
+                          </div>
+                          <span className="text-[5px] font-mono text-white/40 text-center">No images uploaded</span>
+                          <button className="w-full py-1 bg-[#c5a059] hover:bg-[#ebd095] text-black text-[5px] font-bold font-mono uppercase tracking-wider rounded-md active:scale-95 cursor-pointer">
+                            Update now
+                          </button>
+                        </div>
 
-                    {/* ── FLOATING SPHERE B (Purple, Center-Back) ── */}
-                    <div 
-                      className="absolute z-20 w-7 h-7 rounded-full animate-dash-sphere-b"
-                      style={{
-                        background: 'radial-gradient(circle at 30% 30%, #f3e8ff 0%, #a78bfa 50%, #5b21b6 90%, #2e1065 100%)',
-                        boxShadow: '0 6px 15px rgba(0,0,0,0.6), inset 0 -1.5px 4px rgba(0,0,0,0.8), inset 0 1.5px 4px rgba(255,255,255,0.4)',
-                      }}
-                    />
+                        {/* 5. Analytics Chart Card */}
+                        <div 
+                          className="absolute w-[130px] h-[90px] bg-[#120e29]/90 border border-[#c5a059]/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-chart"
+                          style={{
+                            backdropFilter: 'blur(8px)',
+                            boxShadow: '0 20px 50px rgba(0,0,0,0.7)',
+                            transformStyle: 'preserve-3d',
+                          }}
+                        >
+                          <div className="flex justify-between items-center">
+                            <span className="text-[6px] font-mono text-[#c5a059] font-bold">Chart Title</span>
+                            <span className="text-[5px] font-mono text-white/30">WEEKLY</span>
+                          </div>
+                          <div className="relative h-10 w-full flex items-end">
+                            <div className="absolute inset-0 flex flex-col justify-between opacity-5 pointer-events-none">
+                              <div className="w-full h-[1px] bg-white" />
+                              <div className="w-full h-[1px] bg-white" />
+                              <div className="w-full h-[1px] bg-white" />
+                            </div>
+                            <svg className="w-full h-full text-[#c5a059]" viewBox="0 0 100 40" preserveAspectRatio="none">
+                              <defs>
+                                <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                                  <stop offset="0%" stopColor="#c5a059" stopOpacity="0.4" />
+                                  <stop offset="100%" stopColor="#c5a059" stopOpacity="0.0" />
+                                </linearGradient>
+                              </defs>
+                              <path d="M0,35 Q15,5 30,25 T60,10 T90,30 L100,30 L100,40 L0,40 Z" fill="url(#chartGrad)" />
+                              <path d="M0,35 Q15,5 30,25 T60,10 T90,30 L100,30" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                            </svg>
+                          </div>
+                          <div className="flex justify-between items-center text-[5px] font-mono text-white/50 leading-none">
+                            <span>5.000,00 Orders</span>
+                            <span className="text-[#c5a059] font-bold">+14.2%</span>
+                          </div>
+                        </div>
 
-                    {/* ── FLOATING CLOUD (Back) ── */}
-                    <div
-                      className="absolute z-0 w-12 h-7 opacity-40 animate-dash-cloud"
-                    >
-                      <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
-                        <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
-                      </svg>
-                    </div>
+                        {/* 6. Stats Counter Card */}
+                        <div 
+                          className="absolute w-[85px] h-[65px] bg-[#120e29]/90 border border-white/5 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-stats"
+                          style={{
+                            backdropFilter: 'blur(8px)',
+                            boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
+                            transformStyle: 'preserve-3d',
+                          }}
+                        >
+                          <span className="text-[5px] font-mono text-slate-400 font-bold">This Week</span>
+                          <div className="flex flex-col gap-0.5 mt-1">
+                            <span className="text-xs font-mono font-bold text-white leading-none">00</span>
+                            <span className="text-[5px] font-mono text-slate-500 leading-none">Label</span>
+                          </div>
+                          <div className="flex justify-between items-center pt-1 border-t border-white/5">
+                            <span className="text-[5px] font-mono text-white/30">ORDERS</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]/80 shadow-[0_0_4px_#c5a059]" />
+                          </div>
+                        </div>
 
-                  </div>
+                        {/* FLOATING SPHERE A */}
+                        <div 
+                          className="absolute z-20 w-8 h-8 rounded-full animate-dash-sphere-a"
+                          style={{
+                            background: 'radial-gradient(circle at 30% 30%, #ffebc2 0%, #c5a059 50%, #5e4618 90%, #201402 100%)',
+                            boxShadow: '0 8px 20px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.4)',
+                          }}
+                        />
 
+                        {/* FLOATING SPHERE B */}
+                        <div 
+                          className="absolute z-20 w-7 h-7 rounded-full animate-dash-sphere-b"
+                          style={{
+                            background: 'radial-gradient(circle at 30% 30%, #f3e8ff 0%, #a78bfa 50%, #5b21b6 90%, #2e1065 100%)',
+                            boxShadow: '0 6px 15px rgba(0,0,0,0.6), inset 0 -1.5px 4px rgba(0,0,0,0.8), inset 0 1.5px 4px rgba(255,255,255,0.4)',
+                          }}
+                        />
+
+                        {/* FLOATING CLOUD */}
+                        <div className="absolute z-0 w-12 h-7 opacity-40 animate-dash-cloud">
+                          <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
+                            <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
+                          </svg>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {activeHeroSlide === 1 && (
+                      <motion.div
+                        key="scene-laptop"
+                        initial={{ opacity: 0, scale: 0.85 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.85 }}
+                        transition={{ duration: 0.45 }}
+                        className="relative flex items-center justify-center animate-browser-main"
+                        style={{
+                          transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
+                          transformStyle: 'preserve-3d',
+                        }}
+                      >
+                        {/* Laptop base lying horizontally */}
+                        <div 
+                          className="absolute w-44 h-32 bg-gradient-to-br from-[#1b143c] to-[#0a0718] border border-[#c5a059]/40 rounded-xl"
+                          style={{
+                            transform: 'rotateX(72deg) translate3d(0, 48px, -15px)',
+                            boxShadow: '0 25px 45px rgba(0,0,0,0.8), inset 0 2px 8px rgba(255,255,255,0.06)',
+                            transformStyle: 'preserve-3d'
+                          }}
+                        >
+                          {/* Trackpad outline */}
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-14 h-7 border border-[#c5a059]/20 rounded-md bg-white/[0.01]" />
+                          {/* Keyboard keys structure */}
+                          <div className="absolute top-4 left-4 right-4 bottom-11 grid grid-rows-4 gap-1 opacity-75">
+                            {[...Array(4)].map((_, rIdx) => (
+                              <div key={rIdx} className="flex gap-1 justify-center">
+                                {[...Array(rIdx === 3 ? 6 : 10)].map((_, kIdx) => (
+                                  <div key={kIdx} className={`h-1.5 bg-[#c5a059]/25 rounded-sm ${rIdx === 3 && kIdx === 2 ? 'w-14 bg-[#c5a059]/45' : 'w-2 sm:w-2.5'}`} />
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Laptop screen standing vertically */}
+                        <div 
+                          className="absolute w-44 h-30 bg-[#070514]/98 border border-[#c5a059]/30 rounded-xl overflow-hidden shadow-[0_-8px_30px_rgba(124,58,237,0.3)]"
+                          style={{
+                            transform: 'rotateX(5deg) translate3d(0, -22px, 0px)',
+                            transformStyle: 'preserve-3d',
+                          }}
+                        >
+                          {/* Screen content - IDE Mock */}
+                          <div className="w-full h-full p-2.5 font-mono text-[5.5px] flex flex-col justify-between select-none text-left">
+                            <div className="flex justify-between items-center border-b border-white/5 pb-1">
+                              <div className="flex gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-red-500/70" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-yellow-500/70" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500/70" />
+                              </div>
+                              <span className="text-[4px] text-white/30">digital-agency.tsx</span>
+                            </div>
+                            <div className="flex-1 py-2 flex flex-col gap-1.5 text-white/70">
+                              <div><span className="text-purple-400">import</span> React <span className="text-purple-400">from</span> <span className="text-yellow-200">'react'</span>;</div>
+                              <div><span className="text-blue-400 font-bold">const</span> NexcoreAgency = () =&gt; &#123;</div>
+                              <div className="pl-3"><span className="text-blue-400">const</span> [design] = useState(<span className="text-[#c5a059]">'premium'</span>);</div>
+                              <div className="pl-3 text-emerald-400">return &lt;<span className="text-purple-300">WowInterface</span> scaling=&#123;true&#125; /&gt;</div>
+                              <div>&#125;;</div>
+                            </div>
+                            <div className="flex justify-between items-center text-[4px] text-[#c5a059]/60 border-t border-white/5 pt-1">
+                              <span>UTF-8</span>
+                              <span>TypeScript JSX</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Floating Code Panel Left */}
+                        <motion.div
+                          animate={{ y: [0, -6, 0] }}
+                          transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute w-28 h-20 bg-[#120e29]/95 border border-[#c5a059]/30 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl"
+                          style={{
+                            transform: 'translate3d(-105px, -30px, 45px)',
+                            backdropFilter: 'blur(8px)',
+                          }}
+                        >
+                          <div className="flex justify-between items-center border-b border-white/5 pb-1">
+                            <span className="text-[5.5px] font-mono text-[#c5a059] font-black uppercase">Tailwind Engine</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          </div>
+                          <div className="flex flex-col gap-1 my-1">
+                            <div className="w-12 h-1 bg-[#c5a059]/30 rounded" />
+                            <div className="w-16 h-1 bg-[#c5a059]/15 rounded" />
+                            <div className="w-8 h-1 bg-[#c5a059]/20 rounded" />
+                          </div>
+                          <span className="text-[5px] font-mono text-white/40">Compiled: 18ms</span>
+                        </motion.div>
+
+                        {/* Floating Code Panel Right */}
+                        <motion.div
+                          animate={{ y: [0, 8, 0] }}
+                          transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute w-24 h-16 bg-[#120e29]/95 border border-purple-500/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl"
+                          style={{
+                            transform: 'translate3d(105px, -45px, 50px)',
+                            backdropFilter: 'blur(8px)',
+                          }}
+                        >
+                          <span className="text-[5.5px] font-mono text-purple-300 font-bold uppercase">React Hooks</span>
+                          <div className="flex flex-col gap-1 my-1">
+                            <div className="w-14 h-1 bg-purple-500/30 rounded" />
+                            <div className="w-9 h-1 bg-purple-500/20 rounded" />
+                          </div>
+                          <span className="text-[5px] font-mono text-green-400 font-bold">useMemo()</span>
+                        </motion.div>
+
+                        {/* Smiley/Tech Emoji Bubbles */}
+                        <motion.div
+                          animate={{ y: [0, -8, 0] }}
+                          transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute w-8 h-8 rounded-full bg-gradient-to-br from-[#ffebc2] to-[#c5a059] flex items-center justify-center shadow-lg border border-white/10"
+                          style={{
+                            transform: 'translate3d(-60px, -95px, 60px)',
+                          }}
+                        >
+                          <span className="text-xs">⚡</span>
+                        </motion.div>
+
+                        <motion.div
+                          animate={{ y: [0, 8, 0] }}
+                          transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute w-7 h-7 rounded-full bg-gradient-to-br from-purple-400 to-indigo-600 flex items-center justify-center shadow-lg border border-white/10"
+                          style={{
+                            transform: 'translate3d(65px, -100px, 70px)',
+                          }}
+                        >
+                          <span className="text-[10px]">✨</span>
+                        </motion.div>
+
+                        {/* Secondary floating sphere */}
+                        <motion.div 
+                          animate={{ y: [0, -10, 0] }}
+                          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute z-20 w-6 h-6 rounded-full"
+                          style={{
+                            transform: 'translate3d(-120px, 60px, 65px)',
+                            background: 'radial-gradient(circle at 30% 30%, #f3e8ff 0%, #a78bfa 50%, #5b21b6 90%)',
+                            boxShadow: '0 6px 15px rgba(0,0,0,0.6)',
+                          }}
+                        />
+                      </motion.div>
+                    )}
+
+                    {activeHeroSlide === 2 && (
+                      <motion.div
+                        key="scene-browser"
+                        initial={{ opacity: 0, scale: 0.85 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.85 }}
+                        transition={{ duration: 0.45 }}
+                        className="relative flex items-center justify-center animate-browser-main"
+                        style={{
+                          transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
+                          transformStyle: 'preserve-3d',
+                        }}
+                      >
+                        {/* Browser Window frame */}
+                        <div 
+                          className="absolute w-48 h-36 bg-[#0c091f]/98 border border-[#c5a059]/30 rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between"
+                          style={{
+                            transform: 'translate3d(0, 0, 0px)',
+                            boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
+                            transformStyle: 'preserve-3d'
+                          }}
+                        >
+                          {/* Browser header */}
+                          <div className="bg-[#15112e] border-b border-white/5 p-2 flex items-center gap-2">
+                            <div className="flex gap-0.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-red-500/60" />
+                              <span className="w-1.5 h-1.5 rounded-full bg-yellow-500/60" />
+                              <span className="w-1.5 h-1.5 rounded-full bg-green-500/60" />
+                            </div>
+                            <div className="flex-1 bg-black/25 rounded-md h-4 border border-white/5 flex items-center px-1.5">
+                              <span className="text-[4px] font-mono text-white/30">pixelvance.com/ranking-analytics</span>
+                            </div>
+                          </div>
+                          
+                          {/* Website Illustration Card inside Browser */}
+                          <div className="flex-1 p-2 bg-[#0c091f] flex gap-2">
+                            {/* Mountain landscape visualization */}
+                            <div className="flex-1 bg-[#1c1837] border border-[#c5a059]/20 rounded-md overflow-hidden flex flex-col justify-end relative">
+                              <div className="absolute inset-0 bg-gradient-to-t from-violet-950/80 via-transparent to-transparent z-1" />
+                              <div className="absolute bottom-0 w-full h-8 flex items-end">
+                                <svg className="w-full h-full text-[#c5a059]/40" viewBox="0 0 100 40" preserveAspectRatio="none">
+                                  <path d="M0,40 L30,10 L60,30 L80,5 L100,40 Z" fill="currentColor" />
+                                  <path d="M0,40 L20,20 L50,35 L70,15 L100,40 Z" fill="#8c6e3d" opacity="0.3" />
+                                </svg>
+                              </div>
+                              <div className="p-1.5 z-10 text-left">
+                                <span className="text-[4.5px] font-mono text-white/50 block leading-none">Traffic Overview</span>
+                                <span className="text-[6px] font-mono text-[#c5a059] font-bold block uppercase leading-none mt-0.5">+435% organic</span>
+                              </div>
+                            </div>
+                            
+                            {/* Side block wireframe */}
+                            <div className="w-14 bg-white/[0.01] border border-white/5 rounded-md p-1 flex flex-col gap-1.5 justify-center">
+                              <div className="w-full h-2.5 bg-[#c5a059]/10 rounded-sm" />
+                              <div className="w-full h-2.5 bg-purple-500/10 rounded-sm" />
+                              <div className="w-full h-2.5 bg-blue-500/10 rounded-sm" />
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Floating Audio Waveform Visualizer */}
+                        <motion.div
+                          animate={{ y: [0, -6, 0] }}
+                          transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute w-24 h-16 bg-[#120e29]/95 border border-[#c5a059]/30 rounded-lg p-2 flex flex-col justify-between shadow-2xl"
+                          style={{
+                            transform: 'translate3d(-105px, -30px, 45px)',
+                            backdropFilter: 'blur(8px)',
+                          }}
+                        >
+                          <span className="text-[5.5px] font-mono text-[#c5a059] font-bold uppercase leading-none text-left">Real-time Volume</span>
+                          <div className="flex gap-1.5 items-end justify-center h-8 mt-1.5">
+                            {[...Array(6)].map((_, i) => (
+                              <motion.div 
+                                key={i} 
+                                animate={{ height: [4, 22, 4] }}
+                                transition={{ duration: 1.1, repeat: Infinity, delay: i * 0.12, ease: "easeInOut" }}
+                                className="w-1.5 bg-[#c5a059] rounded-full"
+                              />
+                            ))}
+                          </div>
+                        </motion.div>
+
+                        {/* Floating Star Rating widget */}
+                        <motion.div
+                          animate={{ y: [0, 8, 0] }}
+                          transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute w-28 h-12 bg-[#120e29]/95 border border-purple-500/30 rounded-full px-3 flex items-center justify-between shadow-2xl"
+                          style={{
+                            transform: 'translate3d(105px, -45px, 50px)',
+                            backdropFilter: 'blur(8px)',
+                          }}
+                        >
+                          <div className="flex flex-col text-left">
+                            <span className="text-[5px] font-mono text-purple-300 font-bold uppercase leading-none">SEO Audit Score</span>
+                            <span className="text-[8px] font-extrabold text-white leading-none mt-1">98/100 A+</span>
+                          </div>
+                          <span className="text-xs text-[#c5a059]">🏆</span>
+                        </motion.div>
+
+                        {/* Stacked 3D Coins representing Conversion */}
+                        <motion.div
+                          animate={{ y: [0, -10, 0] }}
+                          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute flex flex-col gap-0.5"
+                          style={{
+                            transform: 'translate3d(95px, 40px, 60px)',
+                            transformStyle: 'preserve-3d',
+                          }}
+                        >
+                          {[...Array(3)].map((_, idx) => (
+                            <div 
+                              key={idx}
+                              className="w-8 h-2 bg-gradient-to-r from-[#c5a059] via-[#ffebc2] to-[#8c6e3d] rounded-full border border-black/40 shadow-md"
+                              style={{
+                                boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.4)',
+                              }}
+                            />
+                          ))}
+                        </motion.div>
+
+                        {/* Floating Gold Sphere */}
+                        <motion.div
+                          animate={{ y: [0, -8, 0] }}
+                          transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute z-20 w-5 h-5 rounded-full"
+                          style={{
+                            transform: 'translate3d(-40px, -95px, 55px)',
+                            background: 'radial-gradient(circle at 30% 30%, #ffebc2 0%, #c5a059 50%, #5e4618 90%)',
+                            boxShadow: '0 6px 15px rgba(0,0,0,0.6)',
+                          }}
+                        />
+                      </motion.div>
+                    )}
+
+                    {activeHeroSlide === 3 && (
+                      <motion.div
+                        key="scene-cloud"
+                        initial={{ opacity: 0, scale: 0.85 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.85 }}
+                        transition={{ duration: 0.45 }}
+                        className="relative flex items-center justify-center animate-browser-main"
+                        style={{
+                          transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
+                          transformStyle: 'preserve-3d',
+                        }}
+                      >
+                        {/* CPU Server core lying horizontal */}
+                        <div 
+                          className="absolute w-40 h-40 bg-[#0f0b24]/98 border border-[#c5a059]/40 rounded-2xl p-4 flex flex-col justify-between shadow-2xl"
+                          style={{
+                            transform: 'rotateX(40deg) rotateZ(-8deg)',
+                            boxShadow: '0 30px 60px rgba(0,0,0,0.9), inset 0 2px 10px rgba(255,255,255,0.05)',
+                            transformStyle: 'preserve-3d'
+                          }}
+                        >
+                          <div className="absolute inset-0 bg-grid-pattern opacity-10 rounded-2xl" />
+                          
+                          {/* Glowing CPU center core */}
+                          <div 
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-br from-[#c5a059] to-[#8c6e3d] border border-[#ffebc2] rounded-xl flex items-center justify-center"
+                            style={{
+                              boxShadow: '0 0 25px rgba(197, 160, 89, 0.6), inset 0 2px 5px rgba(255,255,255,0.4)',
+                            }}
+                          >
+                            <span className="text-[7px] font-mono text-black font-black uppercase text-center leading-none">CORE<br/>v4.0</span>
+                          </div>
+                          
+                          {/* Connective traces */}
+                          <div className="flex justify-between items-center w-full z-1">
+                            <span className="text-[5.5px] font-mono text-purple-300 font-bold uppercase leading-none">CLOUD NODE</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          </div>
+                          
+                          <div className="flex justify-between items-center w-full z-1 text-[5px] font-mono text-white/40 leading-none">
+                            <span>CPU: 42%</span>
+                            <span>RAM: 8.4GB</span>
+                          </div>
+                        </div>
+
+                        {/* Rotating Gold Gear 1 */}
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                          className="absolute z-10 text-[#c5a059]/80"
+                          style={{
+                            transform: 'translate3d(-105px, -35px, 20px)',
+                          }}
+                        >
+                          <svg width="36" height="36" viewBox="0 0 100 100" fill="currentColor">
+                            <path d="M50,35 C41.7,35 35,41.7 35,50 C35,58.3 41.7,65 50,65 C58.3,65 65,58.3 65,50 C65,41.7 58.3,35 50,35 Z M50,55 C47.2,55 45,52.8 45,50 C45,47.2 47.2,45 50,45 C52.8,45 55,47.2 55,50 C55,52.8 52.8,55 50,55 Z" />
+                            <rect x="44" y="10" width="12" height="20" rx="3" />
+                            <rect x="44" y="70" width="12" height="20" rx="3" />
+                            <rect x="10" y="44" width="20" height="12" rx="3" />
+                            <rect x="70" y="44" width="20" height="12" rx="3" />
+                          </svg>
+                        </motion.div>
+
+                        {/* Rotating Gear 2 */}
+                        <motion.div
+                          animate={{ rotate: -360 }}
+                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                          className="absolute z-10 text-purple-400/80"
+                          style={{
+                            transform: 'translate3d(-75px, 5px, 15px)',
+                          }}
+                        >
+                          <svg width="24" height="24" viewBox="0 0 100 100" fill="currentColor">
+                            <path d="M50,35 C41.7,35 35,41.7 35,50 C35,58.3 41.7,65 50,65 C58.3,65 65,58.3 65,50 C65,41.7 58.3,35 50,35 Z M50,55 C47.2,55 45,52.8 45,50 C45,47.2 47.2,45 50,45 C52.8,45 55,47.2 55,50 C55,52.8 52.8,55 50,55 Z" />
+                            <rect x="44" y="10" width="12" height="20" rx="3" />
+                            <rect x="44" y="70" width="12" height="20" rx="3" />
+                            <rect x="10" y="44" width="20" height="12" rx="3" />
+                            <rect x="70" y="44" width="20" height="12" rx="3" />
+                          </svg>
+                        </motion.div>
+
+                        {/* Floating Database Node */}
+                        <motion.div
+                          animate={{ y: [0, -6, 0] }}
+                          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute w-24 h-16 bg-[#120e29]/95 border border-purple-500/30 rounded-lg p-2.5 flex flex-col justify-between shadow-2xl"
+                          style={{
+                            transform: 'translate3d(110px, -40px, 40px)',
+                            backdropFilter: 'blur(8px)',
+                          }}
+                        >
+                          <div className="flex justify-between items-center border-b border-white/5 pb-1">
+                            <span className="text-[5.5px] font-mono text-purple-300 font-bold uppercase leading-none">DB CLUSTER</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                          </div>
+                          <div className="flex flex-col gap-0.5 mt-1 font-mono text-[4.5px] text-white/55 text-left">
+                            <span>Shard #1: ONLINE</span>
+                            <span>Latency: 14ms</span>
+                          </div>
+                        </motion.div>
+
+                        {/* Floating API Gateway */}
+                        <motion.div
+                          animate={{ y: [0, 8, 0] }}
+                          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute w-28 h-10 bg-[#120e29]/95 border border-[#c5a059]/30 rounded-lg p-2 flex items-center justify-between shadow-2xl"
+                          style={{
+                            transform: 'translate3d(90px, 45px, 50px)',
+                            backdropFilter: 'blur(8px)',
+                          }}
+                        >
+                          <span className="text-[5.5px] font-mono text-[#c5a059] font-bold uppercase leading-none">API GATEWAY</span>
+                          <span className="text-[6px] font-mono text-white font-extrabold uppercase leading-none">12k rps</span>
+                        </motion.div>
+
+                        {/* Background Floating Cloud */}
+                        <div className="absolute z-0 w-12 h-7 opacity-40 animate-dash-cloud">
+                          <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
+                            <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
+                          </svg>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
 
@@ -785,11 +1244,19 @@ export default function App() {
                 </div>
 
                 {/* Dot Indicators */}
-                <div className="flex items-center gap-2 justify-center lg:justify-start w-full">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#c5a059] shadow-glow-blue" />
-                  <span className="w-2 h-2 rounded-full border border-white/40" />
-                  <span className="w-2 h-2 rounded-full border border-white/40" />
-                  <span className="w-2 h-2 rounded-full border border-white/40" />
+                <div className="flex items-center gap-3 justify-center lg:justify-start w-full">
+                  {heroSlides.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveHeroSlide(idx)}
+                      className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                        activeHeroSlide === idx
+                          ? 'w-6 bg-[#c5a059] shadow-[0_0_10px_#c5a059]'
+                          : 'w-2.5 bg-white/20 hover:bg-white/45'
+                      }`}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
 
