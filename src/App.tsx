@@ -518,15 +518,15 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
-              className="flex items-center justify-center w-full max-w-[340px] sm:max-w-[480px] lg:max-w-none mx-auto my-6 lg:my-0"
+              className="flex items-center justify-center w-full max-w-[340px] sm:max-w-[480px] lg:max-w-none mx-auto h-[300px] sm:h-[420px] lg:h-[520px] my-6 lg:my-0 relative overflow-visible"
               aria-hidden
             >
               <div
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full flex items-center justify-center origin-center cursor-default hero-graphic-container"
+                className="absolute left-1/2 top-1/2 w-[520px] h-[520px] flex items-center justify-center origin-center cursor-default hero-graphic-container"
                 style={{
-                  transform: `perspective(1200px) scale(var(--hero-scale)) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
+                  transform: `translate(-50%, -50%) perspective(1200px) scale(var(--hero-scale)) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
                   transition: 'transform 0.2s cubic-bezier(0.1, 0.8, 0.2, 1)',
                   transformStyle: 'preserve-3d',
                 }}
