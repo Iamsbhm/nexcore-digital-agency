@@ -285,7 +285,7 @@ export default function App() {
                 key={link.label}
                 onClick={() => scrollToSection(link.target)}
                 id={`nav-link-${link.label.toLowerCase()}`}
-                className="text-[10px] font-mono tracking-[0.2em] text-slate-400 hover:text-[#c5a059] pb-0.5 border-b border-transparent hover:border-[#c5a059] transition-all cursor-pointer relative py-1"
+                className="text-[10px] font-mono tracking-[0.2em] text-white hover:text-[#c5a059] pb-0.5 border-b border-transparent hover:border-[#c5a059] transition-all cursor-pointer relative py-1"
               >
                 {link.label}
               </button>
@@ -297,7 +297,7 @@ export default function App() {
               className={`text-[10px] font-mono tracking-[0.2em] pb-0.5 border-b transition-all cursor-pointer relative py-1 ${
                 currentPage === 'about'
                   ? 'text-[#c5a059] border-[#c5a059]'
-                  : 'text-slate-400 hover:text-[#c5a059] border-transparent hover:border-[#c5a059]'
+                  : 'text-white hover:text-[#c5a059] border-transparent hover:border-[#c5a059]'
               }`}
             >
               ABOUT US
@@ -346,7 +346,7 @@ export default function App() {
                   key={link.label}
                   onClick={() => scrollToSection(link.target)}
                   id={`mobile-nav-link-${link.label.replace(/\s+/g, '-').toLowerCase()}`}
-                  className="w-full text-left py-3.5 px-2 text-xs font-semibold text-white/70 hover:text-[#c5a059] border-b border-white/[0.05] last:border-0 block font-mono tracking-widest cursor-pointer active:text-[#c5a059] transition-colors"
+                  className="w-full text-left py-3.5 px-2 text-xs font-semibold text-white hover:text-[#c5a059] border-b border-white/[0.05] last:border-0 block font-mono tracking-widest cursor-pointer active:text-[#c5a059] transition-colors"
                 >
                   ▶ {link.label.toUpperCase()}
                 </button>
@@ -356,7 +356,7 @@ export default function App() {
                 onClick={() => { setMobileMenuOpen(false); navigateTo('about'); }}
                 id="mobile-nav-link-about"
                 className={`w-full text-left py-3.5 px-2 text-xs font-semibold border-b border-white/[0.05] block font-mono tracking-widest cursor-pointer transition-colors ${
-                  currentPage === 'about' ? 'text-[#c5a059]' : 'text-white/70 hover:text-[#c5a059]'
+                  currentPage === 'about' ? 'text-[#c5a059]' : 'text-white hover:text-[#c5a059]'
                 }`}
               >
                 ▶ ABOUT US
