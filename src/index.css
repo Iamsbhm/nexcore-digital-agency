@@ -204,3 +204,16 @@
     --hero-scale: 1;
   }
 }
+
+/* Custom autofill styles to keep text white and background dark */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0c0a1c inset !important;
+  box-shadow: 0 0 0px 1000px #0c0a1c inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}

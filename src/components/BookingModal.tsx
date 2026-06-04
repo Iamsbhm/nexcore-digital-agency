@@ -240,26 +240,26 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="text-[11px] text-white/50 font-semibold block">Full Name:</label>
+                        <label className="text-[11px] text-white/70 font-semibold block">Full Name:</label>
                         <input
                           type="text"
                           required
                           value={clientName}
                           onChange={(e) => setClientName(e.target.value)}
                           id="booking-name-input"
-                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/20 transition-all"
+                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all"
                           placeholder="Your Name"
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="text-[11px] text-white/50 font-semibold block">Email Address:</label>
+                        <label className="text-[11px] text-white/70 font-semibold block">Email Address:</label>
                         <input
                           type="email"
                           required
                           value={clientEmail}
                           onChange={(e) => setClientEmail(e.target.value)}
                           id="booking-email-input"
-                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white transition-all font-mono"
+                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
                           placeholder="you@company.com"
                         />
                       </div>
@@ -267,7 +267,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
 
                     {/* Mobile Number — full width */}
                     <div className="space-y-1">
-                      <label className="text-[11px] text-white/50 font-semibold block">Mobile Number:</label>
+                      <label className="text-[11px] text-white/70 font-semibold block">Mobile Number:</label>
                       <div className="relative">
                         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30 text-xs font-mono select-none">+</span>
                         <input
@@ -276,14 +276,14 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                           value={clientPhone}
                           onChange={(e) => setClientPhone(e.target.value)}
                           id="booking-phone-input"
-                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 pl-6 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/20 transition-all font-mono"
+                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 pl-6 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
                           placeholder="1 234 567 8900"
                         />
                       </div>
                     </div>
                     <div className="space-y-1">
                       <div className="flex justify-between items-center">
-                        <label className="text-[11px] text-white/50 font-semibold block">Brief project description:</label>
+                        <label className="text-[11px] text-white/70 font-semibold block">Brief project description:</label>
                         <span className="text-[9px] font-mono text-white/25">(Optional)</span>
                       </div>
                       <textarea
@@ -291,7 +291,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                         onChange={(e) => setClientNote(e.target.value)}
                         id="booking-note-input"
                         rows={2}
-                        className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/20 resize-none transition-all"
+                        className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 resize-none transition-all"
                         placeholder="Brief notes about your branding or web app goals..."
                       />
                     </div>
