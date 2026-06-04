@@ -576,7 +576,7 @@ export default function App() {
                   <div 
                     className="relative flex items-center justify-center animate-browser-main"
                     style={{
-                      transform: 'rotateX(55deg) rotateZ(-45deg)',
+                      transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
                       transformStyle: 'preserve-3d',
                     }}
                   >
