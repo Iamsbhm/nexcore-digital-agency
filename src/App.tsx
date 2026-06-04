@@ -503,10 +503,10 @@ export default function App() {
                 <button
                   onClick={() => scrollToSection('services-explorer-section')}
                   id="hero-demo-btn"
-                  className="flex items-center justify-center gap-2 py-3.5 px-8 border border-white/8 bg-white/[0.015] hover:bg-white/[0.05] hover:border-[#c5a059]/25 uppercase text-[10px] font-mono tracking-[0.28em] transition-all cursor-pointer active:scale-95 text-white/40 hover:text-white/80 w-full sm:w-auto"
+                  className="group flex items-center justify-center gap-2 py-3.5 px-8 border border-[#c5a059]/35 bg-[#c5a059]/[0.015] hover:bg-[#c5a059]/10 hover:border-[#c5a059] uppercase text-[10px] font-mono tracking-[0.28em] transition-all cursor-pointer active:scale-95 text-[#c5a059]/75 hover:text-[#c5a059] w-full sm:w-auto"
                 >
                   Explore Services
-                  <ArrowDownCircle className="w-3 h-3 text-[#c5a059]/60" />
+                  <ArrowDownCircle className="w-3 h-3 text-[#c5a059]/60 group-hover:text-[#c5a059] transition-colors" />
                 </button>
               </motion.div>
 
