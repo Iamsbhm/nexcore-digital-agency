@@ -22,9 +22,8 @@ import {
   ShieldCheck,
   CheckCircle,
   HelpCircle,
-  Facebook,
-  Youtube,
-  Twitter,
+  Linkedin,
+  Dribbble,
   Share2
 } from 'lucide-react';
 
@@ -797,28 +796,20 @@ export default function App() {
               {/* Social Sidebar Icons (Desktop Only) */}
               <div className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 flex-col gap-5 z-20 bg-white/[0.02] border border-white/5 rounded-full p-2 backdrop-blur-sm">
                 <a
-                  href="https://facebook.com"
+                  href="https://linkedin.com"
                   target="_blank"
                   rel="noreferrer"
                   className="w-7 h-7 rounded-full border border-[#c5a059]/30 hover:border-[#c5a059] text-white flex items-center justify-center transition-all hover:scale-115"
                 >
-                  <Facebook className="w-3.5 h-3.5 text-[#c5a059]" />
+                  <Linkedin className="w-3.5 h-3.5 text-[#c5a059]" />
                 </a>
                 <a
-                  href="https://youtube.com"
+                  href="https://dribbble.com"
                   target="_blank"
                   rel="noreferrer"
                   className="w-7 h-7 rounded-full border border-[#c5a059]/30 hover:border-[#c5a059] text-white flex items-center justify-center transition-all hover:scale-115"
                 >
-                  <Youtube className="w-3.5 h-3.5 text-[#c5a059]" />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-7 h-7 rounded-full border border-[#c5a059]/30 hover:border-[#c5a059] text-white flex items-center justify-center transition-all hover:scale-115"
-                >
-                  <Twitter className="w-3.5 h-3.5 text-[#c5a059]" />
+                  <Dribbble className="w-3.5 h-3.5 text-[#c5a059]" />
                 </a>
               </div>
 
