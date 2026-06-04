@@ -200,7 +200,7 @@ export default function App() {
     if (currentPage !== 'home') return;
     const interval = setInterval(() => {
       setActiveHeroSlide((prev) => (prev === 3 ? 0 : prev + 1));
-    }, 7000);
+    }, 8000);
     return () => clearInterval(interval);
   }, [currentPage]);
 
