@@ -580,768 +580,90 @@ export default function App() {
               </div>
             </div>
 
-            {/* ── RIGHT COLUMN — Deep Rich Violet-to-Navy Gradient with Isometric 3D Laptop ── */}
+            {/* ── RIGHT COLUMN — Deep Rich Violet-to-Navy Gradient with Full-bleed Background ── */}
             <div className="lg:col-span-7 bg-gradient-to-br from-[#1e133d] via-[#0b081c] to-[#06040a] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden text-white min-h-[420px] lg:min-h-0">
+              
+              {/* Absolute Slider Background */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <AnimatePresence mode="wait">
+                  {activeHeroSlide === 0 && (
+                    <motion.div
+                      key="bg-web-design"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.65 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6 }}
+                      className="absolute inset-0 w-full h-full"
+                    >
+                      <img
+                        src="/images/hero_web_design.png"
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                  )}
+                  {activeHeroSlide === 1 && (
+                    <motion.div
+                      key="bg-tech-development"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.65 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6 }}
+                      className="absolute inset-0 w-full h-full"
+                    >
+                      <img
+                        src="/images/hero_tech_development.png"
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                  )}
+                  {activeHeroSlide === 2 && (
+                    <motion.div
+                      key="bg-seo-rankings"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.65 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6 }}
+                      className="absolute inset-0 w-full h-full"
+                    >
+                      <img
+                        src="/images/hero_seo_rankings.png"
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                  )}
+                  {activeHeroSlide === 3 && (
+                    <motion.div
+                      key="bg-cloud-infrastructure"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.65 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6 }}
+                      className="absolute inset-0 w-full h-full"
+                    >
+                      <img
+                        src="/images/hero_cloud_infrastructure.png"
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                {/* Overlay gradient to ensure high readability for floating elements */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#06040a]/80 via-transparent to-[#1e133d]/20" />
+              </div>
+
               {/* Floating Glow Background Elements for depth */}
-              <div className="absolute -top-[10%] left-[-5%] w-[45%] h-[45%] rounded-full bg-[#c5a059]/10 blur-[120px] pointer-events-none" />
-              <div className="absolute bottom-[10%] right-[-5%] w-[50%] h-[50%] rounded-full bg-[#7c3aed]/15 blur-[130px] pointer-events-none" />
+              <div className="absolute -top-[10%] left-[-5%] w-[45%] h-[45%] rounded-full bg-[#c5a059]/10 blur-[120px] pointer-events-none z-1" />
+              <div className="absolute bottom-[10%] right-[-5%] w-[50%] h-[50%] rounded-full bg-[#7c3aed]/15 blur-[130px] pointer-events-none z-1" />
 
               {/* Spacer where the mock header used to be */}
-              <div className="h-2 w-full mb-4" />
+              <div className="h-2 w-full mb-4 z-10" />
 
-              {/* 3D Isometric Laptop Showcase Scene */}
-              <div className="relative w-full h-[250px] sm:h-[280px] md:h-[300px] lg:h-[340px] flex items-center justify-center overflow-visible my-auto z-10">
-                {/* Responsive Scale Wrapper */}
-                <div 
-                  className="relative w-[300px] h-[300px] flex items-center justify-center origin-center transition-all duration-300 hero-graphic-container"
-                  style={{
-                    transform: `perspective(1000px) rotateX(${tilt.y * 0.4}deg) rotateY(${tilt.x * 0.4}deg) scale(var(--hero-scale))`,
-                    transformStyle: 'preserve-3d',
-                  }}
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  
-                  {/* BACKGROUND PLANT LEAVES SILHOUETTES */}
-                  <motion.div
-                    animate={{ y: [0, -4, 0], rotate: [0, 1.5, 0] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute z-0 pointer-events-none origin-bottom text-[#c5a059]/10"
-                    style={{ transform: "translate3d(-10px, -70px, -20px)" }}
-                  >
-                    <svg width="220" height="220" viewBox="0 0 200 200" fill="currentColor">
-                      {/* Left Leaf branch */}
-                      <path d="M100 180 C 70 140, 20 120, 25 80 C 27 60, 45 70, 55 90 C 40 50, 60 40, 75 75 C 65 30, 85 20, 95 60 C 97 15, 110 30, 105 80 C 112 30, 125 15, 127 60 C 137 20, 157 30, 147 75 C 162 40, 182 50, 167 90 C 177 70, 195 60, 197 80 C 202 120, 152 140, 122 180 Z" />
-                      {/* Right Leaf branch */}
-                      <path d="M100 180 C 110 140, 140 120, 135 80 C 133 60, 120 70, 110 90 C 120 50, 105 40, 95 75 C 105 30, 85 20, 80 60 C 78 15, 68 30, 72 80 C 65 30, 55 15, 53 60 C 45 20, 30 30, 38 75 C 25 40, 10 50, 20 90 C 12 70, 2 60, 0 80 C -5 120, 35 140, 65 180 Z" opacity="0.6" transform="scale(-1, 1) translate(-200, 0)" />
-                    </svg>
-                  </motion.div>
-
-                  {/* ISOMETRIC DECORATIVE GLOW ORB */}
-                  <div
-                    className="absolute pointer-events-none rounded-full blur-2xl opacity-40 z-1"
-                    style={{
-                      width: '240px',
-                      height: '240px',
-                      background: 'radial-gradient(circle, #c5a059 0%, #7c3aed 100%)',
-                      transform: 'translate3d(0, 0, -40px) rotateX(60deg) rotateZ(-45deg)',
-                    }}
-                  />
-
-                  {/* ── 3D SCENES CAROUSEL ── */}
-                  <AnimatePresence mode="wait">
-                    {activeHeroSlide === 0 && (
-                      <motion.div
-                        key="scene-dashboard"
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.85 }}
-                        transition={{ duration: 0.45 }}
-                        className="relative flex items-center justify-center animate-browser-main"
-                        style={{
-                          transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
-                          transformStyle: 'preserve-3d',
-                        }}
-                      >
-                        {/* 1. Dashboard Navigation Sidebar */}
-                        <div 
-                          className="absolute w-16 h-[140px] bg-gradient-to-b from-[#1b153a]/95 to-[#0c071a]/98 border border-[#c5a059]/20 rounded-xl p-2 flex flex-col gap-2.5 shadow-2xl animate-dash-sidebar"
-                          style={{
-                            transformStyle: 'preserve-3d',
-                            boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
-                          }}
-                        >
-                          <div className="flex gap-1 items-center pb-1 border-b border-white/5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
-                            <span className="text-[5px] font-mono text-white/40">DASH</span>
-                          </div>
-                          <div className="flex flex-col gap-2">
-                            <div className="w-full h-5 bg-[#c5a059]/10 border border-[#c5a059]/40 rounded-md flex items-center justify-center">
-                              <span className="text-[6px] text-[#c5a059] font-bold">⊞</span>
-                            </div>
-                            <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⊟</div>
-                            <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⊘</div>
-                            <div className="w-full h-5 rounded-md flex items-center justify-center text-white/30 text-[6px]">⚙</div>
-                          </div>
-                        </div>
-
-                        {/* 2. Gold Premium VISA Card */}
-                        <div 
-                          className="absolute w-28 h-[75px] bg-gradient-to-br from-[#ebd095] via-[#c5a059] to-[#8c6e3d] border border-[#ffebad]/30 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl animate-dash-visa"
-                          style={{
-                            transformStyle: 'preserve-3d',
-                            boxShadow: '0 20px 40px rgba(0,0,0,0.7), 0 0 15px rgba(197,160,89,0.2)',
-                          }}
-                        >
-                          <div className="flex justify-between items-start">
-                            <span className="text-[6px] font-mono text-black font-black leading-none">VISA</span>
-                            <div className="w-4 h-3 bg-gradient-to-br from-yellow-100 to-yellow-600 rounded-sm opacity-80" />
-                          </div>
-                          <div className="text-[8px] font-mono font-semibold text-black/75 tracking-wider">
-                            •••• •••• •••• 7539
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-[5px] font-mono text-black/60 font-bold uppercase">ALEX D.</span>
-                            <span className="text-[5px] font-mono text-black/60">12/28</span>
-                          </div>
-                        </div>
-
-                        {/* 3. Interactive Calendar Card */}
-                        <div 
-                          className="absolute w-[100px] h-[100px] bg-[#120e29]/90 border border-[#c5a059]/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-calendar"
-                          style={{
-                            backdropFilter: 'blur(8px)',
-                            boxShadow: '0 20px 45px rgba(0,0,0,0.6)',
-                            transformStyle: 'preserve-3d',
-                          }}
-                        >
-                          <div className="flex justify-between items-center border-b border-white/5 pb-1">
-                            <span className="text-[6px] font-mono text-purple-200 font-bold">Nov 2026</span>
-                            <span className="text-[5px] text-white/30">◀ ▶</span>
-                          </div>
-                          <div className="grid grid-cols-7 gap-1 mt-1 text-[5px] font-mono text-white/55 text-center leading-none">
-                            {['S','M','T','W','T','F','S'].map((d, i) => (
-                              <span key={i} className="text-purple-300 font-bold">{d}</span>
-                            ))}
-                            {[...Array(28)].map((_, i) => {
-                              const isSpecial = i + 1 === 15;
-                              return (
-                                <span 
-                                  key={i} 
-                                  className={`h-3.5 flex items-center justify-center rounded-sm ${isSpecial ? 'bg-[#c5a059] text-black font-bold' : ''}`}
-                                >
-                                  {i + 1}
-                                </span>
-                              );
-                            })}
-                          </div>
-                        </div>
-
-                        {/* 4. Mock Asset Upload Card */}
-                        <div 
-                          className="absolute w-[115px] h-[95px] bg-[#120e29]/90 border border-[#c5a059]/20 rounded-xl p-2.5 flex flex-col justify-between shadow-2xl animate-dash-upload"
-                          style={{
-                            backdropFilter: 'blur(8px)',
-                            boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
-                            transformStyle: 'preserve-3d',
-                          }}
-                        >
-                          <div className="w-full h-8 border border-dashed border-white/10 rounded flex flex-col items-center justify-center opacity-70">
-                            <span className="text-[7px] text-[#c5a059]">🖼</span>
-                          </div>
-                          <span className="text-[5px] font-mono text-white/40 text-center">No images uploaded</span>
-                          <button className="w-full py-1 bg-[#c5a059] hover:bg-[#ebd095] text-black text-[5px] font-bold font-mono uppercase tracking-wider rounded-md active:scale-95 cursor-pointer">
-                            Update now
-                          </button>
-                        </div>
-
-                        {/* 5. Analytics Chart Card */}
-                        <div 
-                          className="absolute w-[130px] h-[90px] bg-[#120e29]/90 border border-[#c5a059]/30 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-chart"
-                          style={{
-                            backdropFilter: 'blur(8px)',
-                            boxShadow: '0 20px 50px rgba(0,0,0,0.7)',
-                            transformStyle: 'preserve-3d',
-                          }}
-                        >
-                          <div className="flex justify-between items-center">
-                            <span className="text-[6px] font-mono text-[#c5a059] font-bold">Chart Title</span>
-                            <span className="text-[5px] font-mono text-white/30">WEEKLY</span>
-                          </div>
-                          <div className="relative h-10 w-full flex items-end">
-                            <div className="absolute inset-0 flex flex-col justify-between opacity-5 pointer-events-none">
-                              <div className="w-full h-[1px] bg-white" />
-                              <div className="w-full h-[1px] bg-white" />
-                              <div className="w-full h-[1px] bg-white" />
-                            </div>
-                            <svg className="w-full h-full text-[#c5a059]" viewBox="0 0 100 40" preserveAspectRatio="none">
-                              <defs>
-                                <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                                  <stop offset="0%" stopColor="#c5a059" stopOpacity="0.4" />
-                                  <stop offset="100%" stopColor="#c5a059" stopOpacity="0.0" />
-                                </linearGradient>
-                              </defs>
-                              <path d="M0,35 Q15,5 30,25 T60,10 T90,30 L100,30 L100,40 L0,40 Z" fill="url(#chartGrad)" />
-                              <path d="M0,35 Q15,5 30,25 T60,10 T90,30 L100,30" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                            </svg>
-                          </div>
-                          <div className="flex justify-between items-center text-[5px] font-mono text-white/50 leading-none">
-                            <span>5.000,00 Orders</span>
-                            <span className="text-[#c5a059] font-bold">+14.2%</span>
-                          </div>
-                        </div>
-
-                        {/* 6. Stats Counter Card */}
-                        <div 
-                          className="absolute w-[85px] h-[65px] bg-[#120e29]/90 border border-white/5 rounded-xl p-2 flex flex-col justify-between shadow-2xl animate-dash-stats"
-                          style={{
-                            backdropFilter: 'blur(8px)',
-                            boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
-                            transformStyle: 'preserve-3d',
-                          }}
-                        >
-                          <span className="text-[5px] font-mono text-slate-400 font-bold">This Week</span>
-                          <div className="flex flex-col gap-0.5 mt-1">
-                            <span className="text-xs font-mono font-bold text-white leading-none">00</span>
-                            <span className="text-[5px] font-mono text-slate-500 leading-none">Label</span>
-                          </div>
-                          <div className="flex justify-between items-center pt-1 border-t border-white/5">
-                            <span className="text-[5px] font-mono text-white/30">ORDERS</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]/80 shadow-[0_0_4px_#c5a059]" />
-                          </div>
-                        </div>
-
-                        {/* FLOATING SPHERE A */}
-                        <div 
-                          className="absolute z-20 w-8 h-8 rounded-full animate-dash-sphere-a"
-                          style={{
-                            background: 'radial-gradient(circle at 30% 30%, #ffebc2 0%, #c5a059 50%, #5e4618 90%, #201402 100%)',
-                            boxShadow: '0 8px 20px rgba(0,0,0,0.6), inset 0 -2px 5px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.4)',
-                          }}
-                        />
-
-                        {/* FLOATING SPHERE B */}
-                        <div 
-                          className="absolute z-20 w-7 h-7 rounded-full animate-dash-sphere-b"
-                          style={{
-                            background: 'radial-gradient(circle at 30% 30%, #f3e8ff 0%, #a78bfa 50%, #5b21b6 90%, #2e1065 100%)',
-                            boxShadow: '0 6px 15px rgba(0,0,0,0.6), inset 0 -1.5px 4px rgba(0,0,0,0.8), inset 0 1.5px 4px rgba(255,255,255,0.4)',
-                          }}
-                        />
-
-                        {/* FLOATING CLOUD */}
-                        <div className="absolute z-0 w-12 h-7 opacity-40 animate-dash-cloud">
-                          <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
-                            <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
-                          </svg>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {activeHeroSlide === 1 && (
-                      <motion.div
-                        key="scene-laptop"
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.85 }}
-                        transition={{ duration: 0.45 }}
-                        className="relative flex items-center justify-center animate-browser-main"
-                        style={{
-                          transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
-                          transformStyle: 'preserve-3d',
-                        }}
-                      >
-                        {/* Laptop base lying horizontally */}
-                        <div 
-                          className="absolute w-44 h-32 bg-gradient-to-br from-[#1b143c] to-[#0a0718] border border-[#c5a059]/40 rounded-xl"
-                          style={{
-                            transform: 'rotateX(72deg) translate3d(0, 48px, -15px)',
-                            boxShadow: '0 25px 45px rgba(0,0,0,0.8), inset 0 2px 8px rgba(255,255,255,0.06)',
-                            transformStyle: 'preserve-3d'
-                          }}
-                        >
-                          {/* Trackpad outline */}
-                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-14 h-7 border border-[#c5a059]/20 rounded-md bg-white/[0.01]" />
-                          {/* Keyboard keys structure */}
-                          <div className="absolute top-4 left-4 right-4 bottom-11 grid grid-rows-4 gap-1 opacity-75">
-                            {[...Array(4)].map((_, rIdx) => (
-                              <div key={rIdx} className="flex gap-1 justify-center">
-                                {[...Array(rIdx === 3 ? 6 : 10)].map((_, kIdx) => (
-                                  <div key={kIdx} className={`h-1.5 bg-[#c5a059]/25 rounded-sm ${rIdx === 3 && kIdx === 2 ? 'w-14 bg-[#c5a059]/45' : 'w-2 sm:w-2.5'}`} />
-                                ))}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Laptop screen standing vertically */}
-                        <div 
-                          className="absolute w-44 h-30 bg-[#070514] border border-[#c5a059]/30 rounded-xl overflow-hidden shadow-[0_-8px_30px_rgba(124,58,237,0.3)]"
-                          style={{
-                            transform: 'rotateX(5deg) translate3d(0, -22px, 0px)',
-                            transformStyle: 'preserve-3d',
-                          }}
-                        >
-                          {/* Inner Screen Wallpaper & Circular Glow */}
-                          <div className="w-full h-full relative bg-gradient-to-br from-[#120a2e] to-[#04020a] overflow-hidden flex items-center justify-center">
-                            <div className="absolute w-24 h-24 rounded-full bg-[#c5a059]/10 blur-xl pointer-events-none" />
-                            <div className="absolute top-1.5 right-2 flex gap-0.5 z-10">
-                              <span className="w-1 h-1 rounded-full bg-red-500/60" />
-                              <span className="w-1 h-1 rounded-full bg-yellow-500/60" />
-                              <span className="w-1 h-1 rounded-full bg-green-500/60" />
-                            </div>
-                            <span className="text-[5px] font-mono text-white/20 select-none uppercase tracking-[0.2em] mt-8">Nexcore Digital</span>
-                          </div>
-                        </div>
-
-                        {/* 1. Red Movie Strip Video Card */}
-                        <motion.div
-                          animate={{ y: [0, -6, 0] }}
-                          transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute w-20 h-14 bg-gradient-to-br from-red-600 to-red-700 border border-red-400/40 rounded-lg p-1.5 flex flex-col justify-between shadow-2xl"
-                          style={{
-                            transform: 'translate3d(-20px, -45px, 20px)',
-                            transformStyle: 'preserve-3d',
-                            boxShadow: '0 15px 30px rgba(0,0,0,0.5)'
-                          }}
-                        >
-                          <div className="flex justify-between items-center opacity-60">
-                            {[...Array(4)].map((_, i) => (
-                              <span key={i} className="w-1.5 h-1 bg-black rounded-full" />
-                            ))}
-                          </div>
-                          <div className="flex-1 flex items-center justify-center text-white text-[8px] font-bold">▶</div>
-                          <div className="flex justify-between items-center opacity-60">
-                            {[...Array(4)].map((_, i) => (
-                              <span key={i} className="w-1.5 h-1 bg-black rounded-full" />
-                            ))}
-                          </div>
-                        </motion.div>
-
-                        {/* 2. Blue Message Box */}
-                        <motion.div
-                          animate={{ y: [0, 5, 0] }}
-                          transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                          className="absolute w-16 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 border border-blue-400/40 rounded-lg p-1.5 flex flex-col justify-between shadow-2xl"
-                          style={{
-                            transform: 'translate3d(-52px, 5px, 30px)',
-                            transformStyle: 'preserve-3d',
-                            boxShadow: '0 15px 30px rgba(0,0,0,0.5)'
-                          }}
-                        >
-                          <div className="flex flex-col gap-1 text-left">
-                            <div className="w-10 h-1 bg-white rounded-full" />
-                            <div className="w-7 h-1 bg-white/60 rounded-full" />
-                          </div>
-                          <div className="w-3 h-3 bg-white/10 rounded-full self-end flex items-center justify-center text-white text-[5px]">⚡</div>
-                        </motion.div>
-
-                        {/* 3. Green Landscape Image Card */}
-                        <motion.div
-                          animate={{ y: [0, -5, 0] }}
-                          transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-                          className="absolute w-24 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 border border-emerald-400/40 rounded-lg p-2 flex flex-col justify-between shadow-2xl"
-                          style={{
-                            transform: 'translate3d(32px, -22px, 35px)',
-                            transformStyle: 'preserve-3d',
-                            boxShadow: '0 15px 35px rgba(0,0,0,0.5)'
-                          }}
-                        >
-                          <div className="flex-1 relative overflow-hidden bg-emerald-950/40 rounded flex items-end">
-                            <svg className="w-full h-8 text-emerald-400/45" viewBox="0 0 100 40" preserveAspectRatio="none">
-                              <path d="M0,40 L30,15 L60,32 L85,8 L100,40 Z" fill="currentColor" />
-                            </svg>
-                            <div className="absolute top-1.5 right-2 w-2.5 h-2.5 bg-yellow-400 rounded-full shadow-[0_0_6px_#facc15]" />
-                          </div>
-                          <span className="text-[5px] text-white/70 font-mono text-left mt-1 leading-none">landscape.png</span>
-                        </motion.div>
-
-                        {/* 4. Orange Play Card */}
-                        <motion.div
-                          animate={{ y: [0, 4, 0] }}
-                          transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
-                          className="absolute w-18 h-12 bg-gradient-to-br from-amber-500 to-orange-600 border border-amber-400/45 rounded-lg p-1.5 flex flex-col justify-between shadow-2xl"
-                          style={{
-                            transform: 'translate3d(42px, 22px, 15px)',
-                            transformStyle: 'preserve-3d',
-                            boxShadow: '0 15px 30px rgba(0,0,0,0.5)'
-                          }}
-                        >
-                          <div className="flex-1 flex items-center justify-center bg-black/10 rounded">
-                            <span className="text-white text-[8px] font-bold">▶</span>
-                          </div>
-                        </motion.div>
-
-                        {/* 5. 3D Rocket Flying */}
-                        <motion.div
-                          animate={{ 
-                            y: [0, -10, 0],
-                            x: [0, -4, 0]
-                          }}
-                          transition={{ 
-                            duration: 5, 
-                            repeat: Infinity, 
-                            ease: "easeInOut" 
-                          }}
-                          className="absolute"
-                          style={{
-                            transform: 'translate3d(-110px, -55px, 60px) rotateX(10deg) rotateY(15deg) rotateZ(-10deg)',
-                            transformStyle: 'preserve-3d',
-                          }}
-                        >
-                          {/* Faint trail paths */}
-                          <svg className="absolute -left-12 -bottom-16 w-28 h-28 opacity-15 text-white/50 pointer-events-none" viewBox="0 0 100 100" fill="none">
-                            <path d="M10,90 Q40,40 80,10" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
-                            <path d="M5,80 Q35,30 75,5" stroke="currentColor" strokeWidth="0.7" strokeDasharray="2,2" />
-                          </svg>
-
-                          <div className="relative w-12 h-24 flex flex-col items-center" style={{ transformStyle: 'preserve-3d' }}>
-                            {/* Nose Cone */}
-                            <div className="w-6 h-6 bg-[#c5a059] rounded-t-full shadow-md z-10" />
-                            {/* Body */}
-                            <div className="w-8 h-14 bg-gradient-to-b from-white via-slate-100 to-slate-200 border border-white/10 rounded-b-xl flex justify-center items-center relative shadow-lg shadow-black/40">
-                              {/* Window */}
-                              <div className="w-3.5 h-3.5 rounded-full bg-cyan-500 border border-slate-300 shadow-inner flex items-center justify-center relative">
-                                <span className="w-1.5 h-1.5 rounded-full bg-white/50 absolute top-0.5 left-0.5" />
-                              </div>
-                            </div>
-                            {/* Fins */}
-                            <div 
-                              className="absolute left-[-6px] bottom-3 w-4 h-8 bg-[#c5a059] rounded-l-full shadow-md"
-                              style={{
-                                transform: 'rotateY(-45deg) translateZ(-2px)'
-                              }}
-                            />
-                            <div 
-                              className="absolute right-[-6px] bottom-3 w-4 h-8 bg-[#c5a059] rounded-r-full shadow-md"
-                              style={{
-                                transform: 'rotateY(45deg) translateZ(-2px)'
-                              }}
-                            />
-                            <div 
-                              className="absolute bottom-3 w-1.5 h-8 bg-[#a6823c] rounded-full shadow-md"
-                              style={{
-                                transform: 'translateZ(6px)'
-                              }}
-                            />
-
-                            {/* Flame */}
-                            <motion.div
-                              animate={{ 
-                                scaleY: [1, 1.3, 0.9, 1.2, 1],
-                                scaleX: [1, 1.1, 0.95, 1.05, 1]
-                              }}
-                              transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
-                              className="w-4 h-8 bg-gradient-to-b from-amber-400 via-orange-500 to-transparent rounded-b-full origin-top"
-                              style={{
-                                transform: 'translateY(-1px) translateZ(0)'
-                              }}
-                            />
-                          </div>
-                        </motion.div>
-
-                        {/* 6. Floating Low-Poly Pyramids/Crystals */}
-                        {/* Gold Crystal (Left) */}
-                        <motion.div
-                          animate={{ 
-                            y: [0, -12, 0],
-                            rotateZ: [0, 8, 0]
-                          }}
-                          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute pointer-events-none"
-                          style={{
-                            transform: 'translate3d(-145px, 45px, 20px)',
-                          }}
-                        >
-                          <svg width="40" height="45" viewBox="0 0 40 45" fill="none">
-                            <path d="M20,0 L40,30 L20,45 Z" fill="#8c6e3d" opacity="0.85" />
-                            <path d="M20,0 L0,30 L20,45 Z" fill="#c5a059" opacity="0.95" />
-                            <path d="M0,30 L40,30 L20,45 Z" fill="#5e4618" opacity="0.75" />
-                          </svg>
-                        </motion.div>
-
-                        {/* Purple Crystal (Right) */}
-                        <motion.div
-                          animate={{ 
-                            y: [0, 10, 0],
-                            rotateZ: [0, -6, 0]
-                          }}
-                          transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                          className="absolute pointer-events-none"
-                          style={{
-                            transform: 'translate3d(145px, -70px, 30px)',
-                          }}
-                        >
-                          <svg width="32" height="36" viewBox="0 0 30 35" fill="none">
-                            <path d="M15,0 L30,22 L15,35 Z" fill="#7c3aed" opacity="0.8" />
-                            <path d="M15,0 L0,22 L15,35 Z" fill="#a78bfa" opacity="0.9" />
-                            <path d="M0,22 L30,22 L15,35 Z" fill="#5b21b6" opacity="0.7" />
-                          </svg>
-                        </motion.div>
-
-                        {/* Smaller Accent Crystal */}
-                        <motion.div
-                          animate={{ 
-                            y: [0, -8, 0],
-                            rotateY: [0, 360]
-                          }}
-                          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute pointer-events-none"
-                          style={{
-                            transform: 'translate3d(85px, -110px, -10px)',
-                          }}
-                        >
-                          <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
-                            <path d="M10,0 L20,15 L10,24 Z" fill="#c5a059" opacity="0.8" />
-                            <path d="M10,0 L0,15 L10,24 Z" fill="#ebd095" opacity="0.9" />
-                            <path d="M0,15 L20,15 L10,24 Z" fill="#8c6e3d" opacity="0.7" />
-                          </svg>
-                        </motion.div>
-                      </motion.div>
-                    )}
-
-                    {activeHeroSlide === 2 && (
-                      <motion.div
-                        key="scene-browser"
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.85 }}
-                        transition={{ duration: 0.45 }}
-                        className="relative flex items-center justify-center animate-browser-main"
-                        style={{
-                          transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
-                          transformStyle: 'preserve-3d',
-                        }}
-                      >
-                        {/* Browser Window frame */}
-                        <div 
-                          className="absolute w-48 h-36 bg-[#0c091f]/98 border border-[#c5a059]/30 rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between"
-                          style={{
-                            transform: 'translate3d(0, 0, 0px)',
-                            boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
-                            transformStyle: 'preserve-3d'
-                          }}
-                        >
-                          {/* Browser header */}
-                          <div className="bg-[#15112e] border-b border-white/5 p-2 flex items-center gap-2">
-                            <div className="flex gap-0.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-red-500/60" />
-                              <span className="w-1.5 h-1.5 rounded-full bg-yellow-500/60" />
-                              <span className="w-1.5 h-1.5 rounded-full bg-green-500/60" />
-                            </div>
-                            <div className="flex-1 bg-black/25 rounded-md h-4 border border-white/5 flex items-center px-1.5">
-                              <span className="text-[4px] font-mono text-white/30">pixelvance.com/ranking-analytics</span>
-                            </div>
-                          </div>
-                          
-                          {/* Website Illustration Card inside Browser */}
-                          <div className="flex-1 p-2 bg-[#0c091f] flex gap-2">
-                            {/* Mountain landscape visualization */}
-                            <div className="flex-1 bg-[#1c1837] border border-[#c5a059]/20 rounded-md overflow-hidden flex flex-col justify-end relative">
-                              <div className="absolute inset-0 bg-gradient-to-t from-violet-950/80 via-transparent to-transparent z-1" />
-                              <div className="absolute bottom-0 w-full h-8 flex items-end">
-                                <svg className="w-full h-full text-[#c5a059]/40" viewBox="0 0 100 40" preserveAspectRatio="none">
-                                  <path d="M0,40 L30,10 L60,30 L80,5 L100,40 Z" fill="currentColor" />
-                                  <path d="M0,40 L20,20 L50,35 L70,15 L100,40 Z" fill="#8c6e3d" opacity="0.3" />
-                                </svg>
-                              </div>
-                              <div className="p-1.5 z-10 text-left">
-                                <span className="text-[4.5px] font-mono text-white/50 block leading-none">Traffic Overview</span>
-                                <span className="text-[6px] font-mono text-[#c5a059] font-bold block uppercase leading-none mt-0.5">+435% organic</span>
-                              </div>
-                            </div>
-                            
-                            {/* Side block wireframe */}
-                            <div className="w-14 bg-white/[0.01] border border-white/5 rounded-md p-1 flex flex-col gap-1.5 justify-center">
-                              <div className="w-full h-2.5 bg-[#c5a059]/10 rounded-sm" />
-                              <div className="w-full h-2.5 bg-purple-500/10 rounded-sm" />
-                              <div className="w-full h-2.5 bg-blue-500/10 rounded-sm" />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Floating Audio Waveform Visualizer */}
-                        <motion.div
-                          animate={{ y: [0, -6, 0] }}
-                          transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute w-24 h-16 bg-[#120e29]/95 border border-[#c5a059]/30 rounded-lg p-2 flex flex-col justify-between shadow-2xl"
-                          style={{
-                            transform: 'translate3d(-105px, -30px, 45px)',
-                            backdropFilter: 'blur(8px)',
-                          }}
-                        >
-                          <span className="text-[5.5px] font-mono text-[#c5a059] font-bold uppercase leading-none text-left">Real-time Volume</span>
-                          <div className="flex gap-1.5 items-end justify-center h-8 mt-1.5">
-                            {[...Array(6)].map((_, i) => (
-                              <motion.div 
-                                key={i} 
-                                animate={{ height: [4, 22, 4] }}
-                                transition={{ duration: 1.1, repeat: Infinity, delay: i * 0.12, ease: "easeInOut" }}
-                                className="w-1.5 bg-[#c5a059] rounded-full"
-                              />
-                            ))}
-                          </div>
-                        </motion.div>
-
-                        {/* Floating Star Rating widget */}
-                        <motion.div
-                          animate={{ y: [0, 8, 0] }}
-                          transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute w-28 h-12 bg-[#120e29]/95 border border-purple-500/30 rounded-full px-3 flex items-center justify-between shadow-2xl"
-                          style={{
-                            transform: 'translate3d(105px, -45px, 50px)',
-                            backdropFilter: 'blur(8px)',
-                          }}
-                        >
-                          <div className="flex flex-col text-left">
-                            <span className="text-[5px] font-mono text-purple-300 font-bold uppercase leading-none">SEO Audit Score</span>
-                            <span className="text-[8px] font-extrabold text-white leading-none mt-1">98/100 A+</span>
-                          </div>
-                          <span className="text-xs text-[#c5a059]">🏆</span>
-                        </motion.div>
-
-                        {/* Stacked 3D Coins representing Conversion */}
-                        <motion.div
-                          animate={{ y: [0, -10, 0] }}
-                          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute flex flex-col gap-0.5"
-                          style={{
-                            transform: 'translate3d(95px, 40px, 60px)',
-                            transformStyle: 'preserve-3d',
-                          }}
-                        >
-                          {[...Array(3)].map((_, idx) => (
-                            <div 
-                              key={idx}
-                              className="w-8 h-2 bg-gradient-to-r from-[#c5a059] via-[#ffebc2] to-[#8c6e3d] rounded-full border border-black/40 shadow-md"
-                              style={{
-                                boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.4)',
-                              }}
-                            />
-                          ))}
-                        </motion.div>
-
-                        {/* Floating Gold Sphere */}
-                        <motion.div
-                          animate={{ y: [0, -8, 0] }}
-                          transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute z-20 w-5 h-5 rounded-full"
-                          style={{
-                            transform: 'translate3d(-40px, -95px, 55px)',
-                            background: 'radial-gradient(circle at 30% 30%, #ffebc2 0%, #c5a059 50%, #5e4618 90%)',
-                            boxShadow: '0 6px 15px rgba(0,0,0,0.6)',
-                          }}
-                        />
-                      </motion.div>
-                    )}
-
-                    {activeHeroSlide === 3 && (
-                      <motion.div
-                        key="scene-cloud"
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.85 }}
-                        transition={{ duration: 0.45 }}
-                        className="relative flex items-center justify-center animate-browser-main"
-                        style={{
-                          transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
-                          transformStyle: 'preserve-3d',
-                        }}
-                      >
-                        {/* CPU Server core lying horizontal */}
-                        <div 
-                          className="absolute w-40 h-40 bg-[#0f0b24]/98 border border-[#c5a059]/40 rounded-2xl p-4 flex flex-col justify-between shadow-2xl"
-                          style={{
-                            transform: 'rotateX(40deg) rotateZ(-8deg)',
-                            boxShadow: '0 30px 60px rgba(0,0,0,0.9), inset 0 2px 10px rgba(255,255,255,0.05)',
-                            transformStyle: 'preserve-3d'
-                          }}
-                        >
-                          <div className="absolute inset-0 bg-grid-pattern opacity-10 rounded-2xl" />
-                          
-                          {/* Glowing CPU center core */}
-                          <div 
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-br from-[#c5a059] to-[#8c6e3d] border border-[#ffebc2] rounded-xl flex items-center justify-center"
-                            style={{
-                              boxShadow: '0 0 25px rgba(197, 160, 89, 0.6), inset 0 2px 5px rgba(255,255,255,0.4)',
-                            }}
-                          >
-                            <span className="text-[7px] font-mono text-black font-black uppercase text-center leading-none">CORE<br/>v4.0</span>
-                          </div>
-                          
-                          {/* Connective traces */}
-                          <div className="flex justify-between items-center w-full z-1">
-                            <span className="text-[5.5px] font-mono text-purple-300 font-bold uppercase leading-none">CLOUD NODE</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                          </div>
-                          
-                          <div className="flex justify-between items-center w-full z-1 text-[5px] font-mono text-white/40 leading-none">
-                            <span>CPU: 42%</span>
-                            <span>RAM: 8.4GB</span>
-                          </div>
-                        </div>
-
-                        {/* Rotating Gold Gear 1 */}
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                          className="absolute z-10 text-[#c5a059]/80"
-                          style={{
-                            transform: 'translate3d(-105px, -35px, 20px)',
-                          }}
-                        >
-                          <svg width="36" height="36" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M50,35 C41.7,35 35,41.7 35,50 C35,58.3 41.7,65 50,65 C58.3,65 65,58.3 65,50 C65,41.7 58.3,35 50,35 Z M50,55 C47.2,55 45,52.8 45,50 C45,47.2 47.2,45 50,45 C52.8,45 55,47.2 55,50 C55,52.8 52.8,55 50,55 Z" />
-                            <rect x="44" y="10" width="12" height="20" rx="3" />
-                            <rect x="44" y="70" width="12" height="20" rx="3" />
-                            <rect x="10" y="44" width="20" height="12" rx="3" />
-                            <rect x="70" y="44" width="20" height="12" rx="3" />
-                          </svg>
-                        </motion.div>
-
-                        {/* Rotating Gear 2 */}
-                        <motion.div
-                          animate={{ rotate: -360 }}
-                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                          className="absolute z-10 text-purple-400/80"
-                          style={{
-                            transform: 'translate3d(-75px, 5px, 15px)',
-                          }}
-                        >
-                          <svg width="24" height="24" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M50,35 C41.7,35 35,41.7 35,50 C35,58.3 41.7,65 50,65 C58.3,65 65,58.3 65,50 C65,41.7 58.3,35 50,35 Z M50,55 C47.2,55 45,52.8 45,50 C45,47.2 47.2,45 50,45 C52.8,45 55,47.2 55,50 C55,52.8 52.8,55 50,55 Z" />
-                            <rect x="44" y="10" width="12" height="20" rx="3" />
-                            <rect x="44" y="70" width="12" height="20" rx="3" />
-                            <rect x="10" y="44" width="20" height="12" rx="3" />
-                            <rect x="70" y="44" width="20" height="12" rx="3" />
-                          </svg>
-                        </motion.div>
-
-                        {/* Floating Database Node */}
-                        <motion.div
-                          animate={{ y: [0, -6, 0] }}
-                          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute w-24 h-16 bg-[#120e29]/95 border border-purple-500/30 rounded-lg p-2.5 flex flex-col justify-between shadow-2xl"
-                          style={{
-                            transform: 'translate3d(110px, -40px, 40px)',
-                            backdropFilter: 'blur(8px)',
-                          }}
-                        >
-                          <div className="flex justify-between items-center border-b border-white/5 pb-1">
-                            <span className="text-[5.5px] font-mono text-purple-300 font-bold uppercase leading-none">DB CLUSTER</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                          </div>
-                          <div className="flex flex-col gap-0.5 mt-1 font-mono text-[4.5px] text-white/55 text-left">
-                            <span>Shard #1: ONLINE</span>
-                            <span>Latency: 14ms</span>
-                          </div>
-                        </motion.div>
-
-                        {/* Floating API Gateway */}
-                        <motion.div
-                          animate={{ y: [0, 8, 0] }}
-                          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute w-28 h-10 bg-[#120e29]/95 border border-[#c5a059]/30 rounded-lg p-2 flex items-center justify-between shadow-2xl"
-                          style={{
-                            transform: 'translate3d(90px, 45px, 50px)',
-                            backdropFilter: 'blur(8px)',
-                          }}
-                        >
-                          <span className="text-[5.5px] font-mono text-[#c5a059] font-bold uppercase leading-none">API GATEWAY</span>
-                          <span className="text-[6px] font-mono text-white font-extrabold uppercase leading-none">12k rps</span>
-                        </motion.div>
-
-                        {/* Background Floating Cloud */}
-                        <div className="absolute z-0 w-12 h-7 opacity-40 animate-dash-cloud">
-                          <svg viewBox="0 0 100 60" fill="white" className="drop-shadow-md">
-                            <path d="M 20 40 a 20 20 0 0 1 20 -20 a 25 25 0 0 1 45 5 a 15 15 0 0 1 10 15 a 15 15 0 0 1 -15 15 L 20 55 a 15 15 0 0 1 -0 -15 z" />
-                          </svg>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </div>
+              {/* Middle spacer to preserve layout height */}
+              <div className="flex-1 min-h-[220px] sm:min-h-[260px] lg:min-h-[300px] z-10" />
 
               {/* Bottom Buttons and Dot Indicators */}
               <div className="flex flex-col items-center gap-4 z-10 w-full mt-6">
