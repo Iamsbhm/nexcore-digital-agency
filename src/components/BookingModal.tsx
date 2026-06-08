@@ -47,6 +47,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
   const [clientPhone, setClientPhone] = useState<string>('');
   const [isSending, setIsSending] = useState<boolean>(false);
   const [sendError, setSendError] = useState<string>('');
+  const [dispatchId, setDispatchId] = useState<string>('');
 
 
   if (!isOpen) return null;
@@ -76,6 +77,8 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
         templateParams,
         EMAILJS_PUBLIC_KEY
       );
+      // Generate and lock the dispatch ID on success
+      setDispatchId(Math.floor(100000 + Math.random() * 900000).toString());
       setStep('success');
     } catch (err) {
       console.error('EmailJS error:', err);
@@ -231,7 +234,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                     Request Received!
                   </h3>
                   <p className="text-xs text-[#c5a059] mt-1 font-mono uppercase tracking-widest font-semibold">
-                    DISPATCH_ID: #{Math.floor(100000 + Math.random() * 900000)}
+                    DISPATCH_ID: #{dispatchId}
                   </p>
                 </div>
 
