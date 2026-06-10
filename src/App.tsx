@@ -81,6 +81,33 @@ export default function App() {
     setTilt({ x: 0, y: 0 });
   };
 
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+    
+    const percentX = x / rect.width;
+    const percentY = y / rect.height;
+    const rotateX = (percentY - 0.5) * -12;
+    const rotateY = (percentX - 0.5) * 12;
+    
+    card.style.setProperty('--rotate-x', `${rotateX}deg`);
+    card.style.setProperty('--rotate-y', `${rotateY}deg`);
+    card.style.setProperty('--card-scale', '1.04');
+  };
+
+  const handleCardMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    card.style.setProperty('--rotate-x', '0deg');
+    card.style.setProperty('--rotate-y', '0deg');
+    const isActive = card.getAttribute('data-active') === 'true';
+    card.style.setProperty('--card-scale', isActive ? '1.04' : '1');
+  };
+
   useEffect(() => {
     // Scroll event observer
     const handleScroll = () => {
@@ -162,35 +189,55 @@ export default function App() {
   // Hero carousel slides configurations
   const heroSlides = [
     {
-      tag: "Premium Agency",
+      tag: "WEB DESIGN",
       titleLine1: "Innovative",
       titleLine2: "Web Design",
-      description: <>Innovation in its modern meaning is <span className="text-[#c5a059] font-bold">"a new idea, creative thoughts, new imaginations</span> in form of device or method".</>,
-      ctaText: "Start a Project",
+      titleGrad: "from-[#34d399] to-[#059669]",
+      dotColor: "#10b981",
+      badgeClass: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+      description: <>Innovation in its modern meaning is <span className="text-[#10b981] font-semibold">advanced web layouts, creative responsive UI, and interactive animations</span>.</>,
+      ctaText: "Start Designing",
+      activeBadgeText: "Web Design",
+      activeBadgeColor: "bg-[#10b981] text-white",
       onCtaClick: () => openBooking('GROWTH', '$2,999')
     },
     {
-      tag: "Bespoke Development",
+      tag: "REACT SYSTEMS",
       titleLine1: "Next-Gen",
       titleLine2: "React Systems",
-      description: <>Engineering high-performance software with <span className="text-[#c5a059] font-bold">clean architectures, rich micro-interactions,</span> and pixel-perfect responsiveness.</>,
+      titleGrad: "from-[#818cf8] to-[#6366f1]",
+      dotColor: "#6366f1",
+      badgeClass: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
+      description: <>Engineering high-performance software with <span className="text-[#818cf8] font-semibold">clean architectures, rich micro-interactions</span>, and pixel-perfect responsiveness.</>,
       ctaText: "Explore Tech",
+      activeBadgeText: "React Systems",
+      activeBadgeColor: "bg-[#6366f1] text-white",
       onCtaClick: () => scrollToSection('services-explorer-section')
     },
     {
-      tag: "Organic Growth",
+      tag: "ORGANIC GROWTH",
       titleLine1: "Dominant",
       titleLine2: "SEO Tactics",
-      description: <>Dominate local and national rankings using <span className="text-[#c5a059] font-bold">advanced search marketing strategies</span> that drive qualified client bookings.</>,
-      ctaText: "Audit Site",
+      titleGrad: "from-[#7c3aed] to-[#3b82f6]",
+      dotColor: "#7c3aed",
+      badgeClass: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+      description: <>Dominate local and national rankings using <span className="text-[#c5a059] font-semibold">advanced search marketing strategies</span> that drive qualified client bookings.</>,
+      ctaText: "Start Growing",
+      activeBadgeText: "SEO & Growth",
+      activeBadgeColor: "bg-[#7c3aed] text-white",
       onCtaClick: () => scrollToSection('why-us-section')
     },
     {
-      tag: "Secure Infrastructure",
+      tag: "CLOUD & SCALE",
       titleLine1: "Scalable",
       titleLine2: "Cloud Nodes",
-      description: <>Deploying robust, containerized architectures on AWS/Vercel with <span className="text-[#c5a059] font-bold">automated failovers, load balancing, and database clustering</span>.</>,
+      titleGrad: "from-[#fbbf24] to-[#f59e0b]",
+      dotColor: "#fbbf24",
+      badgeClass: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+      description: <>Deploying robust, containerized architectures on AWS/Vercel with <span className="text-[#fbbf24] font-semibold">automated failovers, load balancing, and database clustering</span>.</>,
       ctaText: "Scale Server",
+      activeBadgeText: "Cloud & Scale",
+      activeBadgeColor: "bg-[#fbbf24] text-black",
       onCtaClick: () => openBooking('SCALE', '$4,999')
     }
   ];
@@ -258,14 +305,26 @@ export default function App() {
       </div>
 
       {/* 2. PERSISTENT NAVIGATION BAR */}
-      <nav 
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-          scrolled 
-            ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5 py-3' 
-            : 'bg-transparent py-5'
-        }`}
-        id="main-navigation"
-        role="navigation"
+      <header className="relative z-40">
+        {/* Visually hidden but SEO-indexable list of agency capabilities in the header */}
+        <div className="sr-only">
+          <h2>Pixel Vance Digital Core Capabilities</h2>
+          {heroSlides.map((slide, index) => (
+            <article key={index}>
+              <h3>{slide.tag}: {slide.titleLine1} {slide.titleLine2}</h3>
+              <p>{slide.description}</p>
+            </article>
+          ))}
+        </div>
+
+        <nav 
+          className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
+            scrolled 
+              ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5 py-3' 
+              : 'bg-transparent py-5'
+          }`}
+          id="main-navigation"
+          role="navigation"
         aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
@@ -424,8 +483,9 @@ export default function App() {
           </div>
         )}
       </nav>
+      </header>
 
-      <div className="h-[72px]" />
+      {currentPage !== 'home' && <div className="h-[72px]" />}
 
       {/* Main content landmark for accessibility & skip-nav */}
       <main id="main-content">
@@ -447,8 +507,7 @@ export default function App() {
 
       {/* 3. HERO SECTION — Premium 3D Split Layout */}
       <section
-        className="relative z-10 overflow-hidden flex items-center justify-center"
-        style={{ minHeight: 'calc(100vh - 72px)' }}
+        className="relative z-10 overflow-hidden flex items-stretch justify-center min-h-screen"
         id="hero"
       >
         {/* 3D Floating Spheres — background */}
@@ -466,27 +525,29 @@ export default function App() {
           backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.02) 3px, rgba(0,0,0,0.02) 4px)',
         }} />
 
-        {/* Corner HUD brackets */}
-        <div className="absolute top-6 md:top-8 left-6 md:left-10 w-6 h-6 border-t border-l border-[#c5a059]/30 pointer-events-none z-10" />
-        <div className="absolute top-6 md:top-8 right-6 md:right-10 w-6 h-6 border-t border-r border-[#c5a059]/30 pointer-events-none z-10" />
-        <div className="absolute bottom-16 left-6 md:left-10 w-6 h-6 border-b border-l border-[#c5a059]/30 pointer-events-none z-10" />
-        <div className="absolute bottom-16 right-6 md:right-10 w-6 h-6 border-b border-r border-[#c5a059]/30 pointer-events-none z-10" />
-
-        {/* ── CENTRAL SPLIT VIEWPORT CARD ── */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 flex items-center justify-center">
+        {/* ── FULL SCREEN SPLIT VIEWPORT ── */}
+        <div className="relative z-10 w-full min-h-screen flex items-stretch">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full bg-[#080711]/60 border border-white/10 rounded-[32px] overflow-hidden shadow-[0_32px_90px_rgba(0,0,0,0.85)] backdrop-blur-md grid grid-cols-1 lg:grid-cols-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-full grid grid-cols-1 lg:grid-cols-12 items-stretch"
           >
-            {/* ── LEFT COLUMN — Dark Glassmorphic & Deep Indigo Gradient ── */}
-            <div className="lg:col-span-5 bg-gradient-to-br from-[#0e0c21]/95 via-[#0a0818]/98 to-[#05040a]/99 p-6 sm:p-8 flex flex-col justify-between text-slate-100 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5">
-              {/* Spacer where the mock header used to be */}
-              <div className="h-2 w-full mb-4" />
+            {/* ── LEFT COLUMN — Premium Translucent Dark Navy/Violet Brand Styling ── */}
+            <div className="lg:col-span-6 bg-gradient-to-br from-[#0b0c16]/95 via-[#06070d]/98 to-[#030306]/98 backdrop-blur-md px-8 pb-8 pt-24 sm:px-12 sm:pb-12 sm:pt-28 lg:px-16 lg:pb-16 lg:pt-32 xl:px-20 xl:pb-20 xl:pt-36 flex flex-col justify-between text-slate-100 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5">
+              {/* Floating background gradient glow inside left panel */}
+              <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-[#7c3aed]/10 blur-[80px] pointer-events-none" />
+              
+              {/* Top Badge: Dynamic based on active slide */}
+              <div className="flex items-center justify-between mb-6 z-10">
+                <div className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[10px] font-mono tracking-widest font-bold uppercase transition-all duration-300 ${heroSlides[activeHeroSlide].badgeClass}`}>
+                  <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: heroSlides[activeHeroSlide].dotColor }} />
+                  {heroSlides[activeHeroSlide].tag}
+                </div>
+              </div>
 
-              {/* Title Section */}
-              <div className="my-auto min-h-[300px] flex flex-col justify-center">
+              {/* Title, Description & CTA Section */}
+              <div className="my-auto min-h-[280px] flex flex-col justify-center z-10">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeHeroSlide}
@@ -496,230 +557,516 @@ export default function App() {
                     transition={{ duration: 0.35, ease: "easeInOut" }}
                     className="flex flex-col text-left w-full"
                   >
-                    <h1 className="sr-only">Innovative Web Design - Pixel Vance Digital</h1>
-                    <div aria-hidden="true" className="space-y-1">
-                      <p className="font-display font-light text-[#c5a059] text-sm tracking-[0.2em] uppercase">
-                        {heroSlides[activeHeroSlide].tag}
-                      </p>
-                      <p className="font-display font-extrabold uppercase text-[clamp(2.0rem,5vw,3.2rem)] leading-[0.95] tracking-[0.02em] text-white">
-                        {heroSlides[activeHeroSlide].titleLine1}
-                      </p>
-                      <p className="font-display font-extrabold uppercase text-[clamp(2.0rem,5vw,3.2rem)] leading-[0.95] tracking-[0.02em] text-[#c5a059] pb-2">
+                    {/* Dynamic Highlight Title */}
+                    <h1 className="font-display font-extrabold text-[clamp(2.0rem,4.5vw,3.0rem)] leading-[1.05] tracking-tight text-white mb-4">
+                      {heroSlides[activeHeroSlide].titleLine1}{' '}
+                      <span className={`bg-gradient-to-r ${heroSlides[activeHeroSlide].titleGrad} text-transparent bg-clip-text`}>
                         {heroSlides[activeHeroSlide].titleLine2}
-                      </p>
-                    </div>
+                      </span>
+                    </h1>
 
-                    {/* Gold Divider Bar */}
-                    <div className="w-24 h-[4px] bg-[#c5a059] my-4 rounded-full self-start" />
+                    {/* Description Block */}
+                    <p className="font-sans text-sm sm:text-base leading-relaxed text-slate-300/90 max-w-md">
+                      {heroSlides[activeHeroSlide].description}
+                    </p>
 
-                    {/* Glass Card Description */}
-                    <div className="bg-white/[0.02] border border-white/5 hover:border-[#c5a059]/20 rounded-2xl p-4 md:p-5 text-left relative overflow-hidden group transition-all duration-300 shadow-xl backdrop-blur-md">
-                      {/* Corner brackets */}
-                      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#c5a059]/30 pointer-events-none" />
-                      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#c5a059]/30 pointer-events-none" />
-                      
-                      <p className="font-mono text-xs sm:text-[13px] leading-relaxed text-white/90">
-                        {heroSlides[activeHeroSlide].description}
-                      </p>
-                    </div>
-
-                    {/* Left CTA */}
-                    <div className="mt-4 flex justify-start">
+                    {/* CTA Button */}
+                    <div className="mt-8 flex justify-start">
                       <button
-                        onClick={() => openBooking('GROWTH', '$2,999')}
-                        className="group relative flex items-center justify-center gap-2.5 py-3 px-8 border-2 border-[#c5a059]/80 text-[#c5a059] hover:text-black hover:bg-[#c5a059] uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer rounded-full active:scale-95 font-black shadow-md shadow-gold-500/10 hover:shadow-gold-500/25"
+                        onClick={heroSlides[activeHeroSlide].onCtaClick}
+                        className="group relative flex items-center justify-center gap-2 py-3 px-8 bg-black text-white hover:text-black hover:bg-[#c5a059] border border-white/10 hover:border-[#c5a059] uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer rounded-full active:scale-95 font-black shadow-lg shadow-black/20"
                       >
-                        Start a Project
+                        {heroSlides[activeHeroSlide].ctaText}
                       </button>
                     </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Bottom Navigation and Indicators */}
-              <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/5 w-full">
-                {/* Share Icon */}
-                <button 
-                  onClick={() => {
-                    if (navigator.share) {
-                      navigator.share({
-                        title: 'Pixel Vance Digital',
-                        text: 'High-fidelity web design & bespoke development.',
-                        url: window.location.href,
-                      });
-                    } else {
-                      alert('Link copied to clipboard: ' + window.location.href);
-                    }
-                  }}
-                  className="w-9 h-9 rounded-full bg-white/[0.02] border border-white/10 hover:bg-white/10 text-[#c5a059] flex items-center justify-center shadow-sm hover:shadow transition-all cursor-pointer active:scale-90"
-                  title="Share Website"
-                >
-                  <Share2 className="w-4 h-4" />
-                </button>
-
-                {/* Arrows */}
-                <div className="flex items-center gap-2.5">
+              {/* Bottom Slider tags row */}
+              <div className="mt-8 pt-6 border-t border-white/5 z-10">
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {/* Web Design Badge */}
                   <button
-                    onClick={() => setActiveHeroSlide((prev) => (prev === 0 ? 3 : prev - 1))}
-                    className="w-9 h-9 rounded-full bg-white/[0.02] border border-white/10 hover:bg-white/10 text-xs text-white hover:text-[#c5a059] hover:shadow transition-all flex items-center justify-center cursor-pointer active:scale-90"
-                    title="Previous Slide"
+                    onClick={() => setActiveHeroSlide(0)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 cursor-pointer border ${
+                      activeHeroSlide === 0
+                        ? 'bg-[#10b981]/15 text-[#34d399] border-[#10b981]/30 font-bold'
+                        : 'border-white/5 text-white/50 hover:text-white hover:border-white/20'
+                    }`}
                   >
-                    ◀
+                    {activeHeroSlide === 0 && <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />}
+                    Web Design {activeHeroSlide === 0 ? '' : '+'}
                   </button>
+
+                  {/* React Systems Badge */}
                   <button
-                    onClick={() => setActiveHeroSlide((prev) => (prev === 3 ? 0 : prev + 1))}
-                    className="w-9 h-9 rounded-full bg-white/[0.02] border border-white/10 hover:bg-white/10 text-xs text-white hover:text-[#c5a059] hover:shadow transition-all flex items-center justify-center cursor-pointer active:scale-90"
-                    title="Next Slide"
+                    onClick={() => setActiveHeroSlide(1)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 cursor-pointer border ${
+                      activeHeroSlide === 1
+                        ? 'bg-[#6366f1]/15 text-[#818cf8] border-[#6366f1]/30 font-bold'
+                        : 'border-white/5 text-white/50 hover:text-white hover:border-white/20'
+                    }`}
                   >
-                    ▶
+                    {activeHeroSlide === 1 && <span className="w-1.5 h-1.5 rounded-full bg-[#6366f1]" />}
+                    React Systems {activeHeroSlide === 1 ? '' : '+'}
                   </button>
-                </div>
 
-                {/* Slide Number */}
-                <span className="text-3xl font-serif italic text-[#c5a059]/35 select-none font-bold">0{activeHeroSlide + 1}</span>
-              </div>
-            </div>
-
-            {/* ── RIGHT COLUMN — Deep Rich Violet-to-Navy Gradient with Full-bleed Background ── */}
-            <div className="lg:col-span-7 bg-gradient-to-br from-[#1e133d] via-[#0b081c] to-[#06040a] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden text-white min-h-[420px] lg:min-h-0">
-              
-              {/* Absolute Slider Background */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
-                <AnimatePresence mode="wait">
-                  {activeHeroSlide === 0 && (
-                    <motion.div
-                      key="bg-web-design"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.65 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.6 }}
-                      className="absolute inset-0 w-full h-full"
-                    >
-                      <img
-                        src="/images/hero_web_design.png"
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                  )}
-                  {activeHeroSlide === 1 && (
-                    <motion.div
-                      key="bg-tech-development"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.65 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.6 }}
-                      className="absolute inset-0 w-full h-full"
-                    >
-                      <img
-                        src="/images/hero_tech_development.png"
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                  )}
-                  {activeHeroSlide === 2 && (
-                    <motion.div
-                      key="bg-seo-rankings"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.65 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.6 }}
-                      className="absolute inset-0 w-full h-full"
-                    >
-                      <img
-                        src="/images/hero_seo_rankings.png"
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                  )}
-                  {activeHeroSlide === 3 && (
-                    <motion.div
-                      key="bg-cloud-infrastructure"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.65 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.6 }}
-                      className="absolute inset-0 w-full h-full"
-                    >
-                      <img
-                        src="/images/hero_cloud_infrastructure.png"
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                {/* Overlay gradient to ensure high readability for floating elements */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#06040a]/80 via-transparent to-[#1e133d]/20" />
-              </div>
-
-              {/* Floating Glow Background Elements for depth */}
-              <div className="absolute -top-[10%] left-[-5%] w-[45%] h-[45%] rounded-full bg-[#c5a059]/10 blur-[120px] pointer-events-none z-1" />
-              <div className="absolute bottom-[10%] right-[-5%] w-[50%] h-[50%] rounded-full bg-[#7c3aed]/15 blur-[130px] pointer-events-none z-1" />
-
-              {/* Spacer where the mock header used to be */}
-              <div className="h-2 w-full mb-4 z-10" />
-
-              {/* Middle spacer to preserve layout height */}
-              <div className="flex-1 min-h-[220px] sm:min-h-[260px] lg:min-h-[300px] z-10" />
-
-              {/* Bottom Buttons and Dot Indicators */}
-              <div className="flex flex-col items-center gap-4 z-10 w-full mt-6">
-                <div className="flex flex-wrap items-center gap-4 w-full justify-center lg:justify-start">
+                  {/* SEO & Growth Badge */}
                   <button
-                    onClick={() => openBooking('STRATEGY', 'Free')}
-                    className="py-3.5 px-7 sm:px-8 bg-[#c5a059] hover:bg-[#ebd095] text-black font-mono font-black uppercase text-[10px] tracking-widest transition-all duration-300 rounded-full active:scale-95 shadow-md shadow-gold-500/10 cursor-pointer"
+                    onClick={() => setActiveHeroSlide(2)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 cursor-pointer border ${
+                      activeHeroSlide === 2
+                        ? 'bg-[#7c3aed]/15 text-[#a78bfa] border-[#7c3aed]/30 font-bold'
+                        : 'border-white/5 text-white/50 hover:text-white hover:border-white/20'
+                    }`}
                   >
-                    Book Strategy Session
+                    {activeHeroSlide === 2 && <span className="w-1.5 h-1.5 rounded-full bg-[#7c3aed]" />}
+                    SEO & Growth
                   </button>
+
+                  {/* Cloud & Scale Badge */}
+                  <button
+                    onClick={() => setActiveHeroSlide(3)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 cursor-pointer border ${
+                      activeHeroSlide === 3
+                        ? 'bg-[#c5a059]/15 text-[#ebd095] border-[#c5a059]/30 font-bold'
+                        : 'border-white/5 text-white/50 hover:text-white hover:border-white/20'
+                    }`}
+                  >
+                    {activeHeroSlide === 3 && <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />}
+                    Cloud & Scale {activeHeroSlide === 3 ? '' : '+'}
+                  </button>
+
+                  {/* Brand Identity Tag (Static) */}
                   <button
                     onClick={() => scrollToSection('services-explorer-section')}
-                    className="py-3.5 px-7 sm:px-8 border-2 border-[#c5a059]/60 hover:border-[#c5a059] text-[#c5a059] hover:bg-[#c5a059]/5 font-mono font-bold uppercase text-[10px] tracking-widest transition-all duration-300 rounded-full active:scale-95 cursor-pointer"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider border border-white/5 text-white/50 hover:text-white hover:border-white/20 transition-all duration-300 cursor-pointer"
                   >
-                    Explore Services
+                    Brand Identity
+                  </button>
+
+                  {/* AI Automation Tag (Static) */}
+                  <button
+                    onClick={() => scrollToSection('services-explorer-section')}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider border border-white/5 text-white/50 hover:text-white hover:border-white/20 transition-all duration-300 cursor-pointer"
+                  >
+                    AI Automation
                   </button>
                 </div>
 
-                {/* Dot Indicators */}
-                <div className="flex items-center gap-3 justify-center lg:justify-start w-full">
-                  {heroSlides.map((_, idx) => (
+                {/* Pagination Controls & Arrows */}
+                <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
+                  {/* Pagination Dots */}
+                  <div className="flex items-center gap-2">
+                    {heroSlides.map((slide, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveHeroSlide(idx)}
+                        className="h-2 rounded-full transition-all duration-300 cursor-pointer"
+                        style={{
+                          width: activeHeroSlide === idx ? '24px' : '8px',
+                          backgroundColor: activeHeroSlide === idx ? slide.dotColor : 'rgba(255, 255, 255, 0.2)'
+                        }}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Navigation Arrows */}
+                  <div className="flex items-center gap-3">
                     <button
-                      key={idx}
-                      onClick={() => setActiveHeroSlide(idx)}
-                      className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                        activeHeroSlide === idx
-                          ? 'w-6 bg-[#c5a059] shadow-[0_0_10px_#c5a059]'
-                          : 'w-2.5 bg-white/20 hover:bg-white/45'
-                      }`}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
+                      onClick={() => setActiveHeroSlide((prev) => (prev === 0 ? 3 : prev - 1))}
+                      className="w-9 h-9 rounded-full border border-white/10 hover:border-white/30 text-white hover:text-[#c5a059] flex items-center justify-center transition-all cursor-pointer active:scale-90"
+                      title="Previous Slide"
+                    >
+                      ←
+                    </button>
+                    <button
+                      onClick={() => setActiveHeroSlide((prev) => (prev === 3 ? 0 : prev + 1))}
+                      className="w-9 h-9 rounded-full border border-white/10 hover:border-white/30 text-white hover:text-[#c5a059] flex items-center justify-center transition-all cursor-pointer active:scale-90"
+                      title="Next Slide"
+                    >
+                      →
+                    </button>
+                  </div>
                 </div>
               </div>
-
-              {/* Social Sidebar Icons (Desktop Only) */}
-              <div className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 flex-col gap-5 z-20 bg-white/[0.02] border border-white/5 rounded-full p-2 backdrop-blur-sm">
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-7 h-7 rounded-full border border-[#c5a059]/30 hover:border-[#c5a059] text-white flex items-center justify-center transition-all hover:scale-115"
-                >
-                  <Linkedin className="w-3.5 h-3.5 text-[#c5a059]" />
-                </a>
-                <a
-                  href="https://dribbble.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-7 h-7 rounded-full border border-[#c5a059]/30 hover:border-[#c5a059] text-white flex items-center justify-center transition-all hover:scale-115"
-                >
-                  <Dribbble className="w-3.5 h-3.5 text-[#c5a059]" />
-                </a>
-              </div>
-
             </div>
+
+            {/* ── RIGHT COLUMN — 2x2 Interactive Gradients Grid ── */}
+            <div className="lg:col-span-6 bg-gradient-to-br from-[#0b0a16]/95 via-[#06050e]/98 to-[#030206]/98 backdrop-blur-md px-8 pb-8 pt-24 sm:px-12 sm:pb-12 sm:pt-28 lg:px-16 lg:pb-16 lg:pt-32 xl:px-20 xl:pb-20 xl:pt-36 flex flex-col justify-center items-center relative overflow-hidden text-white min-h-[460px] lg:min-h-0">
+              <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_center,rgba(124,58,237,0.15),transparent_60%)]" />
+              
+              <div className="w-full max-w-xl xl:max-w-2xl aspect-[4/3] flex items-center justify-center">
+                <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full">
+                
+                {/* ── CARD 1: Web Design (Top-Left) ── */}
+                <div
+                  data-active={activeHeroSlide === 0}
+                  onClick={() => setActiveHeroSlide(0)}
+                  className={`group/card relative rounded-[24px] overflow-hidden p-5 flex flex-col justify-between cursor-pointer border ${
+                    activeHeroSlide === 0
+                      ? 'shadow-[0_20px_50px_rgba(16,185,129,0.35)] border-[#34d399]/60 z-10 opacity-100'
+                      : 'border-white/10 opacity-60 hover:opacity-95'
+                  }`}
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  style={{
+                    background: activeHeroSlide === 0
+                      ? 'linear-gradient(135deg, #064e3b 0%, #059669 40%, #10b981 100%)'
+                      : 'linear-gradient(135deg, #022c22 0%, #065f46 60%, #0f766e 100%)',
+                    transform: `perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale(var(--card-scale, ${activeHeroSlide === 0 ? '1.04' : '1'}))`,
+                    transformStyle: 'preserve-3d',
+                    transition: 'transform 0.3s cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease',
+                  }}
+                >
+                  {/* Dynamic Spotlight Shine */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.18) 0%, transparent 60%)',
+                      mixBlendMode: 'overlay',
+                    }}
+                  />
+                  {/* Single-Sweep Gloss Sheen */}
+                  <div className="card-shimmer" />
+                  
+                  {/* Content/Illustration Area */}
+                  <div 
+                    className="w-full flex-1 flex items-center justify-center pointer-events-none transition-transform duration-500"
+                    style={{ transform: 'translateZ(32px)', transformStyle: 'preserve-3d' }}
+                  >
+                    <svg viewBox="0 0 240 160" className="w-full h-auto max-h-[120px]" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="chart-area-grad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="rgba(255, 255, 255, 0.45)"/>
+                          <stop offset="100%" stopColor="rgba(255, 255, 255, 0)"/>
+                        </linearGradient>
+                        <linearGradient id="chart-line-grad" x1="0" y1="0" x2="1" y2="0">
+                          <stop offset="0%" stopColor="#ffffff"/>
+                          <stop offset="100%" stopColor="rgba(255, 255, 255, 0.6)"/>
+                        </linearGradient>
+                      </defs>
+                      <rect x="10" y="10" width="220" height="140" rx="10" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" fill="rgba(255,255,255,0.06)" />
+                      <line x1="10" y1="35" x2="230" y2="35" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+                      <circle cx="24" cy="22" r="3.5" fill="rgba(255,255,255,0.5)" />
+                      <circle cx="34" cy="22" r="3.5" fill="rgba(255,255,255,0.3)" />
+                      <circle cx="44" cy="22" r="3.5" fill="rgba(255,255,255,0.3)" />
+                      <line x1="62" y1="35" x2="62" y2="150" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+                      <rect x="20" y="48" width="32" height="7" rx="2" fill="rgba(255,255,255,0.3)" />
+                      <rect x="20" y="62" width="26" height="7" rx="2" fill="rgba(255,255,255,0.15)" />
+                      <rect x="20" y="76" width="30" height="7" rx="2" fill="rgba(255,255,255,0.15)" />
+                      <rect x="74" y="48" width="68" height="36" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+                      <circle cx="90" cy="66" r="6" stroke="rgba(255,255,255,0.4)" />
+                      <line x1="102" y1="62" x2="132" y2="62" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                      <line x1="102" y1="70" x2="122" y2="70" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" />
+                      <rect x="150" y="48" width="70" height="36" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+                      <rect x="160" y="58" width="30" height="6" rx="2" fill="rgba(255,255,255,0.3)" />
+                      <rect x="160" y="70" width="50" height="4" rx="1" fill="rgba(255,255,255,0.15)" />
+                      <rect x="74" y="94" width="146" height="46" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+                      <line x1="74" y1="108" x2="220" y2="108" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="3 3" />
+                      <line x1="74" y1="122" x2="220" y2="122" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="3 3" />
+                      <path d="M 82 132 C 96 112, 102 118, 118 106 C 134 94, 146 126, 166 102 C 186 78, 196 122, 212 110 L 212 132 Z" fill="url(#chart-area-grad)" stroke="none" />
+                      <path className="animate-flow-line" d="M 82 132 C 96 112, 102 118, 118 106 C 134 94, 146 126, 166 102 C 186 78, 196 122, 212 110" fill="none" stroke="url(#chart-line-grad)" strokeWidth="2.5" />
+                      <circle cx="166" cy="102" r="4.5" fill="#ffffff" />
+                      <circle cx="166" cy="102" r="8" className="glow-pulse" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2" />
+                      
+                      {/* Bouncing cursor pointing to active chart node */}
+                      <g transform="translate(162, 105)" className="animate-bounce">
+                        <path d="M0 0 L0 10 L3 7 L7 7 Z" fill="#ffffff" stroke="rgba(0,0,0,0.3)" strokeWidth="0.5" />
+                      </g>
+                    </svg>
+                  </div>
+ 
+                  {/* Badge Bottom Left */}
+                  <div className="z-10 mt-3 self-start" style={{ transform: 'translateZ(20px)' }}>
+                    <span className={`px-3 py-1 rounded-full text-[10px] font-sans font-bold shadow-sm transition-all duration-300 ${
+                      activeHeroSlide === 0
+                        ? 'bg-white text-[#059669]'
+                        : 'bg-white/10 text-white/90 backdrop-blur-md border border-white/15'
+                    }`}>
+                      Web Design
+                    </span>
+                  </div>
+                </div>
+
+                {/* ── CARD 2: React Systems (Top-Right) ── */}
+                <div
+                  data-active={activeHeroSlide === 1}
+                  onClick={() => setActiveHeroSlide(1)}
+                  className={`group/card relative rounded-[24px] overflow-hidden p-5 flex flex-col justify-between cursor-pointer border ${
+                    activeHeroSlide === 1
+                      ? 'shadow-[0_20px_50px_rgba(99,102,241,0.35)] border-[#818cf8]/60 z-10 opacity-100'
+                      : 'border-white/10 opacity-60 hover:opacity-95'
+                  }`}
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  style={{
+                    background: activeHeroSlide === 1
+                      ? 'linear-gradient(135deg, #1e1b4b 0%, #4f46e5 40%, #6366f1 100%)'
+                      : 'linear-gradient(135deg, #0f172a 0%, #312e81 60%, #3730a3 100%)',
+                    transform: `perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale(var(--card-scale, ${activeHeroSlide === 1 ? '1.04' : '1'}))`,
+                    transformStyle: 'preserve-3d',
+                    transition: 'transform 0.3s cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease',
+                  }}
+                >
+                  {/* Dynamic Spotlight Shine */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.18) 0%, transparent 60%)',
+                      mixBlendMode: 'overlay',
+                    }}
+                  />
+                  {/* Single-Sweep Gloss Sheen */}
+                  <div className="card-shimmer" />
+                  
+                  {/* Badge Top Right */}
+                  <div className="z-10 self-end" style={{ transform: 'translateZ(25px)' }}>
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-sm text-[8px] font-mono font-black text-white uppercase tracking-wider">
+                      Growth +1424
+                    </span>
+                  </div>
+
+                  {/* Content/Illustration Area */}
+                  <div 
+                    className="w-full flex-1 flex items-center justify-center pointer-events-none transition-transform duration-500"
+                    style={{ transform: 'translateZ(32px)', transformStyle: 'preserve-3d' }}
+                  >
+                    <svg viewBox="0 0 240 160" className="w-full h-auto max-h-[120px]" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="react-orbit-grad" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stopColor="#61dafb"/>
+                          <stop offset="100%" stopColor="#c084fc"/>
+                        </linearGradient>
+                      </defs>
+                      <rect x="35" y="20" width="170" height="102" rx="8" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" fill="rgba(255,255,255,0.06)" />
+                      <rect x="40" y="25" width="160" height="84" rx="4" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
+                      <path d="M 20 122 L 220 122 C 220 122, 215 136, 205 136 L 35 136 C 25 136, 20 122, 20 122 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                      <rect x="105" y="127" width="30" height="6" rx="2" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+                      <line x1="68" y1="25" x2="68" y2="109" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
+                      <rect x="46" y="32" width="16" height="5" rx="1.5" fill="rgba(255,255,255,0.3)" />
+                      <rect x="46" y="42" width="12" height="5" rx="1.5" fill="rgba(255,255,255,0.15)" />
+                      <rect x="46" y="52" width="18" height="5" rx="1.5" fill="rgba(255,255,255,0.15)" />
+                      <rect x="74" y="32" width="36" height="6" rx="1.5" fill="rgba(255,255,255,0.4)" />
+                      <rect x="74" y="44" width="70" height="5" rx="1" fill="rgba(255,255,255,0.2)" />
+                      <rect x="86" y="54" width="50" height="5" rx="1" fill="rgba(255,255,255,0.2)" />
+                      <rect x="86" y="64" width="65" height="5" rx="1" fill="rgba(255,255,255,0.3)" />
+                      <g transform="translate(170, 52) scale(0.68)">
+                        <g className="animate-spin-slow" style={{ transformOrigin: '0px 0px' }}>
+                          <ellipse rx="24" ry="9" stroke="url(#react-orbit-grad)" strokeWidth="2" fill="none" transform="rotate(0)" />
+                          <ellipse rx="24" ry="9" stroke="url(#react-orbit-grad)" strokeWidth="2" fill="none" transform="rotate(60)" />
+                          <ellipse rx="24" ry="9" stroke="url(#react-orbit-grad)" strokeWidth="2" fill="none" transform="rotate(120)" />
+                        </g>
+                        <circle r="4.5" fill="#61dafb" className="animate-pulse" />
+                      </g>
+                    </svg>
+                  </div>
+
+                  {/* Badge Bottom Left */}
+                  <div className="z-10 mt-3 self-start" style={{ transform: 'translateZ(20px)' }}>
+                    <span className={`px-3 py-1 rounded-full text-[10px] font-sans font-bold shadow-sm transition-all duration-300 ${
+                      activeHeroSlide === 1
+                        ? 'bg-white text-[#6366f1]'
+                        : 'bg-white/10 text-white/90 backdrop-blur-md border border-white/15'
+                    }`}>
+                      React Systems
+                    </span>
+                  </div>
+                </div>
+
+                {/* ── CARD 3: Shine together (Bottom-Left) ── */}
+                <div
+                  data-active={activeHeroSlide === 2}
+                  onClick={() => setActiveHeroSlide(2)}
+                  className={`group/card relative rounded-[24px] overflow-hidden p-5 flex flex-col justify-between cursor-pointer border ${
+                    activeHeroSlide === 2
+                      ? 'shadow-[0_20px_50px_rgba(236,72,153,0.35)] border-[#f472b6]/60 z-10 opacity-100'
+                      : 'border-white/10 opacity-60 hover:opacity-95'
+                  }`}
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  style={{
+                    background: activeHeroSlide === 2
+                      ? 'linear-gradient(135deg, #500724 0%, #db2777 40%, #f472b6 100%)'
+                      : 'linear-gradient(135deg, #18000a 0%, #831843 60%, #9d174d 100%)',
+                    transform: `perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale(var(--card-scale, ${activeHeroSlide === 2 ? '1.04' : '1'}))`,
+                    transformStyle: 'preserve-3d',
+                    transition: 'transform 0.3s cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease',
+                  }}
+                >
+                  {/* Dynamic Spotlight Shine */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.18) 0%, transparent 60%)',
+                      mixBlendMode: 'overlay',
+                    }}
+                  />
+                  {/* Single-Sweep Gloss Sheen */}
+                  <div className="card-shimmer" />
+                  
+                  {/* Content/Illustration Area */}
+                  <div 
+                    className="w-full flex-1 flex items-center justify-center pointer-events-none transition-transform duration-500"
+                    style={{ transform: 'translateZ(32px)', transformStyle: 'preserve-3d' }}
+                  >
+                    <svg viewBox="0 0 240 160" className="w-full h-auto max-h-[120px]" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
+                          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.85"/>
+                          <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+                        </radialGradient>
+                      </defs>
+                      <g opacity="0.25" stroke="#ffffff" strokeWidth="1">
+                        <line x1="20" y1="120" x2="120" y2="40" />
+                        <line x1="60" y1="140" x2="180" y2="40" />
+                        <line x1="120" y1="140" x2="220" y2="60" />
+                        <line x1="20" y1="120" x2="120" y2="140" />
+                        <line x1="60" y1="80" x2="180" y2="140" />
+                        <line x1="120" y1="40" x2="220" y2="60" />
+                      </g>
+                      <g transform="translate(0, -8)">
+                        <line x1="120" y1="90" x2="65" y2="125" stroke="#ffffff" strokeWidth="2.2" opacity="0.85" />
+                        <line x1="120" y1="90" x2="175" y2="115" stroke="#ffffff" strokeWidth="2.2" opacity="0.85" />
+                        <line x1="120" y1="90" x2="135" y2="45" stroke="#ffffff" strokeWidth="2.2" opacity="0.85" />
+                        <line x1="65" y1="125" x2="135" y2="45" stroke="#ffffff" strokeWidth="1" strokeDasharray="3 3" opacity="0.5" />
+                        <line x1="175" y1="115" x2="135" y2="45" stroke="#ffffff" strokeWidth="1" strokeDasharray="3 3" opacity="0.5" />
+                        
+                        <circle cx="120" cy="90" r="20" fill="url(#node-glow)" className="glow-pulse" />
+                        <circle cx="65" cy="125" r="14" fill="url(#node-glow)" className="glow-pulse" style={{ animationDelay: '0.6s' }} />
+                        <circle cx="175" cy="115" r="16" fill="url(#node-glow)" className="glow-pulse" style={{ animationDelay: '1.2s' }} />
+                        
+                        <circle cx="120" cy="90" r="10.5" fill="#ffffff" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                        <circle cx="65" cy="125" r="7.5" fill="#ffffff" />
+                        <circle cx="175" cy="115" r="9" fill="#ffffff" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                        <circle cx="135" cy="45" r="6.5" fill="#ffffff" />
+                        
+                        <path d="M 115 96 A 5 5 0 0 1 125 96" stroke="#ec4899" strokeWidth="1.5" />
+                        <circle cx="120" cy="88" r="3.2" fill="#ec4899" />
+                        
+                        {/* Data packets flowing along lines */}
+                        <circle r="3" fill="#ffffff" className="animate-flow-dot-1" />
+                        <circle r="3" fill="#ffffff" className="animate-flow-dot-2" />
+                      </g>
+                    </svg>
+                  </div>
+
+                  {/* Badge Bottom Center */}
+                  <div className={`z-10 mt-3 self-center flex items-center gap-1.5 px-3.5 py-1 rounded-full shadow-sm transition-all duration-300 ${
+                    activeHeroSlide === 2
+                      ? 'bg-white'
+                      : 'bg-white/10 backdrop-blur-md border border-white/15'
+                  }`}
+                  style={{ transform: 'translateZ(20px)' }}>
+                    {/* Overlapping profile avatars representation */}
+                    <div className="flex -space-x-1.5">
+                      <div className="w-3.5 h-3.5 rounded-full bg-[#7c3aed] border border-black/20" />
+                      <div className="w-3.5 h-3.5 rounded-full bg-[#3b82f6] border border-black/20" />
+                      <div className="w-3.5 h-3.5 rounded-full bg-[#ec4899] border border-black/20" />
+                    </div>
+                    <span className={`text-[10px] font-sans font-bold transition-all duration-300 ${
+                      activeHeroSlide === 2
+                        ? 'text-[#ec4899]'
+                        : 'text-white/80'
+                    }`}>
+                      Shine together
+                    </span>
+                  </div>
+                </div>
+
+                {/* ── CARD 4: Cloud & Scale (Bottom-Right) ── */}
+                <div
+                  data-active={activeHeroSlide === 3}
+                  onClick={() => setActiveHeroSlide(3)}
+                  className={`group/card relative rounded-[24px] overflow-hidden p-5 flex flex-col justify-between cursor-pointer border ${
+                    activeHeroSlide === 3
+                      ? 'shadow-[0_20px_50px_rgba(245,158,11,0.35)] border-[#fbbf24]/60 z-10 opacity-100'
+                      : 'border-white/10 opacity-60 hover:opacity-95'
+                  }`}
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  style={{
+                    background: activeHeroSlide === 3
+                      ? 'linear-gradient(135deg, #451a03 0%, #d97706 40%, #fbbf24 100%)'
+                      : 'linear-gradient(135deg, #1c1917 0%, #78350f 60%, #92400e 100%)',
+                    transform: `perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale(var(--card-scale, ${activeHeroSlide === 3 ? '1.04' : '1'}))`,
+                    transformStyle: 'preserve-3d',
+                    transition: 'transform 0.3s cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease',
+                  }}
+                >
+                  {/* Dynamic Spotlight Shine */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.18) 0%, transparent 60%)',
+                      mixBlendMode: 'overlay',
+                    }}
+                  />
+                  {/* Single-Sweep Gloss Sheen */}
+                  <div className="card-shimmer" />
+                  
+                  {/* Badge Top Left */}
+                  <div className="z-10 self-start" style={{ transform: 'translateZ(25px)' }}>
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-sm text-[8px] font-mono font-black text-white uppercase tracking-wider">
+                      8K
+                    </span>
+                  </div>
+
+                  {/* Content/Illustration Area */}
+                  <div 
+                    className="w-full flex-1 flex items-center justify-center pointer-events-none transition-transform duration-500"
+                    style={{ transform: 'translateZ(32px)', transformStyle: 'preserve-3d' }}
+                  >
+                    <svg viewBox="0 0 240 160" className="w-full h-auto max-h-[120px]" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g className="bob-1">
+                        <path d="M 0 -22 L 25 -34 L 50 -22 L 25 -10 Z" fill="rgba(255,255,255,0.35)" stroke="#ffffff" strokeWidth="1" />
+                        <path d="M 0 -22 L 25 -10 L 25 20 L 0 8 Z" fill="rgba(255,255,255,0.15)" stroke="#ffffff" strokeWidth="1" />
+                        <path d="M 25 -10 L 50 -22 L 50 8 L 25 20 Z" fill="rgba(255,255,255,0.22)" stroke="#ffffff" strokeWidth="1" />
+                        <line x1="8" y1="-2" x2="20" y2="4" stroke="#ffffff" strokeWidth="1.5" />
+                        <line x1="8" y1="6" x2="20" y2="12" stroke="#ffffff" strokeWidth="1.5" />
+                        <circle cx="34" cy="-2" r="1.5" className="led-green" />
+                      </g>
+                      <g className="bob-2">
+                        <path d="M 0 -22 L 25 -34 L 50 -22 L 25 -10 Z" fill="rgba(255,255,255,0.4)" stroke="#ffffff" strokeWidth="1" />
+                        <path d="M 0 -22 L 25 -10 L 25 24 L 0 12 Z" fill="rgba(255,255,255,0.12)" stroke="#ffffff" strokeWidth="1" />
+                        <path d="M 25 -10 L 50 -22 L 50 12 L 25 24 Z" fill="rgba(255,255,255,0.25)" stroke="#ffffff" strokeWidth="1" />
+                        <line x1="8" y1="-2" x2="20" y2="4" stroke="#ffffff" strokeWidth="1.5" />
+                        <line x1="8" y1="6" x2="20" y2="12" stroke="#ffffff" strokeWidth="1.5" />
+                        <circle cx="34" cy="-2" r="1.5" className="led-blue" />
+                      </g>
+                      <g className="bob-3">
+                        <path d="M 0 -22 L 25 -34 L 50 -22 Z" fill="rgba(255,255,255,0.3)" stroke="#ffffff" strokeWidth="1" />
+                        <path d="M 25 -10 L 50 -22 L 50 8 L 25 20 Z" fill="rgba(255,255,255,0.22)" stroke="#ffffff" strokeWidth="1" />
+                        <path d="M 0 -22 L 25 -10 L 25 20 L 0 8 Z" fill="rgba(255,255,255,0.15)" stroke="#ffffff" strokeWidth="1" />
+                        <line x1="8" y1="-2" x2="20" y2="4" stroke="#ffffff" strokeWidth="1.5" />
+                        <circle cx="34" cy="-2" r="1.5" className="led-red" />
+                      </g>
+                      <g className="bob-4">
+                        <ellipse cx="20" cy="10" rx="16" ry="6" fill="rgba(255,255,255,0.3)" stroke="#ffffff" strokeWidth="1" />
+                        <path d="M 4 10 L 4 25 A 16 6 0 0 0 36 25 L 36 10 Z" fill="rgba(255,255,255,0.15)" stroke="#ffffff" strokeWidth="1" />
+                        <path d="M 4 25 L 4 40 A 16 6 0 0 0 36 40 L 36 25 Z" fill="rgba(255,255,255,0.15)" stroke="#ffffff" strokeWidth="1" />
+                        <line x1="20" y1="16" x2="20" y2="40" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeDasharray="3 3" />
+                        <circle cx="20" cy="16" r="2.5" className="animate-pulse" fill="#ffffff" />
+                      </g>
+                    </svg>
+                  </div>
+
+                  {/* Badge Bottom Left */}
+                  <div className="z-10 mt-3 self-start" style={{ transform: 'translateZ(20px)' }}>
+                    <span className={`px-3 py-1 rounded-full text-[10px] font-sans font-bold shadow-sm transition-all duration-300 ${
+                      activeHeroSlide === 3
+                        ? 'bg-white text-[#f59e0b]'
+                        : 'bg-white/10 text-white/90 backdrop-blur-md border border-white/15'
+                    }`}>
+                      Cloud & Scale
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           </motion.div>
         </div>
