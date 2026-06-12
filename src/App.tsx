@@ -508,7 +508,7 @@ export default function App() {
           />
         )}
         {currentPage === 'case-studies' && <CaseStudiesPage openBooking={openBooking} />}
-        {currentPage === 'blog'         && <BlogPage />}
+        {currentPage === 'blog'         && <BlogPage openBooking={openBooking} />}
       </Suspense>
 
       {/* ── Home Content ── */}
