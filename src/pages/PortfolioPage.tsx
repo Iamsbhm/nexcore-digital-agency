@@ -4,15 +4,13 @@ import { ExternalLink, X, ShieldCheck, Code, Sparkles, BarChart3, ArrowLeft } fr
 
 interface PortfolioPageProps {
   openBooking: (plan: string, price: string) => void;
-  initialProjectTitle?: string | null;
-  onClearInitialProject?: () => void;
 }
 
 const categories = ['All', 'Branding', 'Web', 'Mobile', 'UI/UX'];
 
 const projects = [
   {
-    title: 'Nexcore Web Platform',
+    title: 'Pixel Vance Web Platform',
     category: 'Web',
     tags: ['React', 'TypeScript', 'TailwindCSS', 'WebGL', 'Framer Motion'],
     desc: 'Our own high-performance, next-generation agency website with interactive 3D elements.',
@@ -367,21 +365,43 @@ function ProjectDetailsView({ project, onBack, openBooking }: ProjectDetailsProp
 
 // ── Portfolio Page Main ──
 
-export default function PortfolioPage({ openBooking, initialProjectTitle, onClearInitialProject }: PortfolioPageProps) {
+export default function PortfolioPage({ openBooking }: PortfolioPageProps) {
   const [active, setActive] = useState('All');
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
+  const getSlug = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
   useEffect(() => {
-    if (initialProjectTitle) {
-      const proj = projects.find(p => p.title === initialProjectTitle);
-      if (proj) {
-        setSelectedProject(proj);
+    const handleUrlChange = () => {
+      const path = window.location.pathname;
+      if (path.startsWith('/portfolio/')) {
+        const slug = path.replace('/portfolio/', '');
+        const proj = projects.find(p => getSlug(p.title) === slug);
+        setSelectedProject(proj || null);
+      } else {
+        setSelectedProject(null);
       }
-      if (onClearInitialProject) {
-        onClearInitialProject();
-      }
-    }
-  }, [initialProjectTitle, onClearInitialProject]);
+    };
+
+    handleUrlChange();
+    window.addEventListener('popstate', handleUrlChange);
+    return () => window.removeEventListener('popstate', handleUrlChange);
+  }, []);
+
+  const selectProject = (proj: typeof projects[0]) => {
+    const slug = getSlug(proj.title);
+    window.history.pushState(null, '', `/portfolio/${slug}`);
+    setSelectedProject(proj);
+    window.scrollTo({ top: 0 });
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
+
+  const deselectProject = () => {
+    window.history.pushState(null, '', '/portfolio');
+    setSelectedProject(null);
+    window.scrollTo({ top: 0 });
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
 
   const filtered = active === 'All' ? projects : projects.filter(p => p.category === active);
 
@@ -392,10 +412,7 @@ export default function PortfolioPage({ openBooking, initialProjectTitle, onClea
           <ProjectDetailsView 
             key="details"
             project={selectedProject} 
-            onBack={() => {
-              setSelectedProject(null);
-              window.scrollTo({ top: 0 });
-            }} 
+            onBack={deselectProject} 
             openBooking={openBooking} 
           />
         ) : (
@@ -449,7 +466,7 @@ export default function PortfolioPage({ openBooking, initialProjectTitle, onClea
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.07 }}
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => selectProject(project)}
                   className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/15 transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
                 >
                   <div>

@@ -338,7 +338,7 @@ export default function ServiceSelector() {
         categoryColor={selected?.catColor ?? '#c5a059'}
         categoryIcon={selected?.catIcon ?? 'Compass'}
         onBooking={(plan, price) => {
-          window.dispatchEvent(new CustomEvent('nexcore:openBooking', { detail: { plan, price } }));
+          window.dispatchEvent(new CustomEvent('pixelvance:openBooking', { detail: { plan, price } }));
         }}
       />
     </>

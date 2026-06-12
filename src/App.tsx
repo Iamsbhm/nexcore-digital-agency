@@ -47,7 +47,16 @@ const PortfolioPage   = lazy(() => import('./pages/PortfolioPage'));
 const CaseStudiesPage = lazy(() => import('./pages/CaseStudiesPage'));
 const BlogPage        = lazy(() => import('./pages/BlogPage'));
 
-type PageName = 'home' | 'about' | 'portfolio' | 'case-studies' | 'blog';
+const getSlug = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+const getPageFromPath = (): PageName => {
+  const path = window.location.pathname;
+  if (path === '/about') return 'about';
+  if (path === '/portfolio' || path.startsWith('/portfolio/')) return 'portfolio';
+  if (path === '/case-studies') return 'case-studies';
+  if (path === '/blog' || path.startsWith('/blog/')) return 'blog';
+  return 'home';
+};
 
 export default function App() {
   // Navigation
@@ -55,10 +64,15 @@ export default function App() {
   const [scrolled, setScrolled] = useState<boolean>(false);
 
   // Page routing
-  const [currentPage, setCurrentPage] = useState<PageName>('home');
+  const [currentPage, setCurrentPage] = useState<PageName>(getPageFromPath());
 
-  // Selected project for portfolio modal
-  const [initialProjectTitle, setInitialProjectTitle] = useState<string | null>(null);
+  useEffect(() => {
+    const handleUrlChange = () => {
+      setCurrentPage(getPageFromPath());
+    };
+    window.addEventListener('popstate', handleUrlChange);
+    return () => window.removeEventListener('popstate', handleUrlChange);
+  }, []);
 
   // Booking Modal State
   const [bookingOpen, setBookingOpen] = useState<boolean>(false);
@@ -158,8 +172,8 @@ export default function App() {
       // Small delay so service modal close animation finishes first
       setTimeout(() => openBookingRef.current(plan, price), 80);
     };
-    window.addEventListener('nexcore:openBooking', handler);
-    return () => window.removeEventListener('nexcore:openBooking', handler);
+    window.addEventListener('pixelvance:openBooking', handler);
+    return () => window.removeEventListener('pixelvance:openBooking', handler);
   }, []);
 
   const openBooking = (planName: string, price: string = 'Custom') => {
@@ -175,7 +189,7 @@ export default function App() {
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
     if (currentPage !== 'home') {
-      setCurrentPage('home');
+      navigateTo('/');
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -255,10 +269,14 @@ export default function App() {
   }, [currentPage]);
 
   // Page navigation helper
-  const navigateTo = (page: PageName) => {
-    setCurrentPage(page);
+  const navigateTo = (path: string) => {
+    window.history.pushState(null, '', path);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Trigger URL change handlers
+    const event = new PopStateEvent('popstate');
+    window.dispatchEvent(event);
   };
 
   // Helper lists
@@ -334,7 +352,7 @@ export default function App() {
           
           {/* Brand Signature */}
           <button 
-            onClick={() => currentPage === 'home' ? scrollToSection('hero') : navigateTo('home')} 
+            onClick={() => currentPage === 'home' ? scrollToSection('hero') : navigateTo('/')} 
             className="flex items-center gap-3 group text-left cursor-pointer transition-all"
             id="brand-logo-btn"
             aria-label="Pixel Vance Digital — Go to homepage"
@@ -403,7 +421,7 @@ export default function App() {
             ))}
             {/* About Us — page navigation */}
             <button
-              onClick={() => navigateTo('about')}
+              onClick={() => navigateTo('/about')}
               id="nav-link-about"
               className={`text-[10px] font-mono tracking-[0.2em] pb-0.5 border-b transition-all cursor-pointer relative py-1 ${
                 currentPage === 'about'
@@ -464,7 +482,7 @@ export default function App() {
               ))}
 
               <button
-                onClick={() => { setMobileMenuOpen(false); navigateTo('about'); }}
+                onClick={() => { setMobileMenuOpen(false); navigateTo('/about'); }}
                 id="mobile-nav-link-about"
                 className={`w-full text-left py-3.5 px-2 text-xs font-semibold border-b border-white/[0.05] block font-mono tracking-widest cursor-pointer transition-colors ${
                   currentPage === 'about' ? 'text-[#c5a059]' : 'text-white hover:text-[#c5a059]'
@@ -503,8 +521,6 @@ export default function App() {
         {currentPage === 'portfolio'    && (
           <PortfolioPage 
             openBooking={openBooking} 
-            initialProjectTitle={initialProjectTitle} 
-            onClearInitialProject={() => setInitialProjectTitle(null)} 
           />
         )}
         {currentPage === 'case-studies' && <CaseStudiesPage openBooking={openBooking} />}
@@ -1152,7 +1168,7 @@ export default function App() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             {
-              title: 'Nexcore Web Platform',
+              title: 'Pixel Vance Web Platform',
               category: 'Web',
               tags: ['React', 'TypeScript', 'TailwindCSS', 'WebGL'],
               desc: 'Our own high-performance, next-generation agency website with interactive 3D elements.',
@@ -1179,9 +1195,7 @@ export default function App() {
             <div
               key={project.title}
               onClick={() => {
-                setInitialProjectTitle(project.title);
-                setCurrentPage('portfolio');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                navigateTo(`/portfolio/${getSlug(project.title)}`);
               }}
               className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/15 transition-all duration-350 hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between"
             >
@@ -1234,8 +1248,7 @@ export default function App() {
         <div className="text-center pt-8">
           <button
             onClick={() => {
-              setCurrentPage('portfolio');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              navigateTo('/portfolio');
             }}
             className="inline-flex items-center gap-2 py-3 px-8 bg-transparent hover:bg-white/[0.03] border border-white/10 hover:border-white/20 text-white text-[10px] font-mono tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer rounded-xl"
           >
@@ -1613,14 +1626,14 @@ export default function App() {
                 <h5 className="text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-[#c5a059]">Company</h5>
                 <ul className="space-y-3">
                   {([
-                    { label: 'About Us',           page: 'about'        as PageName },
-                    { label: 'Design Portfolio',    page: 'portfolio'    as PageName },
-                    { label: 'Client Case Studies', page: 'case-studies' as PageName },
-                    { label: 'Engineering Blog',    page: 'blog'         as PageName },
-                  ]).map(({ label, page }) => (
+                    { label: 'About Us',           path: '/about' },
+                    { label: 'Design Portfolio',    path: '/portfolio' },
+                    { label: 'Client Case Studies', path: '/case-studies' },
+                    { label: 'Engineering Blog',    path: '/blog' },
+                  ]).map(({ label, path }) => (
                     <li key={label}>
                       <button
-                        onClick={() => navigateTo(page)}
+                        onClick={() => navigateTo(path)}
                         id={`footer-company-${label.toLowerCase().replace(/\s+/g, '-')}`}
                         className="text-[11px] text-white/35 hover:text-white transition-colors duration-200 text-left group flex items-center gap-2"
                       >

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Clock, ArrowRight, ArrowLeft } from 'lucide-react';
 
 interface PostContentBlock {
@@ -17,22 +17,37 @@ const posts = [
     gradient: 'from-emerald-600/25 to-transparent',
     accent: '#10b981',
     content: [
-      { type: 'p', text: 'Largest Contentful Paint (LCP) is one of the most critical Core Web Vitals metrics monitored by Google. It tracks how quickly the main content of a page is rendered. While Google benchmarks 2.5 seconds as "Good", aiming for a sub-second LCP (under 1.0s) puts your website in the top tier, significantly improving organic search rankings and decreasing user bounce rates.' },
-      { type: 'h2', text: '1. Lazy Loading Non-Critical Components' },
-      { type: 'p', text: 'By default, Next.js packages all imports into the main page bundle. For heavy interactive widgets, maps, or modals, this is highly inefficient. You should load them dynamically on demand using next/dynamic:' },
-      { type: 'code', text: `import dynamic from 'next/dynamic';\n\nconst InteractiveConsole = dynamic(() => import('@/components/SpatialConsole'), {\n  ssr: false,\n  loading: () => <div className="h-48 animate-pulse bg-white/5 rounded-2xl" />\n});` },
-      { type: 'h2', text: '2. Optimizing the Image Delivery Pipeline' },
-      { type: 'p', text: 'Unoptimized images are the primary cause of slow LCP. Utilize the next/image component to automatically serve WebP/AVIF formats, scale sizes dynamically, and prevent layout shifts. For primary hero graphics, always attach the priority property to prefetch them:' },
-      { type: 'code', text: `<Image\n  src="/images/hero_visual.png"\n  alt="Hero Showcase"\n  width={1200}\n  height={630}\n  priority\n  className="object-cover"\n/>` },
-      { type: 'h2', text: '3. Streaming Server Components' },
-      { type: 'p', text: 'With Next.js App Router, you can stream slow data fetch actions. Wrap dynamic parts in React Suspense. This lets the server deliver the HTML shell instantly while the client streams and inflates components as their queries resolve:' },
-      { type: 'code', text: `<Suspense fallback={<LoadingSkeleton />}>\n  <DynamicMetricsGrid />\n</Suspense>` },
-      { type: 'h2', text: 'Summary Checklist' },
+      { type: 'p', text: 'Largest Contentful Paint (LCP) is one of the three core metrics monitored in Google\'s Core Web Vitals. It measures the time taken to render the largest image or text block visible within the viewport. While a score below 2.5s is defined as "Good" by Google, target systems built for enterprise conversions must aim for a sub-second LCP (under 1000ms). Websites achieving sub-second LCP experience lower bounce rates, higher user engagement, and a distinct ranking boost in search engine result pages (SERPs).' },
+      
+      { type: 'h2', text: 'Understanding the LCP Breakdown' },
+      { type: 'p', text: 'To optimize LCP, you must break down the loading sequence into four distinct phases: Time to First Byte (TTFB), Resource Load Delay, Resource Load Time, and Element Render Delay. Every optimization we implement acts directly on one of these phases. At Pixel Vance Digital, our benchmark for client deliverables is a sub-second LCP, which demands strict management of CSS, JavaScript, and asset assets.' },
+      
+      { type: 'h2', text: '1. Lazy Loading Non-Critical Components via Dynamic Imports' },
+      { type: 'p', text: 'Next.js automatically code-splits pages, but large component libraries, interactive canvas components (such as WebGL), charts, or complex scheduling modals can still bloat the initial JavaScript bundle. When JavaScript is parsed by the browser, it blocks rendering. Utilizing next/dynamic allows you to lazy-load components so they are only fetched when required:' },
+      { type: 'code', text: `import dynamic from 'next/dynamic';\n\n// Load heavy 3D rendering console only on demand, bypassing initial load\nconst SpatialConsole = dynamic(() => import('@/components/SpatialConsole'), {\n  ssr: false,\n  loading: () => <div className="h-96 animate-pulse bg-white/5 border border-white/10 rounded-2xl" />\n});` },
+      { type: 'p', text: 'By offloading heavy interactive modules, you reduce the initial bundle size, allowing the browser to parse HTML and render primary LCP content significantly faster.' },
+      
+      { type: 'h2', text: '2. Implementing next/image for Responsive Asset Delivery' },
+      { type: 'p', text: 'Unoptimized raster images are the most common source of high element render delays. Next.js provides the next/image wrapper, which converts images to optimized formats like WebP or AVIF on the fly, resizes assets to match device viewport layouts, and sets up layout dimensions to prevent Cumulative Layout Shift (CLS).' },
+      { type: 'p', text: 'For primary hero banners or background images that represent the LCP element itself, never let the browser lazy-load. Set the priority property to instruct the bundler to preload the asset immediately:' },
+      { type: 'code', text: `<Image\n  src="/images/nexcore_web_platform.png"\n  alt="Pixel Vance Dashboard Mockup"\n  width={1200}\n  height={630}\n  priority\n  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"\n  className="object-cover rounded-3xl"\n/>` },
+      
+      { type: 'h2', text: '3. Streaming Server Components via Suspense Boundary' },
+      { type: 'p', text: 'When rendering server-side components (SSR), a slow database query can block the entire page response, increasing TTFB. The Next.js App Router leverages React Server Components and HTML streaming, allowing you to wrap slow data-fetching components inside React Suspense boundaries. The server delivers the static page shell immediately, and streams individual dynamic sections once queries resolve:' },
+      { type: 'code', text: `import { Suspense } from 'react';\nimport { MetricsLoader } from './MetricsLoader';\nimport { SkeletonGrid } from './SkeletonGrid';\n\nexport default function DashboardPage() {\n  return (\n    <div className="space-y-8">\n      <h1 className="text-3xl font-display text-white">Analytics Overview</h1>\n      <Suspense fallback={<SkeletonGrid />}>\n        <MetricsLoader />\n      </Suspense>\n    </div>\n  );\n}` },
+      
+      { type: 'h2', text: '4. Prefetching & Font Optimization' },
+      { type: 'p', text: 'Minimize font load delays by utilizing @next/font. This downloads web fonts at build time, hosts them locally, and inserts font declarations directly into the CSS bundle. Set font-display: swap to ensure fallback system fonts are rendered instantly while primary typography resolves, eliminating render-blocking layout flashes. Combining font declarations directly in Next.js reduces external domain requests to third-party services like Google Fonts, preventing critical delays.' },
+      
+      { type: 'quote', text: '"Page load speed is not just an engineering metric; it is a fundamental pillar of user experience and organic search engine discovery. Every 100ms of loading latency correlates directly with a drop in conversions. At Pixel Vance Digital, speed is our core feature."' },
+      
+      { type: 'h2', text: 'Sub-Second LCP Checklist for Developers' },
       { type: 'ul', text: [
-        'Dynamic import for heavy third-party libs (charts, map components).',
-        'Enable preconnect link elements in the document head for DNS resolution.',
-        'Use priority on any above-the-fold image layout block.',
-        'Configure local font-preloading to eliminate layout shifts (CLS).'
+        'Audit bundle weights using @next/bundle-analyzer regularly.',
+        'Preconnect to external api domains to speed up DNS handshakes.',
+        'Preload above-the-fold images and dynamic local fonts.',
+        'Wrap database-fetching components in dynamic Suspense streams.',
+        'Cache static files at the edge using a global CDN (e.g. Vercel, Cloudflare).'
       ]}
     ]
   },
@@ -45,14 +60,31 @@ const posts = [
     gradient: 'from-[#c5a059]/25 to-transparent',
     accent: '#c5a059',
     content: [
-      { type: 'p', text: 'Financial software often fails because it overwhelms users. In fintech design, the core challenge is taking complex datasets—cash flow sheets, live stocks, asset transaction logs—and translating them into a visually digestible layout that minimizes cognitive load.' },
-      { type: 'h2', text: '1. The Golden Quad Rule of Dashboard Grids' },
-      { type: 'p', text: 'Users scan screens in an F-shaped pattern. Place the absolute high-level status numbers (e.g., Total Net Balance, Active Yields) in the top-left section. Historical charts should occupy the middle columns, while long detail lists are reserved for the bottom or side tables.' },
-      { type: 'h2', text: '2. Progressive Disclosure vs. Over-Notification' },
-      { type: 'p', text: 'Avoid listing everything on a single panel. Use progressive disclosure: display high-level summaries first, and allow detailed log drilling only when the user clicks a card. This keeps the default screen layout clean and focused.' },
-      { type: 'quote', text: '"Complexity is fine; confusion is not. Progressive disclosure ensures that data is shown only at the moment of need, protecting the user from decision fatigue."' },
+      { type: 'p', text: 'Fintech dashboards are highly complex interfaces. Users frequently navigate vast quantities of dense information, such as real-time stock indexes, trade volume logs, cash flow metrics, and transaction ledgers. The primary goal of a UX designer is to organize this information to minimize cognitive fatigue, helping users make critical financial decisions quickly and without error.' },
+      
+      { type: 'h2', text: '1. The Golden Quad Scanning Pattern' },
+      { type: 'p', text: 'Eyetracking studies confirm that users scan digital displays in an F-shaped pattern, concentrating focus on the top and left quadrants. Place high-level status widgets (e.g., Total Net Balance, Active Cash Flow, Alert Flags) in this golden zone. Middle areas are reserved for historical timeline line charts, and the lower rows or right sidebar components house search logs and transaction tables. By arranging layout hierarchies to match default scanning behaviors, users absorb critical stats in under 2 seconds.' },
+      
+      { type: 'h2', text: '2. Implementing Progressive Disclosure' },
+      { type: 'p', text: 'Dumping all details on a single display creates immediate visual noise. Use progressive disclosure: show clean, high-level summaries first, and allow detailed exploration only when a user clicks. This preserves white space and maintains focus. Pixel Vance Digital applies this by defaulting panels to summarized cards while utilizing overlay modals or sub-pages to reveal expanded logs upon click.' },
+      
+      { type: 'quote', text: '"Designers often confuse density with complexity. A dashboard can be data-dense while remaining clean if you structure it so that detail is revealed only at the moment of need."' },
+      
       { type: 'h2', text: '3. Designing Contextual Color Indicators' },
-      { type: 'p', text: 'Every color in a financial dashboard must have a specific purpose. Use soft, non-saturated tones. Green should strictly denote upward growth, and red should highlight transactions requiring urgent attention. Neutral slate tones are best for default states and label styling.' }
+      { type: 'p', text: 'Color in fintech dashboards must carry meaning, not serve as generic decoration. Set up low-saturation palettes to avoid eye strain. Green should exclusively signify positive growth, while red highlights anomalies requiring immediate attention. Neutral colors like slate gray should be used for secondary text labels. By establishing strict semantic colors, users map visual changes to real-world performance instantly.' },
+      { type: 'code', text: `/* Core Semantic Color Tokens */\n:root {\n  --color-status-success: #10b981;  /* Low-saturation Emerald Green */\n  --color-status-warning: #f59e0b;  /* Soft Amber Gold */\n  --color-status-error: #ef4444;    /* Alert Red */\n  --color-neutral-muted: #64748b;   /* Slate Gray for secondary info */\n}` },
+      
+      { type: 'h2', text: '4. Typography and Number Readability' },
+      { type: 'p', text: 'When rendering numbers, always use monospaced numerals (tabular figures) like JetBrains Mono or tabular settings in Space Grotesk. Standard proportional numbers have variable widths (e.g., "1" is narrower than "8"), which causes numbers in tables to misalign vertically and flicker during real-time updates. Monospaced rendering ensures decimal points line up vertically, allowing immediate comparison.' },
+      
+      { type: 'h2', text: 'Key UX Dashboard Guidelines' },
+      { type: 'ul', text: [
+        'Utilize tabular monospaced numbers for all dynamic and static metrics.',
+        'Keep visual focus balanced by placing key actions on the top right.',
+        'Enforce progressive disclosure to keep layouts clean and breathable.',
+        'Choose curated, low-saturation hues to limit visual eye strain over long sessions.',
+        'Ensure critical alerts trigger screen-reader notifications for accessibility.'
+      ]}
     ]
   },
   {
@@ -64,14 +96,28 @@ const posts = [
     gradient: 'from-blue-600/25 to-transparent',
     accent: '#3b82f6',
     content: [
-      { type: 'p', text: 'As AI search integrations (like Google SGE) take over, traditional keyword stuffing is completely dead. Enterprise organic traffic growth now depends on establishing semantic authority, structuring pages cleanly, and publishing detailed, original technical content.' },
-      { type: 'h2', text: '1. Structured Data Rich Snippets (JSON-LD)' },
-      { type: 'p', text: 'Search crawlers need programmatic structure to map who you are. Implementing structured schema scripts in your HTML head lets crawlers serve rich snippets (star ratings, site links, pricing tiers) directly in search pages, increasing click-through rates by up to 30%:' },
-      { type: 'code', text: `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Organization",\n  "name": "Pixel Vance",\n  "url": "https://www.pixelvancedigital.com"\n}\n</script>` },
-      { type: 'h2', text: '2. Core Web Vitals as a Ranking Vector' },
-      { type: 'p', text: 'Google prioritizes user experience as a ranking factor. Slow, laggy pages drive users back to search results, signaling poor page quality. A fast, sub-second LCP and low Interaction to Next Paint (INP) directly boost your search rankings.' },
-      { type: 'h2', text: '3. Semantic Content Hubs' },
-      { type: 'p', text: 'Instead of scattershot articles, build clusters around core pillars. For instance, link multiple specific articles on React rendering (SSR, static generation, hydrate) back to a single parent page. This signals comprehensive domain authority to Google.' }
+      { type: 'p', text: 'The organic search landscape has shifted dramatically. With Google introducing Search Generative Experience (SGE) and AI-driven direct answers, traditional keyword density stuffing is completely obsolete. Enterprise organic traffic growth now depends on establishing semantic authority, structuring pages cleanly, and publishing detailed, original technical content. Pixel Vance Digital leads enterprise search marketing projects by focusing on technical indexability, high-converting copy, and structured schema tags.' },
+      
+      { type: 'h2', text: '1. Structured Data Schema Markup (JSON-LD)' },
+      { type: 'p', text: 'Search crawlers use structured schema scripts in your HTML head to index your pages. Adding JSON-LD schemas helps engines serve rich snippets (such as star ratings, site links, pricing tiers, and article details) directly in search pages, increasing click-through rates (CTR) by up to 30%:' },
+      { type: 'code', text: `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Article",\n  "headline": "The 2026 Blueprint for Enterprise Organic Traffic Growth",\n  "author": {\n    "@type": "Organization",\n    "name": "Pixel Vance Digital"\n  },\n  "datePublished": "2026-05-12",\n  "publisher": {\n    "@type": "Organization",\n    "name": "Pixel Vance Digital",\n    "logo": {\n      "@type": "ImageObject",\n      "url": "https://www.pixelvancedigital.com/logo.png"\n    }\n  }\n}\n</script>` },
+      
+      { type: 'h2', text: '2. Building Semantic Content Clusters' },
+      { type: 'p', text: 'Search engines rank sites based on topical authority, not single articles. Instead of publishing disconnected posts, structure content in clusters around core pillars. For instance, link multiple specific articles on React rendering (SSR, static generation, dynamic hydration) back to a single parent page. This indicates comprehensive domain authority to web crawlers.' },
+      
+      { type: 'h2', text: '3. Technical UX and Page Load Signals' },
+      { type: 'p', text: 'Google explicitly uses page speed and user interaction metrics as ranking factors. Slow, laggy pages drive users back to search results, signaling poor quality to search engine algorithms and ranking your site lower. Core Web Vitals are directly linked to your SEO performance. Optimizing largest contentful paint (LCP) and interaction to next paint (INP) are mandatory milestones.' },
+      
+      { type: 'quote', text: '"A website that loads in under 1 second will naturally convert more search visitors and maintain higher rankings than a slower site, even if their content is identical. Technical SEO is the foundation of digital growth. Working with Pixel Vance Digital gives businesses this unfair technical advantage."' },
+      
+      { type: 'h2', text: 'Core Enterprise SEO Strategy' },
+      { type: 'ul', text: [
+        'Deploy JSON-LD schemas for all articles, FAQs, and product pages.',
+        'Structure site hierarchy using semantic elements like main, section, and article.',
+        'Target long-tail, high-intent keywords to bypass generic domain competition.',
+        'Verify XML sitemaps and robots.txt configurations weekly.',
+        'Ensure 100% responsiveness and rapid loading on mobile viewports.'
+      ]}
     ]
   },
   {
@@ -83,11 +129,25 @@ const posts = [
     gradient: 'from-blue-600/25 to-transparent',
     accent: '#3b82f6',
     content: [
-      { type: 'p', text: 'Scale is the ultimate test of a design system. Naming variables and components haphazardly leads to fragmentation, duplicate assets, and developers abandoning the design system. Here is our checklist for structuring enterprise systems.' },
+      { type: 'p', text: 'Scaling a design system requires strict rules. Without clear guidelines for variables and components, you end up with duplicate assets and fragmented designs. When Pixel Vance Digital constructs design systems for large organizations, we align visual assets in Figma directly with UI tokens inside code repositories.' },
+      
       { type: 'h2', text: '1. Structuring Semantic Design Tokens' },
-      { type: 'p', text: 'Design tokens map core visual assets (colors, padding, roundness) to variables. Organize them in three tiers: Global (raw color palettes), Alias (semantic meanings like color-background-primary), and Component (specific overrides).' },
+      { type: 'p', text: 'Design tokens map core visual elements (colors, spacing, typography) to variables. Organize them in three tiers: Global (raw color palettes), Alias (semantic values like color-background-primary), and Component (specific overrides). This hierarchy ensures that changing a color theme across a site requires editing just a single line in a JSON token directory.' },
+      { type: 'code', text: `{\n  "global": {\n    "brand-gold": { "value": "#c5a059" }\n  },\n  "alias": {\n    "accent-color": { "value": "{global.brand-gold.value}" }\n  },\n  "component": {\n    "button-primary-bg": { "value": "{alias.accent-color.value}" }\n  }\n}` },
+      
       { type: 'h2', text: '2. Component Taxonomy & Variant Properties' },
-      { type: 'p', text: 'Avoid creating separate assets for minor variations. Use Figma component properties to configure toggles (like hasIcon) and text slots. This cuts catalog weight by 70%, keeping both design files and codebases clean.' }
+      { type: 'p', text: 'Rather than creating separate assets for minor variations, use Figma component properties to configure toggles (such as hasIcon) and text slots. This reduces catalog weight by 70%, keeping designs and codebases aligned. Ensure component naming schemes match React prop structures to streamline development handoff.' },
+      
+      { type: 'quote', text: '"A design system is not a project; it is a product that serves other product builders. The key to success is keeping design resources and engineering outputs locked in 1:1 synchronization."' },
+      
+      { type: 'h2', text: 'Design System Checklist' },
+      { type: 'ul', text: [
+        'Organize design tokens in Global, Alias, and Component structures.',
+        'Implement strict naming conventions across both Figma and React repositories.',
+        'Automate CSS variable outputs directly from design variables using Style Dictionary.',
+        'Provide comprehensive code guidelines and use-case references for developers.',
+        'Maintain a single source of truth for design assets to eliminate duplicates.'
+      ]}
     ]
   },
   {
@@ -99,11 +159,25 @@ const posts = [
     gradient: 'from-purple-600/25 to-transparent',
     accent: '#a855f7',
     content: [
-      { type: 'p', text: 'AI integration has shifted from simple chatbots to complex workflow automation. Having built 12 production-grade AI pipelines for various clients, we have compiled the key architectural rules for stable, cost-effective deployments.' },
+      { type: 'p', text: 'AI integration has shifted from simple chatbots to complex workflow automation. Having built 12 production-grade AI pipelines for various clients, Pixel Vance Digital has compiled the key architectural rules for stable, cost-effective deployments that increase operating efficiency.' },
+      
       { type: 'h2', text: '1. Restricting LLM Output Structure' },
-      { type: 'p', text: 'Raw string responses from LLMs are notoriously fragile to parse in code. Always enforce structured outputs (like JSON schemas) or use function-calling APIs to ensure outputs conform to your system requirements.' },
+      { type: 'p', text: 'Raw string responses from LLMs are notoriously fragile to parse in code. Always enforce structured outputs (like JSON schemas) or use function-calling APIs to ensure outputs conform to your system requirements. This eliminates parsing errors and guarantees database compatibility.' },
+      { type: 'code', text: `const chatCompletion = await openai.chat.completions.create({\n  model: "gpt-4o",\n  messages: [{ role: "user", content: "Extract customer data..." }],\n  response_format: { type: "json_object" }\n});` },
+      
       { type: 'h2', text: '2. Implementing Fallbacks & Guardrails' },
-      { type: 'p', text: 'LLMs can hallucinate or fail. Always configure fallback checks, timeout rules, and strict validation layers. If the structured response fails validation, retry with a correction prompt or route the task to a manual review queue.' }
+      { type: 'p', text: 'LLMs can hallucinate or fail. Always configure fallback checks, timeout rules, and strict validation layers. If the structured response fails validation, retry with a correction prompt or route the task to a manual review queue. Implementing a retry loop with correction logs reduces structural failures to less than 0.5%.' },
+      
+      { type: 'quote', text: '"Automation should never introduce chaos. When integration with AI models occurs, you must build robust validation layers around prompt responses to shield customer databases from unstructured data."' },
+      
+      { type: 'h2', text: 'AI Integration Guidelines' },
+      { type: 'ul', text: [
+        'Force structured output JSON formats to guarantee database integrity.',
+        'Build automatic validation layers to scan output structure on client APIs.',
+        'Configure prompt chains and deterministic scripts instead of single prompts.',
+        'Implement caching strategies for repeat questions to control API costs.',
+        'Monitor token logs and model latencies using telemetry tools.'
+      ]}
     ]
   },
   {
@@ -115,11 +189,27 @@ const posts = [
     gradient: 'from-[#c5a059]/25 to-transparent',
     accent: '#c5a059',
     content: [
-      { type: 'p', text: 'Traffic without conversion is just wasted budget. After designing and shipping 500+ landing pages, we have identified 7 conversion rate optimization (CRO) elements that consistently yield the highest returns.' },
+      { type: 'p', text: 'Traffic without conversion is just wasted budget. After designing and shipping 500+ landing pages, Pixel Vance Digital has identified 7 conversion rate optimization (CRO) elements that consistently yield the highest returns. Implementing these guarantees that you get the most out of your organic and paid marketing efforts.' },
+      
       { type: 'h2', text: '1. Above-the-Fold Value Proposition' },
-      { type: 'p', text: 'You have less than 5 seconds to capture a user\'s attention. State exactly what you solve, who you solve it for, and the immediate benefit. Keep paragraphs under 3 lines and CTA buttons highly visible.' },
+      { type: 'p', text: 'You have less than 5 seconds to capture a user\'s attention. State exactly what you solve, who you solve it for, and the immediate benefit. Keep paragraphs under 3 lines and CTA buttons highly visible. Eliminate visual clutter above the fold so the main action stands out immediately.' },
+      
       { type: 'h2', text: '2. Social Proof & Micro-interactions' },
-      { type: 'p', text: 'Show reviews, client logos, and numeric stats directly under your primary header. Use subtle interactive fade-ins to draw attention to metrics without distracting the user from the content.' }
+      { type: 'p', text: 'Show reviews, client logos, and numeric stats directly under your primary header. Use subtle interactive fade-ins to draw attention to metrics without distracting the user from the content. Social proof establishes trust before the user scroll begins.' },
+      
+      { type: 'quote', text: '"Conversion rate optimization is not about tricks; it is about reducing friction. Make it easy for the visitor to understand your offer and take the next step. Simple design converts best."' },
+      
+      { type: 'h2', text: '3. Form Fields & Action Triggers' },
+      { type: 'p', text: 'Reducing form fields from 5 to 3 can boost form submission rates by up to 25%. Only ask for essential data initially. Enable automatic autofill tags to streamline input. Ensure CTA button copy is descriptive and action-oriented (e.g. "Start My Free Trial" instead of "Submit").' },
+      
+      { type: 'h2', text: 'Core CRO Elements to Test' },
+      { type: 'ul', text: [
+        'Headline clarity: Test explicit benefits versus creative hook copy.',
+        'CTA button color and copy: Ensure high visual contrast.',
+        'Logo placement: Place client badges directly below the main header.',
+        'Form inputs: Limit fields to Name and Email to reduce friction.',
+        'Page speed: Eliminate slow-loading scripts to reduce drop-offs.'
+      ]}
     ]
   },
   {
@@ -131,9 +221,25 @@ const posts = [
     gradient: 'from-emerald-600/25 to-transparent',
     accent: '#10b981',
     content: [
-      { type: 'p', text: 'Maintaining separate repositories for website code, server components, and design libraries creates massive overhead. Moving to a monorepo setup saved our team over 40 hours of maintenance work every month.' },
+      { type: 'p', text: 'Maintaining separate repositories for website code, server components, and design libraries creates massive overhead. Moving client builds to a monorepo setup saved Pixel Vance Digital over 40 hours of maintenance work every month, allowing us to ship features and updates much faster.' },
+      
       { type: 'h2', text: '1. Shared Tools & Linters' },
-      { type: 'p', text: 'With a monorepo (using Turborepo or pnpm workspaces), linting profiles, code formats, and tsconfig profiles are defined globally. When shared packages or utilities are updated, dependencies recompile instantly across all apps.' }
+      { type: 'p', text: 'With a monorepo (using Turborepo or pnpm workspaces), linting profiles, code formats, and tsconfig profiles are defined globally. When shared packages or utilities are updated, dependencies recompile instantly across all apps. This maintains code consistency across all developers on our team.' },
+      { type: 'code', text: `// pnpm-workspace.yaml\npackages:\n  - 'apps/*'\n  - 'packages/*'\n  - 'shared-ui'` },
+      
+      { type: 'h2', text: '2. Faster Onboarding & Version Control' },
+      { type: 'p', text: 'Onboarding new developers to a single repository takes minutes. They download one codebase, run a single pnpm install, and launch all servers simultaneously. Bug fixes are applied once in the shared core and immediately roll out to the web client, CMS, and admin console.' },
+      
+      { type: 'quote', text: '"Managing multiple repositories for a single product ecosystem is an anti-pattern. A monorepo synchronizes releases and tool configurations, allowing our engineers to focus on code rather than devops overhead."' },
+      
+      { type: 'h2', text: 'Benefits of a Monorepo' },
+      { type: 'ul', text: [
+        'Linting profiles and configs are updated in a single central folder.',
+        'Package dependencies are shared to prevent version drift.',
+        'Shared design system libraries update globally on build.',
+        'Simplifies CI/CD pipelines to a single build script.',
+        'Drastically reduces node_modules size on developer machines.'
+      ]}
     ]
   },
   {
@@ -145,9 +251,24 @@ const posts = [
     gradient: 'from-rose-600/25 to-transparent',
     accent: '#f43f5e',
     content: [
-      { type: 'p', text: 'A great logo isn\'t a pretty illustration; it is a visual identifier. In a crowded digital market, the best brand marks prioritize clarity and adaptability across different platforms.' },
+      { type: 'p', text: 'A great logo isn\'t a pretty illustration; it is a visual identifier. In a crowded digital market, the best brand marks prioritize clarity and adaptability across different platforms. Pixel Vance Digital designs visual identities that scale from physical billboards to tiny browser tab icons.' },
+      
       { type: 'h2', text: '1. Designing for the App Icon Grid' },
-      { type: 'p', text: 'Always test logo concepts in a 16x16 pixel grid. If the icon loses detail or becomes unreadable at small sizes, it will fail as a favicon, social avatar, or app icon. Keep geometry minimal and bold.' }
+      { type: 'p', text: 'Always test logo concepts in a 16x16 pixel grid. If the icon loses detail or becomes unreadable at small sizes, it will fail as a favicon, social avatar, or app icon. Keep geometry minimal and bold. Modern screens demand simplified geometry to remain visible in dark modes and dense dashboard layouts.' },
+      
+      { type: 'h2', text: '2. Responsive Logo Variations' },
+      { type: 'p', text: 'Create variations of the mark to fit different spacing constraints: a horizontal version for headers, a stacked format for boxes, and a simplified icon for mobile screens. If a brand identity cannot scale down cleanly, it will feel clunky and inconsistent across the customer journey.' },
+      
+      { type: 'quote', text: '"Complexity is the enemy of visual recall. The most memorable brand marks in history can be sketched from memory in under 5 seconds. Design for immediate recognition, not artistic styling."' },
+      
+      { type: 'h2', text: 'Brand Mark Design Principles' },
+      { type: 'ul', text: [
+        'Test the brand icon in small sizes (16x16px) for visibility.',
+        'Ensure the mark works in solid black or white versions.',
+        'Limit brand palettes to 2-3 colors to prevent print alignment errors.',
+        'Avoid thin fonts or complex lines that distort at high scales.',
+        'Align visual geometry with the brand personality and values.'
+      ]}
     ]
   },
   {
@@ -159,9 +280,25 @@ const posts = [
     gradient: 'from-amber-600/25 to-transparent',
     accent: '#f59e0b',
     content: [
-      { type: 'p', text: 'E-commerce conversion rates drop by 7% for every 100ms of latency. We audited a premium Shopify store and optimized its performance profile from a Lighthouse score of 28 to a perfect 100.' },
+      { type: 'p', text: 'E-commerce conversion rates drop by 7% for every 100ms of latency. We audited a premium Shopify store for a luxury home decor brand and optimized its performance profile from a Lighthouse score of 28 to a perfect 100. This optimization resulted in a direct increase in conversion rates.' },
+      
       { type: 'h2', text: '1. Eliminating App Code Bloat' },
-      { type: 'p', text: 'Shopify extensions inject multiple blocking scripts into the document head. Audit app usage and lazy-load third-party tracking scripts until after the user first interacts with the page.' }
+      { type: 'p', text: 'Shopify extensions inject multiple blocking scripts into the document head. Audit app usage and lazy-load third-party tracking scripts until after the user first interacts with the page. Preconnect to external inventory nodes to speed up DNS handshakes before assets are fetched.' },
+      { type: 'code', text: `// Delay tag manager execution until user scroll or tap\nwindow.addEventListener('scroll', () => {\n  initializeGoogleTagManager();\n}, { once: true });` },
+      
+      { type: 'h2', text: '2. Native CSS Layout Elements' },
+      { type: 'p', text: 'Many store themes rely on heavy JavaScript packages to build simple interactive sliders and grids. We rebuilt these components using native CSS grid, flexbox, and modern CSS scroll-snap modules. This allowed us to delete over 180kb of blocking carousel libraries, reducing Page Interactive delay metrics.' },
+      
+      { type: 'quote', text: '"Speed is a conversion multiplier in e-commerce. A slow checkout flow represents direct revenue loss. Optimizing site speed is the highest leverage CRO investment any online business can make."' },
+      
+      { type: 'h2', text: 'Shopify Performance Steps' },
+      { type: 'ul', text: [
+        'Remove inactive app integrations and clear residual theme scripts.',
+        'Decline theme slide libraries in favor of CSS scroll-snap containers.',
+        'Optimise store images into WebP/AVIF formats.',
+        'Delay marketing scripts (e.g. Hotjar, Facebook Pixel) until user interaction.',
+        'Set explicit dimension heights on images to prevent layout shift.'
+      ]}
     ]
   }
 ];
@@ -261,7 +398,7 @@ function BlogArticleView({ post, onBack, openBooking }: BlogArticleProps) {
           Want to build speed-optimized, premium software?
         </h3>
         <p className="text-xs text-white/40 max-w-md mx-auto">
-          Our team specializes in React, Next.js, and premium WebGL development to build speed-optimized, high-converting products.
+          Our team at Pixel Vance Digital specializes in React, Next.js, and premium WebGL development to build speed-optimized, high-converting products.
         </p>
         <button
           onClick={() => openBooking('GROWTH', '$2,999')}
@@ -291,6 +428,40 @@ interface BlogPageProps {
 export default function BlogPage({ openBooking }: BlogPageProps) {
   const [selectedPost, setSelectedPost] = useState<typeof posts[0] | null>(null);
 
+  const getSlug = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const path = window.location.pathname;
+      if (path.startsWith('/blog/')) {
+        const slug = path.replace('/blog/', '');
+        const post = posts.find(p => getSlug(p.title) === slug);
+        setSelectedPost(post || null);
+      } else {
+        setSelectedPost(null);
+      }
+    };
+
+    handleUrlChange();
+    window.addEventListener('popstate', handleUrlChange);
+    return () => window.removeEventListener('popstate', handleUrlChange);
+  }, []);
+
+  const selectPost = (post: typeof posts[0]) => {
+    const slug = getSlug(post.title);
+    window.history.pushState(null, '', `/blog/${slug}`);
+    setSelectedPost(post);
+    window.scrollTo({ top: 0 });
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
+
+  const deselectPost = () => {
+    window.history.pushState(null, '', '/blog');
+    setSelectedPost(null);
+    window.scrollTo({ top: 0 });
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
+
   return (
     <div className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto pt-8 pb-24 space-y-16">
       <AnimatePresence mode="wait">
@@ -298,10 +469,7 @@ export default function BlogPage({ openBooking }: BlogPageProps) {
           <BlogArticleView 
             key="article" 
             post={selectedPost} 
-            onBack={() => {
-              setSelectedPost(null);
-              window.scrollTo({ top: 0 });
-            }} 
+            onBack={deselectPost} 
             openBooking={openBooking}
           />
         ) : (
@@ -334,7 +502,7 @@ export default function BlogPage({ openBooking }: BlogPageProps) {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              onClick={() => setSelectedPost(posts[0])}
+              onClick={() => selectPost(posts[0])}
               className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-[#c5a059]/25 transition-all duration-300 cursor-pointer"
             >
               <div className="h-2 w-full" style={{ background: 'linear-gradient(to right, #c5a059aa, transparent)' }} />
@@ -374,27 +542,32 @@ export default function BlogPage({ openBooking }: BlogPageProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.07 }}
-                  onClick={() => setSelectedPost(post)}
-                  className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/12 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                  onClick={() => selectPost(post)}
+                  className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/12 transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
                 >
-                  {/* Top accent line */}
-                  <div className="h-1 w-full" style={{ background: `linear-gradient(to right, ${post.accent}80, transparent)` }} />
+                  <div>
+                    {/* Top accent line */}
+                    <div className="h-1 w-full" style={{ background: `linear-gradient(to right, ${post.accent}80, transparent)` }} />
 
-                  <div className="p-6 space-y-4 text-left">
-                    <div className="flex items-center justify-between">
-                      <span
-                        className="text-[9px] font-mono px-2 py-0.5 rounded-full border"
-                        style={{ color: post.accent, borderColor: `${post.accent}40`, backgroundColor: `${post.accent}10` }}
-                      >
-                        {post.category}
-                      </span>
-                      <span className="text-[9px] font-mono text-white/25">{post.date}</span>
+                    <div className="p-6 space-y-4 text-left">
+                      <div className="flex items-center justify-between">
+                        <span
+                          className="text-[9px] font-mono px-2 py-0.5 rounded-full border"
+                          style={{ color: post.accent, borderColor: `${post.accent}40`, backgroundColor: `${post.accent}10` }}
+                        >
+                          {post.category}
+                        </span>
+                        <span className="text-[9px] font-mono text-white/25">{post.date}</span>
+                      </div>
+                      <h3 className="text-sm font-display font-semibold text-white leading-snug group-hover:text-[#c5a059] transition-colors">
+                        {post.title}
+                      </h3>
+                      <p className="text-[11px] text-white/35 leading-relaxed line-clamp-3">{post.excerpt}</p>
                     </div>
-                    <h3 className="text-sm font-display font-semibold text-white leading-snug group-hover:text-[#c5a059] transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="text-[11px] text-white/35 leading-relaxed line-clamp-3">{post.excerpt}</p>
-                    <div className="flex items-center justify-between pt-2">
+                  </div>
+
+                  <div className="p-6 pt-0 text-left">
+                    <div className="flex items-center justify-between pt-2 border-t border-white/[0.04]">
                       <div className="flex items-center gap-1.5 text-white/25">
                         <Clock className="w-3 h-3" />
                         <span className="text-[10px] font-mono">{post.readTime}</span>
