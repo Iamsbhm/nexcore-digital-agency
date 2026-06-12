@@ -388,6 +388,23 @@ export default function PortfolioPage({ openBooking }: PortfolioPageProps) {
     return () => window.removeEventListener('popstate', handleUrlChange);
   }, []);
 
+  useEffect(() => {
+    if (selectedProject) {
+      document.title = `${selectedProject.title} Case Study | Pixel Vance Digital`;
+      const slug = getSlug(selectedProject.title);
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.setAttribute('href', `https://www.pixelvancedigital.com/portfolio/${slug}`);
+      }
+    } else {
+      document.title = 'Portfolio | Web Design & Branding Work | Pixel Vance Digital';
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.setAttribute('href', 'https://www.pixelvancedigital.com/portfolio');
+      }
+    }
+  }, [selectedProject]);
+
   const selectProject = (proj: typeof projects[0]) => {
     const slug = getSlug(proj.title);
     window.history.pushState(null, '', `/portfolio/${slug}`);

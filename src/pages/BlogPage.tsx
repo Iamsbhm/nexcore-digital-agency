@@ -447,6 +447,23 @@ export default function BlogPage({ openBooking }: BlogPageProps) {
     return () => window.removeEventListener('popstate', handleUrlChange);
   }, []);
 
+  useEffect(() => {
+    if (selectedPost) {
+      document.title = `${selectedPost.title} | Pixel Vance Digital`;
+      const slug = getSlug(selectedPost.title);
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.setAttribute('href', `https://www.pixelvancedigital.com/blog/${slug}`);
+      }
+    } else {
+      document.title = 'Blog | Web Design & Digital Marketing Tips | Pixel Vance Digital';
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.setAttribute('href', 'https://www.pixelvancedigital.com/blog');
+      }
+    }
+  }, [selectedPost]);
+
   const selectPost = (post: typeof posts[0]) => {
     const slug = getSlug(post.title);
     window.history.pushState(null, '', `/blog/${slug}`);

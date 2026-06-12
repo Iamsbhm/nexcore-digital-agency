@@ -150,7 +150,7 @@ export default function App() {
     };
   }, []);
 
-  // Dynamic page title — updates document.title per route (SEO)
+  // Dynamic page title & canonical tag — updates per route (SEO)
   useEffect(() => {
     const pageTitles: Record<PageName, string> = {
       home:           'Pixel Vance Digital — Premium Web Design & SEO Agency USA',
@@ -160,6 +160,16 @@ export default function App() {
       blog:           'Blog | Web Design & Digital Marketing Tips | Pixel Vance Digital',
     };
     document.title = pageTitles[currentPage];
+
+    // Update canonical tag dynamically
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    const path = window.location.pathname;
+    canonicalLink.setAttribute('href', `https://www.pixelvancedigital.com${path}`);
   }, [currentPage]);
 
   // Keep a stable ref to openBooking so the event listener never goes stale
