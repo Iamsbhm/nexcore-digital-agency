@@ -26,8 +26,8 @@ const cases = [
     year: '2025',
     gradient: 'from-blue-600/20 to-blue-900/5',
     accent: '#3b82f6',
-    challenge: 'Low-converting landing page and poor onboarding UX resulting in 2.1% trial-to-paid rate.',
-    solution: 'Full UX audit, redesigned onboarding flow, new pricing page, and speed optimisation from 8s → 1.2s LCP.',
+    challenge: 'Aether Finance suffered from high onboarding bounce rates and low subscription volumes. A cluttered onboarding user flow, complex financial dashboard panels, and high page load latency (LCP of 8.0s) confused visitors, resulting in a trial-to-paid subscription conversion rate stuck at 2.1%.',
+    solution: 'Our team performed a comprehensive fintech UX audit and heat-map analysis, streamlined user flows by applying progressive disclosure principles, designed clean interactive finance widgets with monospaced tabular figures, and optimized bundle sizes to reduce LCP down to 1.2s.',
     results: [
       { metric: '3.8×', label: 'Conversion Uplift' },
       { metric: '−62%', label: 'Churn Reduction' },
@@ -40,8 +40,8 @@ const cases = [
     year: '2024',
     gradient: 'from-[#c5a059]/20 to-[#8c6e3d]/5',
     accent: '#c5a059',
-    challenge: 'Generic Shopify theme was misrepresenting a premium brand and causing cart abandonment above 80%.',
-    solution: 'Bespoke Shopify theme, product configurator, and trust-building checkout flow redesign.',
+    challenge: "Luxe Maison's luxury home products were bottlenecked by a generic out-of-the-box Shopify theme. Slow mobile paint times, layout shifts (high CLS), and an unoptimized cart checkout flow failed to project premium craftsmanship, driving a mobile checkout abandonment rate above 80%.",
+    solution: 'Crafted a custom headless e-commerce frontend built with Astro and Tailwind CSS integrated via Shopify Storefront API. Designed fluid visual transition animations, built an interactive 3D product catalog configurator, and redesigned checkout steps to slash cart abandonment.',
     results: [
       { metric: '3×',   label: 'Revenue Growth' },
       { metric: '−23%', label: 'Cart Abandonment' },
@@ -54,8 +54,8 @@ const cases = [
     year: '2024',
     gradient: 'from-emerald-600/20 to-emerald-900/5',
     accent: '#10b981',
-    challenge: 'Early prototype with confusing navigation and no clear value proposition causing poor App Store ratings.',
-    solution: 'Zero-to-one mobile UI redesign with AI-driven personalisation flows and onboarding gamification.',
+    challenge: "PulseApp's initial product prototype had low day-1 user retention and poor App Store review ratings. Users found the health logging flows confusing, and the app lacked both a strong above-the-fold value proposition and automated accessibility screen-reader support.",
+    solution: 'Re-engineered the complete mobile UI/UX from the ground up using React Native. Designed gamified user onboarding milestones, built personal dashboards powered by custom AI health recommendation flows, and ensured 100% compliance with digital accessibility standards.',
     results: [
       { metric: '4.8★', label: 'App Store Rating' },
       { metric: '50K+', label: 'Launch Week Downloads' },
@@ -68,8 +68,8 @@ const cases = [
     year: '2023',
     gradient: 'from-purple-600/20 to-purple-900/5',
     accent: '#a855f7',
-    challenge: 'Outdated brand identity failing to position the firm at the luxury end of the NYC real estate market.',
-    solution: 'Complete rebrand — logo, brand guidelines, website, collateral, and social media visual system.',
+    challenge: 'Voss & Co. needed to scale their luxury real estate portfolio in Manhattan but were held back by an outdated visual identity. Their legacy branding, stationery, and non-responsive website looked unprofessional, failing to attract high-net-worth real estate buyers.',
+    solution: 'Created a premium brand system featuring custom serif typography, a refined visual brand kit, and high-fidelity print assets. Developed a lightning-fast responsive showcase website utilizing search-optimized structured metadata to capture organic high-net-worth investor leads.',
     results: [
       { metric: '+240%', label: 'Inbound Leads' },
       { metric: '2×',    label: 'Avg. Deal Size' },
