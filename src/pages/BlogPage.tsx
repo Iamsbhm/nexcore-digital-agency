@@ -3,6 +3,33 @@ import { Clock, ArrowRight } from 'lucide-react';
 
 const posts = [
   {
+    category: 'Performance',
+    title: 'How to Optimize Next.js Load Times for Sub-Second LCP',
+    excerpt: 'A step-by-step technical guide on optimizing Next.js Core Web Vitals. Discover code-splitting, dynamic loading, server component streaming, and asset prefetching strategies.',
+    readTime: '9 min read',
+    date: 'June 2026',
+    gradient: 'from-emerald-600/25 to-transparent',
+    accent: '#10b981',
+  },
+  {
+    category: 'UI/UX',
+    title: 'Fintech Dashboard Design Best Practices: A UX Case Study',
+    excerpt: 'Explore best practices for designing financial analytics dashboards that simplify cognitive complexity. Lessons on layout grids, dynamic sorting, and contextual alerts.',
+    readTime: '11 min read',
+    date: 'June 2026',
+    gradient: 'from-[#c5a059]/25 to-transparent',
+    accent: '#c5a059',
+  },
+  {
+    category: 'SEO Strategy',
+    title: 'The 2026 Blueprint for Enterprise Organic Traffic Growth',
+    excerpt: 'How to structure content and indexation mapping to dominate search rankings. Learn our exact formula for keyword research, semantic styling, and structured JSON-LD schemas.',
+    readTime: '8 min read',
+    date: 'May 2026',
+    gradient: 'from-blue-600/25 to-transparent',
+    accent: '#3b82f6',
+  },
+  {
     category: 'Design Systems',
     title: 'How We Build Design Systems That Scale to 1000+ Components',
     excerpt: 'A behind-the-scenes look at the tokenisation strategy, naming conventions, and Figma architecture we use for enterprise-grade design systems.',
