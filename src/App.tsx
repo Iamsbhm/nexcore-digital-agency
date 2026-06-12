@@ -153,7 +153,7 @@ export default function App() {
   // Dynamic page title & canonical tag — updates per route (SEO)
   useEffect(() => {
     const pageTitles: Record<PageName, string> = {
-      home:           'Pixel Vance Digital — Premium Web Design & SEO Agency USA',
+      home:           'Pixel Vance Digital — Premium Web Design & SEO Agency USA & Canada',
       about:          'About Us | Pixel Vance Digital — Web Design & Digital Marketing',
       portfolio:      'Portfolio | Web Design & Branding Work | Pixel Vance Digital',
       'case-studies': 'Case Studies | Client Success Stories | Pixel Vance Digital',
@@ -292,7 +292,7 @@ export default function App() {
   // Helper lists
   const statsList = [
     { value: '500+', label: 'Projects Completed' },
-    { value: '200+', label: 'Happy USA Clients' },
+    { value: '200+', label: 'Happy USA & Canada Clients' },
     { value: '98%', label: 'Client Retention' },
     { value: '7+', label: 'Years Experience' }
   ];
