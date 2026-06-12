@@ -1575,7 +1575,7 @@ export default function App() {
                 <div className="flex items-center gap-2.5">
                   {[
                     { label: 'in', href: 'https://www.linkedin.com/company/pixel-vance-digital/', title: 'LinkedIn' },
-                    { label: 'Dr', href: '#', title: 'Dribbble' }
+                    { label: 'Dr', href: 'https://dribbble.com/pixelvancedigital', title: 'Dribbble' }
                   ].map((s) => (
                     <a
                       key={s.label}
