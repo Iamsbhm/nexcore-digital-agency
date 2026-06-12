@@ -1574,21 +1574,24 @@ export default function App() {
                 {/* Social links */}
                 <div className="flex items-center gap-2.5">
                   {[
-                    { label: 'in', href: 'https://www.linkedin.com/company/pixel-vance-digital/', title: 'LinkedIn' },
-                    { label: 'Dr', href: 'https://dribbble.com/pixelvancedigital', title: 'Dribbble' }
-                  ].map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target={s.href !== '#' ? '_blank' : undefined}
-                      rel={s.href !== '#' ? 'noopener noreferrer' : undefined}
-                      id={`footer-social-${s.label.toLowerCase()}`}
-                      title={s.title}
-                      className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-[10px] font-bold font-mono text-white/35 hover:text-[#c5a059] hover:border-[#c5a059]/40 hover:bg-[#c5a059]/5 transition-all duration-200"
-                    >
-                      {s.label}
-                    </a>
-                  ))}
+                    { label: 'in', href: 'https://www.linkedin.com/company/pixel-vance-digital/', title: 'LinkedIn', icon: Linkedin },
+                    { label: 'Dr', href: 'https://dribbble.com/pixelvancedigital', title: 'Dribbble', icon: Dribbble }
+                  ].map((s) => {
+                    const Icon = s.icon;
+                    return (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target={s.href !== '#' ? '_blank' : undefined}
+                        rel={s.href !== '#' ? 'noopener noreferrer' : undefined}
+                        id={`footer-social-${s.label.toLowerCase()}`}
+                        title={s.title}
+                        className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-white/35 hover:text-[#c5a059] hover:border-[#c5a059]/40 hover:bg-[#c5a059]/5 transition-all duration-200"
+                      >
+                        <Icon className="w-4 h-4" />
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
 
