@@ -180,6 +180,7 @@ const projects = [
 ];
 
 interface ProjectDetailsProps {
+  key?: string;
   project: typeof projects[0];
   onBack: () => void;
   openBooking: (plan: string, price: string) => void;

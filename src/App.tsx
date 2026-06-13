@@ -30,6 +30,7 @@ import {
 // Critical above-fold components — loaded eagerly for best LCP
 import Particles3D from './components/Particles3D';
 import Spheres3D from './components/Spheres3D';
+import { PageName } from './types';
 import { Analytics } from '@vercel/analytics/react';
 
 // Lazy-loaded below-fold components (splits JS bundle, improves LCP & TTI)
@@ -56,6 +57,11 @@ const getPageFromPath = (): PageName => {
   if (path === '/portfolio' || path.startsWith('/portfolio/')) return 'portfolio';
   if (path === '/case-studies') return 'case-studies';
   if (path === '/blog' || path.startsWith('/blog/')) return 'blog';
+  if (path === '/website-development') return 'web-development';
+  if (path === '/web-design') return 'web-design';
+  if (path === '/wordpress') return 'wordpress';
+  if (path === '/ui-ux') return 'ui-ux';
+  if (path === '/contact') return 'contact';
   return 'home';
 };
 
@@ -66,6 +72,8 @@ export default function App() {
 
   // Page routing
   const [currentPage, setCurrentPage] = useState<PageName>(getPageFromPath());
+
+  const isHomepageGroup = currentPage === 'home' || currentPage === 'web-development' || currentPage === 'web-design' || currentPage === 'wordpress' || currentPage === 'ui-ux' || currentPage === 'contact';
 
   useEffect(() => {
     const handleUrlChange = () => {
@@ -151,16 +159,43 @@ export default function App() {
     };
   }, []);
 
-  // Dynamic page title & canonical tag — updates per route (SEO)
+  // Dynamic page title, meta description & canonical tag — updates per route (SEO)
   useEffect(() => {
     const pageTitles: Record<PageName, string> = {
-      home:           'Pixel Vance Digital — Premium Web Design & SEO Agency USA & Canada',
-      about:          'About Us | Pixel Vance Digital — Web Design & Digital Marketing',
-      portfolio:      'Portfolio | Web Design & Branding Work | Pixel Vance Digital',
-      'case-studies': 'Case Studies | Client Success Stories | Pixel Vance Digital',
-      blog:           'Blog | Web Design & Digital Marketing Tips | Pixel Vance Digital',
+      home:              'Website Development Company USA | PixelVance Digital',
+      about:             'About Us – Website Development Experts for US Businesses | PixelVance',
+      portfolio:         'Portfolio | Web Design & Branding Work | Pixel Vance Digital',
+      'case-studies':    'Case Studies | Client Success Stories | Pixel Vance Digital',
+      blog:              'Blog | Web Design & Digital Marketing Tips | Pixel Vance Digital',
+      'web-development': 'Custom Website Development Services USA | PixelVance Digital',
+      'web-design':      'Web Design Agency for Small Businesses USA | PixelVance',
+      wordpress:         'WordPress Development Company USA | PixelVance',
+      'ui-ux':           'UI UX Design Agency USA | PixelVance Digital',
+      contact:           'Contact PixelVance Digital – Serving Clients Across the USA',
     };
-    document.title = pageTitles[currentPage];
+    document.title = pageTitles[currentPage] || 'PixelVance Digital';
+
+    // Update meta description dynamically
+    const metaDescriptions: Record<PageName, string> = {
+      home:              'Struggling with an outdated website? PixelVance Digital builds modern, high-converting websites for US businesses. Get a free website consultation today!',
+      about:             'Learn more about PixelVance Digital, a leading website development company in the USA. We are experts in custom web design, WordPress, and UI/UX services.',
+      portfolio:         'Check out our portfolio of high-converting web design, custom website development, and branding work for businesses across the USA.',
+      'case-studies':    'Explore our website development and design case studies showing real conversion and organic search growth for clients across the USA.',
+      blog:              'Read the latest guides on web development, WordPress customization, Core Web Vitals optimization, and UI/UX design from PixelVance Digital.',
+      'web-development': 'Custom website development services for US businesses. Fast, responsive, SEO-friendly websites designed to generate more leads and sales. Request a free quote.',
+      'web-design':      'Professional web design services for small businesses across the USA. Modern designs, mobile optimization, and conversion-focused websites. Get started today!',
+      wordpress:         'Need a powerful WordPress website? PixelVance Digital develops secure, scalable WordPress websites for US businesses. Free consultation available.',
+      'ui-ux':           'Improve user experience and increase conversions with expert UI/UX design services. Trusted by businesses looking to create better digital experiences.',
+      contact:           'Ready to grow your business online? Contact PixelVance Digital for a free website strategy call. Serving clients across all 50 US states.',
+    };
+
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', metaDescriptions[currentPage] || 'Premium website design, custom WordPress development, and UI/UX services in the USA.');
 
     // Update canonical tag dynamically
     let canonicalLink = document.querySelector('link[rel="canonical"]');
@@ -171,6 +206,37 @@ export default function App() {
     }
     const path = window.location.pathname;
     canonicalLink.setAttribute('href', `https://www.pixelvancedigital.com${path}`);
+  }, [currentPage]);
+
+  // Handle landing page route side-effects (scrolling or opening modals)
+  useEffect(() => {
+    if (currentPage === 'contact') {
+      setTimeout(() => {
+        setBookingOpen(true);
+        setSelectedPlan('FREE AUDIT');
+        setCalculatedPrice('Free');
+      }, 100);
+    } else if (currentPage === 'web-design') {
+      setTimeout(() => {
+        const el = document.getElementById('services-explorer-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 500);
+    } else if (currentPage === 'web-development') {
+      setTimeout(() => {
+        const el = document.getElementById('services-explorer-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 500);
+    } else if (currentPage === 'wordpress') {
+      setTimeout(() => {
+        const el = document.getElementById('process-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 500);
+    } else if (currentPage === 'ui-ux') {
+      setTimeout(() => {
+        const el = document.getElementById('why-us-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 500);
+    }
   }, [currentPage]);
 
   // Keep a stable ref to openBooking so the event listener never goes stale
@@ -199,7 +265,7 @@ export default function App() {
   // Smooth scroll helper — navigates home first if on an inner page
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
-    if (currentPage !== 'home') {
+    if (!isHomepageGroup) {
       navigateTo('/');
       setTimeout(() => {
         const element = document.getElementById(id);
@@ -217,54 +283,54 @@ export default function App() {
   // Hero carousel slides configurations
   const heroSlides = [
     {
-      tag: "WEB DESIGN",
-      titleLine1: "Innovative",
-      titleLine2: "Web Design",
+      tag: "WEB DEVELOPMENT",
+      titleLine1: "Custom Website Development &",
+      titleLine2: "Web Design Services for US Businesses",
       titleGrad: "from-[#34d399] to-[#059669]",
       dotColor: "#10b981",
       badgeClass: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-      description: <>Innovation in its modern meaning is <span className="text-[#10b981] font-semibold">advanced web layouts, creative responsive UI, and interactive animations</span>.</>,
-      ctaText: "Start Designing",
-      activeBadgeText: "Web Design",
+      description: <>PixelVance Digital builds <span className="text-[#10b981] font-semibold">modern, high-converting websites</span> designed to generate more leads and sales for your business.</>,
+      ctaText: "Get Free Consultation",
+      activeBadgeText: "Web Dev & Design",
       activeBadgeColor: "bg-[#10b981] text-white",
       onCtaClick: () => openBooking('GROWTH', '$2,999')
     },
     {
-      tag: "REACT SYSTEMS",
-      titleLine1: "Next-Gen",
-      titleLine2: "React Systems",
+      tag: "WORDPRESS DEVELOPMENT",
+      titleLine1: "WordPress Development",
+      titleLine2: "for Modern Businesses",
       titleGrad: "from-[#818cf8] to-[#6366f1]",
       dotColor: "#6366f1",
       badgeClass: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
-      description: <>Engineering high-performance software with <span className="text-[#818cf8] font-semibold">clean architectures, rich micro-interactions</span>, and pixel-perfect responsiveness.</>,
-      ctaText: "Explore Tech",
-      activeBadgeText: "React Systems",
+      description: <>Secure, scalable, and custom-coded <span className="text-[#818cf8] font-semibold">WordPress themes and systems</span> built to load in milliseconds.</>,
+      ctaText: "Request WordPress Quote",
+      activeBadgeText: "WordPress Company",
       activeBadgeColor: "bg-[#6366f1] text-white",
-      onCtaClick: () => scrollToSection('services-explorer-section')
+      onCtaClick: () => openBooking('GROWTH', '$2,999')
     },
     {
-      tag: "ORGANIC GROWTH",
-      titleLine1: "Dominant",
-      titleLine2: "SEO Tactics",
+      tag: "UI UX DESIGN",
+      titleLine1: "UI/UX Design Focused on",
+      titleLine2: "User Experience",
       titleGrad: "from-[#7c3aed] to-[#3b82f6]",
       dotColor: "#7c3aed",
       badgeClass: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-      description: <>Dominate local and national rankings using <span className="text-[#c5a059] font-semibold">advanced search marketing strategies</span> that drive qualified client bookings.</>,
-      ctaText: "Start Growing",
-      activeBadgeText: "SEO & Growth",
+      description: <>Improve conversion rates and <span className="text-[#c5a059] font-semibold">user interaction dynamics</span> with bespoke wireframing and user journey planning.</>,
+      ctaText: "Start UI/UX Project",
+      activeBadgeText: "UI/UX Agency",
       activeBadgeColor: "bg-[#7c3aed] text-white",
-      onCtaClick: () => scrollToSection('why-us-section')
+      onCtaClick: () => openBooking('GROWTH', '$2,999')
     },
     {
-      tag: "CLOUD & SCALE",
-      titleLine1: "Scalable",
-      titleLine2: "Cloud Nodes",
+      tag: "WEBSITE MAINTENANCE",
+      titleLine1: "Website Maintenance &",
+      titleLine2: "Core Web Vitals Optimization",
       titleGrad: "from-[#fbbf24] to-[#f59e0b]",
       dotColor: "#fbbf24",
       badgeClass: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-      description: <>Deploying robust, containerized architectures on AWS/Vercel with <span className="text-[#fbbf24] font-semibold">automated failovers, load balancing, and database clustering</span>.</>,
-      ctaText: "Scale Server",
-      activeBadgeText: "Cloud & Scale",
+      description: <>Keep your platform <span className="text-[#fbbf24] font-semibold">secure, updated, and blazing fast</span>. Continuous uptime tracking and backup systems.</>,
+      ctaText: "Check Performance",
+      activeBadgeText: "Maintenance & Speed",
       activeBadgeColor: "bg-[#fbbf24] text-black",
       onCtaClick: () => openBooking('SCALE', '$4,999')
     }
@@ -272,7 +338,7 @@ export default function App() {
 
   // Autoplay hero carousel
   useEffect(() => {
-    if (currentPage !== 'home') return;
+    if (!isHomepageGroup) return;
     const interval = setInterval(() => {
       setActiveHeroSlide((prev) => (prev === 3 ? 0 : prev + 1));
     }, 8000);
@@ -340,7 +406,7 @@ export default function App() {
       <header className="relative z-40">
         {/* Visually hidden but SEO-indexable list of agency capabilities in the header */}
         <div className="sr-only">
-          <h2>Pixel Vance Digital Core Capabilities</h2>
+          <h2>Trusted Website Development Agency Serving the USA</h2>
           {heroSlides.map((slide, index) => (
             <article key={index}>
               <h3>{slide.tag}: {slide.titleLine1} {slide.titleLine2}</h3>
@@ -363,7 +429,7 @@ export default function App() {
           
           {/* Brand Signature */}
           <button 
-            onClick={() => currentPage === 'home' ? scrollToSection('hero') : navigateTo('/')} 
+            onClick={() => isHomepageGroup ? scrollToSection('hero') : navigateTo('/')} 
             className="flex items-center gap-3 group text-left cursor-pointer transition-all"
             id="brand-logo-btn"
             aria-label="Pixel Vance Digital — Go to homepage"
@@ -517,7 +583,7 @@ export default function App() {
       </nav>
       </header>
 
-      {currentPage !== 'home' && <div className="h-[72px]" />}
+      {!isHomepageGroup && <div className="h-[72px]" />}
 
       {/* Main content landmark for accessibility & skip-nav */}
       <main id="main-content">
@@ -539,7 +605,7 @@ export default function App() {
       </Suspense>
 
       {/* ── Home Content ── */}
-      {currentPage === 'home' && <>
+      {isHomepageGroup && <>
 
       {/* 3. HERO SECTION — Premium 3D Split Layout */}
       <section
@@ -1148,10 +1214,10 @@ export default function App() {
             — WHAT WE DO —
           </span>
           <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            Web Design, SEO & Digital Marketing Services
+            Website Development Services Built for Growth
           </h2>
           <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-            Full-spectrum web design, SEO, AI automation & digital marketing services for US businesses. Select a division to explore deliverables.
+            Custom website development, WordPress solutions, UI/UX design, and website maintenance built for US businesses. Select a division to explore deliverables.
           </p>
         </div>
 
@@ -1168,7 +1234,7 @@ export default function App() {
             — FEATURED SHOWCASE —
           </span>
           <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            Sleek Digital <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Showcases</span>
+            Custom Web Design That <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Converts Visitors</span> Into Customers
           </h2>
           <p className="text-xs md:text-sm text-white/50 leading-relaxed">
             A curated glance at the high-fidelity web experiences, digital products, and brand systems we've designed and engineered.
@@ -1277,10 +1343,10 @@ export default function App() {
             — HOW WE WORK —
           </span>
           <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            Our 4-Step Web Design & Development Process
+            WordPress Development for Modern Businesses
           </h2>
           <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-            Simple, transparent, and results-driven from day one. From strategy to launch — walk through our proven milestones.
+            Our 4-step custom WordPress theme design and website development workflow designed for speed, security, and scalability.
           </p>
         </div>
 
@@ -1299,10 +1365,13 @@ export default function App() {
             — OUR EDGE —
           </span>
           <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-white leading-none">
-            Why Choose <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Pixel Vance Digital</span>
+            Trusted Website Development <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Agency Serving the USA</span>
           </h2>
-          <p className="text-sm text-white/40 max-w-xl mx-auto leading-relaxed">
-            The top-rated US web design agency that doesn't just build — we craft digital experiences that convert, scale, and dominate search rankings.
+          <h3 className="text-lg md:text-xl font-display font-bold text-[#c5a059] mt-3 uppercase tracking-wider">
+            UI/UX Design Focused on User Experience
+          </h3>
+          <p className="text-sm text-white/40 max-w-xl mx-auto leading-relaxed mt-2">
+            The top-rated US web design agency that crafts custom websites, fast WordPress platforms, and user experiences that convert and scale.
           </p>
         </div>
 
@@ -1489,28 +1558,43 @@ export default function App() {
           <div className="absolute inset-0 bg-dot-pattern opacity-30 pointer-events-none" />
 
           <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-            <h2 className="text-3xl md:text-4.5xl font-light tracking-tight text-white font-display">
-              Ready to Build a <span className="font-serif italic text-[#c5a059]">Digital Legacy?</span>
+            <h2 className="text-3xl md:text-4.5xl font-black tracking-tight text-white font-display">
+              Get Your <span className="font-serif italic text-[#c5a059]">Free Website Audit</span> Today
             </h2>
-            <p className="text-xs md:text-sm text-slate-400 leading-relaxed font-sans">
-              Book a bespoke 30-minute high-fidelity strategy session. No commitment — just absolute architectural clarity on your digital scaling roadmap.
+            <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-sans font-medium">
+              Not sure if your website is helping or hurting your business? Get a <span className="text-[#c5a059] font-bold">FREE Website Audit</span> and discover:
             </p>
+
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left max-w-lg mx-auto text-xs text-white/70 font-mono py-4 border-y border-white/[0.05]">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                Speed & Performance Issues
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                SEO Opportunities
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                Mobile Responsiveness Problems
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                User Experience Improvements
+              </li>
+              <li className="flex items-center gap-2 sm:col-span-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                Lead Generation Recommendations
+              </li>
+            </ul>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 max-w-xl mx-auto">
               <button
-                onClick={() => openBooking('GROWTH', '$2,999')}
+                onClick={() => openBooking('FREE AUDIT', 'Free')}
                 id="booking-cta-bottom"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 py-3.5 px-7 border border-[#c5a059] bg-[#c5a059] hover:bg-transparent text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.2em] transition-all duration-300 cursor-pointer shadow-lg active:scale-95"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 py-3.5 px-8 border border-[#c5a059] bg-[#c5a059] hover:bg-transparent text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.2em] transition-all duration-300 cursor-pointer shadow-lg active:scale-95 font-bold"
               >
-                <span>Book Strategy Session</span>
-              </button>
-
-              <button
-                onClick={() => openBooking('ENTERPRISE', 'Custom')}
-                id="booking-whatsapp-cta"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 py-3.5 px-7 border border-slate-800 bg-white/[0.02] hover:bg-[#c5a059]/10 uppercase text-[10px] font-mono tracking-[0.2em] transition-all cursor-pointer active:scale-95 text-slate-300"
-              >
-                <span>CONTACT US // WHATSAPP →</span>
+                <span>Claim Your Free Website Audit Today →</span>
               </button>
             </div>
           </div>

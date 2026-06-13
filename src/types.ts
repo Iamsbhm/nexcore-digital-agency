@@ -43,3 +43,15 @@ export interface ProcessStep {
   description: string;
   details: string[];
 }
+
+export type PageName = 
+  | 'home' 
+  | 'about' 
+  | 'portfolio' 
+  | 'case-studies' 
+  | 'blog' 
+  | 'web-development' 
+  | 'web-design' 
+  | 'wordpress' 
+  | 'ui-ux' 
+  | 'contact';

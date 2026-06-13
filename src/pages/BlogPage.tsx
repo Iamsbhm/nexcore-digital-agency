@@ -304,6 +304,7 @@ const posts = [
 ];
 
 interface BlogArticleProps {
+  key?: string;
   post: typeof posts[0];
   onBack: () => void;
   openBooking: (plan: string, price: string) => void;
