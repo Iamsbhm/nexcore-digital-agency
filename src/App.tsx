@@ -30,6 +30,7 @@ import {
 // Critical above-fold components — loaded eagerly for best LCP
 import Particles3D from './components/Particles3D';
 import Spheres3D from './components/Spheres3D';
+import { Analytics } from '@vercel/analytics/react';
 
 // Lazy-loaded below-fold components (splits JS bundle, improves LCP & TTI)
 const AutomationSandbox  = lazy(() => import('./components/AutomationSandbox'));
@@ -1702,6 +1703,7 @@ export default function App() {
           calculatedPrice={calculatedPrice}
         />
       </Suspense>
+      <Analytics />
       </main>
     </div>
   );
