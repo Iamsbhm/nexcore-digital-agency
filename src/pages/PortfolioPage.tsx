@@ -94,6 +94,36 @@ const projects: ProjectItem[] = [
       author: 'Robert Mitchell',
       role: 'Managing Partner, JusticeEdge Law Group'
     }
+  },
+  {
+    title: 'Elite Home Renovations',
+    category: 'Web',
+    tags: ['Figma', 'WordPress', 'Elementor Pro', 'WP Rocket', 'Rank Math SEO'],
+    desc: 'Home Renovation & Remodeling Website Design & Development',
+    gradient: 'from-blue-950/40 via-orange-500/10 to-transparent',
+    accent: '#ea580c',
+    year: '2026',
+    image: '/images/elite_presentation.jpg',
+    challenge: 'The client faced an outdated website design with no project portfolio showcase, low Google rankings, and a poor mobile experience. Homeowners were choosing competing contractors due to a lack of professional galleries and a weak local SEO presence in Houston.',
+    solution: 'Designed and developed a premium, conversion-focused website featuring a dark blue and orange accent theme, high-quality project before-and-after galleries, a free estimate request system, and service-specific local SEO targeting for kitchen, bath, and additions.',
+    howItMade: 'Designed layouts in Figma. Developed the responsive site on WordPress using Elementor Pro, setting up Rank Math for local SEO. Integrated speed optimizations using WP Rocket, and configured conversion tracking with Google Analytics and Search Console.',
+    results: [
+      { metric: '+622%', label: 'Traffic Growth' },
+      { metric: '95+', label: 'Quote Requests' },
+      { metric: '9.5×', label: 'Ranking Keywords' },
+      { metric: '-48%', label: 'Bounce Rate' },
+      { metric: '3.9×', label: 'Mobile Conv. Rate' }
+    ],
+    gallery: [
+      '/images/elite_presentation.jpg'
+    ],
+    liveUrl: 'https://elitehomeremodels.com',
+    clientOverview: 'Elite Home Renovations is a leading home renovation and remodeling company in Houston, Texas. They specialize in high-end kitchen remodeling, bathroom renovations, basement finishing, and home additions, seeking to showcase their craftsmanship and capture high-value homeowner leads.',
+    testimonial: {
+      quote: '“Since launching our new website, we have seen a significant increase in qualified remodeling inquiries. The project gallery and quote request system have become our strongest lead-generation tools.”',
+      author: 'David Carter',
+      role: 'Owner, Elite Home Renovations'
+    }
   }
 ];
 
@@ -159,6 +189,16 @@ function getTechIcon(tag: string) {
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
           <line x1="11" y1="8" x2="11" y2="14" />
           <line x1="8" y1="11" x2="14" y2="11" />
+        </svg>
+      </div>
+    );
+  }
+  if (t.includes('rocket') || t.includes('wp rocket')) {
+    return (
+      <div className="w-12 h-12 rounded-full bg-[#f34a23]/10 border border-[#f34a23]/20 flex items-center justify-center text-[#f34a23] group-hover:scale-110 transition-transform duration-300 shadow-md">
+        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.5 16.5c-1.5 1.25-2.5 3.5-2.5 3.5s2.25-1 3.5-2.5M12 2C6.5 2 2 6.5 2 12c0 3 1.5 5.5 4 7l2-2M12 2c5.5 0 10 4.5 10 10 0 3-1.5 5.5-4 7l-2-2M12 2l-6 6 6-3 6 3-6-6z" />
+          <circle cx="12" cy="10" r="2" />
         </svg>
       </div>
     );

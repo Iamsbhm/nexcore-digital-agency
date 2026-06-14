@@ -36,6 +36,15 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
       image: '/images/justiceedge_presentation.jpg',
       accent: '#c5a059',
       liveUrl: 'https://justiceedgelaw.com'
+    },
+    {
+      title: 'Elite Home Renovations',
+      category: 'Web',
+      tags: ['Figma', 'WordPress', 'Elementor Pro', 'WP Rocket', 'Rank Math SEO'],
+      desc: 'Home Renovation & Remodeling Website Design & Development',
+      image: '/images/elite_presentation.jpg',
+      accent: '#ea580c',
+      liveUrl: 'https://elitehomeremodels.com'
     }
   ];
 
