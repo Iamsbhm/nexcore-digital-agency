@@ -27,6 +27,15 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
       image: '/images/wealthpath_presentation.jpg',
       accent: '#c5a059',
       liveUrl: 'https://wealthpathadvisors.com'
+    },
+    {
+      title: 'JusticeEdge Law Group',
+      category: 'Web',
+      tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Rank Math SEO'],
+      desc: 'Law Firm Website Design & Development',
+      image: '/images/justiceedge_presentation.png',
+      accent: '#c5a059',
+      liveUrl: 'https://justiceedgelaw.com'
     }
   ];
 
