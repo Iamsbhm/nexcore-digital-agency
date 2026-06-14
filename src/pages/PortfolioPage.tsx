@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
-import { ExternalLink, X, ShieldCheck, Code, Sparkles, BarChart3, ArrowLeft } from 'lucide-react';
+import { ExternalLink, X, ShieldCheck, Code, Sparkles, BarChart3, ArrowLeft, ArrowUpRight } from 'lucide-react';
 
 interface PortfolioPageProps {
   openBooking: (plan: string, price: string) => void;
@@ -74,6 +74,72 @@ interface ProjectDetailsProps {
   openBooking: (plan: string, price: string) => void;
 }
 
+// ── High-Fidelity Tech Stack SVG Helpers ──
+function getTechIcon(tag: string) {
+  const t = tag.toLowerCase();
+  if (t.includes('figma')) {
+    return (
+      <div className="w-12 h-12 rounded-full bg-[#f24e1e]/10 border border-[#f24e1e]/20 flex items-center justify-center text-[#f24e1e] group-hover:scale-110 transition-transform duration-300 shadow-md">
+        <svg viewBox="0 0 38 57" className="w-4.5 h-6.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 0C13.75 0 9.5 4.25 9.5 9.5C9.5 14.75 13.75 19 19 19H28.5V9.5C28.5 4.25 24.25 0 19 0Z" fill="currentColor"/>
+          <path d="M9.5 28.5C9.5 23.25 13.75 19 19 19H28.5V38H19C13.75 38 9.5 33.75 9.5 28.5Z" fill="#A259FF"/>
+          <path d="M19 38C13.75 38 9.5 42.25 9.5 47.5C9.5 52.75 13.75 57 19 57C24.25 57 28.5 52.75 28.5 47.5V38H19Z" fill="#0ACF83"/>
+          <path d="M0 28.5C0 23.25 4.25 19 9.5 19V38C9.5 33.75 4.25 28.5 0 28.5Z" fill="#1ABCFE"/>
+          <path d="M9.5 9.5C9.5 14.75 5.25 19 0 19V0H9.5C5.25 0 9.5 4.25 9.5 9.5Z" fill="#FF7262"/>
+        </svg>
+      </div>
+    );
+  }
+  if (t.includes('wordpress')) {
+    return (
+      <div className="w-12 h-12 rounded-full bg-[#21759b]/10 border border-[#21759b]/20 flex items-center justify-center text-[#21759b] group-hover:scale-110 transition-transform duration-300 shadow-md">
+        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.158 12.786l-2.698 7.83c1.782.527 3.666.505 5.433-.067l-2.735-7.763zm.937-2.696l2.378 6.945c.983-1.42 1.543-3.11 1.543-4.935 0-1.228-.24-2.398-.675-3.468l-3.246 9.458-2.613-7.585zm-2.88 7.375L7.29 8.243C6.772 9.39 6.474 10.66 6.474 12c0 2.01.693 3.864 1.848 5.342l1.893-5.494zm.82-10.218c-.382 0-.743.048-1.096.14l.012.012c.704.143 1.228.76 1.228 1.488 0 .614-.37 1.157-.905 1.4l1.242 3.61c.42-.423.674-.997.674-1.63 0-1.516-1.155-3.618-1.155-5.02zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18.583a8.557 8.557 0 0 1-4.717-1.408l.056-.026 3.013-8.736 3.04 8.64.032.09c-1.272.937-2.83 1.44-4.424 1.44z"/>
+        </svg>
+      </div>
+    );
+  }
+  if (t.includes('elementor')) {
+    return (
+      <div className="w-12 h-12 rounded-full bg-[#92003B]/10 border border-[#92003B]/20 flex items-center justify-center text-[#92003B] group-hover:scale-110 transition-transform duration-300 shadow-md">
+        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.5 17h-11v-1.95h11V17zm0-3.665h-11v-1.95h11v1.95zm0-3.67h-11V7.71h11v1.955z"/>
+        </svg>
+      </div>
+    );
+  }
+  if (t.includes('calendly')) {
+    return (
+      <div className="w-12 h-12 rounded-full bg-[#006BFF]/10 border border-[#006BFF]/20 flex items-center justify-center text-[#006BFF] group-hover:scale-110 transition-transform duration-300 shadow-md">
+        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+          <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
+        </svg>
+      </div>
+    );
+  }
+  if (t.includes('seo') || t.includes('rank math')) {
+    return (
+      <div className="w-12 h-12 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/20 flex items-center justify-center text-[#c5a059] group-hover:scale-110 transition-transform duration-300 shadow-md">
+        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          <line x1="11" y1="8" x2="11" y2="14" />
+          <line x1="8" y1="11" x2="14" y2="11" />
+        </svg>
+      </div>
+    );
+  }
+  return (
+    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 group-hover:scale-110 transition-transform duration-300 shadow-md">
+      <Code className="w-5 h-5" />
+    </div>
+  );
+}
+
 function ProjectDetailsView({ project, onBack, openBooking }: ProjectDetailsProps) {
   return (
     <motion.div
@@ -115,7 +181,7 @@ function ProjectDetailsView({ project, onBack, openBooking }: ProjectDetailsProp
       </div>
 
       {/* Hero Showcase Center Frame (mimicking the large central browser device mockup) */}
-      <div className="h-[40vh] md:h-[58vh] w-full relative rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-[#07080c] relative z-10 group flex items-center justify-center">
+      <div className="h-[40vh] md:h-[58vh] w-full relative rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-[#07080c] z-10 group flex items-center justify-center">
         {/* Ambient Blur Glow Background */}
         <div className="absolute inset-0 filter blur-xl opacity-25 scale-105 overflow-hidden pointer-events-none">
           <img src={project.image} alt="" className="w-full h-full object-cover" />
@@ -131,205 +197,252 @@ function ProjectDetailsView({ project, onBack, openBooking }: ProjectDetailsProp
         <div className="absolute inset-0 border border-white/[0.06] rounded-[32px] pointer-events-none z-20" />
       </div>
 
-      {/* Stats Counter Row (mimicking the 4 pills row from the 1st reference image) */}
-      <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 py-4 relative z-10">
-        {project.results.map((r, ri) => (
-          <div 
-            key={ri} 
-            className="flex items-center gap-3 px-5 py-3 bg-white/[0.01] hover:bg-white/[0.04] border border-white/[0.08] hover:border-[#c5a059]/30 rounded-full transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:-translate-y-0.5"
-          >
-            <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest">{r.label}</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] shrink-0" />
-            <span className="text-xs font-mono font-bold text-[#c5a059]">{r.metric}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Asymmetric Grid Layout matching the 1st reference image */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+      {/* ── Bento Grid Layout (Inspired by GridX reference layout) ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
         
-        {/* Card 1: Client Overview & Tech Stack (corresponds to the dark blue vertical widget) */}
-        <div className="lg:col-span-1 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.07] rounded-[32px] p-6 space-y-6 flex flex-col justify-between relative overflow-hidden group shadow-lg">
+        {/* Card 1: Client Brief & Context (David Henderson Profile Style - col-span-2) */}
+        <div className="lg:col-span-2 md:col-span-2 relative group bg-gradient-to-br from-[#121319] to-[#0c0d12] border border-white/[0.05] rounded-[32px] p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-center sm:items-stretch justify-between overflow-hidden shadow-xl transition-all duration-300 hover:border-white/10 hover:shadow-2xl">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#c5a059]/5 rounded-full blur-3xl group-hover:bg-[#c5a059]/10 transition-colors duration-500" />
+          
+          <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start flex-1 text-center sm:text-left">
+            {/* Left Visual Image Frame */}
+            <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-[30px] overflow-hidden border border-white/[0.08] shrink-0 bg-[#07080c] relative group-hover:border-[#c5a059]/30 transition-colors duration-300">
+              <img 
+                src={project.gallery && project.gallery[0] ? project.gallery[0] : project.image} 
+                alt={project.title} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+              />
+            </div>
+
+            {/* Right Text Content */}
+            <div className="flex flex-col justify-between py-1 text-left">
+              <div>
+                <p className="text-[9px] font-mono text-[#c5a059] uppercase tracking-[0.2em]">Client Brief & Context</p>
+                <h2 className="text-2xl font-display font-light text-white leading-tight mt-2">
+                  {project.title}
+                </h2>
+                <p className="text-[11px] text-white/45 leading-relaxed font-sans font-light mt-3 max-w-lg">
+                  {project.clientOverview || project.desc}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="self-end sm:absolute sm:bottom-8 sm:right-8 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:text-[#c5a059] group-hover:border-[#c5a059]/40 group-hover:bg-[#c5a059]/5 transition-all duration-300">
+            <ArrowUpRight className="w-4 h-4" />
+          </div>
+        </div>
+
+        {/* Card 2: Tech Stack (Credentials signature style - col-span-1) with custom circular badges */}
+        <div className="relative group bg-gradient-to-br from-[#121319] to-[#0c0d12] border border-white/[0.05] rounded-[32px] p-6 flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-300 hover:border-white/10 hover:shadow-2xl">
           <div className="absolute top-0 right-0 w-24 h-24 bg-[#c5a059]/5 rounded-full blur-2xl group-hover:bg-[#c5a059]/10 transition-colors duration-500" />
           
-          <div className="space-y-4 text-left">
-            <div className="flex items-center justify-between">
-              <span className="text-[9px] font-mono text-[#c5a059] tracking-widest uppercase px-3 py-1 rounded-full border border-[#c5a059]/20 bg-[#c5a059]/5">
-                Client Brief
-              </span>
-              <span className="text-[9px] font-mono text-white/30">{project.year}</span>
-            </div>
-            <h3 className="text-xl font-display font-light text-white tracking-tight">
-              WealthPath Advisors
-            </h3>
-            <p className="text-[11px] text-white/45 leading-relaxed font-sans font-light">
-              {project.clientOverview || project.desc}
-            </p>
+          {/* Tech stack icons container */}
+          <div className="grid grid-cols-3 gap-y-4 gap-x-2 py-4 justify-items-center items-center max-w-[220px] mx-auto w-full">
+            {project.tags.map((tag) => (
+              <div key={tag} className="flex flex-col items-center gap-1.5 group/tech cursor-default">
+                {getTechIcon(tag)}
+                <span className="text-[8px] font-mono text-white/40 group-hover/tech:text-white transition-colors text-center w-16 truncate">{tag}</span>
+              </div>
+            ))}
           </div>
 
-          <div className="space-y-4 pt-6 border-t border-white/[0.06] text-left">
-            <h4 className="text-[9px] font-mono text-white/30 uppercase tracking-[0.25em] font-bold">Technologies</h4>
-            <div className="flex flex-wrap gap-1.5">
-              {project.tags.map(tag => (
-                <span 
-                  key={tag} 
-                  className="text-[9px] font-mono text-white/60 bg-white/[0.03] border border-white/[0.08] px-2.5 py-1 rounded-lg hover:border-[#c5a059]/30 transition-colors"
-                >
-                  {tag}
-                </span>
-              ))}
+          <div className="mt-4 flex items-end justify-between text-left">
+            <div>
+              <p className="text-[9px] font-mono text-white/30 uppercase tracking-[0.2em]">Technologies</p>
+              <h3 className="text-lg font-display text-white mt-1">Tech Stack</h3>
+            </div>
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:text-[#c5a059] group-hover:border-[#c5a059]/40 group-hover:bg-[#c5a059]/5 transition-all duration-300">
+              <ArrowUpRight className="w-4 h-4" />
             </div>
           </div>
         </div>
 
-        {/* Card 2: The Challenge (corresponds to the middle square portrait card) */}
-        <div className="lg:col-span-1 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.07] rounded-[28px] p-6 space-y-6 flex flex-col justify-between relative overflow-hidden group shadow-lg text-left">
+        {/* Card 3: Specifications (Projects Showcase style - col-span-1) with wireframe SVG */}
+        <div className="relative group bg-gradient-to-br from-[#121319] to-[#0c0d12] border border-white/[0.05] rounded-[32px] p-6 flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-300 hover:border-white/10 hover:shadow-2xl">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-[#c5a059]/5 rounded-full blur-2xl group-hover:bg-[#c5a059]/10 transition-colors duration-500" />
+          
+          {/* Abstract Graphic representing a browser frame/wireframe */}
+          <div className="w-full aspect-[4/3] rounded-2xl bg-white/[0.01] border border-white/[0.06] p-3 flex flex-col gap-2 relative overflow-hidden group-hover:border-white/10 transition-colors duration-300">
+            <div className="flex gap-1.5 border-b border-white/[0.06] pb-1.5 shrink-0">
+              <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+              <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+              <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+            </div>
+            <div className="flex-1 flex flex-col gap-2 justify-center text-left">
+              <div className="h-2 w-2/3 bg-white/15 rounded" />
+              <div className="h-2 w-1/2 bg-white/10 rounded" />
+              <div className="grid grid-cols-3 gap-1.5 mt-1">
+                <div className="h-6 bg-[#07080c] border border-white/[0.06] rounded flex items-center justify-center text-[7px] font-mono text-[#c5a059]">{project.year}</div>
+                <div className="h-6 bg-[#07080c] border border-white/[0.06] rounded flex items-center justify-center text-[7px] font-mono text-[#c5a059]">{project.category.toUpperCase()}</div>
+                <div className="h-6 bg-[#07080c] border border-white/[0.06] rounded flex items-center justify-center text-[7px] font-mono text-[#c5a059]">USA</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-end justify-between text-left">
+            <div>
+              <p className="text-[9px] font-mono text-white/30 uppercase tracking-[0.2em]">Specifications</p>
+              <h3 className="text-lg font-display text-white mt-1">Overview</h3>
+            </div>
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:text-[#c5a059] group-hover:border-[#c5a059]/40 group-hover:bg-[#c5a059]/5 transition-all duration-300">
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
+          </div>
+        </div>
+
+        {/* Card 4: The Challenge (Blog style - col-span-1) with warning badge */}
+        <div className="relative group bg-gradient-to-br from-[#121319] to-[#0c0d12] border border-white/[0.05] rounded-[32px] p-6 flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-300 hover:border-white/10 hover:shadow-2xl">
           <div className="absolute top-0 right-0 w-24 h-24 bg-red-500/5 rounded-full blur-2xl group-hover:bg-red-500/10 transition-colors duration-500" />
           
-          <div className="space-y-4">
-            <span className="text-[9px] font-mono text-red-400 tracking-widest uppercase px-3 py-1 rounded-full border border-red-500/20 bg-red-500/5 inline-block">
-              The Challenge
-            </span>
-            <h3 className="text-xl font-display font-light text-white tracking-tight">
-              Outdated Presence
-            </h3>
+          <div className="space-y-4 text-left">
+            <div className="w-10 h-10 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 group-hover:scale-105 transition-transform duration-300">
+              <ShieldCheck className="w-5 h-5 text-red-400" />
+            </div>
             <p className="text-[11px] text-white/45 leading-relaxed font-sans font-light">
               {project.challenge}
             </p>
           </div>
 
-          <div className="relative rounded-2xl overflow-hidden aspect-video border border-white/[0.08] shadow-md bg-white/[0.01]">
-            <img 
-              src={project.gallery && project.gallery[2] ? project.gallery[2] : project.image} 
-              alt="Client Context" 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-            <span className="absolute bottom-2.5 left-3 text-[9px] font-mono text-white/50">{project.title} Interface</span>
+          <div className="mt-4 flex items-end justify-between text-left">
+            <div>
+              <p className="text-[9px] font-mono text-red-400/60 uppercase tracking-[0.2em]">The Problem</p>
+              <h3 className="text-lg font-display text-white mt-1">Challenge</h3>
+            </div>
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:text-red-400 group-hover:border-red-400/40 group-hover:bg-red-500/5 transition-all duration-300">
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
           </div>
         </div>
 
-        {/* Card 3: Our Solution (corresponds to the right widget card) */}
-        <div className="lg:col-span-1 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.07] rounded-[28px] p-6 space-y-6 flex flex-col justify-between relative overflow-hidden group shadow-lg text-left">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-colors duration-500" />
+        {/* Card 5: Our Solution (Specialization style - col-span-2) with three icons */}
+        <div className="lg:col-span-2 md:col-span-2 relative group bg-gradient-to-br from-[#121319] to-[#0c0d12] border border-white/[0.05] rounded-[32px] p-6 md:p-8 flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-300 hover:border-white/10 hover:shadow-2xl">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl group-hover:bg-emerald-500/10 transition-colors duration-500" />
           
-          <div className="space-y-4">
-            <span className="text-[9px] font-mono text-emerald-400 tracking-widest uppercase px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 inline-block">
-              Our Solution
-            </span>
-            <h3 className="text-xl font-display font-light text-white tracking-tight">
-              Trust & Growth
-            </h3>
+          <div className="flex flex-col gap-5 text-left">
+            {/* Icons representing solution pillars */}
+            <div className="flex items-center gap-4 justify-start">
+              <div className="w-12 h-12 rounded-full bg-emerald-500/5 border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-emerald-400 hover:border-emerald-500/30 transition-all duration-300 hover:scale-105 shadow-sm">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div className="w-12 h-12 rounded-full bg-emerald-500/5 border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-emerald-400 hover:border-emerald-500/30 transition-all duration-300 hover:scale-105 shadow-sm">
+                <Code className="w-5 h-5" />
+              </div>
+              <div className="w-12 h-12 rounded-full bg-emerald-500/5 border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-emerald-400 hover:border-emerald-500/30 transition-all duration-300 hover:scale-105 shadow-sm">
+                <BarChart3 className="w-5 h-5" />
+              </div>
+            </div>
+            
             <p className="text-[11px] text-white/45 leading-relaxed font-sans font-light">
               {project.solution}
             </p>
           </div>
 
-          <div className="space-y-2 pt-2">
-            <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl flex items-center justify-between hover:border-white/10 transition-colors">
-              <span className="text-[10px] font-sans text-white/50">Modern UI/UX Design</span>
-              <span className="text-[8px] font-mono text-emerald-400 uppercase tracking-widest px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/5">Blue & Gold</span>
+          <div className="mt-6 flex items-end justify-between text-left">
+            <div>
+              <p className="text-[9px] font-mono text-emerald-400/60 uppercase tracking-[0.2em]">The Methodology</p>
+              <h3 className="text-lg font-display text-white mt-1">Our Solution</h3>
             </div>
-            <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl flex items-center justify-between hover:border-white/10 transition-colors">
-              <span className="text-[10px] font-sans text-white/50">Consultation Booking</span>
-              <span className="text-[8px] font-mono text-emerald-400 uppercase tracking-widest px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/5">Calendly API</span>
-            </div>
-            <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl flex items-center justify-between hover:border-white/10 transition-colors">
-              <span className="text-[10px] font-sans text-white/50">Local SEO Optimization</span>
-              <span className="text-[8px] font-mono text-emerald-400 uppercase tracking-widest px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/5">Rank Math</span>
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:text-emerald-400 group-hover:border-[#0ac97a]/40 group-hover:bg-[#0ac97a]/5 transition-all duration-300">
+              <ArrowUpRight className="w-4 h-4" />
             </div>
           </div>
         </div>
 
-        {/* Card 4: Engineering Process & Process Steps (corresponds to the bottom-left wide card) */}
-        <div className="lg:col-span-2 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.07] rounded-[32px] p-8 space-y-6 relative overflow-hidden group shadow-lg text-left">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors duration-500" />
+        {/* Card 6: Live Website & Session Booking (Profiles style - col-span-1) */}
+        <div className="relative group bg-gradient-to-br from-[#121319] to-[#0c0d12] border border-white/[0.05] rounded-[32px] p-6 flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-300 hover:border-white/10 hover:shadow-2xl">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-[#c5a059]/5 rounded-full blur-2xl group-hover:bg-[#c5a059]/10 transition-colors duration-500" />
           
-          <div className="flex items-center justify-between">
-            <span className="text-[9px] font-mono text-blue-400 tracking-widest uppercase px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/5">
-              Engineering Process
-            </span>
-            <span className="text-[9px] font-mono text-white/20">Figma to Elementor Pro</span>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 pt-2">
-            <div className="space-y-4">
-              <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] font-bold">Process & Architecture</h4>
-              <p className="text-[11px] text-white/45 leading-relaxed font-sans font-light">
-                {project.howItMade}
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] font-bold">Scope of Work Delivered</h4>
-              <div className="grid grid-cols-1 gap-2">
-                {[
-                  'Custom Wireframing & UI Style Guide in Figma',
-                  'Online Scheduling & Calendly Consultation API',
-                  'Local Dallas SEO Architecture & Metadata Mapping',
-                  'Mobile-First Responsive Layout Engineering',
-                  'Custom Regulatory Disclosures & Trust Badges'
-                ].map((feature, fi) => (
-                  <div key={fi} className="flex items-center gap-3 p-2 bg-white/[0.01] border border-white/[0.04] rounded-lg">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] shrink-0" />
-                    <span className="text-[10px] text-white/50">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 5: Testimonial & Live Link Actions (corresponds to the bottom-right black card) */}
-        <div className="lg:col-span-1 bg-gradient-to-b from-[#111219]/90 to-[#09090c]/90 border border-white/[0.08] rounded-[32px] p-6 flex flex-col justify-between relative overflow-hidden group shadow-2xl text-left">
-          <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-[#c5a059]/10 rounded-full blur-2xl" />
-          
-          {project.testimonial ? (
-            <div className="space-y-5">
-              <div className="flex items-center justify-between">
-                <span className="text-[9px] font-mono text-[#c5a059] tracking-widest uppercase px-3 py-1 rounded-full border border-[#c5a059]/20 bg-[#c5a059]/5">
-                  Client Feedback
-                </span>
-                <span className="text-xs text-[#c5a059] font-serif">5★ Review</span>
-              </div>
-              <blockquote className="text-[11px] md:text-xs text-white/80 italic leading-relaxed font-serif relative pl-3 border-l border-[#c5a059]/30">
-                {project.testimonial.quote}
-              </blockquote>
-              <div className="space-y-0.5 pt-2 pl-3">
-                <p className="text-[11px] text-white font-semibold">{project.testimonial.author}</p>
-                <p className="text-[9px] text-white/40 font-mono">{project.testimonial.role}</p>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <span className="text-[9px] font-mono text-[#c5a059] tracking-widest uppercase px-3 py-1 rounded-full border border-[#c5a059]/20 bg-[#c5a059]/5 inline-block">
-                Project Actions
-              </span>
-              <h3 className="text-lg font-display font-light text-white">Let's Collaborate</h3>
-              <p className="text-[11px] text-white/40 leading-relaxed font-sans font-light">
-                Ready to achieve comparable growth metrics and transform your digital presence?
-              </p>
-            </div>
-          )}
-
-          <div className="space-y-2.5 pt-8 z-10">
+          <div className="flex flex-col gap-4 items-center justify-center py-4">
             {project.liveUrl && (
-              <a
+              <a 
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#c5a059] hover:bg-[#c5a059]/90 text-black text-[10px] font-mono tracking-widest uppercase font-bold transition-all rounded-xl cursor-pointer shadow-lg shadow-[#c5a059]/10"
+                className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-[#c5a059] hover:border-[#c5a059]/40 hover:bg-[#c5a059]/5 transition-all duration-300 hover:scale-110 shadow-lg"
+                title="Visit Live Site"
               >
-                <span>Visit Live Website</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <ExternalLink className="w-6 h-6" />
               </a>
             )}
+            <button 
+              onClick={() => openBooking('GROWTH', '$2,999')}
+              className="w-full py-2.5 px-4 bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.08] text-[9.5px] font-mono tracking-wider uppercase text-white/70 hover:text-white rounded-xl transition-colors cursor-pointer"
+            >
+              Book Session
+            </button>
+          </div>
+
+          <div className="mt-4 flex items-end justify-between text-left">
+            <div>
+              <p className="text-[9px] font-mono text-white/30 uppercase tracking-[0.2em]">Project Actions</p>
+              <h3 className="text-lg font-display text-white mt-1">Live Website</h3>
+            </div>
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:text-[#c5a059] group-hover:border-[#c5a059]/40 group-hover:bg-[#c5a059]/5 transition-all duration-300">
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
+          </div>
+        </div>
+
+        {/* Card 7: Impact KPIs results counters grid (Stats Counter style - col-span-1) */}
+        <div className="relative group bg-gradient-to-br from-[#121319] to-[#0c0d12] border border-white/[0.05] rounded-[32px] p-6 flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-300 hover:border-white/10 hover:shadow-2xl">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-[#c5a059]/5 rounded-full blur-2xl group-hover:bg-[#c5a059]/10 transition-colors duration-500" />
+          
+          <div className="grid grid-cols-2 gap-2 text-left py-1">
+            {project.results.map((res, idx) => (
+              <div key={idx} className={`p-2 bg-[#07080c] border border-white/[0.04] rounded-2xl flex flex-col hover:border-[#c5a059]/25 transition-colors ${idx === 4 ? 'col-span-2 items-center' : ''}`}>
+                <span className="text-[15px] font-display font-light text-[#c5a059] leading-tight">{res.metric}</span>
+                <span className="text-[8px] font-mono text-white/40 uppercase tracking-wider mt-1 truncate w-full text-center sm:text-left">{res.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 text-left">
+            <p className="text-[9px] font-mono text-white/30 uppercase tracking-[0.2em]">KPI Results</p>
+            <h3 className="text-lg font-display text-white mt-1">Impact</h3>
+          </div>
+        </div>
+
+        {/* Card 8: Testimonial / Collaboration Pitch (Let's work together style - col-span-3) */}
+        <div className="lg:col-span-3 md:col-span-2 relative group bg-gradient-to-br from-[#121319] to-[#0c0d12] border border-white/[0.05] rounded-[32px] p-6 md:p-8 flex flex-col justify-between overflow-hidden shadow-xl transition-all duration-300 hover:border-white/10 hover:shadow-2xl text-left">
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#c5a059]/5 rounded-full blur-3xl group-hover:bg-[#c5a059]/10 transition-colors duration-500" />
+          
+          <div className="relative">
+            {/* Sparkle/Star Icon */}
+            <Sparkles className="w-8 h-8 text-[#c5a059]/40 mb-5 group-hover:text-[#c5a059] transition-colors duration-300 animate-pulse-subtle" />
+            
+            {project.testimonial ? (
+              <div className="space-y-4">
+                <p className="text-base md:text-xl font-display font-light text-white leading-relaxed tracking-tight">
+                  {project.testimonial.quote}
+                </p>
+                <div className="pt-1">
+                  <p className="text-xs font-mono text-[#c5a059] uppercase tracking-widest">{project.testimonial.author}</p>
+                  <p className="text-[10px] font-sans text-white/45 mt-0.5">{project.testimonial.role}</p>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <h2 className="text-2xl md:text-4xl font-display font-light text-white leading-tight">
+                  Let's work <span className="text-[#c5a059] font-serif italic">together.</span>
+                </h2>
+                <p className="text-xs text-white/45 max-w-md mt-1 font-light">
+                  Ready to scale your digital metrics? Let's design and engineer your custom platform today.
+                </p>
+              </div>
+            )}
+          </div>
+
+          <div className="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4 z-10">
             <button
               onClick={() => openBooking('GROWTH', '$2,999')}
-              className="inline-flex items-center justify-center w-full py-3 px-4 bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.08] text-white text-[10px] font-mono tracking-widest uppercase transition-all rounded-xl cursor-pointer"
+              className="inline-flex items-center gap-2 py-2.5 px-5 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white text-[10px] font-mono tracking-widest uppercase font-bold transition-all duration-300 rounded-xl cursor-pointer"
             >
-              Book Strategy Session
+              Start Your Project
             </button>
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:text-[#c5a059] group-hover:border-[#c5a059]/40 group-hover:bg-[#c5a059]/5 transition-all duration-300">
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
           </div>
         </div>
 
