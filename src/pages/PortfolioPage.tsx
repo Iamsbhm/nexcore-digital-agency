@@ -40,7 +40,7 @@ const projects: ProjectItem[] = [
     gradient: 'from-blue-900/40 via-[#c5a059]/15 to-transparent',
     accent: '#c5a059',
     year: '2026',
-    image: '/images/wealthpath_hero.png',
+    image: '/images/wealthpath_presentation.jpg',
     challenge: 'The client faced an outdated website design with no online booking or lead generation system. Poor mobile responsiveness, low search engine visibility, and a lack of trust-building content caused visitors to leave without initiating contact.',
     solution: 'Designed and developed a trust-focused website with a professional blue & gold color scheme. Integrated Calendly and Zoom for scheduling, created conversion-oriented service landing pages, added local SEO targeting, and optimized for mobile performance.',
     howItMade: 'Crafted custom UI mockups in Figma. Developed the final platform on WordPress with Elementor Pro, structuring it for speed and local SEO using Rank Math. Built custom integrations for Calendly scheduling and Google Analytics tracking.',
@@ -115,14 +115,20 @@ function ProjectDetailsView({ project, onBack, openBooking }: ProjectDetailsProp
       </div>
 
       {/* Hero Showcase Center Frame (mimicking the large central browser device mockup) */}
-      <div className="h-[40vh] md:h-[58vh] w-full relative rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-[#07080c] relative z-10 group">
+      <div className="h-[40vh] md:h-[58vh] w-full relative rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-[#07080c] relative z-10 group flex items-center justify-center">
+        {/* Ambient Blur Glow Background */}
+        <div className="absolute inset-0 filter blur-xl opacity-25 scale-105 overflow-hidden pointer-events-none">
+          <img src={project.image} alt="" className="w-full h-full object-cover" />
+        </div>
+        
+        {/* Full Image Presentation */}
         <img 
           src={project.image} 
           alt={project.title} 
-          className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" 
+          className="w-full h-full object-contain relative z-10 transition-transform duration-[1.5s] group-hover:scale-[1.02]" 
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
-        <div className="absolute inset-0 border border-white/[0.06] rounded-[32px] pointer-events-none" />
+        
+        <div className="absolute inset-0 border border-white/[0.06] rounded-[32px] pointer-events-none z-20" />
       </div>
 
       {/* Stats Counter Row (mimicking the 4 pills row from the 1st reference image) */}

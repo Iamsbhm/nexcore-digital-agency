@@ -24,7 +24,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
       category: 'Web',
       tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Local SEO'],
       desc: 'Financial Advisor Website Design & Development',
-      image: '/images/wealthpath_hero.png',
+      image: '/images/wealthpath_presentation.jpg',
       accent: '#c5a059',
       liveUrl: 'https://wealthpathadvisors.com'
     }
