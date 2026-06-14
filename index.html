@@ -132,15 +132,29 @@
          Replace G-XXXXXXXXXX with your Measurement ID
          from: analytics.google.com
     ══════════════════════════════════════════ -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <!-- ══════════════════════════════════════════
+         GOOGLE ANALYTICS GA4 (Optimized Dynamic Loading)
+         Loads tag manager only if a valid ID is configured
+         ══════════════════════════════════════════ -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){ dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX', {
-        page_title: document.title,
-        send_page_view: true
-      });
+      (function() {
+        const gaId = 'G-XXXXXXXXXX'; // Replace with your measurement ID from analytics.google.com
+        if (gaId && gaId !== 'G-XXXXXXXXXX') {
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+          document.head.appendChild(script);
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', gaId, {
+            page_title: document.title,
+            send_page_view: true
+          });
+        }
+      })();
     </script>
   </head>
   <body>

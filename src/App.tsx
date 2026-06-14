@@ -75,6 +75,17 @@ export default function App() {
 
   const isHomepageGroup = currentPage === 'home' || currentPage === 'web-development' || currentPage === 'web-design' || currentPage === 'wordpress' || currentPage === 'ui-ux' || currentPage === 'contact';
 
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   useEffect(() => {
     const handleUrlChange = () => {
       setCurrentPage(getPageFromPath());
@@ -613,14 +624,18 @@ export default function App() {
         id="hero"
       >
         {/* 3D Floating Spheres — background */}
-        <div className="absolute inset-0 pointer-events-none opacity-30 lg:opacity-100 transition-opacity duration-700">
-          <Spheres3D />
-        </div>
+        {!isMobile && (
+          <div className="absolute inset-0 pointer-events-none opacity-30 lg:opacity-100 transition-opacity duration-700">
+            <Spheres3D />
+          </div>
+        )}
 
         {/* Particles subtle secondary layer */}
-        <div className="absolute inset-0 pointer-events-none opacity-20">
-          <Particles3D />
-        </div>
+        {!isMobile && (
+          <div className="absolute inset-0 pointer-events-none opacity-20">
+            <Particles3D />
+          </div>
+        )}
 
         {/* Scanline overlay */}
         <div className="absolute inset-0 pointer-events-none z-[1]" style={{
@@ -797,7 +812,8 @@ export default function App() {
             </div>
 
             {/* ── RIGHT COLUMN — 2x2 Interactive Gradients Grid ── */}
-            <div className="lg:col-span-6 bg-gradient-to-br from-[#0b0a16]/95 via-[#06050e]/98 to-[#030206]/98 backdrop-blur-md px-8 pb-8 pt-24 sm:px-12 sm:pb-12 sm:pt-28 lg:px-16 lg:pb-16 lg:pt-32 xl:px-20 xl:pb-20 xl:pt-36 flex flex-col justify-center items-center relative overflow-hidden text-white min-h-[460px] lg:min-h-0">
+            {!isMobile && (
+              <div className="lg:col-span-6 bg-gradient-to-br from-[#0b0a16]/95 via-[#06050e]/98 to-[#030206]/98 backdrop-blur-md px-8 pb-8 pt-24 sm:px-12 sm:pb-12 sm:pt-28 lg:px-16 lg:pb-16 lg:pt-32 xl:px-20 xl:pb-20 xl:pt-36 flex flex-col justify-center items-center relative overflow-hidden text-white min-h-[460px] lg:min-h-0">
               <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_center,rgba(124,58,237,0.15),transparent_60%)]" />
               
               <div className="w-full max-w-xl xl:max-w-2xl aspect-[4/3] flex items-center justify-center">
@@ -1169,6 +1185,7 @@ export default function App() {
               </div>
             </div>
           </div>
+        )}
 
           </motion.div>
         </div>
@@ -1222,7 +1239,13 @@ export default function App() {
         </div>
 
         {/* Interactive Services catalog list selector */}
-        <ServiceSelector />
+        <Suspense fallback={
+          <div className="w-full min-h-[400px] flex items-center justify-center bg-white/[0.02] border border-white/[0.05] rounded-3xl animate-pulse">
+            <span className="text-sm font-mono text-white/30">Loading services...</span>
+          </div>
+        }>
+          <ServiceSelector />
+        </Suspense>
       </section>
 
       <div className="my-16 md:my-24" />
@@ -1351,7 +1374,13 @@ export default function App() {
         </div>
 
         {/* Interactive timeline module */}
-        <InteractiveProcess />
+        <Suspense fallback={
+          <div className="w-full min-h-[350px] flex items-center justify-center bg-white/[0.02] border border-white/[0.05] rounded-3xl animate-pulse">
+            <span className="text-sm font-mono text-white/30">Loading process timeline...</span>
+          </div>
+        }>
+          <InteractiveProcess />
+        </Suspense>
       </section>
 
       <div className="my-16 md:my-24" />
@@ -1545,7 +1574,13 @@ export default function App() {
         </div>
 
         {/* Testimonials Slider */}
-        <TestimonialsSlider />
+        <Suspense fallback={
+          <div className="w-full min-h-[300px] flex items-center justify-center bg-white/[0.02] border border-white/[0.05] rounded-3xl animate-pulse">
+            <span className="text-sm font-mono text-white/30">Loading reviews...</span>
+          </div>
+        }>
+          <TestimonialsSlider />
+        </Suspense>
       </section>
 
       <div className="my-16 md:my-24" />
