@@ -14,10 +14,21 @@ export interface FeaturedProjectItem {
   desc: string;
   image: string;
   accent: string;
+  liveUrl?: string;
 }
 
 export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps) {
-  const projects: FeaturedProjectItem[] = [];
+  const projects: FeaturedProjectItem[] = [
+    {
+      title: 'WealthPath Financial Advisors',
+      category: 'Web',
+      tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Local SEO'],
+      desc: 'Financial Advisor Website Design & Development',
+      image: '/images/wealthpath_hero.png',
+      accent: '#c5a059',
+      liveUrl: 'https://wealthpathadvisors.com'
+    }
+  ];
 
   return (
     <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto" id="portfolio-featured-section">

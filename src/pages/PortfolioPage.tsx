@@ -22,9 +22,38 @@ export interface ProjectItem {
   howItMade: string;
   results: { metric: string; label: string }[];
   gallery: string[];
+  liveUrl?: string;
 }
 
-const projects: ProjectItem[] = [];
+const projects: ProjectItem[] = [
+  {
+    title: 'WealthPath Financial Advisors',
+    category: 'Web',
+    tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Local SEO'],
+    desc: 'Financial Advisor Website Design & Development',
+    gradient: 'from-blue-900/40 via-[#c5a059]/15 to-transparent',
+    accent: '#c5a059',
+    year: '2026',
+    image: '/images/wealthpath_hero.png',
+    challenge: 'The client faced an outdated website design with no online booking or lead generation system. Poor mobile responsiveness, low search engine visibility, and a lack of trust-building content caused visitors to leave without initiating contact.',
+    solution: 'Designed and developed a trust-focused website with a professional blue & gold color scheme. Integrated Calendly and Zoom for scheduling, created conversion-oriented service landing pages, added local SEO targeting, and optimized for mobile performance.',
+    howItMade: 'Crafted custom UI mockups in Figma. Developed the final platform on WordPress with Elementor Pro, structuring it for speed and local SEO using Rank Math. Built custom integrations for Calendly scheduling and Google Analytics tracking.',
+    results: [
+      { metric: '+500%', label: 'Monthly Visitors' },
+      { metric: '5.6×', label: 'Consultations' },
+      { metric: '-31%', label: 'Bounce Rate' },
+      { metric: '4.8%', label: 'Mobile Conv. Rate' },
+      { metric: '65', label: 'Google Keywords' }
+    ],
+    gallery: [
+      '/images/wealthpath_hero.png',
+      '/images/wealthpath_mobile.jpg',
+      '/images/wealthpath_about.jpg',
+      '/images/wealthpath_services.jpg'
+    ],
+    liveUrl: 'https://wealthpathadvisors.com'
+  }
+];
 
 interface ProjectDetailsProps {
   key?: string;
@@ -130,6 +159,22 @@ function ProjectDetailsView({ project, onBack, openBooking }: ProjectDetailsProp
         {/* Right 1 Column: Tech Stack & CTA */}
         <div className="space-y-6 text-left">
           
+          {/* Project Link Card */}
+          {project.liveUrl && (
+            <div className="p-6 bg-white/[0.01] border border-[#c5a059]/20 rounded-2xl space-y-4 shadow-[0_0_15px_rgba(197,160,89,0.03)]">
+              <h4 className="text-[10px] font-mono text-[#c5a059] uppercase tracking-[0.3em] font-bold">Project Website</h4>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-between w-full py-3 px-4 bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.08] hover:border-white/20 text-white text-[10px] font-mono tracking-widest uppercase font-bold transition-all rounded-xl cursor-pointer"
+              >
+                <span>Visit Live Site</span>
+                <ExternalLink className="w-3.5 h-3.5 text-white/60" />
+              </a>
+            </div>
+          )}
+
           {/* Technologies Used Card */}
           <div className="p-6 bg-white/[0.01] border border-white/[0.06] rounded-2xl space-y-4">
             <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] font-bold">Technologies Used</h4>
