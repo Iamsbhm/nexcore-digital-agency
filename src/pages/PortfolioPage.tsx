@@ -23,6 +23,12 @@ export interface ProjectItem {
   results: { metric: string; label: string }[];
   gallery: string[];
   liveUrl?: string;
+  clientOverview?: string;
+  testimonial?: {
+    quote: string;
+    author: string;
+    role: string;
+  };
 }
 
 const projects: ProjectItem[] = [
@@ -51,7 +57,13 @@ const projects: ProjectItem[] = [
       '/images/wealthpath_about.jpg',
       '/images/wealthpath_services.jpg'
     ],
-    liveUrl: 'https://wealthpathadvisors.com'
+    liveUrl: 'https://wealthpathadvisors.com',
+    clientOverview: 'WealthPath Financial Advisors is an independent financial advisory firm in Dallas, Texas. They help individuals, families, and business owners with retirement planning, investment management, wealth preservation, estate planning, and tax-efficient investing.',
+    testimonial: {
+      quote: '“Pixel Vance Digital transformed our online presence. We now receive qualified consultation requests every week, and our website has become our primary lead generation channel.”',
+      author: 'Michael Anderson',
+      role: 'Founder, WealthPath Financial Advisors'
+    }
   }
 ];
 
@@ -69,10 +81,14 @@ function ProjectDetailsView({ project, onBack, openBooking }: ProjectDetailsProp
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      className="space-y-10"
+      className="space-y-12 relative"
     >
-      {/* Back Button */}
-      <div className="flex items-center justify-between">
+      {/* Background Decorative Drifting Orbs */}
+      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-gradient-to-br from-indigo-500/5 to-transparent rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-gradient-to-br from-[#c5a059]/5 to-transparent rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Navigation & Back Button */}
+      <div className="flex items-center justify-between relative z-10">
         <button
           onClick={onBack}
           className="inline-flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-white/50 hover:text-[#c5a059] transition-colors cursor-pointer group"
@@ -80,147 +96,237 @@ function ProjectDetailsView({ project, onBack, openBooking }: ProjectDetailsProp
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Back to Portfolio
         </button>
-        <span className="text-[9px] font-mono tracking-widest text-white/30 uppercase">
+        <span className="text-[9px] font-mono tracking-widest text-[#c5a059] uppercase px-3 py-1 rounded-full border border-[#c5a059]/20 bg-[#c5a059]/5">
           Case Study / {project.category}
         </span>
       </div>
 
-      {/* Hero Showcase Frame */}
-      <div className="h-[40vh] md:h-[55vh] w-full relative rounded-3xl overflow-hidden border border-white/[0.08] shadow-2xl flex items-center justify-center">
+      {/* Main Title Block - Large Headline Presentation */}
+      <div className="space-y-4 text-center max-w-3xl mx-auto pt-6 relative z-10">
+        <span className="text-[10px] font-mono tracking-[0.35em] text-[#c5a059] uppercase font-bold">
+          — DETAILED CASE STUDY —
+        </span>
+        <h1 className="text-4xl md:text-6xl font-display font-light text-white leading-[1.15] tracking-tight">
+          {project.title}
+        </h1>
+        <p className="text-xs md:text-sm text-white/45 max-w-xl mx-auto leading-relaxed font-sans font-light">
+          {project.desc}
+        </p>
+      </div>
+
+      {/* Hero Showcase Center Frame (mimicking the large central browser device mockup) */}
+      <div className="h-[40vh] md:h-[58vh] w-full relative rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-[#07080c] relative z-10 group">
         <img 
           src={project.image} 
           alt={project.title} 
-          className="absolute inset-0 w-full h-full object-cover" 
+          className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" 
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0c0d12] via-[#0c0d12]/20 to-transparent" />
-        
-        {/* Title Content Overlay */}
-        <div className="absolute bottom-0 inset-x-0 p-6 md:p-10 flex flex-col md:flex-row md:items-end justify-between gap-6 z-10">
-          <div className="space-y-3 text-left">
-            <span 
-              className="text-[9px] font-mono tracking-widest uppercase px-3 py-1 rounded-full border inline-block" 
-              style={{ color: project.accent, borderColor: `${project.accent}40`, backgroundColor: `${project.accent}15` }}
-            >
-              {project.category}
-            </span>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-semibold text-white leading-tight">
-              {project.title}
-            </h1>
-          </div>
-          <div className="text-[10px] font-mono text-white/50 bg-black/40 backdrop-blur-sm border border-white/[0.08] px-4 py-2 rounded-full shrink-0 self-start md:self-end">
-            ESTABLISHED: {project.year}
-          </div>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
+        <div className="absolute inset-0 border border-white/[0.06] rounded-[32px] pointer-events-none" />
       </div>
 
-      {/* Main Content Grid */}
-      <div className="grid lg:grid-cols-3 gap-8">
-        
-        {/* Left 2 Columns: Details */}
-        <div className="lg:col-span-2 space-y-8">
-          
-          {/* Challenge & Solution Cards */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Challenge Card */}
-            <div className="p-6 md:p-8 bg-white/[0.01] border border-white/[0.06] rounded-2xl space-y-4 text-left">
-              <div className="flex items-center gap-2.5" style={{ color: project.accent }}>
-                <ShieldCheck className="w-5 h-5" />
-                <h3 className="text-xs font-mono uppercase tracking-[0.25em] font-bold">The Challenge</h3>
-              </div>
-              <p className="text-sm text-white/70 leading-relaxed font-sans">
-                {project.challenge}
-              </p>
-            </div>
-
-            {/* Solution Card */}
-            <div className="p-6 md:p-8 bg-white/[0.01] border border-white/[0.06] rounded-2xl space-y-4 text-left">
-              <div className="flex items-center gap-2.5 text-emerald-400">
-                <Sparkles className="w-5 h-5" />
-                <h3 className="text-xs font-mono uppercase tracking-[0.25em] font-bold">Our Solution</h3>
-              </div>
-              <p className="text-sm text-white/70 leading-relaxed font-sans">
-                {project.solution}
-              </p>
-            </div>
+      {/* Stats Counter Row (mimicking the 4 pills row from the 1st reference image) */}
+      <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 py-4 relative z-10">
+        {project.results.map((r, ri) => (
+          <div 
+            key={ri} 
+            className="flex items-center gap-3 px-5 py-3 bg-white/[0.01] hover:bg-white/[0.04] border border-white/[0.08] hover:border-[#c5a059]/30 rounded-full transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:-translate-y-0.5"
+          >
+            <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest">{r.label}</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] shrink-0" />
+            <span className="text-xs font-mono font-bold text-[#c5a059]">{r.metric}</span>
           </div>
+        ))}
+      </div>
 
-          {/* How It Was Made (Full Width details) */}
-          <div className="p-6 md:p-8 bg-white/[0.01] border border-white/[0.06] rounded-2xl space-y-5 text-left">
-            <div className="flex items-center gap-2.5 text-blue-400">
-              <Code className="w-5 h-5" />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] font-bold">Engineering Process</h3>
+      {/* Asymmetric Grid Layout matching the 1st reference image */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+        
+        {/* Card 1: Client Overview & Tech Stack (corresponds to the dark blue vertical widget) */}
+        <div className="lg:col-span-1 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.07] rounded-[32px] p-6 space-y-6 flex flex-col justify-between relative overflow-hidden group shadow-lg">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-[#c5a059]/5 rounded-full blur-2xl group-hover:bg-[#c5a059]/10 transition-colors duration-500" />
+          
+          <div className="space-y-4 text-left">
+            <div className="flex items-center justify-between">
+              <span className="text-[9px] font-mono text-[#c5a059] tracking-widest uppercase px-3 py-1 rounded-full border border-[#c5a059]/20 bg-[#c5a059]/5">
+                Client Brief
+              </span>
+              <span className="text-[9px] font-mono text-white/30">{project.year}</span>
             </div>
-            <p className="text-sm text-white/70 leading-relaxed font-sans">
-              {project.howItMade}
+            <h3 className="text-xl font-display font-light text-white tracking-tight">
+              WealthPath Advisors
+            </h3>
+            <p className="text-[11px] text-white/45 leading-relaxed font-sans font-light">
+              {project.clientOverview || project.desc}
             </p>
           </div>
-        </div>
 
-        {/* Right 1 Column: Tech Stack & CTA */}
-        <div className="space-y-6 text-left">
-          
-          {/* Project Link Card */}
-          {project.liveUrl && (
-            <div className="p-6 bg-white/[0.01] border border-[#c5a059]/20 rounded-2xl space-y-4 shadow-[0_0_15px_rgba(197,160,89,0.03)]">
-              <h4 className="text-[10px] font-mono text-[#c5a059] uppercase tracking-[0.3em] font-bold">Project Website</h4>
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-between w-full py-3 px-4 bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.08] hover:border-white/20 text-white text-[10px] font-mono tracking-widest uppercase font-bold transition-all rounded-xl cursor-pointer"
-              >
-                <span>Visit Live Site</span>
-                <ExternalLink className="w-3.5 h-3.5 text-white/60" />
-              </a>
-            </div>
-          )}
-
-          {/* Technologies Used Card */}
-          <div className="p-6 bg-white/[0.01] border border-white/[0.06] rounded-2xl space-y-4">
-            <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] font-bold">Technologies Used</h4>
-            <div className="flex flex-wrap gap-2">
+          <div className="space-y-4 pt-6 border-t border-white/[0.06] text-left">
+            <h4 className="text-[9px] font-mono text-white/30 uppercase tracking-[0.25em] font-bold">Technologies</h4>
+            <div className="flex flex-wrap gap-1.5">
               {project.tags.map(tag => (
-                <span key={tag} className="text-[10px] font-mono text-white/60 bg-white/[0.03] border border-white/[0.08] px-3 py-1.5 rounded-lg">
+                <span 
+                  key={tag} 
+                  className="text-[9px] font-mono text-white/60 bg-white/[0.03] border border-white/[0.08] px-2.5 py-1 rounded-lg hover:border-[#c5a059]/30 transition-colors"
+                >
                   {tag}
                 </span>
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Results Metric Card */}
-          <div className="p-6 bg-white/[0.01] border border-white/[0.06] rounded-2xl space-y-4">
-            <div className="flex items-center gap-2 text-indigo-400">
-              <BarChart3 className="w-4 h-4" />
-              <h4 className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold">Performance Results</h4>
-            </div>
-            <div className="grid grid-cols-1 gap-3">
-              {project.results.map((r, ri) => (
-                <div key={ri} className="p-4 bg-white/[0.02] border border-white/[0.05] rounded-xl flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-white/35 uppercase tracking-wide">
-                    {r.label}
-                  </span>
-                  <span className="text-xl font-display font-black" style={{ color: project.accent }}>
-                    {r.metric}
-                  </span>
-                </div>
-              ))}
-            </div>
+        {/* Card 2: The Challenge (corresponds to the middle square portrait card) */}
+        <div className="lg:col-span-1 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.07] rounded-[28px] p-6 space-y-6 flex flex-col justify-between relative overflow-hidden group shadow-lg text-left">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-red-500/5 rounded-full blur-2xl group-hover:bg-red-500/10 transition-colors duration-500" />
+          
+          <div className="space-y-4">
+            <span className="text-[9px] font-mono text-red-400 tracking-widest uppercase px-3 py-1 rounded-full border border-red-500/20 bg-red-500/5 inline-block">
+              The Challenge
+            </span>
+            <h3 className="text-xl font-display font-light text-white tracking-tight">
+              Outdated Presence
+            </h3>
+            <p className="text-[11px] text-white/45 leading-relaxed font-sans font-light">
+              {project.challenge}
+            </p>
           </div>
 
-          {/* CTA Box */}
-          <div className="p-6 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.06] rounded-2xl space-y-4">
-            <p className="text-xs text-white/40 leading-relaxed">
-              Want us to deliver similar performance metrics and brand experience for your project?
+          <div className="relative rounded-2xl overflow-hidden aspect-video border border-white/[0.08] shadow-md bg-white/[0.01]">
+            <img 
+              src={project.gallery && project.gallery[2] ? project.gallery[2] : project.image} 
+              alt="Client Context" 
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+            <span className="absolute bottom-2.5 left-3 text-[9px] font-mono text-white/50">{project.title} Interface</span>
+          </div>
+        </div>
+
+        {/* Card 3: Our Solution (corresponds to the right widget card) */}
+        <div className="lg:col-span-1 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.07] rounded-[28px] p-6 space-y-6 flex flex-col justify-between relative overflow-hidden group shadow-lg text-left">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-colors duration-500" />
+          
+          <div className="space-y-4">
+            <span className="text-[9px] font-mono text-emerald-400 tracking-widest uppercase px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 inline-block">
+              Our Solution
+            </span>
+            <h3 className="text-xl font-display font-light text-white tracking-tight">
+              Trust & Growth
+            </h3>
+            <p className="text-[11px] text-white/45 leading-relaxed font-sans font-light">
+              {project.solution}
             </p>
+          </div>
+
+          <div className="space-y-2 pt-2">
+            <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl flex items-center justify-between hover:border-white/10 transition-colors">
+              <span className="text-[10px] font-sans text-white/50">Modern UI/UX Design</span>
+              <span className="text-[8px] font-mono text-emerald-400 uppercase tracking-widest px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/5">Blue & Gold</span>
+            </div>
+            <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl flex items-center justify-between hover:border-white/10 transition-colors">
+              <span className="text-[10px] font-sans text-white/50">Consultation Booking</span>
+              <span className="text-[8px] font-mono text-emerald-400 uppercase tracking-widest px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/5">Calendly API</span>
+            </div>
+            <div className="p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl flex items-center justify-between hover:border-white/10 transition-colors">
+              <span className="text-[10px] font-sans text-white/50">Local SEO Optimization</span>
+              <span className="text-[8px] font-mono text-emerald-400 uppercase tracking-widest px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/5">Rank Math</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 4: Engineering Process & Process Steps (corresponds to the bottom-left wide card) */}
+        <div className="lg:col-span-2 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.07] rounded-[32px] p-8 space-y-6 relative overflow-hidden group shadow-lg text-left">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors duration-500" />
+          
+          <div className="flex items-center justify-between">
+            <span className="text-[9px] font-mono text-blue-400 tracking-widest uppercase px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/5">
+              Engineering Process
+            </span>
+            <span className="text-[9px] font-mono text-white/20">Figma to Elementor Pro</span>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 pt-2">
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] font-bold">Process & Architecture</h4>
+              <p className="text-[11px] text-white/45 leading-relaxed font-sans font-light">
+                {project.howItMade}
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] font-bold">Scope of Work Delivered</h4>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  'Custom Wireframing & UI Style Guide in Figma',
+                  'Online Scheduling & Calendly Consultation API',
+                  'Local Dallas SEO Architecture & Metadata Mapping',
+                  'Mobile-First Responsive Layout Engineering',
+                  'Custom Regulatory Disclosures & Trust Badges'
+                ].map((feature, fi) => (
+                  <div key={fi} className="flex items-center gap-3 p-2 bg-white/[0.01] border border-white/[0.04] rounded-lg">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] shrink-0" />
+                    <span className="text-[10px] text-white/50">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 5: Testimonial & Live Link Actions (corresponds to the bottom-right black card) */}
+        <div className="lg:col-span-1 bg-gradient-to-b from-[#111219]/90 to-[#09090c]/90 border border-white/[0.08] rounded-[32px] p-6 flex flex-col justify-between relative overflow-hidden group shadow-2xl text-left">
+          <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-[#c5a059]/10 rounded-full blur-2xl" />
+          
+          {project.testimonial ? (
+            <div className="space-y-5">
+              <div className="flex items-center justify-between">
+                <span className="text-[9px] font-mono text-[#c5a059] tracking-widest uppercase px-3 py-1 rounded-full border border-[#c5a059]/20 bg-[#c5a059]/5">
+                  Client Feedback
+                </span>
+                <span className="text-xs text-[#c5a059] font-serif">5★ Review</span>
+              </div>
+              <blockquote className="text-[11px] md:text-xs text-white/80 italic leading-relaxed font-serif relative pl-3 border-l border-[#c5a059]/30">
+                {project.testimonial.quote}
+              </blockquote>
+              <div className="space-y-0.5 pt-2 pl-3">
+                <p className="text-[11px] text-white font-semibold">{project.testimonial.author}</p>
+                <p className="text-[9px] text-white/40 font-mono">{project.testimonial.role}</p>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <span className="text-[9px] font-mono text-[#c5a059] tracking-widest uppercase px-3 py-1 rounded-full border border-[#c5a059]/20 bg-[#c5a059]/5 inline-block">
+                Project Actions
+              </span>
+              <h3 className="text-lg font-display font-light text-white">Let's Collaborate</h3>
+              <p className="text-[11px] text-white/40 leading-relaxed font-sans font-light">
+                Ready to achieve comparable growth metrics and transform your digital presence?
+              </p>
+            </div>
+          )}
+
+          <div className="space-y-2.5 pt-8 z-10">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#c5a059] hover:bg-[#c5a059]/90 text-black text-[10px] font-mono tracking-widest uppercase font-bold transition-all rounded-xl cursor-pointer shadow-lg shadow-[#c5a059]/10"
+              >
+                <span>Visit Live Website</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
             <button
               onClick={() => openBooking('GROWTH', '$2,999')}
-              className="w-full py-3 bg-[#c5a059] hover:bg-[#c5a059]/90 text-black text-[10px] font-mono tracking-[0.2em] uppercase font-bold transition-all rounded-xl cursor-pointer"
+              className="inline-flex items-center justify-center w-full py-3 px-4 bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.08] text-white text-[10px] font-mono tracking-widest uppercase transition-all rounded-xl cursor-pointer"
             >
               Book Strategy Session
             </button>
           </div>
-
         </div>
+
       </div>
 
       {/* Gallery Showcase */}
