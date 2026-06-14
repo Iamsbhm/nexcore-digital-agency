@@ -33,7 +33,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
       category: 'Web',
       tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Rank Math SEO'],
       desc: 'Law Firm Website Design & Development',
-      image: '/images/justiceedge_presentation.png',
+      image: '/images/justiceedge_presentation.jpg',
       accent: '#c5a059',
       liveUrl: 'https://justiceedgelaw.com'
     }

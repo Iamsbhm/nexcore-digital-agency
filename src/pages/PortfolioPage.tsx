@@ -73,7 +73,7 @@ const projects: ProjectItem[] = [
     gradient: 'from-slate-950/40 via-[#c5a059]/15 to-transparent',
     accent: '#c5a059',
     year: '2026',
-    image: '/images/justiceedge_presentation.png',
+    image: '/images/justiceedge_presentation.jpg',
     challenge: 'The firm\'s existing website was outdated, difficult to navigate, and failed to convert visitors into consultation requests. Potential clients were choosing competing law firms due to poor search engine rankings, no online consultation booking, and a poor mobile experience.',
     solution: 'Designed and developed a premium, trustworthy website featuring professional attorney profiles, service-specific practice area landing pages, Calendly integration for consultations, and local SEO optimizations targeting high-value legal search terms in Chicago.',
     howItMade: 'Designed initial layouts in Figma. Developed the final responsive site on WordPress using Elementor Pro, setting up Rank Math for local SEO architecture. Integrated Calendly booking flows, Google Search Console, and Google Analytics to track consultation lead conversions.',
@@ -85,7 +85,7 @@ const projects: ProjectItem[] = [
       { metric: '4.1×', label: 'Mobile Conv. Rate' }
     ],
     gallery: [
-      '/images/justiceedge_presentation.png'
+      '/images/justiceedge_presentation.jpg'
     ],
     liveUrl: 'https://justiceedgelaw.com',
     clientOverview: 'JusticeEdge Law Group is a prominent legal services firm in Chicago, Illinois. They specialize in Personal Injury Law, Family Law, Criminal Defense, Business Litigation, Real Estate Law, and Estate Planning, seeking to establish attorney credibility and build local client trust online.',
