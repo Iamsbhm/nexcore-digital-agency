@@ -124,6 +124,34 @@ const projects: ProjectItem[] = [
       author: 'David Carter',
       role: 'Owner, Elite Home Renovations'
     }
+  },
+  {
+    title: 'BrightSmile Dental Care',
+    category: 'Web',
+    tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Rank Math SEO'],
+    desc: 'Dental Clinic Website Redesign & Development',
+    gradient: 'from-blue-900/30 via-sky-500/10 to-transparent',
+    accent: '#0ea5e9',
+    year: '2026',
+    image: '/images/dental_presentation.jpg',
+    challenge: 'The dental clinic\'s existing website was outdated, difficult to navigate, and failed to convert visitors into appointment bookings. Potential patients were choosing competing clinics due to a poor mobile experience, a lack of local SEO, and a weak patient credibility presentation.',
+    solution: 'Designed and developed a premium, trustworthy dental clinic website featuring a clean blue theme, high-quality patient-focused photography, service landing pages for general and cosmetic dentistry, a Calendly integration for online appointments, and local SEO optimizations.',
+    howItMade: 'Designed UI layouts in Figma. Developed the final platform on WordPress with Elementor Pro. Configured Rank Math for local SEO, and integrated Calendly scheduling. Installed Google Analytics and Google Search Console to track bookings and search traffic.',
+    results: [
+      { metric: '+85%', label: 'Appointment Bookings' },
+      { metric: '+62%', label: 'Organic Traffic' },
+      { metric: '-40%', label: 'Bounce Rate' }
+    ],
+    gallery: [
+      '/images/dental_presentation.jpg'
+    ],
+    liveUrl: 'https://brightsmiledental.com',
+    clientOverview: 'BrightSmile Dental Care is a modern dental clinic offering general and cosmetic dentistry, teeth whitening, and dental implants. They wanted a trust-building digital presence that would establish patient credibility, streamline online bookings, and capture local patient search interest.',
+    testimonial: {
+      quote: '“The new website completely transformed our patient booking experience. We have seen a significant increase in online appointments, and our patients love the clean, easy-to-use design.”',
+      author: 'Dr. Sarah Jenkins',
+      role: 'Clinical Director, BrightSmile Dental Care'
+    }
   }
 ];
 

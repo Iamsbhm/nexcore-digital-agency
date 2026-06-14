@@ -45,6 +45,15 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
       image: '/images/elite_presentation.jpg',
       accent: '#ea580c',
       liveUrl: 'https://elitehomeremodels.com'
+    },
+    {
+      title: 'BrightSmile Dental Care',
+      category: 'Web',
+      tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Rank Math SEO'],
+      desc: 'Dental Clinic Website Redesign & Development',
+      image: '/images/dental_presentation.jpg',
+      accent: '#0ea5e9',
+      liveUrl: 'https://brightsmiledental.com'
     }
   ];
 
