@@ -8,180 +8,27 @@ interface PortfolioPageProps {
 
 const categories = ['All', 'Branding', 'Web', 'Mobile', 'UI/UX'];
 
-const projects = [
-  {
-    title: 'Pixel Vance Web Platform',
-    category: 'Web',
-    tags: ['React', 'TypeScript', 'TailwindCSS', 'WebGL', 'Framer Motion'],
-    desc: 'Our own high-performance, next-generation agency website with interactive 3D elements.',
-    gradient: 'from-[#c5a059]/30 via-purple-900/20 to-transparent',
-    accent: '#c5a059',
-    year: '2026',
-    image: '/images/nexcore_web_platform.png',
-    challenge: 'Creating an agency website that stands out in a crowded market while maintaining extreme performance (sub-second loading times) and high accessibility.',
-    solution: 'Implemented a custom Vite + React + Framer Motion structure with optimized 3D particle elements, dynamic code watermarks, and smooth layout transitions.',
-    howItMade: 'Built using Vite for instant dev server starts, Tailwind CSS for fluid utilities, and WebGL for canvas particle effects. Performance optimized via eager assets prefetching and component lazy-loading.',
-    results: [
-      { metric: '0.4s', label: 'LCP Paint Time' },
-      { metric: '99/100', label: 'Performance score' },
-      { metric: '4.8×', label: 'Lead Conversions' }
-    ],
-    gallery: [
-      '/images/nexcore_web_platform.png',
-      '/images/hero_web_design.png',
-      '/images/hero_tech_development.png',
-      '/images/hero_seo_rankings.png'
-    ]
-  },
-  {
-    title: 'Aether Finance',
-    category: 'Web',
-    tags: ['React', 'TailwindCSS', 'Framer Motion'],
-    desc: 'High-converting SaaS dashboard for a fintech startup targeting the US market.',
-    gradient: 'from-blue-600/30 via-blue-900/20 to-transparent',
-    accent: '#3b82f6',
-    year: '2025',
-    image: '/images/aether_finance.png',
-    challenge: 'Aether Finance struggled with high drop-offs on their core onboarding flow, leading to a trial-to-paid conversion rate stuck at 2.1%.',
-    solution: 'A complete UX overhaul of the user journey, simplified chart interactions, custom analytics widgets, and optimizing LCP to 1.2s.',
-    howItMade: 'Constructed using modern React hooks, Chart.js for data visualization, and Tailwind CSS for standard responsive UI elements.',
-    results: [
-      { metric: '3.8×', label: 'Conversion Uplift' },
-      { metric: '−62%', label: 'Churn Reduction' },
-      { metric: '1.2s', label: 'Page Load Speed' },
-    ],
-    gallery: [
-      '/images/aether_finance.png',
-      '/images/hero_web_design.png',
-      '/images/hero_cloud_infrastructure.png',
-      '/images/hero_seo_rankings.png'
-    ]
-  },
-  {
-    title: 'Voss & Co. Rebrand',
-    category: 'Branding',
-    tags: ['Logo', 'Identity', 'Print'],
-    desc: 'Full brand overhaul for a luxury real estate firm — identity, stationery, signage.',
-    gradient: 'from-[#c5a059]/30 via-[#8c6e3d]/15 to-transparent',
-    accent: '#c5a059',
-    year: '2025',
-    image: '/images/voss_rebrand.png',
-    challenge: 'Voss & Co. needed to position their real estate portfolio for high-net-worth clients, but their old identity felt dated and dry.',
-    solution: 'Re-imagined the brand with a premium serif layout, luxury golden tones, custom stationery, and a sleek web showcase.',
-    howItMade: 'Designed in Illustrator & Figma. Web properties built on Astro for lightning-fast HTML delivery and SEO presence.',
-    results: [
-      { metric: '+240%', label: 'Inbound Leads' },
-      { metric: '2×', label: 'Avg. Deal Size' },
-      { metric: '12', label: 'Press Features' },
-    ],
-    gallery: [
-      '/images/voss_rebrand.png',
-      '/images/hero_web_design.png',
-      '/images/hero_seo_rankings.png',
-      '/images/hero_tech_development.png'
-    ]
-  },
-  {
-    title: 'PulseApp',
-    category: 'Mobile',
-    tags: ['iOS', 'Android', 'React Native'],
-    desc: 'AI-powered health tracking app with 50K+ downloads on launch week.',
-    gradient: 'from-emerald-600/30 via-emerald-900/15 to-transparent',
-    accent: '#10b981',
-    year: '2024',
-    image: '/images/pulseapp_mobile.png',
-    challenge: 'Confusing user interface navigation and no clear onboarding path was leading to low app store reviews and high day-1 churn.',
-    solution: 'Designed a minimal mobile UI flow, implementing AI-driven personal health dashboards and subtle gamified streaks.',
-    howItMade: 'Developed with React Native and Expo, incorporating React Native Reanimated for native-feeling transitions and micro-interactions.',
-    results: [
-      { metric: '4.8★', label: 'App Store Rating' },
-      { metric: '50K+', label: 'Launch Downloads' },
-      { metric: '+180%', label: 'Day-30 Retention' },
-    ],
-    gallery: [
-      '/images/pulseapp_mobile.png',
-      '/images/hero_tech_development.png',
-      '/images/hero_cloud_infrastructure.png',
-      '/images/hero_seo_rankings.png'
-    ]
-  },
-  {
-    title: 'Orbit SaaS Platform',
-    category: 'UI/UX',
-    tags: ['Figma', 'Design System', 'Prototyping'],
-    desc: 'End-to-end design for a B2B project management SaaS — 120+ screens.',
-    gradient: 'from-purple-600/30 via-purple-900/15 to-transparent',
-    accent: '#a855f7',
-    year: '2024',
-    image: '/images/orbit_saas.png',
-    challenge: 'Enterprise users faced cognitive fatigue, leading to drop-offs during complex multi-tenant setup steps.',
-    solution: 'Built a modular layout with clear visual hierarchy, contextual help tooltips, and simplified wizard workflows.',
-    howItMade: 'Engineered as a comprehensive, variable-driven Figma design system. Handoff was compiled into interactive prototypes and documented in Storybook.',
-    results: [
-      { metric: '−45%', label: 'Setup Time' },
-      { metric: '94%', label: 'User Satisfaction' },
-      { metric: '85%', label: 'Feature Adoption' },
-    ],
-    gallery: [
-      '/images/orbit_saas.png',
-      '/images/hero_web_design.png',
-      '/images/hero_cloud_infrastructure.png',
-      '/images/hero_tech_development.png'
-    ]
-  },
-  {
-    title: 'Luxe Maison',
-    category: 'Web',
-    tags: ['Next.js', 'Shopify', 'CRO'],
-    desc: 'Premium e-commerce experience for a luxury home goods brand. 3× conversion uplift.',
-    gradient: 'from-rose-600/25 via-rose-900/15 to-transparent',
-    accent: '#f43f5e',
-    year: '2024',
-    image: '/images/luxe_maison.png',
-    challenge: 'A standard Shopify theme felt generic, failing to reflect luxury craftsmanship and causing cart abandonment of 82%.',
-    solution: 'Crafted a headless Shopify store with bespoke transitions, high-definition interactive images, and simplified payment systems.',
-    howItMade: 'Constructed using Next.js for SSR, Tailwind CSS for design systems, and Shopify Storefront GraphQL API.',
-    results: [
-      { metric: '3×', label: 'Revenue Growth' },
-      { metric: '−23%', label: 'Cart Abandonment' },
-      { metric: '$4.2M', label: 'Revenue (6mo)' },
-    ],
-    gallery: [
-      '/images/luxe_maison.png',
-      '/images/hero_web_design.png',
-      '/images/hero_seo_rankings.png',
-      '/images/hero_cloud_infrastructure.png'
-    ]
-  },
-  {
-    title: 'NovaMark Agency',
-    category: 'Branding',
-    tags: ['Brand Strategy', 'Logo', 'Guidelines'],
-    desc: 'Complete visual identity for a performance marketing agency in Austin, TX.',
-    gradient: 'from-amber-600/25 via-amber-900/15 to-transparent',
-    accent: '#f59e0b',
-    year: '2023',
-    image: '/images/novamark_agency.png',
-    challenge: 'The agency was trying to attract high-ticket B2B enterprise clients but possessed a logo and strategy that looked like a freelancer.',
-    solution: 'Created a cohesive, bold corporate branding system including professional sales decks, web style guides, and stationery.',
-    howItMade: 'Researched B2B design patterns, crafted custom typography in Adobe Illustrator, and designed responsive pitch deck assets.',
-    results: [
-      { metric: '5', label: 'Enterprise Wins' },
-      { metric: '+130%', label: 'Client Retention' },
-      { metric: '4.9★', label: 'Client Reviews' },
-    ],
-    gallery: [
-      '/images/novamark_agency.png',
-      '/images/hero_seo_rankings.png',
-      '/images/hero_web_design.png',
-      '/images/hero_tech_development.png'
-    ]
-  },
-];
+export interface ProjectItem {
+  title: string;
+  category: string;
+  tags: string[];
+  desc: string;
+  gradient: string;
+  accent: string;
+  year: string;
+  image: string;
+  challenge: string;
+  solution: string;
+  howItMade: string;
+  results: { metric: string; label: string }[];
+  gallery: string[];
+}
+
+const projects: ProjectItem[] = [];
 
 interface ProjectDetailsProps {
   key?: string;
-  project: typeof projects[0];
+  project: ProjectItem;
   onBack: () => void;
   openBooking: (plan: string, price: string) => void;
 }
@@ -476,61 +323,68 @@ export default function PortfolioPage({ openBooking }: PortfolioPageProps) {
             </div>
 
             {/* ── Grid ── */}
-            <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filtered.map((project, i) => (
-                <motion.div
-                  key={project.title}
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.07 }}
-                  onClick={() => selectProject(project)}
-                  className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/15 transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
-                >
-                  <div>
-                    {/* Visual placeholder */}
-                    <div className="h-44 relative flex items-end p-5 overflow-hidden">
-                      <img 
-                        src={project.image} 
-                        alt={project.title} 
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
-                      <div className="absolute inset-0 border-b border-white/[0.06]" />
-                      
-                      <div className="relative z-10 flex items-center justify-between w-full">
-                        <span className="text-[9px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full border" style={{ color: project.accent, borderColor: `${project.accent}40`, backgroundColor: `${project.accent}20` }}>
-                          {project.category}
-                        </span>
-                        <span className="text-[9px] font-mono text-white/50">{project.year}</span>
-                      </div>
-                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]">
-                        <div className="px-4 py-2 rounded-xl border flex items-center gap-2 bg-black/60 shadow-lg text-[10px] font-mono tracking-widest uppercase" style={{ color: project.accent, borderColor: `${project.accent}50` }}>
-                          <span>Case Study</span>
-                          <ExternalLink className="w-3.5 h-3.5" />
+            {filtered.length === 0 ? (
+              <div className="text-center py-24 border border-dashed border-white/10 rounded-3xl bg-white/[0.01]">
+                <p className="text-sm text-white/40 font-mono tracking-widest uppercase">No projects found in this category</p>
+                <p className="text-xs text-white/20 font-mono mt-2">New projects are being added. Check back soon!</p>
+              </div>
+            ) : (
+              <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filtered.map((project, i) => (
+                  <motion.div
+                    key={project.title}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: i * 0.07 }}
+                    onClick={() => selectProject(project)}
+                    className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/15 transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Visual placeholder */}
+                      <div className="h-44 relative flex items-end p-5 overflow-hidden">
+                        <img 
+                          src={project.image} 
+                          alt={project.title} 
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
+                        <div className="absolute inset-0 border-b border-white/[0.06]" />
+                        
+                        <div className="relative z-10 flex items-center justify-between w-full">
+                          <span className="text-[9px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full border" style={{ color: project.accent, borderColor: `${project.accent}40`, backgroundColor: `${project.accent}20` }}>
+                            {project.category}
+                          </span>
+                          <span className="text-[9px] font-mono text-white/50">{project.year}</span>
+                        </div>
+                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]">
+                          <div className="px-4 py-2 rounded-xl border flex items-center gap-2 bg-black/60 shadow-lg text-[10px] font-mono tracking-widest uppercase" style={{ color: project.accent, borderColor: `${project.accent}50` }}>
+                            <span>Case Study</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </div>
                         </div>
                       </div>
+
+                      {/* Info */}
+                      <div className="p-5 space-y-3 text-left">
+                        <h3 className="text-base font-display font-semibold text-white group-hover:text-[#c5a059] transition-colors">{project.title}</h3>
+                        <p className="text-[11px] text-white/35 leading-relaxed">{project.desc}</p>
+                      </div>
                     </div>
 
-                    {/* Info */}
-                    <div className="p-5 space-y-3 text-left">
-                      <h3 className="text-base font-display font-semibold text-white group-hover:text-[#c5a059] transition-colors">{project.title}</h3>
-                      <p className="text-[11px] text-white/35 leading-relaxed">{project.desc}</p>
+                    <div className="p-5 pt-0 text-left">
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {project.tags.map(tag => (
+                          <span key={tag} className="text-[9px] font-mono text-white/30 bg-white/[0.04] border border-white/[0.06] px-2 py-0.5 rounded-full">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="p-5 pt-0 text-left">
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="text-[9px] font-mono text-white/30 bg-white/[0.04] border border-white/[0.06] px-2 py-0.5 rounded-full">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
 
             {/* ── CTA ── */}
             <div className="text-center space-y-5 py-14 border border-white/[0.06] rounded-3xl bg-white/[0.01]">
