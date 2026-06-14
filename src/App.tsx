@@ -18,12 +18,9 @@ import {
   PhoneCall, 
   ArrowDownCircle, 
   Sparkles,
-  ExternalLink,
   ShieldCheck,
   CheckCircle,
   HelpCircle,
-  Linkedin,
-  Dribbble,
   Share2
 } from 'lucide-react';
 
@@ -41,6 +38,10 @@ const InteractiveProcess = lazy(() => import('./components/InteractiveProcess'))
 const PricingCalculator  = lazy(() => import('./components/PricingCalculator'));
 const TestimonialsSlider = lazy(() => import('./components/TestimonialsSlider'));
 const BookingModal       = lazy(() => import('./components/BookingModal'));
+const FeaturedPortfolio  = lazy(() => import('./components/FeaturedPortfolio'));
+const WhyChooseUs        = lazy(() => import('./components/WhyChooseUs'));
+const ConversionPortal   = lazy(() => import('./components/ConversionPortal'));
+const Footer             = lazy(() => import('./components/Footer'));
 
 // Lazy-loaded inner pages (not needed on first paint)
 const AboutPage       = lazy(() => import('./pages/AboutPage'));
@@ -74,7 +75,9 @@ export default function App() {
 
   const isHomepageGroup = currentPage === 'home' || currentPage === 'web-development' || currentPage === 'web-design' || currentPage === 'wordpress' || currentPage === 'ui-ux' || currentPage === 'contact';
 
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(() => 
+    typeof window !== 'undefined' ? window.innerWidth < 1024 : false
+  );
 
   useEffect(() => {
     const checkMobile = () => {
@@ -853,111 +856,13 @@ export default function App() {
       <div className="my-16 md:my-24" />
 
       {/* ── FEATURED PORTFOLIO SHOWCASE ── */}
-      <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto" id="portfolio-featured-section">
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-          <span className="text-[10px] font-mono tracking-widest text-[#c5a059] font-bold uppercase">
-            — FEATURED SHOWCASE —
-          </span>
-          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            Custom Web Design That <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Converts Visitors</span> Into Customers
-          </h2>
-          <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-            A curated glance at the high-fidelity web experiences, digital products, and brand systems we've designed and engineered.
-          </p>
+      <Suspense fallback={
+        <div className="w-full min-h-[400px] flex items-center justify-center bg-white/[0.02] border border-white/[0.05] rounded-3xl animate-pulse">
+          <span className="text-sm font-mono text-white/30">Loading showcase...</span>
         </div>
-
-        {/* 3-Card Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            {
-              title: 'Pixel Vance Web Platform',
-              category: 'Web',
-              tags: ['React', 'TypeScript', 'TailwindCSS', 'WebGL'],
-              desc: 'Our own high-performance, next-generation agency website with interactive 3D elements.',
-              image: '/images/nexcore_web_platform.png',
-              accent: '#c5a059'
-            },
-            {
-              title: 'Aether Finance',
-              category: 'Web',
-              tags: ['React', 'TailwindCSS', 'Framer Motion'],
-              desc: 'High-converting SaaS dashboard for a fintech startup targeting the US market.',
-              image: '/images/aether_finance.png',
-              accent: '#3b82f6'
-            },
-            {
-              title: 'PulseApp',
-              category: 'Mobile',
-              tags: ['iOS', 'Android', 'React Native'],
-              desc: 'AI-powered health tracking app with 50K+ downloads on launch week.',
-              image: '/images/pulseapp_mobile.png',
-              accent: '#10b981'
-            }
-          ].map((project) => (
-            <div
-              key={project.title}
-              onClick={() => {
-                navigateTo(`/portfolio/${getSlug(project.title)}`);
-              }}
-              className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/15 transition-all duration-350 hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between"
-            >
-              <div>
-                {/* Visual Image Header */}
-                <div className="h-44 relative overflow-hidden flex items-end p-5">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
-                  <div className="absolute inset-0 border-b border-white/[0.06]" />
-                  
-                  <div className="relative z-10 flex items-center justify-between w-full">
-                    <span className="text-[9px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full border" style={{ color: project.accent, borderColor: `${project.accent}40`, backgroundColor: `${project.accent}20` }}>
-                      {project.category}
-                    </span>
-                  </div>
-                  
-                  <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]">
-                    <div className="px-4 py-2 rounded-xl border flex items-center gap-2 bg-black/60 shadow-lg text-[10px] font-mono tracking-widest uppercase" style={{ color: project.accent, borderColor: `${project.accent}50` }}>
-                      <span>View Project</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content Info */}
-                <div className="p-5 text-left space-y-2.5">
-                  <h3 className="text-base font-display font-semibold text-white group-hover:text-[#c5a059] transition-colors">{project.title}</h3>
-                  <p className="text-[11px] text-white/35 leading-relaxed">{project.desc}</p>
-                </div>
-              </div>
-
-              <div className="p-5 pt-0 text-left">
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="text-[9px] font-mono text-white/30 bg-white/[0.04] border border-white/[0.06] px-2 py-0.5 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* View All Button */}
-        <div className="text-center pt-8">
-          <button
-            onClick={() => {
-              navigateTo('/portfolio');
-            }}
-            className="inline-flex items-center gap-2 py-3 px-8 bg-transparent hover:bg-white/[0.03] border border-white/10 hover:border-white/20 text-white text-[10px] font-mono tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer rounded-xl"
-          >
-            <span>View Full Portfolio</span>
-          </button>
-        </div>
-      </section>
+      }>
+        <FeaturedPortfolio navigateTo={navigateTo} />
+      </Suspense>
 
       <div className="my-16 md:my-24" />
 
@@ -988,175 +893,13 @@ export default function App() {
       <div className="my-16 md:my-24" />
 
       {/* 7. WHY CHOOSE US + TECH STACK */}
-      <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto animate-fade-in" id="why-us-section">
-
-        {/* ── WHY CHOOSE US ── */}
-        <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
-          <span className="text-[10px] font-mono tracking-[0.4em] text-[#c5a059] font-bold uppercase">
-            — OUR EDGE —
-          </span>
-          <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-white leading-none">
-            Trusted Website Development <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Agency Serving the USA</span>
-          </h2>
-          <h3 className="text-lg md:text-xl font-display font-bold text-[#c5a059] mt-3 uppercase tracking-wider">
-            UI/UX Design Focused on User Experience
-          </h3>
-          <p className="text-sm text-white/40 max-w-xl mx-auto leading-relaxed mt-2">
-            The top-rated US web design agency that crafts custom websites, fast WordPress platforms, and user experiences that convert and scale.
-          </p>
+      <Suspense fallback={
+        <div className="w-full min-h-[400px] flex items-center justify-center bg-white/[0.02] border border-white/[0.05] rounded-3xl animate-pulse">
+          <span className="text-sm font-mono text-white/30">Loading edge & stack...</span>
         </div>
-
-        {/* Why Us — premium numbered cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-28">
-          {[
-            { num: '01', icon: '⚡', title: 'Blazing Fast Delivery', desc: 'Tight sprints, most projects ship in 2–4 weeks without sacrificing a single pixel of quality.', stat: '2–4 Weeks', statLabel: 'Avg Delivery' },
-            { num: '02', icon: '🎯', title: 'Conversion-First Design', desc: 'Every pixel is intentional — engineered to guide users toward action and maximize your ROI.', stat: '3.2×', statLabel: 'Avg ROI' },
-            { num: '03', icon: '🔒', title: 'Enterprise Security', desc: 'SSL, firewalls, penetration testing, and best-in-class authentication baked in from day one.', stat: '100%', statLabel: 'Secure Builds' },
-            { num: '04', icon: '🌍', title: 'Global Client Base', desc: "We've delivered premium digital solutions to clients across 25+ countries on 5 continents.", stat: '25+', statLabel: 'Countries' },
-            { num: '05', icon: '🤝', title: 'Dedicated PM on Every Project', desc: 'A single point of contact who keeps you informed, on time, and on budget at every step.', stat: '1:1', statLabel: 'Dedicated PM' },
-            { num: '06', icon: '♾️', title: 'Post-Launch Support', desc: "We don't disappear after launch. Ongoing maintenance, updates, and priority support always.", stat: '24/7', statLabel: 'Availability' },
-          ].map((card, i) => (
-            <div
-              key={i}
-              className="group relative rounded-3xl overflow-hidden cursor-default"
-              style={{ background: 'linear-gradient(145deg, rgba(197,160,89,0.06) 0%, rgba(255,255,255,0.02) 100%)' }}
-            >
-              {/* Animated gold border */}
-              <div className="absolute inset-0 rounded-3xl border border-white/[0.08] group-hover:border-[#c5a059]/50 transition-colors duration-500" />
-              {/* Corner glow */}
-              <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl" style={{ background: 'rgba(197,160,89,0.2)' }} />
-
-              <div className="relative p-7 flex flex-col gap-5">
-                {/* Number + Icon row */}
-                <div className="flex items-start justify-between">
-                  <span className="text-[11px] font-mono text-[#c5a059]/50 font-bold tracking-widest">{card.num}</span>
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-110"
-                    style={{ background: 'linear-gradient(135deg, rgba(197,160,89,0.15), rgba(197,160,89,0.05))' }}
-                  >
-                    {card.icon}
-                  </div>
-                </div>
-
-                {/* Stat */}
-                <div>
-                  <div className="text-3xl font-display font-black" style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                    {card.stat}
-                  </div>
-                  <div className="text-[9px] font-mono tracking-[0.25em] uppercase text-white/35 mt-0.5">{card.statLabel}</div>
-                </div>
-
-                {/* Divider */}
-                <div className="h-[1px] bg-gradient-to-r from-[#c5a059]/30 to-transparent" />
-
-                {/* Text */}
-                <div>
-                  <h3 className="text-sm font-display font-bold text-white mb-2 group-hover:text-[#c5a059] transition-colors duration-200">{card.title}</h3>
-                  <p className="text-[11px] text-white/45 leading-relaxed">{card.desc}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* ── TECH STACK ── */}
-        <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
-          <span className="text-[10px] font-mono tracking-[0.4em] text-[#c5a059] font-bold uppercase">
-            — TOOLS WE MASTER —
-          </span>
-          <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-white leading-none">
-            Our <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Tech Stack</span>
-          </h2>
-          <p className="text-sm text-white/40 max-w-xl mx-auto leading-relaxed">
-            Battle-tested technologies powering fast, scalable, and stunning digital products.
-          </p>
-        </div>
-
-        {/* Tech grid — category panels */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {[
-            {
-              category: 'Frontend', icon: '🖥️', color: '#60a5fa', bg: 'rgba(96,165,250,0.06)',
-              techs: [
-                { name: 'React', icon: '⚛️', bg: 'rgba(96,165,250,0.12)' },
-                { name: 'Next.js', icon: '▲', bg: 'rgba(255,255,255,0.07)' },
-                { name: 'TypeScript', icon: '🔷', bg: 'rgba(59,130,246,0.12)' },
-                { name: 'Tailwind', icon: '🌊', bg: 'rgba(56,189,248,0.12)' },
-                { name: 'Framer', icon: '🎞️', bg: 'rgba(139,92,246,0.12)' },
-                { name: 'Webflow', icon: '🌐', bg: 'rgba(75,85,99,0.18)' },
-              ]
-            },
-            {
-              category: 'Backend & APIs', icon: '⚙️', color: '#34d399', bg: 'rgba(52,211,153,0.06)',
-              techs: [
-                { name: 'Node.js', icon: '🟢', bg: 'rgba(52,211,153,0.12)' },
-                { name: 'Python', icon: '🐍', bg: 'rgba(234,179,8,0.12)' },
-                { name: 'GraphQL', icon: '◈', bg: 'rgba(232,95,161,0.12)' },
-                { name: 'REST APIs', icon: '🔌', bg: 'rgba(148,163,184,0.10)' },
-                { name: 'Firebase', icon: '🔥', bg: 'rgba(249,115,22,0.12)' },
-                { name: 'Supabase', icon: '⚡', bg: 'rgba(52,211,153,0.12)' },
-              ]
-            },
-            {
-              category: 'Mobile & E-commerce', icon: '📱', color: '#f59e0b', bg: 'rgba(245,158,11,0.06)',
-              techs: [
-                { name: 'React Native', icon: '📱', bg: 'rgba(96,165,250,0.12)' },
-                { name: 'Flutter', icon: '🐦', bg: 'rgba(56,189,248,0.12)' },
-                { name: 'Swift', icon: '🍎', bg: 'rgba(239,68,68,0.12)' },
-                { name: 'Shopify', icon: '🛍️', bg: 'rgba(52,211,153,0.12)' },
-                { name: 'WooCommerce', icon: '🛒', bg: 'rgba(139,92,246,0.12)' },
-                { name: 'Stripe', icon: '💳', bg: 'rgba(99,102,241,0.12)' },
-              ]
-            },
-            {
-              category: 'AI & Cloud', icon: '🤖', color: '#f43f5e', bg: 'rgba(244,63,94,0.06)',
-              techs: [
-                { name: 'OpenAI GPT', icon: '🤖', bg: 'rgba(255,255,255,0.07)' },
-                { name: 'LangChain', icon: '⛓️', bg: 'rgba(16,185,129,0.12)' },
-                { name: 'AWS', icon: '☁️', bg: 'rgba(249,115,22,0.12)' },
-                { name: 'Google Cloud', icon: '🌥️', bg: 'rgba(59,130,246,0.12)' },
-                { name: 'Docker', icon: '🐳', bg: 'rgba(56,189,248,0.12)' },
-                { name: 'Vercel', icon: '▲', bg: 'rgba(255,255,255,0.07)' },
-              ]
-            },
-          ].map((group) => (
-            <div
-              key={group.category}
-              className="relative rounded-3xl p-6 overflow-hidden border border-white/[0.06] hover:border-white/[0.12] transition-colors duration-300"
-              style={{ background: `linear-gradient(145deg, ${group.bg}, rgba(255,255,255,0.01))` }}
-            >
-              {/* Category header */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg" style={{ background: `linear-gradient(135deg, ${group.color}25, ${group.color}10)`, border: `1px solid ${group.color}30` }}>
-                  {group.icon}
-                </div>
-                <div>
-                  <h3 className="text-sm font-display font-bold" style={{ color: group.color }}>{group.category}</h3>
-                  <div className="text-[9px] font-mono text-white/30 tracking-widest uppercase">{group.techs.length} Technologies</div>
-                </div>
-                {/* Decorative line */}
-                <div className="flex-1 h-[1px] ml-2" style={{ background: `linear-gradient(to right, ${group.color}40, transparent)` }} />
-              </div>
-
-              {/* Tech cards grid */}
-              <div className="grid grid-cols-3 gap-2.5">
-                {group.techs.map((tech) => (
-                  <div
-                    key={tech.name}
-                    className="group/tech relative flex flex-col items-center gap-2 p-3 rounded-2xl border border-white/[0.06] hover:border-[#c5a059]/40 transition-all duration-200 cursor-default overflow-hidden"
-                    style={{ background: tech.bg }}
-                  >
-                    {/* Hover glow */}
-                    <div className="absolute inset-0 opacity-0 group-hover/tech:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" style={{ background: 'radial-gradient(circle at center, rgba(197,160,89,0.08) 0%, transparent 70%)' }} />
-                    <span className="text-xl leading-none relative">{tech.icon}</span>
-                    <span className="text-[10px] font-mono font-semibold text-white/60 group-hover/tech:text-[#c5a059] transition-colors tracking-wide text-center leading-tight relative">{tech.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      }>
+        <WhyChooseUs />
+      </Suspense>
 
 
       <div className="my-16 md:my-24" />
@@ -1188,232 +931,20 @@ export default function App() {
       <div className="my-16 md:my-24" />
 
       {/* 9. BOTTOM CONVERSION PORTAL */}
-      <section className="relative z-10 px-4 md:px-8 max-w-5xl mx-auto pb-16">
-        <div className="bg-gradient-to-r from-[#0a0a0a] via-[#1a1a1a] to-[#0a0a0a] border border-white/[0.08] rounded-2xl p-8 md:p-12 text-center relative overflow-hidden product-shadow">
-          
-          {/* Radial light behind call tracker */}
-          <div className="absolute inset-0 bg-dot-pattern opacity-30 pointer-events-none" />
-
-          <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-            <h2 className="text-3xl md:text-4.5xl font-black tracking-tight text-white font-display">
-              Get Your <span className="font-serif italic text-[#c5a059]">Free Website Audit</span> Today
-            </h2>
-            <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-sans font-medium">
-              Not sure if your website is helping or hurting your business? Get a <span className="text-[#c5a059] font-bold">FREE Website Audit</span> and discover:
-            </p>
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left max-w-lg mx-auto text-xs text-white/70 font-mono py-4 border-y border-white/[0.05]">
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
-                Speed & Performance Issues
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
-                SEO Opportunities
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
-                Mobile Responsiveness Problems
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
-                User Experience Improvements
-              </li>
-              <li className="flex items-center gap-2 sm:col-span-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
-                Lead Generation Recommendations
-              </li>
-            </ul>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 max-w-xl mx-auto">
-              <button
-                onClick={() => openBooking('FREE AUDIT', 'Free')}
-                id="booking-cta-bottom"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 py-3.5 px-8 border border-[#c5a059] bg-[#c5a059] hover:bg-transparent text-black hover:text-white uppercase text-[10px] font-mono tracking-[0.2em] transition-all duration-300 cursor-pointer shadow-lg active:scale-95 font-bold"
-              >
-                <span>Claim Your Free Website Audit Today →</span>
-              </button>
-            </div>
-          </div>
+      <Suspense fallback={
+        <div className="w-full min-h-[250px] flex items-center justify-center bg-white/[0.02] border border-white/[0.05] rounded-2xl animate-pulse">
+          <span className="text-sm font-mono text-white/30">Loading audit dashboard...</span>
         </div>
-      </section>
+      }>
+        <ConversionPortal openBooking={openBooking} />
+      </Suspense>
 
       </> /* end home */}
 
       {/* 10. PREMIUM CORPORATE FOOTER */}
-      <footer className="relative z-10 overflow-hidden">
-        {/* Gold gradient top border */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-[#c5a059]/60 to-transparent" />
-
-        <div className="bg-[#060608] relative">
-          {/* Background ambient glow */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[300px] bg-[#c5a059]/[0.03] rounded-full blur-[120px] pointer-events-none" />
-
-          <div className="max-w-7xl mx-auto px-6 md:px-10 pt-16 pb-10 relative z-10">
-
-            {/* Top: brand + CTA */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-14">
-              {/* Logo + tagline + socials */}
-              <div className="space-y-5 max-w-md">
-                <div className="flex items-center gap-3">
-                  {/* Pixel Art Logo — footer version (slightly larger) */}
-                  <svg viewBox="0 0 28 32" width="36" height="41" fill="none" xmlns="http://www.w3.org/2000/svg"
-                    className="drop-shadow-[0_0_14px_rgba(124,58,237,0.5)] flex-shrink-0">
-                    <defs>
-                      <linearGradient id="pv-footer-pixel-grad" x1="0" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stopColor="#3b82f6"/>
-                        <stop offset="100%" stopColor="#7c3aed"/>
-                      </linearGradient>
-                    </defs>
-                    <rect x="8" y="0" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="12" y="0" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="4" y="4" width="20" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="0" y="8" width="28" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="0" y="12" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="4" y="12" width="4" height="4" fill="white"/>
-                    <rect x="8" y="12" width="8" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="16" y="12" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="20" y="12" width="4" height="4" fill="white"/>
-                    <rect x="24" y="12" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="0" y="16" width="28" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="4" y="20" width="8" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="16" y="20" width="8" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="8" y="24" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="16" y="24" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                    <rect x="16" y="28" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
-                  </svg>
-                  <div>
-                    <span
-                      className="text-base font-display font-bold tracking-[0.06em] block leading-tight"
-                      style={{ background: 'linear-gradient(90deg, #3b82f6, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
-                    >Pixel Vance</span>
-                    <span className="text-[9px] font-display font-bold tracking-[0.2em] text-white/70 block mt-0.5">DIGITAL AGENCY</span>
-                  </div>
-                </div>
-                <p className="text-sm text-white/35 leading-relaxed font-light">
-                  We craft high-fidelity digital experiences for ambitious brands — from bespoke UI design to AI-powered growth systems.
-                </p>
-                {/* Social links */}
-                <div className="flex items-center gap-2.5">
-                  {[
-                    { label: 'in', href: 'https://www.linkedin.com/company/pixel-vance-digital/', title: 'LinkedIn', icon: Linkedin },
-                    { label: 'Dr', href: 'https://dribbble.com/pixelvancedigital', title: 'Dribbble', icon: Dribbble }
-                  ].map((s) => {
-                    const Icon = s.icon;
-                    return (
-                      <a
-                        key={s.label}
-                        href={s.href}
-                        target={s.href !== '#' ? '_blank' : undefined}
-                        rel={s.href !== '#' ? 'noopener noreferrer' : undefined}
-                        id={`footer-social-${s.label.toLowerCase()}`}
-                        title={s.title}
-                        className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-white/35 hover:text-[#c5a059] hover:border-[#c5a059]/40 hover:bg-[#c5a059]/5 transition-all duration-200"
-                      >
-                        <Icon className="w-4 h-4" />
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Right CTA */}
-              <div className="flex flex-col items-start md:items-end gap-3">
-                <p className="text-[9px] font-mono tracking-widest text-white/25 uppercase">Ready to start a project?</p>
-                <button
-                  onClick={() => openBooking('GROWTH', '$2,999')}
-                  id="footer-cta-btn"
-                  className="flex items-center gap-2.5 py-3 px-7 border border-[#c5a059]/50 text-[#c5a059] hover:bg-[#c5a059] hover:text-black text-[10px] font-mono tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer"
-                >
-                  Book a Strategy Call →
-                </button>
-                <p className="text-[9px] font-mono text-white/20">info@pixelvancedigital.com</p>
-              </div>
-            </div>
-
-            {/* Thin divider */}
-            <div className="h-px w-full bg-white/[0.06] mb-12" />
-
-            {/* 3-column links */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
-
-              {/* Services */}
-              <div className="space-y-5">
-                <h5 className="text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-[#c5a059]">Services</h5>
-                <ul className="space-y-3">
-                  {['Logo & Brand Design', 'Web Development', 'Mobile App Design', 'SEO & Growth Marketing', 'AI System Automation'].map((lnk) => (
-                    <li key={lnk}>
-                      <button
-                        onClick={() => scrollToSection('services-explorer-section')}
-                        id={`footer-service-${lnk.toLowerCase().replace(/\s+/g, '-')}`}
-                        className="text-[11px] text-white/35 hover:text-white transition-colors duration-200 text-left group flex items-center gap-2"
-                      >
-                        <span className="w-0 group-hover:w-2.5 h-px bg-[#c5a059] transition-all duration-300 inline-block shrink-0" />
-                        {lnk}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Company */}
-              <div className="space-y-5">
-                <h5 className="text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-[#c5a059]">Company</h5>
-                <ul className="space-y-3">
-                  {([
-                    { label: 'About Us',           path: '/about' },
-                    { label: 'Design Portfolio',    path: '/portfolio' },
-                    { label: 'Client Case Studies', path: '/case-studies' },
-                    { label: 'Engineering Blog',    path: '/blog' },
-                  ]).map(({ label, path }) => (
-                    <li key={label}>
-                      <button
-                        onClick={() => navigateTo(path)}
-                        id={`footer-company-${label.toLowerCase().replace(/\s+/g, '-')}`}
-                        className="text-[11px] text-white/35 hover:text-white transition-colors duration-200 text-left group flex items-center gap-2"
-                      >
-                        <span className="w-0 group-hover:w-2.5 h-px bg-[#c5a059] transition-all duration-300 inline-block shrink-0" />
-                        {label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Contact */}
-              <div className="space-y-5 col-span-2 md:col-span-1">
-                <h5 className="text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-[#c5a059]">Contact</h5>
-                <ul className="space-y-4">
-                  <li>
-                    <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Email</p>
-                    <a href="mailto:info@pixelvancedigital.com" className="text-[11px] text-white/45 hover:text-white transition-colors">info@pixelvancedigital.com</a>
-                  </li>
-                  <li>
-                    <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Hours</p>
-                    <p className="text-[11px] text-white/45">Mon – Fri &nbsp;·&nbsp; 9am – 6pm EST</p>
-                  </li>
-                  <li className="flex items-center gap-2 pt-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[10px] font-mono text-emerald-400/70">WhatsApp Available</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Bottom bar */}
-            <div className="mt-14 pt-6 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-3">
-              <span className="text-[9px] font-mono text-white/20 tracking-wider">
-                © 2026 Pixel Vance Digital. All rights reserved.
-              </span>
-              <div className="flex items-center gap-6">
-                <span className="text-[9px] font-mono text-white/20 hover:text-white/50 cursor-pointer transition-colors">Privacy Policy</span>
-                <span className="text-white/10">·</span>
-                <span className="text-[9px] font-mono text-white/20 hover:text-white/50 cursor-pointer transition-colors">Terms of Service</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Suspense fallback={null}>
+        <Footer openBooking={openBooking} scrollToSection={scrollToSection} navigateTo={navigateTo} />
+      </Suspense>
 
       {/* 11. GLOBAL BOOKING SCHEDULER MODAL — lazy loaded, only fetched on first open */}
       <Suspense fallback={null}>
