@@ -16,6 +16,7 @@ const posts = [
     date: 'June 2026',
     gradient: 'from-[#c5a059]/25 to-transparent',
     accent: '#c5a059',
+    image: '/images/hero_seo_rankings.png',
     content: [
       { type: 'p', text: 'In the highly competitive digital landscape of the United States, standing out on search engines is no longer just about content or keywords. Google’s algorithms, especially with the introduction of Search Generative Experience (SGE), place immense weight on user experience, technical architecture, and page performance. For any business striving to dominate organic search share, choosing between template-based sites and custom website development is the single most critical decision. While generic builders offer quick setups, they load your site with unused CSS, rendering blockers, and layout shifts that damage your mobile ranking. To dominate local and national search results in the USA, companies must prioritize custom website development designed with clean code, lightning-fast speeds, and structured schema data.' },
       { type: 'h2', text: 'The Technical SEO Edge of Custom Code' },
@@ -44,6 +45,7 @@ const posts = [
     date: 'June 2026',
     gradient: 'from-emerald-600/25 to-transparent',
     accent: '#10b981',
+    image: '/images/hero_tech_development.png',
     content: [
       { type: 'p', text: 'Largest Contentful Paint (LCP) is one of the three core metrics monitored in Google\'s Core Web Vitals. It measures the time taken to render the largest image or text block visible within the viewport. While a score below 2.5s is defined as "Good" by Google, target systems built for enterprise conversions must aim for a sub-second LCP (under 1000ms). Websites achieving sub-second LCP experience lower bounce rates, higher user engagement, and a distinct ranking boost in search engine result pages (SERPs).' },
       
@@ -87,6 +89,7 @@ const posts = [
     date: 'June 2026',
     gradient: 'from-[#c5a059]/25 to-transparent',
     accent: '#c5a059',
+    image: '/images/aether_finance.png',
     content: [
       { type: 'p', text: 'Fintech dashboards are highly complex interfaces. Users frequently navigate vast quantities of dense information, such as real-time stock indexes, trade volume logs, cash flow metrics, and transaction ledgers. The primary goal of a UX designer is to organize this information to minimize cognitive fatigue, helping users make critical financial decisions quickly and without error.' },
       
@@ -123,6 +126,7 @@ const posts = [
     date: 'May 2026',
     gradient: 'from-blue-600/25 to-transparent',
     accent: '#3b82f6',
+    image: '/images/novamark_agency.png',
     content: [
       { type: 'p', text: 'The organic search landscape has shifted dramatically. With Google introducing Search Generative Experience (SGE) and AI-driven direct answers, traditional keyword density stuffing is completely obsolete. Enterprise organic traffic growth now depends on establishing semantic authority, structuring pages cleanly, and publishing detailed, original technical content. Pixel Vance Digital leads enterprise search marketing projects by focusing on technical indexability, high-converting copy, and structured schema tags.' },
       
@@ -156,6 +160,7 @@ const posts = [
     date: 'May 2025',
     gradient: 'from-blue-600/25 to-transparent',
     accent: '#3b82f6',
+    image: '/images/voss_rebrand.png',
     content: [
       { type: 'p', text: 'Scaling a design system requires strict rules. Without clear guidelines for variables and components, you end up with duplicate assets and fragmented designs. When Pixel Vance Digital constructs design systems for large organizations, we align visual assets in Figma directly with UI tokens inside code repositories.' },
       
@@ -186,6 +191,7 @@ const posts = [
     date: 'Apr 2025',
     gradient: 'from-purple-600/25 to-transparent',
     accent: '#a855f7',
+    image: '/images/orbit_saas.png',
     content: [
       { type: 'p', text: 'AI integration has shifted from simple chatbots to complex workflow automation. Having built 12 production-grade AI pipelines for various clients, Pixel Vance Digital has compiled the key architectural rules for stable, cost-effective deployments that increase operating efficiency.' },
       
@@ -216,6 +222,7 @@ const posts = [
     date: 'Mar 2025',
     gradient: 'from-[#c5a059]/25 to-transparent',
     accent: '#c5a059',
+    image: '/images/pulseapp_mobile.png',
     content: [
       { type: 'p', text: 'Traffic without conversion is just wasted budget. After designing and shipping 500+ landing pages, Pixel Vance Digital has identified 7 conversion rate optimization (CRO) elements that consistently yield the highest returns. Implementing these guarantees that you get the most out of your organic and paid marketing efforts.' },
       
@@ -248,6 +255,7 @@ const posts = [
     date: 'Feb 2025',
     gradient: 'from-emerald-600/25 to-transparent',
     accent: '#10b981',
+    image: '/images/hero_cloud_infrastructure.png',
     content: [
       { type: 'p', text: 'Maintaining separate repositories for website code, server components, and design libraries creates massive overhead. Moving client builds to a monorepo setup saved Pixel Vance Digital over 40 hours of maintenance work every month, allowing us to ship features and updates much faster.' },
       
@@ -278,6 +286,7 @@ const posts = [
     date: 'Jan 2025',
     gradient: 'from-rose-600/25 to-transparent',
     accent: '#f43f5e',
+    image: '/images/hero_web_design.png',
     content: [
       { type: 'p', text: 'A great logo isn\'t a pretty illustration; it is a visual identifier. In a crowded digital market, the best brand marks prioritize clarity and adaptability across different platforms. Pixel Vance Digital designs visual identities that scale from physical billboards to tiny browser tab icons.' },
       
@@ -307,6 +316,7 @@ const posts = [
     date: 'Dec 2024',
     gradient: 'from-amber-600/25 to-transparent',
     accent: '#f59e0b',
+    image: '/images/luxe_maison.png',
     content: [
       { type: 'p', text: 'E-commerce conversion rates drop by 7% for every 100ms of latency. We audited a premium Shopify store for a luxury home decor brand and optimized its performance profile from a Lighthouse score of 28 to a perfect 100. This optimization resulted in a direct increase in conversion rates.' },
       
@@ -380,6 +390,21 @@ function BlogArticleView({ post, onBack, openBooking }: BlogArticleProps) {
             {post.readTime}
           </span>
         </div>
+      </div>
+
+      {/* Article Featured Image */}
+      <div className="h-[30vh] md:h-[45vh] w-full relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_15px_35px_rgba(0,0,0,0.4)] bg-[#07080c] group flex items-center justify-center">
+        {/* Ambient Blur Glow Background */}
+        <div className="absolute inset-0 filter blur-xl opacity-20 scale-105 overflow-hidden pointer-events-none">
+          <img src={post.image} alt="" className="w-full h-full object-cover" />
+        </div>
+        {/* Full Image Presentation */}
+        <img 
+          src={post.image} 
+          alt={post.title} 
+          className="w-full h-full object-cover relative z-10 transition-transform duration-[1.5s] group-hover:scale-[1.02]" 
+        />
+        <div className="absolute inset-0 border border-white/[0.06] rounded-2xl pointer-events-none z-20" />
       </div>
 
       {/* Accent line divider */}
@@ -573,9 +598,13 @@ export default function BlogPage({ openBooking }: BlogPageProps) {
                   </div>
                 </div>
                 {/* Visual */}
-                <div className={`h-52 rounded-xl bg-gradient-to-br ${posts[0].gradient} border border-white/[0.06] relative overflow-hidden flex items-center justify-center`}>
-                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDBNIDAgMjAgTCA0MCAyMCBNIDIwIDAgTCAyMCA0MCBNIDAgMzAgTCA0MCAzMCBNIDMwIDAgTCAzMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-70" />
-                  <span className="font-mono text-5xl font-black text-white/10 select-none">01</span>
+                <div className="h-64 rounded-xl border border-white/[0.06] relative overflow-hidden flex items-center justify-center bg-[#07080c] group-hover:border-[#c5a059]/30 transition-colors duration-300">
+                  <img 
+                    src={posts[0].image} 
+                    alt={posts[0].title} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/20 to-transparent" />
                 </div>
               </div>
             </motion.div>
@@ -592,19 +621,25 @@ export default function BlogPage({ openBooking }: BlogPageProps) {
                   className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/12 transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
                 >
                   <div>
-                    {/* Top accent line */}
-                    <div className="h-1 w-full" style={{ background: `linear-gradient(to right, ${post.accent}80, transparent)` }} />
-
-                    <div className="p-6 space-y-4 text-left">
-                      <div className="flex items-center justify-between">
-                        <span
-                          className="text-[9px] font-mono px-2 py-0.5 rounded-full border"
-                          style={{ color: post.accent, borderColor: `${post.accent}40`, backgroundColor: `${post.accent}10` }}
-                        >
+                    {/* Visual Image Header */}
+                    <div className="h-44 relative flex items-end p-5 overflow-hidden">
+                      <img 
+                        src={post.image} 
+                        alt={post.title} 
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
+                      <div className="absolute inset-0 border-b border-white/[0.06]" />
+                      
+                      <div className="relative z-10 flex items-center justify-between w-full">
+                        <span className="text-[9px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full border" style={{ color: post.accent, borderColor: `${post.accent}40`, backgroundColor: `${post.accent}20` }}>
                           {post.category}
                         </span>
-                        <span className="text-[9px] font-mono text-white/25">{post.date}</span>
+                        <span className="text-[9px] font-mono text-white/50">{post.date}</span>
                       </div>
+                    </div>
+
+                    <div className="p-5 space-y-3 text-left">
                       <h3 className="text-sm font-display font-semibold text-white leading-snug group-hover:text-[#c5a059] transition-colors">
                         {post.title}
                       </h3>
