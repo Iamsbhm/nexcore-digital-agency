@@ -45,7 +45,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
       category: 'Web',
       tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Rank Math SEO'],
       desc: 'Dental Clinic Website Redesign & Development',
-      image: '/images/dental_presentation.jpg',
+      image: '/images/dental_presentation_v2.jpg',
       accent: '#0ea5e9',
       liveUrl: 'https://brightsmiledental.com'
     }

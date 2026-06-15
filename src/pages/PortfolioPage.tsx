@@ -103,7 +103,7 @@ const projects: ProjectItem[] = [
     gradient: 'from-blue-950/40 via-orange-500/10 to-transparent',
     accent: '#ea580c',
     year: '2026',
-    image: '/images/elite_presentation.jpg',
+    image: '/images/elite_presentation_v2.jpg',
     challenge: 'The client faced an outdated website design with no project portfolio showcase, low Google rankings, and a poor mobile experience. Homeowners were choosing competing contractors due to a lack of professional galleries and a weak local SEO presence in Houston.',
     solution: 'Designed and developed a premium, conversion-focused website featuring a dark blue and orange accent theme, high-quality project before-and-after galleries, a free estimate request system, and service-specific local SEO targeting for kitchen, bath, and additions.',
     howItMade: 'Designed layouts in Figma. Developed the responsive site on WordPress using Elementor Pro, setting up Rank Math for local SEO. Integrated speed optimizations using WP Rocket, and configured conversion tracking with Google Analytics and Search Console.',
@@ -115,7 +115,7 @@ const projects: ProjectItem[] = [
       { metric: '3.9×', label: 'Mobile Conv. Rate' }
     ],
     gallery: [
-      '/images/elite_presentation.jpg'
+      '/images/elite_presentation_v2.jpg'
     ],
     liveUrl: 'https://elitehomeremodels.com',
     clientOverview: 'Elite Home Renovations is a leading home renovation and remodeling company in Houston, Texas. They specialize in high-end kitchen remodeling, bathroom renovations, basement finishing, and home additions, seeking to showcase their craftsmanship and capture high-value homeowner leads.',
@@ -133,7 +133,7 @@ const projects: ProjectItem[] = [
     gradient: 'from-blue-900/30 via-sky-500/10 to-transparent',
     accent: '#0ea5e9',
     year: '2026',
-    image: '/images/dental_presentation.jpg',
+    image: '/images/dental_presentation_v2.jpg',
     challenge: 'The dental clinic\'s existing website was outdated, difficult to navigate, and failed to convert visitors into appointment bookings. Potential patients were choosing competing clinics due to a poor mobile experience, a lack of local SEO, and a weak patient credibility presentation.',
     solution: 'Designed and developed a premium, trustworthy dental clinic website featuring a clean blue theme, high-quality patient-focused photography, service landing pages for general and cosmetic dentistry, a Calendly integration for online appointments, and local SEO optimizations.',
     howItMade: 'Designed UI layouts in Figma. Developed the final platform on WordPress with Elementor Pro. Configured Rank Math for local SEO, and integrated Calendly scheduling. Installed Google Analytics and Google Search Console to track bookings and search traffic.',
@@ -143,7 +143,7 @@ const projects: ProjectItem[] = [
       { metric: '-40%', label: 'Bounce Rate' }
     ],
     gallery: [
-      '/images/dental_presentation.jpg'
+      '/images/dental_presentation_v2.jpg'
     ],
     liveUrl: 'https://brightsmiledental.com',
     clientOverview: 'BrightSmile Dental Care is a modern dental clinic offering general and cosmetic dentistry, teeth whitening, and dental implants. They wanted a trust-building digital presence that would establish patient credibility, streamline online bookings, and capture local patient search interest.',
