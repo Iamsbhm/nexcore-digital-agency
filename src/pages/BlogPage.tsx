@@ -16,7 +16,7 @@ const posts = [
     date: 'June 2026',
     gradient: 'from-[#c5a059]/25 to-transparent',
     accent: '#c5a059',
-    image: '/images/hero_web_design.png',
+    image: '/images/small_business_web_design.jpg',
     content: [
       { type: 'p', text: 'In 2026, your website is often the first interaction potential customers have with your business. Whether you own a local service company, consulting firm, law practice, home renovation company, or eCommerce store, a professional website can make the difference between gaining a customer and losing one to a competitor.' },
       { type: 'h2', text: 'Why Small Business Website Design Matters More Than Ever' },
