@@ -552,13 +552,19 @@ function ProjectDetailsView({ project, onBack, openBooking }: ProjectDetailsProp
           <h4 className="text-[10px] font-mono uppercase tracking-[0.25em] font-bold text-white/30">Project Gallery</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {project.gallery.map((imgUrl, index) => (
-              <div key={index} className="aspect-video relative rounded-2xl overflow-hidden border border-white/[0.08] hover:border-[#c5a059]/40 transition-all duration-300 group shadow-lg bg-white/[0.01]">
+              <div key={index} className="aspect-video relative rounded-2xl overflow-hidden border border-white/[0.08] hover:border-[#c5a059]/40 transition-all duration-300 group shadow-lg bg-[#07080c] flex items-center justify-center">
+                {/* Ambient Blur Glow Background */}
+                <div className="absolute inset-0 filter blur-md opacity-25 scale-105 overflow-hidden pointer-events-none">
+                  <img src={imgUrl} alt="" className="w-full h-full object-cover" />
+                </div>
+                
+                {/* Full Image Presentation */}
                 <img 
                   src={imgUrl} 
                   alt={`${project.title} screenshot ${index + 1}`} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                  className="w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-[1.03]" 
                 />
-                <div className="absolute inset-0 bg-black/45 group-hover:bg-black/0 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-black/35 group-hover:bg-black/0 transition-colors duration-300 z-20 pointer-events-none" />
               </div>
             ))}
           </div>
