@@ -3,11 +3,70 @@ import { useState, useEffect } from 'react';
 import { Clock, ArrowRight, ArrowLeft } from 'lucide-react';
 
 interface PostContentBlock {
-  type: 'p' | 'h2' | 'h3' | 'code' | 'ul' | 'quote';
+  type: 'p' | 'h2' | 'h3' | 'code' | 'ul' | 'quote' | 'cta';
   text: string | string[];
 }
 
 const posts = [
+  {
+    category: 'Web Design',
+    title: 'Small Business Website Design: The Complete Guide to Growing Your Business Online in 2026',
+    excerpt: 'Learn how professional small business website design can increase traffic, improve SEO rankings, generate more leads, and grow your business in 2026. Target keyword density is naturally optimized for "small business website design".',
+    readTime: '7 min read',
+    date: 'June 2026',
+    gradient: 'from-[#c5a059]/25 to-transparent',
+    accent: '#c5a059',
+    image: '/images/hero_web_design.png',
+    content: [
+      { type: 'p', text: 'In 2026, your website is often the first interaction potential customers have with your business. Whether you own a local service company, consulting firm, law practice, home renovation company, or eCommerce store, a professional website can make the difference between gaining a customer and losing one to a competitor.' },
+      { type: 'h2', text: 'Why Small Business Website Design Matters More Than Ever' },
+      { type: 'p', text: 'A well-designed small business website helps you build trust and credibility, generate more leads, increase online visibility, improve customer experience, and ultimately convert visitors into paying customers.' },
+      { type: 'h2', text: 'What Is Small Business Website Design?' },
+      { type: 'p', text: 'Small business website design focuses on creating websites that are professional and modern, mobile-friendly, fast-loading, SEO-optimized, easy to navigate, and conversion-focused. Unlike large corporate websites, small business websites should prioritize simplicity, trust, and lead generation.' },
+      { type: 'h2', text: 'Essential Features Every Small Business Website Needs' },
+      { type: 'h3', text: '1. Mobile-Friendly Design' },
+      { type: 'p', text: 'More than half of website visitors browse from mobile devices. A responsive website ensures your content looks great on smartphones, tablets, laptops, and desktop computers.' },
+      { type: 'h3', text: '2. Fast Loading Speed' },
+      { type: 'p', text: 'Visitors expect websites to load quickly. A slow website can increase bounce rates and reduce conversions. Speed optimization tips include compressing images, using quality hosting, enabling caching, and optimizing code.' },
+      { type: 'h3', text: '3. Clear Call-to-Action Buttons' },
+      { type: 'p', text: 'Guide visitors toward taking action. Examples include "Get a Free Quote", "Schedule a Consultation", "Call Now", or "Request a Demo".' },
+      { type: 'h3', text: '4. SEO-Friendly Structure' },
+      { type: 'p', text: 'A beautiful website is useless if customers cannot find it. SEO helps your website rank higher on Google for searches related to your services. Important SEO elements include keyword optimization, meta titles, meta descriptions, internal linking, fast page speed, and mobile responsiveness.' },
+      { type: 'h3', text: '5. Contact Information' },
+      { type: 'p', text: 'Make it easy for customers to reach you. Include phone numbers, email addresses, contact forms, business locations, and social media links.' },
+      { type: 'h2', text: 'Common Small Business Website Mistakes to Avoid' },
+      { type: 'ul', text: [
+        'Outdated Design: An old website can make your business appear unprofessional.',
+        'Slow Performance: Visitors often leave websites that take too long to load.',
+        'Poor Mobile Experience: Mobile users expect a seamless experience.',
+        'Lack of SEO: Without SEO, your website may struggle to attract traffic.',
+        'No Lead Generation Strategy: A website should actively encourage inquiries and conversions.'
+      ] },
+      { type: 'h2', text: 'Industries That Benefit Most from Small Business Websites' },
+      { type: 'ul', text: [
+        'Home Renovation Companies: Showcase projects, testimonials, and request-a-quote forms.',
+        'Law Firms: Highlight practice areas, attorney profiles, and consultation forms.',
+        'Financial Advisors: Build trust with professional design and educational content.',
+        'Medical Practices: Enable appointment booking and patient information access.',
+        'Local Service Businesses: Generate local leads through SEO and clear calls-to-action.'
+      ] },
+      { type: 'h2', text: 'Benefits of Professional Small Business Website Design' },
+      { type: 'ul', text: [
+        'Increased Credibility: Customers trust businesses with professional websites.',
+        'Better Search Rankings: SEO-friendly websites attract more organic traffic.',
+        'More Leads: Conversion-focused design generates inquiries and sales.',
+        'Competitive Advantage: Stand out from competitors with a modern online presence.'
+      ] },
+      { type: 'h2', text: 'How Much Does Small Business Website Design Cost?' },
+      { type: 'p', text: 'Website costs vary depending on the number of pages, custom functionality, SEO requirements, content creation, and e-commerce features. The best investment is a website that generates leads and revenue rather than simply looking attractive.' },
+      { type: 'h2', text: 'Why Choose Pixel Vance Digital?' },
+      { type: 'p', text: 'At Pixel Vance Digital, we help small businesses create websites that not only look professional but also drive measurable business growth. Our services include Website Design, Website Development, Website Redesign, SEO Optimization, Landing Page Design, Mobile Optimization, and Speed Optimization. Our goal is simple: help your business attract more customers online.' },
+      { type: 'quote', text: '"A professional small business website is one of the most valuable investments you can make in 2026. The right website can improve your visibility, increase trust, generate leads, and help your business grow faster. If your current website isn\'t producing results, it may be time for an upgrade."' },
+      { type: 'h2', text: 'Contact Us for Website Development' },
+      { type: 'p', text: 'Ready to build a custom small business website that dominates USA search results and converts traffic into revenue? Contact Pixel Vance Digital today to schedule your free website design strategy and consultation session.' },
+      { type: 'cta', text: 'Contact Us for Website Development' }
+    ]
+  },
   {
     category: 'SEO Strategy',
     title: 'Why Custom Website Development is the Key to Ranking #1 in USA Search Results',
@@ -439,6 +498,17 @@ function BlogArticleView({ post, onBack, openBooking }: BlogArticleProps) {
                     <li key={liIndex}>{li}</li>
                   ))}
                 </ul>
+              );
+            case 'cta':
+              return (
+                <div key={index} className="py-6 text-center">
+                  <button 
+                    onClick={() => openBooking('WEBSITE DEVELOPMENT', 'Custom')}
+                    className="inline-flex items-center gap-2 py-3.5 px-8 bg-[#c5a059] hover:bg-[#c5a059]/90 text-black text-[10px] font-mono tracking-[0.2em] uppercase font-bold transition-all duration-300 rounded-xl cursor-pointer hover:scale-[1.03] active:scale-95 shadow-[0_0_25px_rgba(197,160,89,0.2)]"
+                  >
+                    {block.text as string}
+                  </button>
+                </div>
               );
             default:
               return null;
