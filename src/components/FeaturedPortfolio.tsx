@@ -106,7 +106,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
               >
                 <div>
                   {/* Visual Image Header */}
-                  <div className="h-44 relative overflow-hidden flex items-end p-5">
+                  <div className="aspect-[3/2] relative overflow-hidden flex items-end p-5">
                     <img 
                       src={project.image} 
                       alt={project.title} 

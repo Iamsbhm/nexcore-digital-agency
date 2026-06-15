@@ -710,7 +710,7 @@ export default function PortfolioPage({ openBooking }: PortfolioPageProps) {
                   >
                     <div>
                       {/* Visual placeholder */}
-                      <div className="h-44 relative flex items-end p-5 overflow-hidden">
+                      <div className="aspect-[3/2] relative flex items-end p-5 overflow-hidden">
                         <img 
                           src={project.image} 
                           alt={project.title} 
