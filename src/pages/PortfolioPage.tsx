@@ -716,14 +716,19 @@ export default function PortfolioPage({ openBooking }: PortfolioPageProps) {
                   >
                     <div>
                       {/* Visual placeholder */}
-                      <div className="aspect-[3/2] relative flex items-end p-5 overflow-hidden">
+                      <div className="aspect-[3/2] relative flex items-end p-5 overflow-hidden bg-[#07080c]">
+                        {/* Ambient Blur Glow Background */}
+                        <div className="absolute inset-0 filter blur-md opacity-20 scale-105 overflow-hidden pointer-events-none">
+                          <img src={project.image} alt="" className="w-full h-full object-cover" />
+                        </div>
+                        
                         <img 
                           src={project.image} 
                           alt={project.title} 
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                          className="absolute inset-0 w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-105" 
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
-                        <div className="absolute inset-0 border-b border-white/[0.06]" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent z-20 pointer-events-none" />
+                        <div className="absolute inset-0 border-b border-white/[0.06] z-20 pointer-events-none" />
                         
                         <div className="relative z-10 flex items-center justify-between w-full">
                           <span className="text-[9px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full border" style={{ color: project.accent, borderColor: `${project.accent}40`, backgroundColor: `${project.accent}20` }}>
