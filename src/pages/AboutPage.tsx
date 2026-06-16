@@ -17,6 +17,7 @@ const team = [
   { name: 'Maya Patel',   role: 'Lead Engineer',               exp: '9 yrs',  color: 'from-blue-500/20 to-blue-800/10' },
   { name: 'Jordan Lee',   role: 'UX Strategy Director',        exp: '8 yrs',  color: 'from-emerald-500/20 to-emerald-800/10' },
   { name: 'Sam Rivera',   role: 'AI & Automation Lead',        exp: '7 yrs',  color: 'from-purple-500/20 to-purple-800/10' },
+  { name: 'Claudine',     role: 'Web Solution Consultant',     exp: '6 yrs',  color: 'from-rose-500/20 to-rose-800/10' },
 ];
 
 export default function AboutPage({ openBooking }: AboutPageProps) {
@@ -126,7 +127,7 @@ export default function AboutPage({ openBooking }: AboutPageProps) {
           <span className="text-[9px] font-mono tracking-[0.3em] text-[#c5a059] uppercase">The People</span>
           <h2 className="text-3xl md:text-4xl font-display font-light text-white">Meet the Core Team</h2>
         </div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
           {team.map((member, i) => (
             <motion.div
               key={i}
