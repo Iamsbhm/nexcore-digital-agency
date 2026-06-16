@@ -725,7 +725,7 @@ export default function PortfolioPage({ openBooking }: PortfolioPageProps) {
                         <img 
                           src={project.image} 
                           alt={project.title} 
-                          className="absolute inset-0 w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-105" 
+                          className="absolute inset-0 w-full h-full object-contain z-10 transition-transform duration-500 group-hover:scale-105" 
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent z-20 pointer-events-none" />
                         <div className="absolute inset-0 border-b border-white/[0.06] z-20 pointer-events-none" />
