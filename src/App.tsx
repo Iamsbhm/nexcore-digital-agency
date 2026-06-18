@@ -610,7 +610,7 @@ export default function App() {
 
       {/* 3. HERO SECTION — Realistic Tech Split Layout */}
       <section
-        className="relative z-10 overflow-hidden flex items-start lg:items-stretch justify-center min-h-screen lg:h-screen"
+        className="relative z-10 overflow-hidden flex items-start lg:items-stretch justify-center min-h-fit lg:min-h-screen lg:h-screen"
         id="hero"
       >
         {/* Particles subtle secondary layer */}
