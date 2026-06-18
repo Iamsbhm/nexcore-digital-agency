@@ -1,11 +1,12 @@
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 interface FeaturedPortfolioProps {
   navigateTo: (path: string) => void;
 }
 
-const getSlug = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const getSlug = (title: string) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 export interface FeaturedProjectItem {
   title: string;
@@ -15,7 +16,10 @@ export interface FeaturedProjectItem {
   image: string;
   accent: string;
   liveUrl?: string;
+  result?: { val: string; label: string }[];
 }
+
+const GOLD = '#c5a059';
 
 export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps) {
   const [activeDot, setActiveDot] = React.useState(0);
@@ -24,129 +28,203 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
   const projects: FeaturedProjectItem[] = [
     {
       title: 'WealthPath Financial Advisors',
-      category: 'Web',
+      category: 'Finance',
       tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Local SEO'],
       desc: 'Financial Advisor Website Design & Development',
       image: '/images/wealthpath_presentation.jpg',
       accent: '#c5a059',
-      liveUrl: 'https://wealthpathadvisors.com'
+      liveUrl: 'https://wealthpathadvisors.com',
+      result: [
+        { val: '+210%', label: 'Lead increase' },
+        { val: '1.8s',  label: 'Load time' },
+        { val: '98',    label: 'Perf score' },
+      ],
     },
     {
       title: 'JusticeEdge Law Group',
-      category: 'Web',
+      category: 'Legal',
       tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Rank Math SEO'],
       desc: 'Law Firm Website Design & Development',
       image: '/images/justiceedge_presentation.jpg',
       accent: '#c5a059',
-      liveUrl: 'https://justiceedgelaw.com'
+      liveUrl: 'https://justiceedgelaw.com',
+      result: [
+        { val: '+175%', label: 'Consultations' },
+        { val: 'Pg 1',  label: 'Google rank' },
+        { val: '96',    label: 'Perf score' },
+      ],
     },
     {
       title: 'BrightSmile Dental Care',
-      category: 'Web',
+      category: 'Healthcare',
       tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Rank Math SEO'],
       desc: 'Dental Clinic Website Redesign & Development',
       image: '/images/dental_presentation_v2.jpg',
-      accent: '#0ea5e9',
-      liveUrl: 'https://brightsmiledental.com'
-    }
+      accent: '#c5a059',
+      liveUrl: 'https://brightsmiledental.com',
+      result: [
+        { val: '+320%', label: 'Bookings' },
+        { val: '2.1s',  label: 'Load time' },
+        { val: '97',    label: 'Perf score' },
+      ],
+    },
   ];
 
   const handleScroll = () => {
     if (carouselRef.current) {
       const { scrollLeft, scrollWidth } = carouselRef.current;
       const cardWidth = scrollWidth / projects.length;
-      const index = Math.round(scrollLeft / cardWidth);
-      setActiveDot(index);
+      setActiveDot(Math.round(scrollLeft / cardWidth));
     }
   };
 
   return (
     <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto" id="portfolio-featured-section">
-      <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-        <span className="text-[10px] font-mono tracking-widest text-[#c5a059] font-bold uppercase">
-          — FEATURED SHOWCASE —
-        </span>
-        <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-          Custom Web Design That <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Converts Visitors</span> Into Customers
-        </h2>
-        <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-          A curated glance at the high-fidelity web experiences, digital products, and brand systems we've designed and engineered.
-        </p>
+
+      {/* ── HEADER ── */}
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <div className="max-w-2xl">
+          {/* Badge */}
+          <div
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border mb-5"
+            style={{ borderColor: 'rgba(197,160,89,0.2)', background: 'rgba(197,160,89,0.06)' }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: GOLD }} />
+            <span className="text-[9px] font-mono tracking-[0.25em] uppercase" style={{ color: GOLD }}>
+              Featured Work
+            </span>
+          </div>
+
+          <h2 className="text-2xl md:text-4xl font-display font-black tracking-tight text-white leading-tight whitespace-nowrap">
+            Real Projects.{' '}
+            <span className="bg-gradient-to-r from-[#c5a059] via-[#e8c97a] to-[#a07840] bg-clip-text text-transparent">
+              Real Results.
+            </span>{' '}
+            <span className="text-white/70">Real Growth.</span>
+          </h2>
+          <p className="mt-4 text-sm text-white/40 max-w-lg leading-relaxed">
+            Every project we ship is engineered to rank on Google, load in under 2 seconds, and convert visitors into paying customers.
+          </p>
+        </div>
+
+        {/* Desktop CTA */}
+        <button
+          onClick={() => navigateTo('/portfolio')}
+          className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-[10px] font-mono tracking-wider uppercase transition-all duration-200 hover:border-[#c5a059]/40 hover:text-[#c5a059] flex-shrink-0 cursor-pointer"
+          style={{ borderColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}
+        >
+          View All Projects <ArrowRight className="w-3.5 h-3.5" />
+        </button>
       </div>
 
-      {/* 3-Card Grid/Carousel or Fallback */}
+      {/* ── PROJECT CARDS ── */}
       {projects.length === 0 ? (
-        <div className="text-center py-20 border border-dashed border-white/10 rounded-2xl bg-white/[0.01]">
-          <p className="text-sm text-white/40 font-mono tracking-widest uppercase">Portfolio showcase coming soon</p>
-          <p className="text-xs text-white/20 font-mono mt-1">We are updating our gallery with new elite projects. Check back shortly!</p>
+        <div className="text-center py-20 border border-dashed border-white/10 rounded-2xl">
+          <p className="text-sm text-white/40 font-mono uppercase tracking-widest">Portfolio coming soon</p>
         </div>
       ) : (
         <div className="relative">
-          {/* Custom Webkit scrollbar hiding rule */}
-          <style>{`
-            #portfolio-featured-carousel::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-          
-          <div 
-            id="portfolio-featured-carousel"
+          <style>{`#pf-carousel::-webkit-scrollbar { display: none; }`}</style>
+
+          <div
+            id="pf-carousel"
             ref={carouselRef}
             onScroll={handleScroll}
-            className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none md:grid-cols-3 gap-6 pb-6 md:pb-0"
+            className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-3 gap-5 pb-4 md:pb-0"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {projects.map((project) => (
               <div
                 key={project.title}
-                onClick={() => {
-                  navigateTo(`/portfolio/${getSlug(project.title)}`);
-                }}
-                className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/15 transition-all duration-350 hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between"
+                onClick={() => navigateTo(`/portfolio/${getSlug(project.title)}`)}
+                className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none group cursor-pointer flex flex-col rounded-2xl overflow-hidden border transition-all duration-300 hover:border-[#c5a059]/25 hover:-translate-y-1"
+                style={{ background: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.07)' }}
               >
-                <div>
-                  {/* Visual Image Header */}
-                  <div className="aspect-[3/2] relative overflow-hidden flex items-end p-5 bg-[#07080c]">
-                    {/* Ambient Blur Glow Background */}
-                    <div className="absolute inset-0 filter blur-md opacity-20 scale-105 overflow-hidden pointer-events-none">
-                      <img src={project.image} alt="" className="w-full h-full object-cover" />
-                    </div>
-                    
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      loading="lazy"
-                      decoding="async"
-                      className="absolute inset-0 w-full h-full object-contain z-10 transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent z-20 pointer-events-none" />
-                    <div className="absolute inset-0 border-b border-white/[0.06] z-20 pointer-events-none" />
-                    
-                    <div className="relative z-10 flex items-center justify-between w-full">
-                      <span className="text-[9px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full border" style={{ color: project.accent, borderColor: `${project.accent}40`, backgroundColor: `${project.accent}20` }}>
-                        {project.category}
-                      </span>
-                    </div>
-                    
-                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]">
-                      <div className="px-4 py-2 rounded-xl border flex items-center gap-2 bg-black/60 shadow-lg text-[10px] font-mono tracking-widest uppercase" style={{ color: project.accent, borderColor: `${project.accent}50` }}>
-                        <span>View Project</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </div>
-                    </div>
+                {/* Image area */}
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#06070e]">
+                  {/* Blurred bg */}
+                  <div className="absolute inset-0 scale-110 blur-lg opacity-20 pointer-events-none">
+                    <img src={project.image} alt="" className="w-full h-full object-cover" />
                   </div>
 
-                  {/* Content Info */}
-                  <div className="p-5 text-left space-y-2.5">
-                    <h3 className="text-base font-display font-semibold text-white group-hover:text-[#c5a059] transition-colors">{project.title}</h3>
-                    <p className="text-[11px] text-white/35 leading-relaxed">{project.desc}</p>
+                  {/* Main image */}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-contain z-10 transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#06070e] via-transparent to-transparent z-20 pointer-events-none" />
+
+                  {/* Category badge */}
+                  <div className="absolute top-3 left-3 z-30">
+                    <span
+                      className="text-[8px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full"
+                      style={{
+                        color: GOLD,
+                        borderColor: `${GOLD}40`,
+                        backgroundColor: `${GOLD}15`,
+                        border: `1px solid ${GOLD}35`,
+                      }}
+                    >
+                      {project.category}
+                    </span>
+                  </div>
+
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 z-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]"
+                    style={{ background: 'rgba(6,7,14,0.65)' }}>
+                    <div
+                      className="flex items-center gap-2 px-4 py-2 rounded-xl text-[9px] font-mono tracking-widest uppercase"
+                      style={{
+                        color: GOLD,
+                        border: `1px solid ${GOLD}50`,
+                        background: 'rgba(6,7,14,0.7)',
+                      }}
+                    >
+                      View Case Study <ArrowUpRight className="w-3 h-3" />
+                    </div>
                   </div>
                 </div>
 
-                <div className="p-5 pt-0 text-left">
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="text-[9px] font-mono text-white/30 bg-white/[0.04] border border-white/[0.06] px-2 py-0.5 rounded-full">
+                {/* Card body */}
+                <div className="p-5 flex flex-col gap-3 flex-1">
+                  {/* Title + desc */}
+                  <div>
+                    <h3
+                      className="text-sm font-display font-bold text-white group-hover:text-[#c5a059] transition-colors duration-200 mb-1"
+                    >
+                      {project.title}
+                    </h3>
+                    <p className="text-[10px] text-white/35 leading-relaxed">{project.desc}</p>
+                  </div>
+
+                  {/* Result metrics */}
+                  {project.result && (
+                    <div
+                      className="grid grid-cols-3 gap-2 p-3 rounded-xl"
+                      style={{ background: 'rgba(197,160,89,0.04)', border: '1px solid rgba(197,160,89,0.1)' }}
+                    >
+                      {project.result.map((r) => (
+                        <div key={r.label} className="text-center">
+                          <div className="text-sm font-display font-black" style={{ color: GOLD }}>{r.val}</div>
+                          <div className="text-[8px] font-mono text-white/30 mt-0.5">{r.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {project.tags.slice(0, 4).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[8px] font-mono text-white/30 px-2 py-0.5 rounded-full"
+                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
+                      >
                         {tag}
                       </span>
                     ))}
@@ -156,31 +234,55 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
             ))}
           </div>
 
-          {/* Mobile Pagination Slider Dots */}
-          <div className="flex justify-center gap-1.5 mt-4 md:hidden">
+          {/* Mobile dots */}
+          <div className="flex justify-center gap-1.5 mt-5 md:hidden">
             {projects.map((_, i) => (
-              <div 
-                key={i} 
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  activeDot === i ? 'bg-[#c5a059] w-3.5' : 'bg-white/20'
-                }`}
+              <div
+                key={i}
+                className="h-1.5 rounded-full transition-all duration-300"
+                style={{
+                  width: activeDot === i ? '1.75rem' : '0.375rem',
+                  background: activeDot === i ? GOLD : 'rgba(255,255,255,0.2)',
+                }}
               />
             ))}
           </div>
         </div>
       )}
 
-      {/* View All Button */}
-      <div className="text-center pt-8">
-        <button
-          onClick={() => {
-            navigateTo('/portfolio');
-          }}
-          className="inline-flex items-center gap-2 py-3 px-8 bg-transparent hover:bg-white/[0.03] border border-white/10 hover:border-white/20 text-white text-[10px] font-mono tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer rounded-xl"
-        >
-          <span>View Full Portfolio</span>
-        </button>
+      {/* ── BOTTOM CTA STRIP ── */}
+      <div
+        className="mt-8 rounded-2xl border p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+        style={{ background: 'rgba(197,160,89,0.03)', borderColor: 'rgba(197,160,89,0.12)' }}
+      >
+        <div>
+          <div className="text-white font-display font-bold text-base mb-1">
+            Want results like these for your business?
+          </div>
+          <div className="text-[11px] text-white/35 font-mono">
+            500+ projects delivered · 98% client retention · Free strategy call
+          </div>
+        </div>
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <button
+            onClick={() => navigateTo('/portfolio')}
+            className="px-5 py-2.5 rounded-xl border text-[10px] font-mono tracking-wider uppercase text-white/50 hover:text-white/80 hover:border-white/20 transition-all duration-200 cursor-pointer"
+            style={{ borderColor: 'rgba(255,255,255,0.09)' }}
+          >
+            View All Work
+          </button>
+          <button
+            onClick={() =>
+              window.dispatchEvent(new CustomEvent('pixelvance:openBooking', { detail: { plan: 'FREE AUDIT', price: 'Free' } }))
+            }
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider text-black transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+            style={{ background: 'linear-gradient(135deg, #c5a059, #e8c97a)' }}
+          >
+            Start My Project <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
+
     </section>
   );
 }

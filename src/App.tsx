@@ -21,7 +21,12 @@ import {
   ShieldCheck,
   CheckCircle,
   HelpCircle,
-  Share2
+  Share2,
+  Palette,
+  Code,
+  Smartphone,
+  Cpu,
+  ShoppingBag
 } from 'lucide-react';
 
 import { PageName } from './types';
@@ -40,6 +45,7 @@ const TestimonialsSlider = lazy(() => import('./components/TestimonialsSlider'))
 const BookingModal       = lazy(() => import('./components/BookingModal'));
 const FeaturedPortfolio  = lazy(() => import('./components/FeaturedPortfolio'));
 const WhyChooseUs        = lazy(() => import('./components/WhyChooseUs'));
+const TechStack           = lazy(() => import('./components/TechStack'));
 const ConversionPortal   = lazy(() => import('./components/ConversionPortal'));
 const Footer             = lazy(() => import('./components/Footer'));
 
@@ -266,6 +272,13 @@ export default function App() {
         if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 50);
     }
+  };
+
+  const handleCategoryClick = (categoryIndex: number) => {
+    scrollToSection('services-explorer-section');
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('pixelvance:selectCategory', { detail: { categoryIndex } }));
+    }, 450);
   };
 
   // Hero carousel slides configurations
@@ -595,206 +608,245 @@ export default function App() {
       {/* ── Home Content ── */}
       {isHomepageGroup && <>
 
-      {/* 3. HERO SECTION — Premium 3D Split Layout */}
+      {/* 3. HERO SECTION — Realistic Tech Split Layout */}
       <section
-        className="relative z-10 overflow-hidden flex items-stretch justify-center min-h-screen"
+        className="relative z-10 overflow-hidden flex items-stretch justify-center h-screen"
         id="hero"
       >
-
-
         {/* Particles subtle secondary layer */}
         {!isMobile && (
           <Suspense fallback={null}>
-            <div className="absolute inset-0 pointer-events-none opacity-20">
+            <div className="absolute inset-0 pointer-events-none opacity-15">
               <Particles3D />
             </div>
           </Suspense>
         )}
 
-        {/* Scanline overlay */}
+        {/* Subtle scanline */}
         <div className="absolute inset-0 pointer-events-none z-[1]" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.02) 3px, rgba(0,0,0,0.02) 4px)',
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.015) 3px, rgba(0,0,0,0.015) 4px)',
         }} />
 
-        {/* ── FULL SCREEN SPLIT VIEWPORT ── */}
-        <div className="relative z-10 w-full min-h-screen flex items-stretch">
+        {/* ── FULL VIEWPORT CONTAINER ── */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 pt-[72px] pb-0 flex items-center justify-center h-screen">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full grid grid-cols-1 lg:grid-cols-12 items-stretch"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="w-full h-full flex items-center"
           >
-            {/* ── LEFT COLUMN — Premium Translucent Dark Navy/Violet Brand Styling ── */}
-            <div className="lg:col-span-6 bg-gradient-to-br from-[#0b0c16]/95 via-[#06070d]/98 to-[#030306]/98 backdrop-blur-md px-8 pb-8 pt-24 sm:px-12 sm:pb-12 sm:pt-28 lg:px-16 lg:pb-16 lg:pt-32 xl:px-20 xl:pb-20 xl:pt-36 flex flex-col justify-between text-slate-100 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5">
-              {/* Floating background gradient glow inside left panel */}
-              <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-[#7c3aed]/10 blur-[80px] pointer-events-none" />
-              
-              {/* Top Badge: Dynamic based on active slide */}
-              <div className="flex items-center justify-between mb-6 z-10">
-                <div className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[10px] font-mono tracking-widest font-bold uppercase transition-all duration-300 ${heroSlides[activeHeroSlide].badgeClass}`}>
-                  <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: heroSlides[activeHeroSlide].dotColor }} />
-                  {heroSlides[activeHeroSlide].tag}
-                </div>
-              </div>
+            {/* ═══ SPLIT LAYOUT: Left Content | Right Dashboard ═══ */}
+            <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4 xl:gap-6 items-center">
 
-              {/* Title, Description & CTA Section */}
-              <div className="my-auto min-h-[280px] flex flex-col justify-center z-10">
+              {/* ─── LEFT PANEL: Main Content ─── */}
+              <div className="flex flex-col gap-4 relative">
+
+                {/* Terminal-style top bar */}
+                <div className="flex items-center gap-2 bg-[#0d0f1a] border border-white/[0.07] rounded-xl px-3 py-2 w-fit">
+                  <span className="w-2 h-2 rounded-full bg-[#ff5f57] shadow-[0_0_6px_rgba(255,95,87,0.8)]" />
+                  <span className="w-2 h-2 rounded-full bg-[#febc2e] shadow-[0_0_6px_rgba(254,188,46,0.8)]" />
+                  <span className="w-2 h-2 rounded-full bg-[#28c840] shadow-[0_0_6px_rgba(40,200,64,0.8)]" />
+                  <span className="ml-2 text-[9px] font-mono text-white/30 tracking-wider">pixelvance.dev — shell</span>
+                  <span className="ml-auto flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+                    <span className="text-[8px] font-mono text-[#10b981]">LIVE</span>
+                  </span>
+                </div>
+
+                {/* Dynamic Service Tag */}
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={activeHeroSlide}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.35, ease: "easeInOut" }}
-                    className="flex flex-col text-left w-full"
+                    key={`tag-${activeHeroSlide}`}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 10 }}
+                    transition={{ duration: 0.3 }}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-[9px] font-mono tracking-[0.18em] font-bold uppercase w-fit ${heroSlides[activeHeroSlide].badgeClass}`}
                   >
-                    {/* Dynamic Highlight Title */}
-                    <h1 className="font-display font-extrabold text-[clamp(2.0rem,4.5vw,3.0rem)] leading-[1.05] tracking-tight text-white mb-4">
-                      {heroSlides[activeHeroSlide].titleLine1}{' '}
+                    <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: heroSlides[activeHeroSlide].dotColor }} />
+                    {heroSlides[activeHeroSlide].tag}
+                    <span className="ml-1 text-white/30">▸</span>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Main Headline */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`headline-${activeHeroSlide}`}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                  >
+                    <h1 className="font-display font-extrabold text-[clamp(1.75rem,3.8vw,3rem)] leading-[1.08] tracking-tight text-white">
+                      {heroSlides[activeHeroSlide].titleLine1}
+                      <br />
                       <span className={`bg-gradient-to-r ${heroSlides[activeHeroSlide].titleGrad} text-transparent bg-clip-text`}>
                         {heroSlides[activeHeroSlide].titleLine2}
                       </span>
                     </h1>
-
-                    {/* Description Block */}
-                    <p className="font-sans text-sm sm:text-base leading-relaxed text-slate-300/90 max-w-md">
+                    <p className="mt-3 text-sm leading-relaxed text-slate-400 max-w-[420px]">
                       {heroSlides[activeHeroSlide].description}
                     </p>
-
-                    {/* CTA Button */}
-                    <div className="mt-8 flex justify-start">
-                      <button
-                        onClick={heroSlides[activeHeroSlide].onCtaClick}
-                        className="group relative flex items-center justify-center gap-2 py-3 px-8 bg-black text-white hover:text-black hover:bg-[#c5a059] border border-white/10 hover:border-[#c5a059] uppercase text-[10px] font-mono tracking-[0.25em] transition-all duration-300 cursor-pointer rounded-full active:scale-95 font-black shadow-lg shadow-black/20"
-                      >
-                        {heroSlides[activeHeroSlide].ctaText}
-                      </button>
-                    </div>
                   </motion.div>
                 </AnimatePresence>
-              </div>
 
-              {/* Bottom Slider tags row */}
-              <div className="mt-8 pt-6 border-t border-white/5 z-10">
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {/* Web Design Badge */}
+                {/* Tech Stack Pills */}
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {[
+                    { label: 'React', color: '#61dafb' },
+                    { label: 'Next.js', color: '#ffffff' },
+                    { label: 'TypeScript', color: '#3178c6' },
+                    { label: 'WordPress', color: '#21759b' },
+                    { label: 'Figma', color: '#a259ff' },
+                    { label: 'AWS', color: '#ff9900' },
+                  ].map((tech) => (
+                    <span
+                      key={tech.label}
+                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.07] text-[9px] font-mono tracking-wider hover:bg-white/[0.08] transition-colors cursor-default"
+                      style={{ color: tech.color }}
+                    >
+                      <span className="w-1 h-1 rounded-full" style={{ backgroundColor: tech.color, boxShadow: `0 0 4px ${tech.color}` }} />
+                      {tech.label}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="flex items-center gap-3 mt-2">
                   <button
-                    onClick={() => setActiveHeroSlide(0)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 cursor-pointer border ${
-                      activeHeroSlide === 0
-                        ? 'bg-[#10b981]/15 text-[#34d399] border-[#10b981]/30 font-bold'
-                        : 'border-white/5 text-white/50 hover:text-white hover:border-white/20'
-                    }`}
+                    onClick={heroSlides[activeHeroSlide].onCtaClick}
+                    className="group relative flex items-center gap-2 py-2.5 px-6 bg-gradient-to-r from-[#7c3aed] to-[#3b82f6] text-white text-[10px] font-mono tracking-[0.18em] uppercase font-black rounded-lg shadow-lg shadow-[#7c3aed]/25 transition-all duration-300 hover:scale-[1.03] hover:shadow-[#7c3aed]/40 active:scale-[0.98] cursor-pointer overflow-hidden"
+                    id="hero-main-cta-btn"
                   >
-                    {activeHeroSlide === 0 && <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />}
-                    Web Design {activeHeroSlide === 0 ? '' : '+'}
+                    <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ArrowRight className="w-3.5 h-3.5" />
+                    {heroSlides[activeHeroSlide].ctaText}
                   </button>
-
-                  {/* React Systems Badge */}
-                  <button
-                    onClick={() => setActiveHeroSlide(1)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 cursor-pointer border ${
-                      activeHeroSlide === 1
-                        ? 'bg-[#6366f1]/15 text-[#818cf8] border-[#6366f1]/30 font-bold'
-                        : 'border-white/5 text-white/50 hover:text-white hover:border-white/20'
-                    }`}
-                  >
-                    {activeHeroSlide === 1 && <span className="w-1.5 h-1.5 rounded-full bg-[#6366f1]" />}
-                    React Systems {activeHeroSlide === 1 ? '' : '+'}
-                  </button>
-
-                  {/* SEO & Growth Badge */}
-                  <button
-                    onClick={() => setActiveHeroSlide(2)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 cursor-pointer border ${
-                      activeHeroSlide === 2
-                        ? 'bg-[#7c3aed]/15 text-[#a78bfa] border-[#7c3aed]/30 font-bold'
-                        : 'border-white/5 text-white/50 hover:text-white hover:border-white/20'
-                    }`}
-                  >
-                    {activeHeroSlide === 2 && <span className="w-1.5 h-1.5 rounded-full bg-[#7c3aed]" />}
-                    SEO & Growth
-                  </button>
-
-                  {/* Cloud & Scale Badge */}
-                  <button
-                    onClick={() => setActiveHeroSlide(3)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 cursor-pointer border ${
-                      activeHeroSlide === 3
-                        ? 'bg-[#c5a059]/15 text-[#ebd095] border-[#c5a059]/30 font-bold'
-                        : 'border-white/5 text-white/50 hover:text-white hover:border-white/20'
-                    }`}
-                  >
-                    {activeHeroSlide === 3 && <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />}
-                    Cloud & Scale {activeHeroSlide === 3 ? '' : '+'}
-                  </button>
-
-                  {/* Brand Identity Tag (Static) */}
                   <button
                     onClick={() => scrollToSection('services-explorer-section')}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider border border-white/5 text-white/50 hover:text-white hover:border-white/20 transition-all duration-300 cursor-pointer"
+                    className="flex items-center gap-2 py-2.5 px-5 border border-white/10 hover:border-white/25 text-white/70 hover:text-white text-[10px] font-mono tracking-[0.18em] uppercase transition-all duration-300 rounded-lg active:scale-[0.98] cursor-pointer"
+                    id="hero-explore-btn"
                   >
-                    Brand Identity
-                  </button>
-
-                  {/* AI Automation Tag (Static) */}
-                  <button
-                    onClick={() => scrollToSection('services-explorer-section')}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider border border-white/5 text-white/50 hover:text-white hover:border-white/20 transition-all duration-300 cursor-pointer"
-                  >
-                    AI Automation
+                    Explore Services
                   </button>
                 </div>
 
-                {/* Pagination Controls & Arrows */}
-                <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
-                  {/* Pagination Dots */}
+                {/* Slide Dots + Stats strip */}
+                <div className="flex items-center gap-4 mt-1">
                   <div className="flex items-center gap-2">
                     {heroSlides.map((slide, idx) => (
                       <button
                         key={idx}
                         onClick={() => setActiveHeroSlide(idx)}
-                        className="h-2 rounded-full transition-all duration-300 cursor-pointer"
+                        className="h-1 rounded-full transition-all duration-500 cursor-pointer"
                         style={{
-                          width: activeHeroSlide === idx ? '24px' : '8px',
-                          backgroundColor: activeHeroSlide === idx ? slide.dotColor : 'rgba(255, 255, 255, 0.2)'
+                          width: activeHeroSlide === idx ? '20px' : '5px',
+                          backgroundColor: activeHeroSlide === idx ? slide.dotColor : 'rgba(255,255,255,0.18)'
                         }}
-                        aria-label={`Go to slide ${idx + 1}`}
+                        aria-label={`Slide ${idx + 1}`}
                       />
                     ))}
                   </div>
-
-                  {/* Navigation Arrows */}
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => setActiveHeroSlide((prev) => (prev === 0 ? 3 : prev - 1))}
-                      className="w-9 h-9 rounded-full border border-white/10 hover:border-white/30 text-white hover:text-[#c5a059] flex items-center justify-center transition-all cursor-pointer active:scale-90"
-                      title="Previous Slide"
-                    >
-                      ←
-                    </button>
-                    <button
-                      onClick={() => setActiveHeroSlide((prev) => (prev === 3 ? 0 : prev + 1))}
-                      className="w-9 h-9 rounded-full border border-white/10 hover:border-white/30 text-white hover:text-[#c5a059] flex items-center justify-center transition-all cursor-pointer active:scale-90"
-                      title="Next Slide"
-                    >
-                      →
-                    </button>
-                  </div>
+                  <span className="text-white/20 text-[9px] font-mono">|</span>
+                  {[
+                    { val: '500+', lbl: 'Projects' },
+                    { val: '98%', lbl: 'Retention' },
+                    { val: '7+', lbl: 'Yrs Exp' },
+                  ].map((s) => (
+                    <div key={s.lbl} className="flex items-center gap-1">
+                      <span className="text-[11px] font-display font-black text-white">{s.val}</span>
+                      <span className="text-[8px] font-mono text-white/35 uppercase tracking-wider">{s.lbl}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
+
+              {/* ─── RIGHT PANEL: Tech Dashboard ─── */}
+              <div className="hidden lg:flex flex-col gap-3 relative">
+
+                {/* Top row: Metric cards */}
+                <div className="grid grid-cols-3 gap-2.5">
+                  {[
+                    { label: 'Uptime', value: '99.9%', sub: '30-day avg', color: '#10b981', icon: '↑', bar: 99 },
+                    { label: 'Perf Score', value: '97/100', sub: 'Core Web Vitals', color: '#3b82f6', icon: '⚡', bar: 97 },
+                    { label: 'Projects', value: '500+', sub: 'Delivered USA', color: '#a855f7', icon: '✦', bar: 85 },
+                  ].map((m) => (
+                    <div key={m.label} className="bg-[#0a0b15] border border-white/[0.07] rounded-xl p-3 flex flex-col gap-2 hover:border-white/[0.14] transition-colors group">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[8px] font-mono tracking-widest uppercase" style={{ color: m.color }}>{m.label}</span>
+                        <span className="text-[10px]" style={{ color: m.color }}>{m.icon}</span>
+                      </div>
+                      <span className="text-lg font-display font-black text-white leading-none">{m.value}</span>
+                      <div className="flex flex-col gap-1">
+                        <div className="w-full h-0.5 bg-white/5 rounded-full overflow-hidden">
+                          <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${m.bar}%`, backgroundColor: m.color, boxShadow: `0 0 6px ${m.color}` }} />
+                        </div>
+                        <span className="text-[7px] font-mono text-white/30">{m.sub}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Middle: Mini Terminal */}
+                <div className="bg-[#080910] border border-white/[0.07] rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-2 px-3 py-2 bg-[#0d0f1c] border-b border-white/[0.05]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#ff5f57]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#febc2e]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#28c840]" />
+                    <span className="ml-2 text-[8px] font-mono text-white/25 tracking-wider">~/pixelvance/deploy.sh</span>
+                    <span className="ml-auto text-[7px] font-mono text-[#10b981]/60">● running</span>
+                  </div>
+                  <div className="px-3 py-2.5 font-mono text-[9px] leading-[1.7] space-y-0.5">
+                    <div><span className="text-[#7c3aed]">$ </span><span className="text-white/60">npm run build:prod</span></div>
+                    <div className="text-[#10b981]">✔ TypeScript compiled (0 errors)</div>
+                    <div className="text-[#10b981]">✔ Bundle optimized → 142kb gzip</div>
+                    <div className="text-[#3b82f6]">→ Deploying to Vercel Edge...</div>
+                    <div className="text-[#10b981]">✔ Deploy complete in 18s</div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-white/30">$</span>
+                      <span className="inline-block w-1.5 h-3 bg-white/60 animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom row: Service network nodes */}
+                <div className="bg-[#0a0b15] border border-white/[0.07] rounded-xl p-3">
+                  <div className="flex items-center justify-between mb-2.5">
+                    <span className="text-[8px] font-mono tracking-widest text-white/40 uppercase">Service Stack</span>
+                    <span className="text-[7px] font-mono text-[#10b981]/70 flex items-center gap-1">
+                      <span className="w-1 h-1 rounded-full bg-[#10b981] animate-pulse" />
+                      All systems operational
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { label: 'Web Dev', icon: <Code className="w-3 h-3" />, color: '#10b981', status: '12 active' },
+                      { label: 'WordPress', icon: <Layers className="w-3 h-3" />, color: '#6366f1', status: '8 active' },
+                      { label: 'UI/UX', icon: <Palette className="w-3 h-3" />, color: '#a855f7', status: '6 active' },
+                      { label: 'Mobile', icon: <Smartphone className="w-3 h-3" />, color: '#f59e0b', status: '4 active' },
+                      { label: 'AI & Auto', icon: <Sparkles className="w-3 h-3" />, color: '#ef4444', status: '3 active' },
+                      { label: 'E-Commerce', icon: <ShoppingBag className="w-3 h-3" />, color: '#ec4899', status: '7 active' },
+                    ].map((svc) => (
+                      <div
+                        key={svc.label}
+                        onClick={() => scrollToSection('services-explorer-section')}
+                        className="flex items-center gap-2 bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.05] hover:border-white/[0.14] rounded-lg px-2 py-1.5 cursor-pointer transition-all duration-200 group"
+                      >
+                        <span style={{ color: svc.color }} className="group-hover:scale-110 transition-transform flex-shrink-0">{svc.icon}</span>
+                        <div className="overflow-hidden">
+                          <span className="text-[8px] font-mono text-white/70 block truncate">{svc.label}</span>
+                          <span className="text-[7px] font-mono block" style={{ color: svc.color }}>{svc.status}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
             </div>
-
-            {/* ── RIGHT COLUMN — 2x2 Interactive Gradients Grid ── */}
-            {!isMobile && (
-              <Suspense fallback={null}>
-                <HeroGrid activeHeroSlide={activeHeroSlide} setActiveHeroSlide={setActiveHeroSlide} />
-              </Suspense>
-            )}
-
           </motion.div>
         </div>
-
       </section>
 
 
@@ -824,6 +876,105 @@ export default function App() {
           </div>
         </div>
       </div>
+
+      <div className="my-16 md:my-24" />
+
+      {/* FREE AUDIT CTA BANNER */}
+      <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto" id="free-audit-section">
+        <div
+          className="relative rounded-3xl overflow-hidden border"
+          style={{ borderColor: 'rgba(197,160,89,0.2)', background: 'rgba(6,7,14,0.97)' }}
+        >
+          {/* Glow blobs */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full"
+              style={{ background: 'radial-gradient(ellipse, rgba(197,160,89,0.13) 0%, transparent 70%)' }} />
+            <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(197,160,89,0.06) 0%, transparent 65%)' }} />
+          </div>
+
+          {/* Top accent line */}
+          <div className="absolute top-0 inset-x-0 h-px"
+            style={{ background: 'linear-gradient(to right, transparent, rgba(197,160,89,0.6), transparent)' }} />
+
+          <div className="relative px-8 md:px-14 py-10 md:py-12">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+
+              {/* Left text */}
+              <div className="text-center md:text-left max-w-xl">
+                {/* Eyebrow */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border mb-4"
+                  style={{ borderColor: 'rgba(197,160,89,0.25)', background: 'rgba(197,160,89,0.07)' }}>
+                  <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-[#c5a059]" />
+                  <span className="text-[9px] font-mono tracking-[0.25em] text-[#c5a059] uppercase">
+                    Limited — Only 5 Spots This Month
+                  </span>
+                </div>
+
+                <h2 className="text-3xl md:text-5xl font-display font-black text-white leading-tight">
+                  Claim Your{' '}
+                  <span className="bg-gradient-to-r from-[#c5a059] via-[#e8c97a] to-[#a07840] bg-clip-text text-transparent">
+                    Free Website Audit
+                  </span>
+                </h2>
+                <p className="mt-3 text-sm text-white/45 leading-relaxed max-w-md">
+                  Get a detailed report on your site's speed, SEO gaps, conversion leaks, and a clear action plan — completely free, delivered in 24 hours.
+                </p>
+
+                {/* Trust badges */}
+                <div className="flex flex-wrap items-center gap-4 mt-5">
+                  {[
+                    '✓ No credit card',
+                    '✓ Delivered in 24hrs',
+                    '✓ No obligation',
+                    '✓ 100% free',
+                  ].map((b) => (
+                    <span key={b} className="text-[10px] font-mono text-white/40">{b}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right CTA block */}
+              <div className="flex flex-col items-center gap-4 flex-shrink-0">
+                {/* What you get */}
+                <div className="rounded-2xl border p-5 w-full max-w-xs text-left"
+                  style={{ borderColor: 'rgba(197,160,89,0.12)', background: 'rgba(197,160,89,0.04)' }}>
+                  <p className="text-[9px] font-mono tracking-widest text-[#c5a059] uppercase mb-3">
+                    Your free audit includes
+                  </p>
+                  <ul className="space-y-2">
+                    {[
+                      'Page speed & Core Web Vitals',
+                      'SEO & keyword gap analysis',
+                      'Conversion rate review',
+                      'Competitor comparison',
+                      'Personalised action plan',
+                    ].map((item) => (
+                      <li key={item} className="flex items-center gap-2 text-[11px] text-white/60">
+                        <span className="w-1 h-1 rounded-full flex-shrink-0 bg-[#c5a059]" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* CTA Button */}
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('pixelvance:openBooking', { detail: { plan: 'FREE AUDIT', price: 'Free' } }))}
+                  className="w-full max-w-xs flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-display font-bold text-sm text-black transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
+                  style={{ background: 'linear-gradient(135deg, #c5a059 0%, #e8c97a 50%, #c5a059 100%)', boxShadow: '0 0 24px rgba(197,160,89,0.25)' }}
+                >
+                  Claim Free Audit →
+                </button>
+                <p className="text-[8px] font-mono text-white/25 text-center">
+                  No spam. No sales pressure. Just insights.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
 
       <div className="my-16 md:my-24" />
 
@@ -869,14 +1020,18 @@ export default function App() {
       {/* 6. CHRONOLOGICAL PROCESS GANTT (Mirroring screenshot 4) */}
       <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto" id="process-section">
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-          <span className="text-[10px] font-mono tracking-widest text-indigo-400 font-semibold uppercase">
-            — HOW WE WORK —
-          </span>
-          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            WordPress Development for Modern Businesses
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#c5a059]/20 bg-[#c5a059]/05 mb-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059] animate-pulse" />
+            <span className="text-[9px] font-mono tracking-[0.25em] text-[#c5a059] uppercase font-bold">How We Work</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-tight">
+            How We Turn Your Website Into a{' '}
+            <span className="bg-gradient-to-r from-[#c5a059] via-[#e8c97a] to-[#a07840] bg-clip-text text-transparent">
+              Client-Generating Machine
+            </span>
           </h2>
-          <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-            Our 4-step custom WordPress theme design and website development workflow designed for speed, security, and scalability.
+          <p className="text-xs md:text-sm text-white/45 leading-relaxed max-w-xl mx-auto">
+            A transparent, 4-phase workflow that keeps you informed at every step — from initial discovery and design through development, testing, and go-live.
           </p>
         </div>
 
@@ -902,31 +1057,27 @@ export default function App() {
       </Suspense>
 
 
+              <div className="my-16 md:my-24" />
+
+      {/* 7b. TECH STACK — Dedicated Section */}
+      <Suspense fallback={
+        <div className="w-full min-h-[300px] flex items-center justify-center animate-pulse">
+          <span className="text-sm font-mono text-white/20">Loading tech stack...</span>
+        </div>
+      }>
+        <TechStack />
+      </Suspense>
+
       <div className="my-16 md:my-24" />
 
-      {/* 8. CLIENT SUCCESS SLIDER (Mirroring screenshot 5) */}
-      <section className="relative z-10 px-4 md:px-8 max-w-4xl mx-auto" id="testimonials-section">
-        <div className="text-center space-y-4 mb-10">
-          <span className="text-[10px] font-mono tracking-widest text-blue-400 font-bold uppercase">
-            — CLIENT STORIES —
-          </span>
-          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white leading-none">
-            What Our US Clients Say
-          </h2>
-          <p className="text-xs md:text-sm text-white/50 leading-relaxed">
-            Real results from US businesses who partnered with Pixel Vance Digital for web design, SEO & digital marketing.
-          </p>
+      {/* 8. TESTIMONIALS */}
+      <Suspense fallback={
+        <div className="w-full min-h-[300px] flex items-center justify-center animate-pulse">
+          <span className="text-sm font-mono text-white/20">Loading reviews...</span>
         </div>
-
-        {/* Testimonials Slider */}
-        <Suspense fallback={
-          <div className="w-full min-h-[300px] flex items-center justify-center bg-white/[0.02] border border-white/[0.05] rounded-3xl animate-pulse">
-            <span className="text-sm font-mono text-white/30">Loading reviews...</span>
-          </div>
-        }>
-          <TestimonialsSlider />
-        </Suspense>
-      </section>
+      }>
+        <TestimonialsSlider />
+      </Suspense>
 
       <div className="my-16 md:my-24" />
 

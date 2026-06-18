@@ -3,12 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SERVICE_CATEGORIES } from '../data';
 import { ServiceItem, ServiceCategory } from '../types';
 import {
-  Compass, ArrowRight, ChevronRight,
+  Compass, ArrowRight, ChevronRight, CheckCircle,
   // Design & Branding
   PenTool, Layers, LayoutTemplate, UserCheck, Image, Instagram, Presentation, Clapperboard,
   // Web Dev
@@ -24,7 +24,7 @@ import {
   // Category icons
   Palette, Code, Cpu, Sparkles,
 } from 'lucide-react';
-import ServiceModal from './ServiceModal';
+import { SERVICE_DETAILS } from './ServiceModal';
 
 interface SelectedService {
   item: ServiceItem;
@@ -105,242 +105,495 @@ const CATEGORY_TAGLINES: Record<string, string> = {
 };
 
 export default function ServiceSelector() {
-  const [activeCatIndex, setActiveCatIndex] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selected, setSelected] = useState<SelectedService | null>(null);
+  const [activeCatIndex, setActiveCatIndex] = useState(1);
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+  const [hoveredServiceIndex, setHoveredServiceIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleSelectCategory = (e: Event) => {
+      const { categoryIndex } = (e as CustomEvent).detail;
+      if (typeof categoryIndex === 'number' && categoryIndex >= 0 && categoryIndex < SERVICE_CATEGORIES.length) {
+        setActiveCatIndex(categoryIndex);
+        setActiveServiceIndex(0);
+      }
+    };
+    window.addEventListener('pixelvance:selectCategory', handleSelectCategory);
+    return () => window.removeEventListener('pixelvance:selectCategory', handleSelectCategory);
+  }, []);
 
   const categories = SERVICE_CATEGORIES;
   const activeCategory: ServiceCategory = categories[activeCatIndex];
+  const activeService: ServiceItem = activeCategory.items[activeServiceIndex] || activeCategory.items[0];
 
-  const openModal = (item: ServiceItem, cat: ServiceCategory) => {
-    setSelected({ item, catTitle: cat.title, catColor: cat.color, catIcon: cat.iconName });
-    setModalOpen(true);
+  // Fetch detailed service metadata (bullets, tagline) dynamically
+  const serviceDetails = SERVICE_DETAILS[activeService.name] ?? {
+    tagline: 'Premium service tailored to your business.',
+    bullets: ['Custom scope to your needs', 'Expert team assigned', 'Dedicated project manager', 'Quality guaranteed'],
+    deliverables: ['Full project files', 'Documentation', 'Post-launch support'],
   };
+
+  const openBooking = (plan: string, price: string) => {
+    window.dispatchEvent(new CustomEvent('pixelvance:openBooking', { detail: { plan, price } }));
+  };
+
+  // Split items for left and right columns
+  const midPoint = Math.ceil(activeCategory.items.length / 2);
+  const leftItems = activeCategory.items.slice(0, midPoint);
+  const rightItems = activeCategory.items.slice(midPoint);
 
   return (
     <>
-      {/* ── MOBILE VIEW (< lg) ── */}
-      <div className="lg:hidden flex flex-col gap-0 rounded-2xl overflow-hidden border border-white/[0.07]"
-        style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.008) 100%)' }}>
+      {/* ── CATEGORY TAB BAR (Common for Desktop & Mobile) ── */}
+      <div className="w-full max-w-5xl mx-auto mb-12 px-4">
+        <div className="flex flex-wrap justify-center gap-2.5 md:gap-3">
+          {categories.map((cat, i) => {
+            const isActive = i === activeCatIndex;
+            const icon = CATEGORY_ICON_LG[cat.iconName] ?? <Compass className="w-4 h-4" />;
+            return (
+              <button
+                key={cat.title}
+                onClick={() => {
+                  setActiveCatIndex(i);
+                  setActiveServiceIndex(0);
+                }}
+                className={`flex items-center gap-2 px-4 py-3 rounded-xl text-[11px] md:text-xs font-display font-bold whitespace-nowrap transition-all duration-300 cursor-pointer border ${
+                  isActive
+                    ? 'text-black bg-white border-white shadow-[0_0_24px_rgba(255,255,255,0.1)]'
+                    : 'text-white/50 bg-[#0e0e0e]/40 border-white/[0.05] hover:text-white/80 hover:bg-[#0e0e0e]/60 hover:border-white/[0.1]'
+                }`}
+                style={isActive ? {
+                  background: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)',
+                } : {}}
+              >
+                <span className={isActive ? 'text-black/70' : 'text-white/30'}>{icon}</span>
+                {CATEGORY_SHORT[cat.title] ?? cat.title}
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
-        {/* Pill tab strip */}
-        <div className="overflow-x-auto scrollbar-none px-3 pt-3 pb-0">
-          <div className="flex gap-2 w-max">
-            {categories.map((cat, i) => {
-              const isActive = i === activeCatIndex;
-              const icon = CATEGORY_ICON_LG[cat.iconName] ?? <Compass className="w-4 h-4" />;
+      {/* ── MOBILE VIEW (< lg) ── */}
+      <div className="lg:hidden flex flex-col gap-6 px-4">
+        {/* Central Details Card (Shows currently active service details) */}
+        <div 
+          className="w-full bg-gradient-to-b from-[#0e0e0e]/95 to-[#050507]/90 border border-white/10 rounded-[24px] p-5 shadow-2xl flex flex-col gap-4 relative overflow-hidden"
+        >
+          {/* Subtle colored glow behind */}
+          <div 
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full blur-[60px] opacity-15 pointer-events-none"
+            style={{ backgroundColor: activeCategory.color }}
+          />
+
+          {/* Top Aspect ratio Header */}
+          <div 
+            className="w-full aspect-[16/9] rounded-xl overflow-hidden relative border border-white/[0.08] flex items-center justify-center bg-[#07070a]"
+            style={{
+              background: `linear-gradient(135deg, ${activeCategory.color}18 0%, #0c0a1f 60%, #060608 100%)`
+            }}
+          >
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white relative shadow-xl backdrop-blur-sm"
+              style={{ backgroundColor: `${activeCategory.color}25`, border: `1px solid ${activeCategory.color}44`, color: activeCategory.color }}>
+              {SERVICE_ICON_SM[activeService.name] ?? CATEGORY_ICON_LG[activeCategory.iconName]}
+            </div>
+          </div>
+
+          {/* Service Info */}
+          <div className="flex flex-col gap-2">
+            <span className="text-[9px] font-mono tracking-[0.2em] font-bold uppercase" style={{ color: activeCategory.color }}>
+              {activeCategory.title}
+            </span>
+            <h3 className="text-lg font-display font-black text-white leading-tight">
+              {activeService.name}
+            </h3>
+            <p className="text-[11px] text-white/50 italic leading-snug">
+              {serviceDetails.tagline}
+            </p>
+            <p className="text-[11px] text-white/40 leading-relaxed mt-1">
+              {activeService.description}
+            </p>
+          </div>
+
+          {/* Bullets checklist */}
+          <div className="space-y-2.5 bg-white/[0.02] border border-white/[0.05] p-4 rounded-xl">
+            <p className="text-[9px] font-mono tracking-[0.25em] uppercase text-white/30">What's Included</p>
+            {serviceDetails.bullets.slice(0, 3).map((bullet, idx) => (
+              <div key={idx} className="flex items-start gap-2.5">
+                <CheckCircle className="w-3.5 h-3.5 mt-0.5 shrink-0" style={{ color: activeCategory.color }} />
+                <span className="text-[11px] text-white/60 leading-snug">{bullet}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile CTA */}
+          <button
+            onClick={() => openBooking('GROWTH', '$2,999')}
+            className="w-full py-3.5 bg-white hover:bg-opacity-95 text-black font-mono text-[10px] uppercase tracking-[0.2em] font-black rounded-xl active:scale-95 transition-all cursor-pointer"
+          >
+            Book Strategy Session
+          </button>
+        </div>
+
+        {/* List of Services inside active category (Small cards) */}
+        <div className="flex flex-col gap-2.5">
+          <p className="text-[10px] font-mono tracking-[0.25em] text-white/35 uppercase pl-1">Select Service</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {activeCategory.items.map((item, idx) => {
+              const isSelected = idx === activeServiceIndex;
+              const icon = SERVICE_ICON_SM[item.name] ?? <Compass className="w-4 h-4" />;
               return (
                 <button
-                  key={cat.title}
-                  onClick={() => setActiveCatIndex(i)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-display font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer shrink-0 ${
-                    isActive
-                      ? 'text-black'
-                      : 'text-white/45 bg-white/[0.04] border border-white/[0.06] hover:text-white/70'
+                  key={item.name}
+                  onClick={() => setActiveServiceIndex(idx)}
+                  className={`w-full flex items-center gap-3 p-3.5 rounded-xl text-left border transition-all cursor-pointer group relative overflow-hidden ${
+                    isSelected
+                      ? 'bg-white/[0.03] shadow-lg'
+                      : 'bg-[#0e0e0e]/30 border-white/[0.04] hover:border-white/[0.08]'
                   }`}
-                  style={isActive ? {
-                    background: 'linear-gradient(135deg,#c5a059,#e8c97a)',
-                    boxShadow: '0 0 20px rgba(197,160,89,0.3)',
-                  } : {}}
+                  style={isSelected ? { borderColor: activeCategory.color } : {}}
                 >
-                  <span className={isActive ? 'text-black/70' : 'text-white/35'}>{icon}</span>
-                  {CATEGORY_SHORT[cat.title] ?? cat.title}
+                  {/* Corner Accent Arc */}
+                  <div 
+                    className="absolute top-0 right-0 w-3 h-3 border-t border-r rounded-tr-[12px] pointer-events-none"
+                    style={{ borderColor: isSelected ? activeCategory.color : 'transparent' }}
+                  />
+
+                  {/* Icon */}
+                  <div 
+                    className="w-8.5 h-8.5 rounded-lg flex items-center justify-center shrink-0 border transition-all"
+                    style={{
+                      backgroundColor: isSelected ? `${activeCategory.color}15` : 'rgba(255,255,255,0.03)',
+                      borderColor: isSelected ? `${activeCategory.color}33` : 'rgba(255,255,255,0.06)',
+                      color: isSelected ? activeCategory.color : 'rgba(255,255,255,0.4)'
+                    }}
+                  >
+                    {icon}
+                  </div>
+
+                  {/* Text */}
+                  <div className="min-w-0 flex-1">
+                    <p className={`text-[11px] font-display font-bold leading-tight ${isSelected ? 'text-white' : 'text-white/60 group-hover:text-white/80'}`}>
+                      {item.name}
+                    </p>
+                  </div>
                 </button>
               );
             })}
           </div>
         </div>
-
-        {/* Category header */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCatIndex}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="flex items-center gap-3 px-4 py-4 border-b border-white/[0.05] mt-3">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-[#c5a059]"
-                style={{ background: 'linear-gradient(135deg,rgba(197,160,89,0.18),rgba(197,160,89,0.06))', border: '1px solid rgba(197,160,89,0.2)' }}>
-                {CATEGORY_ICON_LG[activeCategory.iconName] ?? <Compass className="w-5 h-5" />}
-              </div>
-              <div className="min-w-0">
-                <h3 className="text-sm font-display font-bold text-white leading-tight">
-                  {activeCategory.title.toLowerCase().replace(/\b\w/g, c => c.toUpperCase())}
-                </h3>
-                <p className="text-[11px] text-white/40 mt-0.5 leading-snug">
-                  {CATEGORY_TAGLINES[activeCategory.title]}
-                </p>
-              </div>
-            </div>
-
-            {/* Service tiles — single column, compact rows */}
-            <div className="divide-y divide-white/[0.04]">
-              {activeCategory.items.map((item: ServiceItem, idx: number) => {
-                const icon = SERVICE_ICON_SM[item.name] ?? <Compass className="w-4 h-4" />;
-                return (
-                  <motion.button
-                    key={item.name}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.15, delay: idx * 0.04 }}
-                    onClick={() => openModal(item, activeCategory)}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 text-left active:bg-[#c5a059]/[0.06] transition-colors cursor-pointer group"
-                  >
-                    {/* Icon */}
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-white/50 group-active:text-[#c5a059] transition-colors"
-                      style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                      {icon}
-                    </div>
-
-                    {/* Text */}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[13px] font-display font-semibold text-white leading-tight">{item.name}</p>
-                      <p className="text-[11px] text-white/40 mt-0.5 leading-snug line-clamp-1">{item.description}</p>
-                    </div>
-
-                    {/* Arrow */}
-                    <ArrowRight className="w-4 h-4 text-[#c5a059]/50 group-active:text-[#c5a059] shrink-0 transition-colors" />
-                  </motion.button>
-                );
-              })}
-            </div>
-          </motion.div>
-        </AnimatePresence>
       </div>
 
       {/* ── DESKTOP VIEW (>= lg) ── */}
       <div
-        className="hidden lg:flex flex-row rounded-3xl overflow-hidden border border-white/[0.08] shadow-[0_40px_120px_rgba(0,0,0,0.6)]"
-        style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 100%)' }}
+        className="hidden lg:block w-full max-w-5xl mx-auto relative h-[540px]"
         id="services-catalog"
       >
-        {/* Sidebar */}
-        <div className="w-72 shrink-0 border-r border-white/[0.06] p-6 flex flex-col gap-1"
-          style={{ background: 'rgba(0,0,0,0.25)' }}>
-          <p className="text-[9px] font-mono tracking-[0.35em] uppercase text-white/30 mb-4 px-2">
-            Service Categories
-          </p>
-          <div className="flex flex-col gap-1">
-            {categories.map((cat, i) => {
-              const isActive = i === activeCatIndex;
-              const icon = CATEGORY_ICON_LG[cat.iconName] ?? <Compass className="w-5 h-5" />;
-              return (
-                <motion.button
-                  key={cat.title}
-                  id={`sidebar-cat-${cat.iconName.toLowerCase()}`}
-                  onClick={() => setActiveCatIndex(i)}
-                  whileTap={{ scale: 0.97 }}
-                  className={`group relative flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 cursor-pointer ${
-                    isActive ? 'text-white' : 'text-white/45 hover:text-white/75 hover:bg-white/[0.03]'
-                  }`}
-                  style={isActive ? {
-                    background: 'linear-gradient(135deg, rgba(197,160,89,0.12) 0%, rgba(197,160,89,0.04) 100%)',
-                    boxShadow: 'inset 0 0 0 1px rgba(197,160,89,0.25)',
-                  } : {}}
+        {/* Dynamic Curved SVG Connector Wires */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1024 540" fill="none">
+          {/* Left Wires */}
+          {leftItems.map((item, i) => {
+            const globalIdx = i;
+            const isSelected = activeServiceIndex === globalIdx;
+            const isHovered = hoveredServiceIndex === globalIdx;
+            const cardTop = leftItems.length > 1
+              ? 40 + i * ((540 - 80 - 68) / (leftItems.length - 1))
+              : 236;
+            const yConn = cardTop + 34;
+            const curvePath = `M 280 ${yConn} C 306 ${yConn}, 306 270, 332 270`;
+
+            const isWireActive = isSelected || isHovered;
+
+            return (
+              <g key={`left-wire-${i}`}>
+                {/* Glow layer */}
+                {isWireActive && (
+                  <motion.path
+                    d={curvePath}
+                    stroke={activeCategory.color}
+                    strokeWidth="3.5"
+                    strokeOpacity="0.4"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ filter: 'blur(3px)' }}
+                  />
+                )}
+                {/* Main Curve Wire */}
+                <path
+                  d={curvePath}
+                  stroke={isWireActive ? activeCategory.color : 'rgba(255, 255, 255, 0.05)'}
+                  strokeWidth={isWireActive ? '2.2' : '1'}
+                  strokeDasharray={isWireActive ? 'none' : '4 4'}
+                  fill="none"
+                  className="transition-all duration-300"
+                />
+                {/* Active current pulse flow */}
+                {isSelected && (
+                  <motion.path
+                    d={curvePath}
+                    stroke="#ffffff"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    fill="none"
+                    initial={{ strokeDasharray: '4 44', strokeDashoffset: 0 }}
+                    animate={{ strokeDashoffset: -48 }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}
+                  />
+                )}
+              </g>
+            );
+          })}
+
+          {/* Right Wires */}
+          {rightItems.map((item, i) => {
+            const globalIdx = i + leftItems.length;
+            const isSelected = activeServiceIndex === globalIdx;
+            const isHovered = hoveredServiceIndex === globalIdx;
+            const cardTop = rightItems.length > 1
+              ? 40 + i * ((540 - 80 - 68) / (rightItems.length - 1))
+              : 236;
+            const yConn = cardTop + 34;
+            const curvePath = `M 744 ${yConn} C 718 ${yConn}, 718 270, 692 270`;
+
+            const isWireActive = isSelected || isHovered;
+
+            return (
+              <g key={`right-wire-${i}`}>
+                {/* Glow layer */}
+                {isWireActive && (
+                  <motion.path
+                    d={curvePath}
+                    stroke={activeCategory.color}
+                    strokeWidth="3.5"
+                    strokeOpacity="0.4"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ filter: 'blur(3px)' }}
+                  />
+                )}
+                {/* Main Curve Wire */}
+                <path
+                  d={curvePath}
+                  stroke={isWireActive ? activeCategory.color : 'rgba(255, 255, 255, 0.05)'}
+                  strokeWidth={isWireActive ? '2.2' : '1'}
+                  strokeDasharray={isWireActive ? 'none' : '4 4'}
+                  fill="none"
+                  className="transition-all duration-300"
+                />
+                {/* Active current pulse flow */}
+                {isSelected && (
+                  <motion.path
+                    d={curvePath}
+                    stroke="#ffffff"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    fill="none"
+                    initial={{ strokeDasharray: '4 44', strokeDashoffset: 0 }}
+                    animate={{ strokeDashoffset: 48 }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}
+                  />
+                )}
+              </g>
+            );
+          })}
+        </svg>
+
+        {/* LEFT COLUMN: First half of services */}
+        <div className="absolute left-0 w-[280px] h-full z-10">
+          {leftItems.map((item, i) => {
+            const globalIdx = i;
+            const isSelected = activeServiceIndex === globalIdx;
+            const cardTop = leftItems.length > 1
+              ? 40 + i * ((540 - 80 - 68) / (leftItems.length - 1))
+              : 236;
+            const icon = SERVICE_ICON_SM[item.name] ?? <Compass className="w-4 h-4" />;
+            return (
+              <motion.div
+                key={item.name}
+                whileHover={{ x: 6 }}
+                whileTap={{ scale: 0.98 }}
+                onMouseEnter={() => setHoveredServiceIndex(globalIdx)}
+                onMouseLeave={() => setHoveredServiceIndex(null)}
+                onClick={() => setActiveServiceIndex(globalIdx)}
+                className={`absolute left-0 w-[280px] h-[68px] rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer border transition-all duration-300 ${
+                  isSelected
+                    ? 'shadow-[0_10px_25px_rgba(0,0,0,0.4)] opacity-100 bg-[#0c0c0e]/90'
+                    : 'border-white/5 bg-[#0e0e0e]/20 opacity-60 hover:opacity-95 hover:bg-[#0e0e0e]/50'
+                }`}
+                style={{
+                  top: `${cardTop}px`,
+                  borderColor: isSelected ? activeCategory.color : 'rgba(255,255,255,0.05)',
+                  boxShadow: isSelected ? `0 0 24px ${activeCategory.color}15, inset 0 0 0 1px ${activeCategory.color}22` : 'none',
+                }}
+              >
+                {/* Decorative Accent Arc */}
+                <div 
+                  className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 rounded-tr-[16px] pointer-events-none transition-colors duration-300"
+                  style={{ borderColor: isSelected ? activeCategory.color : 'transparent' }}
+                />
+
+                {/* Icon Container */}
+                <div 
+                  className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-all"
+                  style={{
+                    backgroundColor: isSelected ? `${activeCategory.color}18` : 'rgba(255,255,255,0.03)',
+                    borderColor: isSelected ? `${activeCategory.color}33` : 'rgba(255,255,255,0.06)',
+                    color: isSelected ? activeCategory.color : 'rgba(255,255,255,0.4)'
+                  }}
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="sidebar-bar"
-                      className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-[#c5a059]"
-                    />
-                  )}
-                  <div className={`shrink-0 transition-colors duration-200 ${isActive ? 'text-[#c5a059]' : 'text-white/35 group-hover:text-white/55'}`}>
-                    {icon}
-                  </div>
-                  <span className={`text-[12px] font-display font-semibold tracking-wide whitespace-nowrap leading-tight ${isActive ? 'text-white' : ''}`}>
-                    {CATEGORY_SHORT[cat.title] ?? cat.title}
-                  </span>
-                  <ChevronRight className={`w-3.5 h-3.5 ml-auto shrink-0 transition-opacity ${isActive ? 'opacity-60 text-[#c5a059]' : 'opacity-0 group-hover:opacity-30'}`} />
-                </motion.button>
-              );
-            })}
-          </div>
+                  {icon}
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-[11px] font-display font-bold text-white leading-tight tracking-wide">
+                    {item.name}
+                  </h4>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Right panel */}
-        <div className="flex-1 min-w-0 p-8">
+        {/* CENTER COLUMN: Central Big details box */}
+        <div 
+          className="absolute left-[332px] w-[360px] h-[480px] top-[30px] bg-gradient-to-b from-[#0e0e0e]/95 to-[#060608]/90 border border-white/10 rounded-[30px] p-5 shadow-[0_30px_70px_rgba(0,0,0,0.8)] flex flex-col justify-between gap-4 z-10 overflow-hidden"
+        >
+          {/* Glowing halo behind */}
+          <div 
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full blur-[65px] opacity-10 pointer-events-none"
+            style={{ backgroundColor: activeCategory.color }}
+          />
+
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeCatIndex}
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -16 }}
-              transition={{ duration: 0.22, ease: 'easeOut' }}
+              key={activeService.name}
+              initial={{ opacity: 0, scale: 0.97, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: -8 }}
+              transition={{ duration: 0.25 }}
+              className="flex flex-col gap-4 h-full w-full flex-1"
             >
-              {/* Panel header */}
-              <div className="flex items-start gap-4 mb-8 pb-6 border-b border-white/[0.06]">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-[#c5a059]"
-                  style={{ background: 'linear-gradient(135deg, rgba(197,160,89,0.18), rgba(197,160,89,0.06))', border: '1px solid rgba(197,160,89,0.25)' }}>
-                  {CATEGORY_ICON_LG[activeCategory.iconName] ?? <Compass className="w-5 h-5" />}
-                </div>
-                <div>
-                  <h3 className="text-xl font-display font-bold text-white mb-1 capitalize">
-                    {activeCategory.title.toLowerCase().replace(/\b\w/g, c => c.toUpperCase())}
-                  </h3>
-                  <p className="text-[12px] text-white/45 leading-relaxed max-w-lg">
-                    {CATEGORY_TAGLINES[activeCategory.title] ?? 'Premium services tailored to your needs.'}
-                  </p>
+              {/* Graphic/Gradient Panel */}
+              <div 
+                className="w-full aspect-[16/9] rounded-2xl overflow-hidden relative border border-white/[0.08] flex items-center justify-center bg-[#07070a]"
+                style={{
+                  background: `linear-gradient(135deg, ${activeCategory.color}15 0%, #0c0a1f 60%, #060608 100%)`
+                }}
+              >
+                {/* Visual grid lines in mockup card */}
+                <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+                
+                {/* Floating active icon */}
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white relative shadow-xl backdrop-blur-sm scale-110"
+                  style={{ 
+                    backgroundColor: `${activeCategory.color}25`, 
+                    border: `1px solid ${activeCategory.color}44`,
+                    color: activeCategory.color 
+                  }}
+                >
+                  {SERVICE_ICON_SM[activeService.name] ?? CATEGORY_ICON_LG[activeCategory.iconName]}
                 </div>
               </div>
 
-              {/* Service cards grid */}
-              <div className="grid grid-cols-2 gap-3">
-                {activeCategory.items.map((item: ServiceItem) => {
-                  const icon = SERVICE_ICON_SM[item.name] ?? <Compass className="w-4 h-4" />;
-                  return (
-                    <motion.div
-                      key={item.name}
-                      id={`service-card-${item.name.replace(/\s+/g, '-').toLowerCase()}`}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.18 }}
-                      onClick={() => openModal(item, activeCategory)}
-                      className="group relative flex flex-col gap-3 p-5 rounded-2xl border border-white/[0.07] hover:border-[#c5a059]/35 cursor-pointer transition-all duration-250 overflow-hidden"
-                      style={{ background: 'rgba(255,255,255,0.025)' }}
-                    >
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-2xl"
-                        style={{ background: 'radial-gradient(ellipse at top right, rgba(197,160,89,0.06) 0%, transparent 65%)' }} />
-
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 text-white/50 group-hover:text-[#c5a059] transition-colors duration-200"
-                            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                            {icon}
-                          </div>
-                          <div>
-                            <h4 className="text-[13px] font-display font-bold text-white group-hover:text-[#c5a059] transition-colors duration-200 leading-tight">
-                              {item.name}
-                            </h4>
-                            <p className="text-[11px] text-white/45 leading-relaxed mt-1.5 line-clamp-2">
-                              {item.description}
-                            </p>
-                          </div>
-                        </div>
-                        <ArrowRight className="w-3.5 h-3.5 shrink-0 text-[#c5a059]/30 group-hover:text-[#c5a059] transition-colors duration-200 mt-0.5" />
-                      </div>
-                    </motion.div>
-                  );
-                })}
+              {/* Service Metadata */}
+              <div className="flex flex-col gap-1 px-1">
+                <span className="text-[8px] font-mono tracking-[0.3em] font-bold uppercase" style={{ color: activeCategory.color }}>
+                  {activeCategory.title}
+                </span>
+                <h3 className="text-base font-display font-black text-white leading-tight tracking-wide mt-0.5">
+                  {activeService.name}
+                </h3>
+                <p className="text-[10px] text-white/50 italic leading-snug">
+                  {serviceDetails.tagline}
+                </p>
+                <p className="text-[10px] text-white/40 leading-relaxed mt-2.5">
+                  {activeService.description}
+                </p>
               </div>
+
+              {/* checklist bullets */}
+              <div className="space-y-2 bg-white/[0.015] border border-white/[0.05] p-3.5 rounded-2xl mt-1">
+                <p className="text-[8px] font-mono tracking-[0.25em] uppercase text-white/30 mb-2">What's Included</p>
+                {serviceDetails.bullets.slice(0, 3).map((bullet, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5">
+                    <CheckCircle className="w-3.5 h-3.5 mt-0.5 shrink-0" style={{ color: activeCategory.color }} />
+                    <span className="text-[10px] text-white/60 leading-snug">{bullet}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Booking Button */}
+              <button
+                onClick={() => openBooking('GROWTH', '$2,999')}
+                className="w-full py-3.5 bg-white hover:bg-opacity-95 text-black font-mono text-[10px] uppercase tracking-[0.2em] font-black rounded-xl shadow-lg transition-all duration-300 active:scale-95 cursor-pointer mt-auto flex items-center justify-center gap-1.5 hover:shadow-[0_0_24px_rgba(255,255,255,0.1)]"
+              >
+                Book Strategy Session
+              </button>
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
 
-      {/* Service Detail Modal */}
-      <ServiceModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        service={selected?.item ?? null}
-        categoryTitle={selected?.catTitle ?? ''}
-        categoryColor={selected?.catColor ?? '#c5a059'}
-        categoryIcon={selected?.catIcon ?? 'Compass'}
-        onBooking={(plan, price) => {
-          window.dispatchEvent(new CustomEvent('pixelvance:openBooking', { detail: { plan, price } }));
-        }}
-      />
+        {/* RIGHT COLUMN: Second half of services */}
+        <div className="absolute right-0 w-[280px] h-full z-10">
+          {rightItems.map((item, i) => {
+            const globalIdx = i + leftItems.length;
+            const isSelected = activeServiceIndex === globalIdx;
+            const cardTop = rightItems.length > 1
+              ? 40 + i * ((540 - 80 - 68) / (rightItems.length - 1))
+              : 236;
+            const icon = SERVICE_ICON_SM[item.name] ?? <Compass className="w-4 h-4" />;
+            return (
+              <motion.div
+                key={item.name}
+                whileHover={{ x: -6 }}
+                whileTap={{ scale: 0.98 }}
+                onMouseEnter={() => setHoveredServiceIndex(globalIdx)}
+                onMouseLeave={() => setHoveredServiceIndex(null)}
+                onClick={() => setActiveServiceIndex(globalIdx)}
+                className={`absolute right-0 w-[280px] h-[68px] rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer border transition-all duration-300 ${
+                  isSelected
+                    ? 'shadow-[0_10px_25px_rgba(0,0,0,0.4)] opacity-100 bg-[#0c0c0e]/90'
+                    : 'border-white/5 bg-[#0e0e0e]/20 opacity-60 hover:opacity-95 hover:bg-[#0e0e0e]/50'
+                }`}
+                style={{
+                  top: `${cardTop}px`,
+                  borderColor: isSelected ? activeCategory.color : 'rgba(255,255,255,0.05)',
+                  boxShadow: isSelected ? `0 0 24px ${activeCategory.color}15, inset 0 0 0 1px ${activeCategory.color}22` : 'none',
+                }}
+              >
+                {/* Decorative Accent Arc */}
+                <div 
+                  className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 rounded-tr-[16px] pointer-events-none transition-colors duration-300"
+                  style={{ borderColor: isSelected ? activeCategory.color : 'transparent' }}
+                />
+
+                {/* Icon Container */}
+                <div 
+                  className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-all"
+                  style={{
+                    backgroundColor: isSelected ? `${activeCategory.color}18` : 'rgba(255,255,255,0.03)',
+                    borderColor: isSelected ? `${activeCategory.color}33` : 'rgba(255,255,255,0.06)',
+                    color: isSelected ? activeCategory.color : 'rgba(255,255,255,0.4)'
+                  }}
+                >
+                  {icon}
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-[11px] font-display font-bold text-white leading-tight tracking-wide">
+                    {item.name}
+                  </h4>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
     </>
   );
 }

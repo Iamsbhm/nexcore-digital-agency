@@ -15,7 +15,7 @@ interface ServiceModalProps {
 }
 
 // Rich detail map for every service
-const SERVICE_DETAILS: Record<string, { tagline: string; bullets: string[]; deliverables: string[] }> = {
+export const SERVICE_DETAILS: Record<string, { tagline: string; bullets: string[]; deliverables: string[] }> = {
   'Logo Design':               { tagline: 'Iconic marks that outlast trends.', bullets: ['Unlimited concepts until perfected', 'Vector & all format files included', 'Full trademark-ready file package', 'Brand usage guidelines doc'], deliverables: ['AI / EPS / SVG / PNG / PDF', 'Dark & light variants', 'Favicon & app icon sizes'] },
   'Brand Identity Packages':   { tagline: 'A full visual language for your brand.', bullets: ['Logo suite & typography system', 'Colour palette with HEX/RGB/CMYK', 'Brand voice & personality guide', 'Social media kit included'], deliverables: ['Brand guidelines PDF', 'Canva / Figma template kit', 'Print-ready stationery files'] },
   'UI Design':                 { tagline: 'Pixel-perfect interfaces that convert.', bullets: ['Component-based design system', 'Desktop, tablet & mobile layouts', 'Interaction & hover state specs', 'Developer-ready Figma handoff'], deliverables: ['Figma source files', 'Design system library', 'Prototype with interactions'] },

@@ -1,174 +1,198 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ShieldCheck, Clock, Globe, Users, Zap, Headphones, CheckCircle } from 'lucide-react';
+
+/* ── Animated counter ── */
+function useCounter(target: number, duration = 1600) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const started = useRef(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started.current) {
+        started.current = true;
+        const t0 = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - t0) / duration, 1);
+          setCount(Math.round((1 - Math.pow(1 - p, 3)) * target));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [target, duration]);
+  return { count, ref };
+}
+
+const GOLD = '#c5a059';
+const GOLD_DIM = 'rgba(197,160,89,0.12)';
+const GOLD_BORDER = 'rgba(197,160,89,0.18)';
+
+const edges = [
+  { icon: Zap,          stat: '2–4 wk', sub: 'avg delivery',    title: 'Blazing Fast Delivery',    desc: 'Most projects ship in 2–4 weeks with zero quality compromise.' },
+  { icon: ShieldCheck,  stat: '100%',   sub: 'secure builds',   title: 'Enterprise Security',      desc: 'SSL, WAF, pen-testing & best-in-class auth from day one.' },
+  { icon: Globe,        stat: '25+',    sub: 'countries',       title: 'Global Portfolio',          desc: 'Premium digital solutions delivered across 5 continents.' },
+  { icon: Users,        stat: '1:1',    sub: 'dedicated PM',    title: 'Personal Manager',          desc: 'One contact keeps you informed, on time, and on budget.' },
+  { icon: Clock,        stat: '3.2×',   sub: 'avg ROI lift',    title: 'Conversion-First Design',  desc: 'Every element is engineered to guide visitors toward action.' },
+  { icon: Headphones,   stat: '24/7',   sub: 'availability',    title: 'Post-Launch Support',      desc: 'Ongoing maintenance, updates, and priority support — always.' },
+];
+
+
 
 export default function WhyChooseUs() {
+  const p500 = useCounter(500);
+  const p98  = useCounter(98);
+  const p7   = useCounter(7);
+  const p200 = useCounter(200);
+
   return (
-    <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto animate-fade-in" id="why-us-section">
-      {/* ── WHY CHOOSE US ── */}
-      <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
-        <span className="text-[10px] font-mono tracking-[0.4em] text-[#c5a059] font-bold uppercase">
-          — OUR EDGE —
-        </span>
-        <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-white leading-none">
-          Trusted Website Development <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Agency Serving the USA</span>
+    <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto" id="why-us-section">
+
+      {/* ── HEADER ── */}
+      <div className="text-center mb-14">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border mb-6"
+          style={{ borderColor: GOLD_BORDER, background: GOLD_DIM }}>
+          <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: GOLD }} />
+          <span className="text-[9px] font-mono tracking-[0.25em] uppercase" style={{ color: GOLD }}>
+            Why 200+ US Businesses Choose Us
+          </span>
+        </div>
+
+        <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-white leading-[1.05]">
+          Your Website Should Be{' '}
+          <span className="bg-gradient-to-r from-[#c5a059] via-[#e8c97a] to-[#a07840] bg-clip-text text-transparent">
+            Winning You Clients,
+          </span>
+          <br />
+          <span className="text-white/65">Not Losing Them.</span>
         </h2>
-        <h3 className="text-lg md:text-xl font-display font-bold text-[#c5a059] mt-3 uppercase tracking-wider">
-          UI/UX Design Focused on User Experience
-        </h3>
-        <p className="text-sm text-white/40 max-w-xl mx-auto leading-relaxed mt-2">
-          The top-rated US web design agency that crafts custom websites, fast WordPress platforms, and user experiences that convert and scale.
+
+        <p className="mt-5 text-sm md:text-[15px] text-white/40 max-w-lg mx-auto leading-relaxed">
+          We craft <span className="text-white/65 font-medium">fast, high-converting websites</span> for US businesses
+          tired of outdated designs and missed revenue.
         </p>
+
+        {/* Proof strip */}
+        <div className="flex items-center justify-center gap-10 mt-8">
+          {[
+            { val: '+43%',     lbl: 'Avg. Revenue Increase' },
+            { val: '3× Speed', lbl: 'Faster than competitors' },
+            { val: '98%',      lbl: 'On-time delivery rate' },
+          ].map((b) => (
+            <div key={b.lbl} className="flex flex-col items-center gap-0.5">
+              <span className="text-xl font-display font-black" style={{ color: GOLD }}>{b.val}</span>
+              <span className="text-[9px] font-mono text-white/30 tracking-wide">{b.lbl}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Why Us — premium numbered cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-28">
+      {/* ── STAT CARDS ── */}
+      <div ref={p500.ref} className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
         {[
-          { num: '01', icon: '⚡', title: 'Blazing Fast Delivery', desc: 'Tight sprints, most projects ship in 2–4 weeks without sacrificing a single pixel of quality.', stat: '2–4 Weeks', statLabel: 'Avg Delivery' },
-          { num: '02', icon: '🎯', title: 'Conversion-First Design', desc: 'Every pixel is intentional — engineered to guide users toward action and maximize your ROI.', stat: '3.2×', statLabel: 'Avg ROI' },
-          { num: '03', icon: '🔒', title: 'Enterprise Security', desc: 'SSL, firewalls, penetration testing, and best-in-class authentication baked in from day one.', stat: '100%', statLabel: 'Secure Builds' },
-          { num: '04', icon: '🌍', title: 'Global Client Base', desc: "We've delivered premium digital solutions to clients across 25+ countries on 5 continents.", stat: '25+', statLabel: 'Countries' },
-          { num: '05', icon: '🤝', title: 'Dedicated PM on Every Project', desc: 'A single point of contact who keeps you informed, on time, and on budget at every step.', stat: '1:1', statLabel: 'Dedicated PM' },
-          { num: '06', icon: '♾️', title: 'Post-Launch Support', desc: "We don't disappear after launch. Ongoing maintenance, updates, and priority support always.", stat: '24/7', statLabel: 'Availability' },
-        ].map((card, i) => (
+          { val: `${p500.count}+`, lbl: 'Projects Completed',    pct: p500.count / 500 },
+          { val: `${p98.count}%`,  lbl: 'Client Retention Rate', pct: p98.count / 100  },
+          { val: `${p7.count}+`,   lbl: 'Years of Experience',   pct: p7.count / 10    },
+          { val: `${p200.count}+`, lbl: 'Happy USA Clients',     pct: p200.count / 200 },
+        ].map((s, i) => (
           <div
             key={i}
-            className="group relative rounded-3xl overflow-hidden cursor-default"
-            style={{ background: 'linear-gradient(145deg, rgba(197,160,89,0.06) 0%, rgba(255,255,255,0.02) 100%)' }}
+            className="rounded-2xl border p-5 relative overflow-hidden group hover:border-[#c5a059]/30 transition-all duration-300"
+            style={{ background: 'rgba(197,160,89,0.03)', borderColor: 'rgba(255,255,255,0.06)' }}
           >
-            {/* Animated gold border */}
-            <div className="absolute inset-0 rounded-3xl border border-white/[0.08] group-hover:border-[#c5a059]/50 transition-colors duration-500" />
-            {/* Corner glow */}
-            <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl" style={{ background: 'rgba(197,160,89,0.2)' }} />
-
-            <div className="relative p-7 flex flex-col gap-5">
-              {/* Number + Icon row */}
-              <div className="flex items-start justify-between">
-                <span className="text-[11px] font-mono text-[#c5a059]/50 font-bold tracking-widest">{card.num}</span>
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-110"
-                  style={{ background: 'linear-gradient(135deg, rgba(197,160,89,0.15), rgba(197,160,89,0.05))' }}
-                >
-                  {card.icon}
-                </div>
-              </div>
-
-              {/* Stat */}
-              <div>
-                <div className="text-3xl font-display font-black" style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  {card.stat}
-                </div>
-                <div className="text-[9px] font-mono tracking-[0.25em] uppercase text-white/35 mt-0.5">{card.statLabel}</div>
-              </div>
-
-              {/* Divider */}
-              <div className="h-[1px] bg-gradient-to-r from-[#c5a059]/30 to-transparent" />
-
-              {/* Text */}
-              <div>
-                <h3 className="text-sm font-display font-bold text-white mb-2 group-hover:text-[#c5a059] transition-colors duration-200">{card.title}</h3>
-                <p className="text-[11px] text-white/45 leading-relaxed">{card.desc}</p>
-              </div>
+            <div className="absolute top-0 inset-x-0 h-px"
+              style={{ background: 'linear-gradient(to right, transparent, rgba(197,160,89,0.45), transparent)' }} />
+            <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style={{ background: 'radial-gradient(circle, rgba(197,160,89,0.12) 0%, transparent 70%)' }} />
+            <div className="text-4xl font-display font-black text-white mb-1">{s.val}</div>
+            <div className="text-[11px] font-mono text-white/35 mb-4">{s.lbl}</div>
+            <div className="h-0.5 w-full rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)' }}>
+              <div
+                className="h-full rounded-full transition-all duration-1000"
+                style={{
+                  width: `${Math.min(s.pct * 100, 100)}%`,
+                  background: 'linear-gradient(to right, #8c6e3d, #c5a059)',
+                  boxShadow: '0 0 8px rgba(197,160,89,0.35)',
+                }}
+              />
             </div>
           </div>
         ))}
       </div>
 
-      {/* ── TECH STACK ── */}
-      <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
-        <span className="text-[10px] font-mono tracking-[0.4em] text-[#c5a059] font-bold uppercase">
-          — TOOLS WE MASTER —
-        </span>
-        <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-white leading-none">
-          Our <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Tech Stack</span>
-        </h2>
-        <p className="text-sm text-white/40 max-w-xl mx-auto leading-relaxed">
-          Battle-tested technologies powering fast, scalable, and stunning digital products.
-        </p>
-      </div>
+      {/* ── EDGE CARDS ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-5">
+        {edges.map((e, i) => {
+          const Icon = e.icon;
+          return (
+            <div
+              key={i}
+              className="rounded-2xl border p-5 relative overflow-hidden group hover:border-[#c5a059]/25 transition-all duration-300"
+              style={{ background: 'rgba(255,255,255,0.015)', borderColor: 'rgba(255,255,255,0.06)' }}
+            >
+              {/* Hover glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
+                style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(197,160,89,0.07) 0%, transparent 60%)' }} />
+              {/* Top shine */}
+              <div className="absolute top-0 inset-x-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: 'linear-gradient(to right, transparent, rgba(197,160,89,0.4), transparent)' }} />
 
-      {/* Tech grid — category panels */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {[
-          {
-            category: 'Frontend', icon: '🖥️', color: '#60a5fa', bg: 'rgba(96,165,250,0.06)',
-            techs: [
-              { name: 'React', icon: '⚛️', bg: 'rgba(96,165,250,0.12)' },
-              { name: 'Next.js', icon: '▲', bg: 'rgba(255,255,255,0.07)' },
-              { name: 'TypeScript', icon: '🔷', bg: 'rgba(59,130,246,0.12)' },
-              { name: 'Tailwind', icon: '🌊', bg: 'rgba(56,189,248,0.12)' },
-              { name: 'Framer', icon: '🎞️', bg: 'rgba(139,92,246,0.12)' },
-              { name: 'Webflow', icon: '🌐', bg: 'rgba(75,85,99,0.18)' },
-            ]
-          },
-          {
-            category: 'Backend & APIs', icon: '⚙️', color: '#34d399', bg: 'rgba(52,211,153,0.06)',
-            techs: [
-              { name: 'Node.js', icon: '🟢', bg: 'rgba(52,211,153,0.12)' },
-              { name: 'Python', icon: '🐍', bg: 'rgba(234,179,8,0.12)' },
-              { name: 'GraphQL', icon: '◈', bg: 'rgba(232,95,161,0.12)' },
-              { name: 'REST APIs', icon: '🔌', bg: 'rgba(148,163,184,0.10)' },
-              { name: 'Firebase', icon: '🔥', bg: 'rgba(249,115,22,0.12)' },
-              { name: 'Supabase', icon: '⚡', bg: 'rgba(52,211,153,0.12)' },
-            ]
-          },
-          {
-            category: 'Mobile & E-commerce', icon: '📱', color: '#f59e0b', bg: 'rgba(245,158,11,0.06)',
-            techs: [
-              { name: 'React Native', icon: '📱', bg: 'rgba(96,165,250,0.12)' },
-              { name: 'Flutter', icon: '🐦', bg: 'rgba(56,189,248,0.12)' },
-              { name: 'Swift', icon: '🍎', bg: 'rgba(239,68,68,0.12)' },
-              { name: 'Shopify', icon: '🛍️', bg: 'rgba(52,211,153,0.12)' },
-              { name: 'WooCommerce', icon: '🛒', bg: 'rgba(139,92,246,0.12)' },
-              { name: 'Stripe', icon: '💳', bg: 'rgba(99,102,241,0.12)' },
-            ]
-          },
-          {
-            category: 'AI & Cloud', icon: '🤖', color: '#f43f5e', bg: 'rgba(244,63,94,0.06)',
-            techs: [
-              { name: 'OpenAI GPT', icon: '🤖', bg: 'rgba(255,255,255,0.07)' },
-              { name: 'LangChain', icon: '⛓️', bg: 'rgba(16,185,129,0.12)' },
-              { name: 'AWS', icon: '☁️', bg: 'rgba(249,115,22,0.12)' },
-              { name: 'Google Cloud', icon: '🌥️', bg: 'rgba(59,130,246,0.12)' },
-              { name: 'Docker', icon: '🐳', bg: 'rgba(56,189,248,0.12)' },
-              { name: 'Vercel', icon: '▲', bg: 'rgba(255,255,255,0.07)' },
-            ]
-          },
-        ].map((group) => (
-          <div
-            key={group.category}
-            className="relative rounded-3xl p-6 overflow-hidden border border-white/[0.06] hover:border-white/[0.12] transition-colors duration-300"
-            style={{ background: `linear-gradient(145deg, ${group.bg}, rgba(255,255,255,0.01))` }}
-          >
-            {/* Category header */}
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg" style={{ background: `linear-gradient(135deg, ${group.color}25, ${group.color}10)`, border: `1px solid ${group.color}30` }}>
-                {group.icon}
-              </div>
-              <div>
-                <h3 className="text-sm font-display font-bold" style={{ color: group.color }}>{group.category}</h3>
-                <div className="text-[9px] font-mono text-white/30 tracking-widest uppercase">{group.techs.length} Technologies</div>
-              </div>
-              {/* Decorative line */}
-              <div className="flex-1 h-[1px] ml-2" style={{ background: `linear-gradient(to right, ${group.color}40, transparent)` }} />
-            </div>
-
-            {/* Tech cards grid */}
-            <div className="grid grid-cols-3 gap-2.5">
-              {group.techs.map((tech) => (
-                <div
-                  key={tech.name}
-                  className="group/tech relative flex flex-col items-center gap-2 p-3 rounded-2xl border border-white/[0.06] hover:border-[#c5a059]/40 transition-all duration-200 cursor-default overflow-hidden"
-                  style={{ background: tech.bg }}
-                >
-                  {/* Hover glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover/tech:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" style={{ background: 'radial-gradient(circle at center, rgba(197,160,89,0.08) 0%, transparent 70%)' }} />
-                  <span className="text-xl leading-none relative">{tech.icon}</span>
-                  <span className="text-[10px] font-mono font-semibold text-white/60 group-hover/tech:text-[#c5a059] transition-colors tracking-wide text-center leading-tight relative">{tech.name}</span>
+              <div className="relative">
+                {/* Icon + Stat row */}
+                <div className="flex items-start justify-between mb-4">
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center"
+                    style={{ background: 'rgba(197,160,89,0.08)', border: '1px solid rgba(197,160,89,0.15)' }}
+                  >
+                    <Icon className="w-4 h-4" style={{ color: GOLD }} />
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xl font-display font-black" style={{ color: GOLD }}>{e.stat}</div>
+                    <div className="text-[8px] font-mono text-white/25 mt-0.5">{e.sub}</div>
+                  </div>
                 </div>
-              ))}
+                {/* Text */}
+                <h3 className="text-sm font-display font-bold text-white mb-2">{e.title}</h3>
+                <p className="text-[11px] text-white/35 leading-relaxed">{e.desc}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
+
+
+      {/* ── BOTTOM CTA STRIP ── */}
+      <div
+        className="mt-5 rounded-2xl border p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+        style={{ background: 'rgba(197,160,89,0.04)', borderColor: 'rgba(197,160,89,0.15)' }}
+      >
+        <div>
+          <div className="text-white font-display font-bold text-base mb-1">Ready to grow your business online?</div>
+          <div className="text-[11px] text-white/35 font-mono">Join 200+ US businesses that trust Pixel Vance Digital.</div>
+        </div>
+        <div className="flex items-center gap-3 flex-shrink-0">
+          {/* Trust marks */}
+          <div className="hidden sm:flex items-center gap-3 mr-2">
+            {['No contracts', 'Free audit', '7-day reply'].map((t) => (
+              <div key={t} className="flex items-center gap-1">
+                <CheckCircle className="w-3 h-3" style={{ color: GOLD }} />
+                <span className="text-[9px] font-mono text-white/40">{t}</span>
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('pixelvance:openBooking', { detail: { plan: 'FREE AUDIT', price: 'Free' } }))}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider text-black transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+            style={{ background: 'linear-gradient(135deg, #c5a059, #e8c97a)' }}
+          >
+            Get Free Audit
+          </button>
+        </div>
+      </div>
+
     </section>
   );
 }
