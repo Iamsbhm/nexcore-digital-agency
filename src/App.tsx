@@ -849,36 +849,6 @@ export default function App() {
         </div>
       </section>
 
-
-
-
-      {/* Marquee continuous text scroll footer banner */}
-      <div 
-        className="w-full bg-white/[0.015] border-y border-white/5 py-4 overflow-hidden mt-12 relative z-10"
-        id="infinite-marquee-section"
-      >
-        {/* Soft fading left & right filters client-side */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030407] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#030407] to-transparent z-10 pointer-events-none" />
-
-        <div className="flex w-[200%] overflow-hidden">
-          <div className="flex gap-16 item-center shrink-0 animate-slide">
-            {/* Run twice for unified looping track */}
-            {marqueeItems.concat(marqueeItems).map((itm, mIdx) => (
-              <span 
-                key={mIdx} 
-                className="text-xs font-mono text-white/45 hover:text-white transition-colors tracking-widest uppercase flex items-center gap-3.5 shrink-0"
-              >
-                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full inline-block" />
-                {itm}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="my-16 md:my-24" />
-
       {/* FREE AUDIT CTA BANNER */}
       <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto" id="free-audit-section">
         <div
@@ -976,7 +946,33 @@ export default function App() {
         </div>
       </section>
 
-      <div className="my-16 md:my-24" />
+      <div className="my-12" />
+
+      {/* Marquee continuous text scroll footer banner */}
+      <div 
+        className="w-full bg-white/[0.015] border-y border-white/5 py-4 overflow-hidden mt-6 relative z-10"
+        id="infinite-marquee-section"
+      >
+        {/* Soft fading left & right filters client-side */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030407] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#030407] to-transparent z-10 pointer-events-none" />
+
+        <div className="flex w-[200%] overflow-hidden">
+          <div className="flex gap-16 item-center shrink-0 animate-slide">
+            {/* Run twice for unified looping track */}
+            {marqueeItems.concat(marqueeItems).map((itm, mIdx) => (
+              <span 
+                key={mIdx} 
+                className="text-xs font-mono text-white/45 hover:text-white transition-colors tracking-widest uppercase flex items-center gap-3.5 shrink-0"
+              >
+                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full inline-block" />
+                {itm}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
 
 
 
