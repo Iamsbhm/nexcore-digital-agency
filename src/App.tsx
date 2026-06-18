@@ -610,7 +610,7 @@ export default function App() {
 
       {/* 3. HERO SECTION — Realistic Tech Split Layout */}
       <section
-        className="relative z-10 overflow-hidden flex items-stretch justify-center h-screen"
+        className="relative z-10 overflow-hidden flex items-center justify-center min-h-screen lg:h-screen lg:items-stretch"
         id="hero"
       >
         {/* Particles subtle secondary layer */}
@@ -628,7 +628,7 @@ export default function App() {
         }} />
 
         {/* ── FULL VIEWPORT CONTAINER ── */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 pt-[72px] pb-0 flex items-center justify-center h-screen">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 pt-20 pb-8 lg:pt-[72px] lg:pb-0 flex items-center justify-center lg:h-screen h-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
