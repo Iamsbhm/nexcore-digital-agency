@@ -610,7 +610,7 @@ export default function App() {
 
       {/* 3. HERO SECTION — Realistic Tech Split Layout */}
       <section
-        className="relative z-10 overflow-hidden flex items-center justify-center min-h-screen lg:h-screen lg:items-stretch"
+        className="relative z-10 overflow-hidden flex items-start lg:items-stretch justify-center min-h-screen lg:h-screen"
         id="hero"
       >
         {/* Particles subtle secondary layer */}
@@ -628,15 +628,15 @@ export default function App() {
         }} />
 
         {/* ── FULL VIEWPORT CONTAINER ── */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 pt-20 pb-8 lg:pt-[72px] lg:pb-0 flex items-center justify-center lg:h-screen h-auto">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 pt-24 pb-8 lg:pt-[72px] lg:pb-0 flex items-start lg:items-center justify-center lg:h-screen h-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="w-full h-full flex items-center"
+            className="w-full h-full flex items-start lg:items-center"
           >
             {/* ═══ SPLIT LAYOUT: Left Content | Right Dashboard ═══ */}
-            <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4 xl:gap-6 items-center">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4 xl:gap-6 items-start lg:items-center">
 
               {/* ─── LEFT PANEL: Main Content ─── */}
               <div className="flex flex-col gap-4 relative">
