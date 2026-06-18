@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
         </p>
 
         {/* Proof strip */}
-        <div className="flex items-center justify-center gap-10 mt-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mt-8">
           {[
             { val: '+43%',     lbl: 'Avg. Revenue Increase' },
             { val: '3× Speed', lbl: 'Faster than competitors' },

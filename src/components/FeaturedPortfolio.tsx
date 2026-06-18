@@ -95,7 +95,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
             </span>
           </div>
 
-          <h2 className="text-2xl md:text-4xl font-display font-black tracking-tight text-white leading-tight whitespace-nowrap">
+          <h2 className="text-xl xs:text-2xl md:text-4xl font-display font-black tracking-tight text-white leading-tight md:whitespace-nowrap">
             Real Projects.{' '}
             <span className="bg-gradient-to-r from-[#c5a059] via-[#e8c97a] to-[#a07840] bg-clip-text text-transparent">
               Real Results.

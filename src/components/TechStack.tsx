@@ -440,7 +440,7 @@ export default function TechStack() {
         <span className="text-[9px] font-mono text-white/25">
           {techGroups.flatMap(g => g.items).length} technologies · battle-tested across 500+ projects
         </span>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center flex-wrap gap-x-4 gap-y-1.5">
           {[
             ['97', 'Avg Perf Score'],
             ['<20s', 'Build Time'],
