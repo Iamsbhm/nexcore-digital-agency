@@ -20,7 +20,7 @@ function useCounter(target: number, duration = 1600) {
         };
         requestAnimationFrame(tick);
       }
-    }, { threshold: 0.4 });
+    }, { threshold: 0.1 });
     io.observe(el);
     return () => io.disconnect();
   }, [target, duration]);
@@ -91,15 +91,16 @@ export default function WhyChooseUs() {
       </div>
 
       {/* ── STAT CARDS ── */}
-      <div ref={p500.ref} className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
         {[
-          { val: `${p500.count}+`, lbl: 'Projects Completed',    pct: p500.count / 500 },
-          { val: `${p98.count}%`,  lbl: 'Client Retention Rate', pct: p98.count / 100  },
-          { val: `${p7.count}+`,   lbl: 'Years of Experience',   pct: p7.count / 10    },
-          { val: `${p200.count}+`, lbl: 'Happy USA Clients',     pct: p200.count / 200 },
+          { val: `${p500.count}+`, lbl: 'Projects Completed',    pct: p500.count / 500, ref: p500.ref },
+          { val: `${p98.count}%`,  lbl: 'Client Retention Rate', pct: p98.count / 100,  ref: p98.ref  },
+          { val: `${p7.count}+`,   lbl: 'Years of Experience',   pct: p7.count / 10,    ref: p7.ref   },
+          { val: `${p200.count}+`, lbl: 'Happy USA Clients',     pct: p200.count / 200, ref: p200.ref },
         ].map((s, i) => (
           <div
             key={i}
+            ref={s.ref}
             className="rounded-2xl border p-5 relative overflow-hidden group hover:border-[#c5a059]/30 transition-all duration-300"
             style={{ background: 'rgba(197,160,89,0.03)', borderColor: 'rgba(255,255,255,0.06)' }}
           >
