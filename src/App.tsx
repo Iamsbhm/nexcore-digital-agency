@@ -48,6 +48,7 @@ const WhyChooseUs        = lazy(() => import('./components/WhyChooseUs'));
 const TechStack           = lazy(() => import('./components/TechStack'));
 const ConversionPortal   = lazy(() => import('./components/ConversionPortal'));
 const Footer             = lazy(() => import('./components/Footer'));
+const TechDashboard      = lazy(() => import('./components/TechDashboard'));
 
 // Lazy-loaded inner pages (not needed on first paint)
 const AboutPage       = lazy(() => import('./pages/AboutPage'));
@@ -764,85 +765,11 @@ export default function App() {
 
               {/* ─── RIGHT PANEL: Tech Dashboard ─── */}
               <div className="hidden lg:flex flex-col gap-3 relative">
-
-                {/* Top row: Metric cards */}
-                <div className="grid grid-cols-3 gap-2.5">
-                  {[
-                    { label: 'Uptime', value: '99.9%', sub: '30-day avg', color: '#10b981', icon: '↑', bar: 99 },
-                    { label: 'Perf Score', value: '97/100', sub: 'Core Web Vitals', color: '#3b82f6', icon: '⚡', bar: 97 },
-                    { label: 'Projects', value: '500+', sub: 'Delivered USA', color: '#a855f7', icon: '✦', bar: 85 },
-                  ].map((m) => (
-                    <div key={m.label} className="bg-[#0a0b15] border border-white/[0.07] rounded-xl p-3 flex flex-col gap-2 hover:border-white/[0.14] transition-colors group">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[8px] font-mono tracking-widest uppercase" style={{ color: m.color }}>{m.label}</span>
-                        <span className="text-[10px]" style={{ color: m.color }}>{m.icon}</span>
-                      </div>
-                      <span className="text-lg font-display font-black text-white leading-none">{m.value}</span>
-                      <div className="flex flex-col gap-1">
-                        <div className="w-full h-0.5 bg-white/5 rounded-full overflow-hidden">
-                          <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${m.bar}%`, backgroundColor: m.color, boxShadow: `0 0 6px ${m.color}` }} />
-                        </div>
-                        <span className="text-[7px] font-mono text-white/30">{m.sub}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Middle: Mini Terminal */}
-                <div className="bg-[#080910] border border-white/[0.07] rounded-xl overflow-hidden">
-                  <div className="flex items-center gap-2 px-3 py-2 bg-[#0d0f1c] border-b border-white/[0.05]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#ff5f57]" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#febc2e]" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#28c840]" />
-                    <span className="ml-2 text-[8px] font-mono text-white/25 tracking-wider">~/pixelvance/deploy.sh</span>
-                    <span className="ml-auto text-[7px] font-mono text-[#10b981]/60">● running</span>
-                  </div>
-                  <div className="px-3 py-2.5 font-mono text-[9px] leading-[1.7] space-y-0.5">
-                    <div><span className="text-[#7c3aed]">$ </span><span className="text-white/60">npm run build:prod</span></div>
-                    <div className="text-[#10b981]">✔ TypeScript compiled (0 errors)</div>
-                    <div className="text-[#10b981]">✔ Bundle optimized → 142kb gzip</div>
-                    <div className="text-[#3b82f6]">→ Deploying to Vercel Edge...</div>
-                    <div className="text-[#10b981]">✔ Deploy complete in 18s</div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-white/30">$</span>
-                      <span className="inline-block w-1.5 h-3 bg-white/60 animate-pulse" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom row: Service network nodes */}
-                <div className="bg-[#0a0b15] border border-white/[0.07] rounded-xl p-3">
-                  <div className="flex items-center justify-between mb-2.5">
-                    <span className="text-[8px] font-mono tracking-widest text-white/40 uppercase">Service Stack</span>
-                    <span className="text-[7px] font-mono text-[#10b981]/70 flex items-center gap-1">
-                      <span className="w-1 h-1 rounded-full bg-[#10b981] animate-pulse" />
-                      All systems operational
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2">
-                    {[
-                      { label: 'Web Dev', icon: <Code className="w-3 h-3" />, color: '#10b981', status: '12 active' },
-                      { label: 'WordPress', icon: <Layers className="w-3 h-3" />, color: '#6366f1', status: '8 active' },
-                      { label: 'UI/UX', icon: <Palette className="w-3 h-3" />, color: '#a855f7', status: '6 active' },
-                      { label: 'Mobile', icon: <Smartphone className="w-3 h-3" />, color: '#f59e0b', status: '4 active' },
-                      { label: 'AI & Auto', icon: <Sparkles className="w-3 h-3" />, color: '#ef4444', status: '3 active' },
-                      { label: 'E-Commerce', icon: <ShoppingBag className="w-3 h-3" />, color: '#ec4899', status: '7 active' },
-                    ].map((svc) => (
-                      <div
-                        key={svc.label}
-                        onClick={() => scrollToSection('services-explorer-section')}
-                        className="flex items-center gap-2 bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.05] hover:border-white/[0.14] rounded-lg px-2 py-1.5 cursor-pointer transition-all duration-200 group"
-                      >
-                        <span style={{ color: svc.color }} className="group-hover:scale-110 transition-transform flex-shrink-0">{svc.icon}</span>
-                        <div className="overflow-hidden">
-                          <span className="text-[8px] font-mono text-white/70 block truncate">{svc.label}</span>
-                          <span className="text-[7px] font-mono block" style={{ color: svc.color }}>{svc.status}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
+                <Suspense fallback={
+                  <div className="w-full h-[400px] bg-white/[0.02] border border-white/[0.05] rounded-xl animate-pulse" />
+                }>
+                  <TechDashboard scrollToSection={scrollToSection} />
+                </Suspense>
               </div>
             </div>
           </motion.div>
