@@ -17,8 +17,8 @@ export default defineConfig(() => {
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
     build: {
-      // Target modern browsers — smaller, faster output
-      target: 'es2015',
+      // Target modern browsers with iOS Safari compatibility
+      target: ['es2020', 'safari14'],
       // Split CSS per chunk — only load styles for what's rendered
       cssCodeSplit: true,
       // Increase warning limit (we split chunks so individual files are smaller)

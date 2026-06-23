@@ -51,12 +51,17 @@ export default function Particles3D() {
       canvas.height = containerRef.current.clientHeight;
     };
 
-    // Initialize resize observer to correctly get width/height without window issues
-    const resizeObserver = new ResizeObserver(() => {
-      handleResize();
-    });
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
+    // Initialize resize observer with safety fallback for older iOS Safari versions
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        handleResize();
+      });
+      if (containerRef.current) {
+        resizeObserver.observe(containerRef.current);
+      }
+    } else {
+      window.addEventListener('resize', handleResize);
     }
 
     handleResize();
@@ -223,7 +228,11 @@ export default function Particles3D() {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      resizeObserver.disconnect();
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      } else {
+        window.removeEventListener('resize', handleResize);
+      }
       if (canvas) {
         canvas.removeEventListener('mousemove', handleMouseMove);
         canvas.removeEventListener('mouseleave', handleMouseLeave);
