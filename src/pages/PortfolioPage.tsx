@@ -40,7 +40,7 @@ const projects: ProjectItem[] = [
     gradient: 'from-yellow-950/40 via-[#c5a059]/15 to-transparent',
     accent: '#c5a059',
     year: '2026',
-    image: '/images/apex_roofing_presentation.png',
+    image: '/images/apex_roofing_presentation.jpg',
     challenge: 'The client, a premier roofing contractor in the USA, was losing high-value storm damage claims and roof inspection leads to local competitors. Their outdated visual presence lacked local SEO architecture, conversion-focused forms, before/after showcases, and mobile booking capabilities.',
     solution: 'Designed and engineered a high-converting web platform utilizing a custom gold-accented theme. Built a dedicated storm damage claims flow, integrated Google Reviews for trust-syncing, set up Calendly for instant inspection bookings, and optimized performance to achieve a 95+ PageSpeed score.',
     howItMade: 'Designed a high-fidelity visual layout in Figma. Built the platform on WordPress using Elementor Pro for custom styling. Set up WP Rocket for performance optimization and Rank Math SEO for structured local schema markup. Wired custom scheduling integrations with Calendly.',
@@ -52,7 +52,7 @@ const projects: ProjectItem[] = [
       { metric: 'Top 3', label: 'Local Maps Rank' }
     ],
     gallery: [
-      '/images/apex_roofing_presentation.png'
+      '/images/apex_roofing_presentation.jpg'
     ],
     liveUrl: 'https://apexroofingsolutions.com',
     clientOverview: 'Apex Roofing Solutions is a leading residential and commercial roofing contractor specializing in roof replacements, leak repairs, storm damage restoration, and insurance claim assistance across major USA markets.',

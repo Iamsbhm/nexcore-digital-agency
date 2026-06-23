@@ -31,7 +31,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
       category: 'Home Services',
       tags: ['Figma', 'WordPress', 'Elementor Pro', 'Rank Math SEO', 'WP Rocket', 'Calendly'],
       desc: 'Roofing Company Website Design & Development',
-      image: '/images/apex_roofing_presentation.png',
+      image: '/images/apex_roofing_presentation.jpg',
       accent: '#c5a059',
       liveUrl: 'https://apexroofingsolutions.com',
       result: [
