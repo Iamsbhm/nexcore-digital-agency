@@ -98,10 +98,12 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
     },
   ];
 
+  const displayedProjects = projects.slice(0, 3);
+
   const handleScroll = () => {
     if (carouselRef.current) {
       const { scrollLeft, scrollWidth } = carouselRef.current;
-      const cardWidth = scrollWidth / projects.length;
+      const cardWidth = scrollWidth / displayedProjects.length;
       setActiveDot(Math.round(scrollLeft / cardWidth));
     }
   };
@@ -146,7 +148,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
       </div>
 
       {/* ── PROJECT CARDS ── */}
-      {projects.length === 0 ? (
+      {displayedProjects.length === 0 ? (
         <div className="text-center py-20 border border-dashed border-white/10 rounded-2xl">
           <p className="text-sm text-white/40 font-mono uppercase tracking-widest">Portfolio coming soon</p>
         </div>
@@ -161,7 +163,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
             className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none md:grid-cols-3 gap-5 pb-4 md:pb-0"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {projects.map((project) => (
+            {displayedProjects.map((project) => (
               <div
                 key={project.title}
                 onClick={() => navigateTo(`/portfolio/${getSlug(project.title)}`)}
@@ -264,7 +266,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
 
           {/* Mobile dots */}
           <div className="flex justify-center gap-1.5 mt-5 md:hidden">
-            {projects.map((_, i) => (
+            {displayedProjects.map((_, i) => (
               <div
                 key={i}
                 className="h-1.5 rounded-full transition-all duration-300"
