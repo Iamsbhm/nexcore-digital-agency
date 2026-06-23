@@ -27,6 +27,20 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
 
   const projects: FeaturedProjectItem[] = [
     {
+      title: 'PrimeNest Realty',
+      category: 'Real Estate',
+      tags: ['Figma', 'WordPress', 'Elementor Pro', 'Rank Math SEO', 'WP Rocket', 'Calendly'],
+      desc: 'Real Estate Agency Website Design & Development',
+      image: '/images/primenest_presentation.jpg',
+      accent: '#c5a059',
+      liveUrl: 'https://primenestrealty.com',
+      result: [
+        { val: '+230%', label: 'Organic Traffic' },
+        { val: '+65%',  label: 'More Leads' },
+        { val: '98+',   label: 'PageSpeed' },
+      ],
+    },
+    {
       title: 'Apex Roofing Solutions',
       category: 'Home Services',
       tags: ['Figma', 'WordPress', 'Elementor Pro', 'Rank Math SEO', 'WP Rocket', 'Calendly'],

@@ -33,6 +33,36 @@ export interface ProjectItem {
 
 const projects: ProjectItem[] = [
   {
+    title: 'PrimeNest Realty',
+    category: 'Web',
+    tags: ['Figma', 'WordPress', 'Elementor Pro', 'Rank Math SEO', 'WP Rocket', 'Calendly'],
+    desc: 'Real Estate Agency Website Design & Development',
+    gradient: 'from-blue-950/40 via-[#c5a059]/15 to-transparent',
+    accent: '#c5a059',
+    year: '2026',
+    image: '/images/primenest_presentation.jpg',
+    challenge: 'The agency had a slow, generic real estate website that failed to showcase property listings dynamically, had poor mobile search capability, and generated low-quality leads. They needed a local SEO-optimized, highly interactive platform that simplified listing discovery and agent-client connection.',
+    solution: 'Designed and built a premium, responsive real estate platform with advanced MLS-style custom search filters, interactive map integration, custom agent profiles, mortgage calculator, and automated lead routing systems, achieving a 98+ PageSpeed score.',
+    howItMade: 'Crafted high-fidelity UI designs in Figma. Developed the responsive website on WordPress with Elementor Pro. Optimized loading speed using WP Rocket and structured properties schemas using Rank Math SEO. Integrated Calendly for agent appointment bookings.',
+    results: [
+      { metric: '+230%', label: 'Organic Traffic' },
+      { metric: '+65%', label: 'More Leads' },
+      { metric: '98+', label: 'PageSpeed Score' },
+      { metric: '100%', label: 'Mobile Friendly' },
+      { metric: '4.9★', label: 'Client Rating' }
+    ],
+    gallery: [
+      '/images/primenest_presentation.jpg'
+    ],
+    liveUrl: 'https://primenestrealty.com',
+    clientOverview: 'PrimeNest Realty is a modern boutique real estate brokerage providing premium residential buying, selling, and leasing services in Dallas, Austin, and Houston, Texas.',
+    testimonial: {
+      quote: '“Pixel Vance Digital designed a beautiful, high-converting platform. Our agents love the custom profiles, and property inquiries have surged since launch. The mortgage calculator is a client favorite.”',
+      author: 'Jessica Miller',
+      role: 'Founder & Broker, PrimeNest Realty'
+    }
+  },
+  {
     title: 'Apex Roofing Solutions',
     category: 'Web',
     tags: ['Figma', 'WordPress', 'Elementor Pro', 'Rank Math SEO', 'WP Rocket', 'Calendly'],
