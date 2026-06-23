@@ -140,8 +140,23 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
         {/* Desktop CTA */}
         <button
           onClick={() => navigateTo('/portfolio')}
-          className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-[10px] font-mono tracking-wider uppercase transition-all duration-200 hover:border-[#c5a059]/40 hover:text-[#c5a059] flex-shrink-0 cursor-pointer"
-          style={{ borderColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}
+          className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-[10px] font-mono tracking-wider uppercase transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex-shrink-0 cursor-pointer"
+          style={{ 
+            borderColor: 'rgba(197, 160, 89, 0.35)', 
+            color: '#c5a059', 
+            background: 'rgba(197, 160, 89, 0.06)',
+            boxShadow: '0 4px 20px rgba(197, 160, 89, 0.03)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = '#c5a059';
+            e.currentTarget.style.background = 'rgba(197, 160, 89, 0.12)';
+            e.currentTarget.style.color = '#e8c97a';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'rgba(197, 160, 89, 0.35)';
+            e.currentTarget.style.background = 'rgba(197, 160, 89, 0.06)';
+            e.currentTarget.style.color = '#c5a059';
+          }}
         >
           View All Projects <ArrowRight className="w-3.5 h-3.5" />
         </button>
@@ -296,8 +311,22 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
         <div className="flex items-center gap-3 flex-shrink-0">
           <button
             onClick={() => navigateTo('/portfolio')}
-            className="px-5 py-2.5 rounded-xl border text-[10px] font-mono tracking-wider uppercase text-white/50 hover:text-white/80 hover:border-white/20 transition-all duration-200 cursor-pointer"
-            style={{ borderColor: 'rgba(255,255,255,0.09)' }}
+            className="px-5 py-2.5 rounded-xl border text-[10px] font-mono tracking-wider uppercase transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            style={{ 
+              borderColor: 'rgba(197, 160, 89, 0.35)', 
+              color: '#c5a059', 
+              background: 'rgba(197, 160, 89, 0.06)' 
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#c5a059';
+              e.currentTarget.style.background = 'rgba(197, 160, 89, 0.12)';
+              e.currentTarget.style.color = '#e8c97a';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(197, 160, 89, 0.35)';
+              e.currentTarget.style.background = 'rgba(197, 160, 89, 0.06)';
+              e.currentTarget.style.color = '#c5a059';
+            }}
           >
             View All Work
           </button>
