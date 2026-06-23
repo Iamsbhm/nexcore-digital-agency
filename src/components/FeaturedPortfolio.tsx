@@ -27,6 +27,20 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
 
   const projects: FeaturedProjectItem[] = [
     {
+      title: 'Apex Roofing Solutions',
+      category: 'Home Services',
+      tags: ['Figma', 'WordPress', 'Elementor Pro', 'Rank Math SEO', 'WP Rocket', 'Calendly'],
+      desc: 'Roofing Company Website Design & Development',
+      image: '/images/apex_roofing_presentation.png',
+      accent: '#c5a059',
+      liveUrl: 'https://apexroofingsolutions.com',
+      result: [
+        { val: '+215%', label: 'Organic Traffic' },
+        { val: '+47%',  label: 'More Leads' },
+        { val: '95+',   label: 'PageSpeed' },
+      ],
+    },
+    {
       title: 'WealthPath Financial Advisors',
       category: 'Finance',
       tags: ['Figma', 'WordPress', 'Elementor Pro', 'Calendly', 'Local SEO'],
