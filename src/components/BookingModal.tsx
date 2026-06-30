@@ -45,6 +45,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
   const [clientEmail, setClientEmail] = useState<string>('');
   const [clientNote, setClientNote] = useState<string>('');
   const [clientPhone, setClientPhone] = useState<string>('');
+  const [clientWebsite, setClientWebsite] = useState<string>('');
   const [isSending, setIsSending] = useState<boolean>(false);
   const [sendError, setSendError] = useState<string>('');
   const [dispatchId, setDispatchId] = useState<string>('');
@@ -66,7 +67,9 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
       from_phone:   clientPhone,
       selected_date: 'N/A (Callback Requested)',
       selected_time: 'N/A (Callback Requested)',
-      message:      `[Plan Selection: ${selectedPlan} (${calculatedPrice})]\n\n${clientNote || 'No additional notes.'}`,
+      message:      selectedPlan === 'FREE AUDIT'
+        ? `[Plan Selection: FREE AUDIT]\nWebsite URL: ${clientWebsite}\n\n${clientNote || 'No additional notes.'}`
+        : `[Plan Selection: ${selectedPlan} (${calculatedPrice})]\n\n${clientNote || 'No additional notes.'}`,
       to_name:      'Pixel Advance Digital Team',
     };
 
@@ -110,7 +113,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c5a059]" />
             </span>
             <span className="text-[10px] font-mono tracking-[0.25em] text-white/40 uppercase">
-              Strategy Session Coordinator
+              {selectedPlan === 'FREE AUDIT' ? 'Free Website Audit Claim' : 'Strategy Session Coordinator'}
             </span>
           </div>
           <button
@@ -165,24 +168,42 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                     </div>
 
                     {/* Mobile Number — full width */}
-                    <div className="space-y-1">
-                      <label className="text-[11px] text-white/70 font-semibold block">Mobile Number:</label>
-                      <div className="relative">
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30 text-xs font-mono select-none">+</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1">
+                        <label className="text-[11px] text-white/70 font-semibold block">Mobile Number:</label>
+                        <div className="relative">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30 text-xs font-mono select-none">+</span>
+                          <input
+                            type="tel"
+                            required
+                            value={clientPhone}
+                            onChange={(e) => setClientPhone(e.target.value)}
+                            id="booking-phone-input"
+                            className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 pl-6 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
+                            placeholder="1 234 567 8900"
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-[11px] text-white/70 font-semibold block">
+                          {selectedPlan === 'FREE AUDIT' ? 'Website URL:' : 'Website (Optional):'}
+                        </label>
                         <input
-                          type="tel"
-                          required
-                          value={clientPhone}
-                          onChange={(e) => setClientPhone(e.target.value)}
-                          id="booking-phone-input"
-                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 pl-6 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
-                          placeholder="1 234 567 8900"
+                          type="url"
+                          required={selectedPlan === 'FREE AUDIT'}
+                          value={clientWebsite}
+                          onChange={(e) => setClientWebsite(e.target.value)}
+                          id="booking-website-input"
+                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
+                          placeholder="https://example.com"
                         />
                       </div>
                     </div>
                     <div className="space-y-1">
                       <div className="flex justify-between items-center">
-                        <label className="text-[11px] text-white/70 font-semibold block">Brief project description:</label>
+                        <label className="text-[11px] text-white/70 font-semibold block">
+                          {selectedPlan === 'FREE AUDIT' ? 'Specific concerns or goals:' : 'Brief project description:'}
+                        </label>
                         <span className="text-[9px] font-mono text-white/25">(Optional)</span>
                       </div>
                       <textarea
@@ -191,7 +212,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                         id="booking-note-input"
                         rows={2}
                         className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 resize-none transition-all"
-                        placeholder="Brief notes about your branding or web app goals..."
+                        placeholder={selectedPlan === 'FREE AUDIT' ? "E.g., Slow loading speed, poor SEO ranking, mobile rendering issues..." : "Brief notes about your branding or web app goals..."}
                       />
                     </div>
                   </div>
@@ -211,7 +232,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                     {isSending ? (
                       <><Loader2 className="w-4 h-4 animate-spin" /> Sending…</>
                     ) : (
-                      <>🚀 Confirm Free Strategy Session</>
+                      <>🚀 {selectedPlan === 'FREE AUDIT' ? 'Claim Free Website Audit' : 'Confirm Free Strategy Session'}</>
                     )}
                   </button>
                 </form>
@@ -239,8 +260,17 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                 </div>
 
                 <p className="text-xs text-white/50 max-w-sm mx-auto leading-relaxed">
-                  Hi <span className="text-white font-bold">{clientName}</span>, your strategy session request has been received. 
-                  We will contact you shortly at <span className="text-[#c5a059] font-mono font-bold">+{clientPhone}</span> or email you at <span className="text-white font-mono font-bold">{clientEmail}</span> to schedule your call.
+                  {selectedPlan === 'FREE AUDIT' ? (
+                    <>
+                      Hi <span className="text-white font-bold">{clientName}</span>, your Free Website Audit request has been received. 
+                      We will perform a detailed audit on <span className="text-[#c5a059] font-mono font-bold">{clientWebsite || 'your website'}</span> and deliver the report to <span className="text-white font-mono font-bold">{clientEmail}</span> within 24 hours.
+                    </>
+                  ) : (
+                    <>
+                      Hi <span className="text-white font-bold">{clientName}</span>, your strategy session request has been received. 
+                      We will contact you shortly at <span className="text-[#c5a059] font-mono font-bold">+{clientPhone}</span> or email you at <span className="text-white font-mono font-bold">{clientEmail}</span> to schedule your call.
+                    </>
+                  )}
                 </p>
 
                 <div className="space-y-2 max-w-sm mx-auto pt-3">
