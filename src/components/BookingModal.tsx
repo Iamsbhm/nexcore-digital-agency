@@ -185,12 +185,14 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                         </div>
                       </div>
                       <div className="space-y-1">
-                        <label className="text-[11px] text-white/70 font-semibold block">
-                          {selectedPlan === 'FREE AUDIT' ? 'Website URL:' : 'Website (Optional):'}
-                        </label>
+                        <div className="flex justify-between items-center">
+                          <label className="text-[11px] text-white/70 font-semibold block">
+                            {selectedPlan === 'FREE AUDIT' ? 'Website URL:' : 'Website:'}
+                          </label>
+                          <span className="text-[9px] font-mono text-white/25">(Optional)</span>
+                        </div>
                         <input
                           type="url"
-                          required={selectedPlan === 'FREE AUDIT'}
                           value={clientWebsite}
                           onChange={(e) => setClientWebsite(e.target.value)}
                           id="booking-website-input"
