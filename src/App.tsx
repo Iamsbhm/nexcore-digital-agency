@@ -824,7 +824,8 @@ export default function App() {
                     Free Website Audit
                   </span>{' '}
                   <span className="text-lg md:text-2xl font-light text-slate-400 block mt-1.5 md:mt-2">
-                    worth $199
+                    worth <span className="line-through text-slate-500/80 mr-1.5">$199</span>
+                    <span className="bg-gradient-to-r from-[#c5a059] to-[#e8c97a] bg-clip-text text-transparent font-black font-mono">$0</span>
                   </span>
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed max-w-md text-white/45">
