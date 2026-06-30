@@ -117,8 +117,8 @@ export default function ServiceSelector() {
         setActiveServiceIndex(0);
       }
     };
-    window.addEventListener('pixelvance:selectCategory', handleSelectCategory);
-    return () => window.removeEventListener('pixelvance:selectCategory', handleSelectCategory);
+    window.addEventListener('pixeladvance:selectCategory', handleSelectCategory);
+    return () => window.removeEventListener('pixeladvance:selectCategory', handleSelectCategory);
   }, []);
 
   const categories = SERVICE_CATEGORIES;
@@ -133,7 +133,7 @@ export default function ServiceSelector() {
   };
 
   const openBooking = (plan: string, price: string) => {
-    window.dispatchEvent(new CustomEvent('pixelvance:openBooking', { detail: { plan, price } }));
+    window.dispatchEvent(new CustomEvent('pixeladvance:openBooking', { detail: { plan, price } }));
   };
 
   // Split items for left and right columns

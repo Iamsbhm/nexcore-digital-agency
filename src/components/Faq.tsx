@@ -12,24 +12,28 @@ export default function Faq() {
 
   const faqData: FaqItem[] = [
     {
-      question: "What regions in the USA does Pixel Vance Digital serve?",
-      answer: "We serve brands nationwide across the USA—from New York to California. We offer local-specific strategies to ensure legal compliance (including WCAG/ADA accessibility standards), high-performance regional CDNs for sub-second page loads, and targeted local SEO structures."
+      question: "What geographic regions does Pixel Advance Digital serve?",
+      answer: "We serve clients globally, including startups and enterprises throughout the United States (from New York to California) as well as international clients across Europe, the UK, Asia, and the Americas. To ensure sub-second loading speeds for all visitors, we deploy our builds using highly optimized, multi-region Content Delivery Networks (CDNs)."
     },
     {
-      question: "How long does it take to deliver a custom website?",
-      answer: "Most custom projects ship in 2 to 4 weeks. By employing rapid, tight development sprints and an agile workflow, we bypass the traditional months-long agency delays without sacrificing a single pixel of quality."
+      question: "How do you handle communication and time zones for international (foreign) clients?",
+      answer: "We are structured for seamless global collaboration. We align our schedules to coordinate across different time zones, offering flexible meeting slots. Our workflow relies on transparent asynchronous communication using tools like Slack, Loom, and Figma, paired with weekly syncs so you can easily track project milestones from anywhere in the world."
     },
     {
-      question: "Why is a custom, conversion-first UI/UX design critical?",
-      answer: "A generic template cannot capture your unique brand voice or rank effectively on search engines. We construct bespoke, premium visual interfaces engineered specifically to guide users toward high-converting actions, delivering an average 3.2x ROI boost for our partners."
+      question: "Do your website designs support multi-language translation and international SEO?",
+      answer: "Absolutely. We build localized, multi-lingual web platforms that allow users to toggle languages and view localized content seamlessly. We also implement international SEO best practices (such as hreflang tags, localized sitemaps, and region-specific metadata) to ensure your company ranks effectively across different country-specific Google search indexes."
     },
     {
-      question: "Are your website builds secure and compliant with US standards?",
-      answer: "Absolutely. Security is baked in from day one. Every build includes advanced SSL encryption, firewalls, penetration testing, and secure authentication mechanisms. We strictly follow WCAG/ADA accessibility compliance and CCPA/privacy guidelines."
+      question: "Are your website builds secure and compliant with US and global regulations?",
+      answer: "Yes, security and regulatory compliance are integrated from day one. Every website is custom-built to comply with US accessibility laws like the Americans with Disabilities Act (ADA) and Web Content Accessibility Guidelines (WCAG) to prevent legal risks. For our global clients, we ensure full compliance with GDPR, CCPA, and secure SSL/firewall configurations to safeguard user privacy."
     },
     {
-      question: "Do we have a dedicated point of contact during the project?",
-      answer: "Yes, you get a 1:1 dedicated Project Manager. This single point of contact keeps you informed, on time, and on budget at every step."
+      question: "Why should we choose a custom website development agency over a cheap template?",
+      answer: "Cheap templates come with bloated code, slow loading times, and poor search engine rankings, which lead to high bounce rates. As a premier US web design agency, we build custom-coded React and WordPress websites optimized from the ground up for high speed (scoring 95+ on Google PageSpeed), custom UI/UX design, and superior SEO architecture that translates into higher conversion rates."
+    },
+    {
+      question: "How long does it take to design, develop, and deploy a custom website?",
+      answer: "Most custom corporate website designs and WordPress platforms ship within 2 to 4 weeks. Complex enterprise web applications or e-commerce platforms can take 4 to 8 weeks. We operate in rapid, agile development sprints to guarantee fast execution without sacrificing visual excellence or code quality."
     }
   ];
 

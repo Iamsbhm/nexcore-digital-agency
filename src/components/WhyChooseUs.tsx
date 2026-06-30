@@ -172,7 +172,7 @@ export default function WhyChooseUs() {
       >
         <div>
           <div className="text-white font-display font-bold text-base mb-1">Ready to grow your business online?</div>
-          <div className="text-[11px] text-white/35 font-mono">Join 200+ US businesses that trust Pixel Vance Digital.</div>
+          <div className="text-[11px] text-white/35 font-mono">Join 200+ US businesses that trust Pixel Advance Digital.</div>
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
           {/* Trust marks */}
@@ -185,7 +185,7 @@ export default function WhyChooseUs() {
             ))}
           </div>
           <button
-            onClick={() => window.dispatchEvent(new CustomEvent('pixelvance:openBooking', { detail: { plan: 'FREE AUDIT', price: 'Free' } }))}
+            onClick={() => window.dispatchEvent(new CustomEvent('pixeladvance:openBooking', { detail: { plan: 'FREE AUDIT', price: 'Free' } }))}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider text-black transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
             style={{ background: 'linear-gradient(135deg, #c5a059, #e8c97a)' }}
           >

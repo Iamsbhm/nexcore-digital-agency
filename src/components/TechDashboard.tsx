@@ -113,7 +113,7 @@ export default function TechDashboard({ scrollToSection }: TechDashboardProps) {
           <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
           <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]/60" />
           <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]/30" />
-          <span className="ml-2 text-[8px] font-mono text-white/25 tracking-wider">~/pixelvance/deploy.sh</span>
+          <span className="ml-2 text-[8px] font-mono text-white/25 tracking-wider">~/pixeladvance/deploy.sh</span>
           <span className="ml-auto text-[7px] font-mono text-[#c5a059]/75 flex items-center gap-1.5">
             <span className="w-1 h-1 rounded-full bg-[#c5a059] animate-ping" />
             running

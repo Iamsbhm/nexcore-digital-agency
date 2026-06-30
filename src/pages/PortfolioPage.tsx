@@ -57,7 +57,7 @@ const projects: ProjectItem[] = [
     liveUrl: 'https://primenestrealty.com',
     clientOverview: 'PrimeNest Realty is a modern boutique real estate brokerage providing premium residential buying, selling, and leasing services in Dallas, Austin, and Houston, Texas.',
     testimonial: {
-      quote: '“Pixel Vance Digital designed a beautiful, high-converting platform. Our agents love the custom profiles, and property inquiries have surged since launch. The mortgage calculator is a client favorite.”',
+      quote: '“Pixel Advance Digital designed a beautiful, high-converting platform. Our agents love the custom profiles, and property inquiries have surged since launch. The mortgage calculator is a client favorite.”',
       author: 'Jessica Miller',
       role: 'Founder & Broker, PrimeNest Realty'
     }
@@ -87,7 +87,7 @@ const projects: ProjectItem[] = [
     liveUrl: 'https://apexroofingsolutions.com',
     clientOverview: 'Apex Roofing Solutions is a leading residential and commercial roofing contractor specializing in roof replacements, leak repairs, storm damage restoration, and insurance claim assistance across major USA markets.',
     testimonial: {
-      quote: '“Pixel Vance Digital did an amazing job! The inspection booking flow and the localized SEO pages have dramatically increased our organic leads. Homeowners trust us more because of our professional online image.”',
+      quote: '“Pixel Advance Digital did an amazing job! The inspection booking flow and the localized SEO pages have dramatically increased our organic leads. Homeowners trust us more because of our professional online image.”',
       author: 'Marcus Vance',
       role: 'Founder & CEO, Apex Roofing Solutions'
     }
@@ -120,7 +120,7 @@ const projects: ProjectItem[] = [
     liveUrl: 'https://wealthpathadvisors.com',
     clientOverview: 'WealthPath Financial Advisors is an independent financial advisory firm in Dallas, Texas. They help individuals, families, and business owners with retirement planning, investment management, wealth preservation, estate planning, and tax-efficient investing.',
     testimonial: {
-      quote: '“Pixel Vance Digital transformed our online presence. We now receive qualified consultation requests every week, and our website has become our primary lead generation channel.”',
+      quote: '“Pixel Advance Digital transformed our online presence. We now receive qualified consultation requests every week, and our website has become our primary lead generation channel.”',
       author: 'Michael Anderson',
       role: 'Founder, WealthPath Financial Advisors'
     }
@@ -672,17 +672,17 @@ export default function PortfolioPage({ openBooking }: PortfolioPageProps) {
 
   useEffect(() => {
     if (selectedProject) {
-      document.title = `${selectedProject.title} Case Study | Pixel Vance Digital`;
+      document.title = `${selectedProject.title} Case Study | Pixel Advance Digital`;
       const slug = getSlug(selectedProject.title);
       let canonicalLink = document.querySelector('link[rel="canonical"]');
       if (canonicalLink) {
-        canonicalLink.setAttribute('href', `https://www.pixelvancedigital.com/portfolio/${slug}`);
+        canonicalLink.setAttribute('href', `https://www.pixeladvancedigital.com/portfolio/${slug}`);
       }
     } else {
-      document.title = 'Portfolio | Web Design & Branding Work | Pixel Vance Digital';
+      document.title = 'Portfolio | Web Design & Branding Work | Pixel Advance Digital';
       let canonicalLink = document.querySelector('link[rel="canonical"]');
       if (canonicalLink) {
-        canonicalLink.setAttribute('href', 'https://www.pixelvancedigital.com/portfolio');
+        canonicalLink.setAttribute('href', 'https://www.pixeladvancedigital.com/portfolio');
       }
     }
   }, [selectedProject]);

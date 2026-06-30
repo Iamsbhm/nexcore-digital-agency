@@ -180,7 +180,7 @@ export const CLIENT_REVIEWS: ClientReview[] = [
     initials: 'JM',
     avatarBg: 'bg-blue-600',
     stars: 5,
-    comment: '"Pixel Vance Digital delivered our Shopify store in 3 weeks. Sales doubled within the first month. Incredible work and communication throughout."'
+    comment: '"Pixel Advance Digital delivered our Shopify store in 3 weeks. Sales doubled within the first month. Incredible work and communication throughout."'
   },
   {
     name: 'Sarah Reynolds',

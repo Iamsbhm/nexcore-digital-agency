@@ -67,7 +67,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
       selected_date: 'N/A (Callback Requested)',
       selected_time: 'N/A (Callback Requested)',
       message:      `[Plan Selection: ${selectedPlan} (${calculatedPrice})]\n\n${clientNote || 'No additional notes.'}`,
-      to_name:      'Pixel Vance Digital Team',
+      to_name:      'Pixel Advance Digital Team',
     };
 
     try {

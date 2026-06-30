@@ -54,7 +54,7 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
                   <span
                     className="text-base font-display font-bold tracking-[0.06em] block leading-tight"
                     style={{ background: 'linear-gradient(90deg, #3b82f6, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
-                  >Pixel Vance</span>
+                  >Pixel Advance</span>
                   <span className="text-[9px] font-display font-bold tracking-[0.2em] text-white/70 block mt-0.5">DIGITAL AGENCY</span>
                 </div>
               </div>
@@ -64,8 +64,8 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
               {/* Social links */}
               <div className="flex items-center gap-2.5">
                 {[
-                  { label: 'in', href: 'https://www.linkedin.com/company/pixel-vance-digital/', title: 'LinkedIn', icon: Linkedin },
-                  { label: 'Dr', href: 'https://dribbble.com/pixelvancedigital', title: 'Dribbble', icon: Dribbble }
+                  { label: 'in', href: 'https://www.linkedin.com/company/pixel-advance-digital/', title: 'LinkedIn', icon: Linkedin },
+                  { label: 'Dr', href: 'https://dribbble.com/pixeladvancedigital', title: 'Dribbble', icon: Dribbble }
                 ].map((s) => {
                   const Icon = s.icon;
                   return (
@@ -95,7 +95,7 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
               >
                 Book a Strategy Call →
               </button>
-              <p className="text-[9px] font-mono text-white/20">info@pixelvancedigital.com</p>
+              <p className="text-[9px] font-mono text-white/20">info@pixeladvancedigital.com</p>
             </div>
           </div>
 
@@ -154,7 +154,7 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
               <ul className="space-y-4">
                 <li>
                   <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Email</p>
-                  <a href="mailto:info@pixelvancedigital.com" className="text-[11px] text-white/45 hover:text-white transition-colors">info@pixelvancedigital.com</a>
+                  <a href="mailto:info@pixeladvancedigital.com" className="text-[11px] text-white/45 hover:text-white transition-colors">info@pixeladvancedigital.com</a>
                 </li>
                 <li>
                   <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Hours</p>
@@ -171,7 +171,7 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
           {/* Bottom bar */}
           <div className="mt-14 pt-6 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-3">
             <span className="text-[9px] font-mono text-white/20 tracking-wider">
-              © 2026 Pixel Vance Digital. All rights reserved.
+              © 2026 Pixel Advance Digital. All rights reserved.
             </span>
             <div className="flex items-center gap-6">
               <span className="text-[9px] font-mono text-white/20 hover:text-white/50 cursor-pointer transition-colors">Privacy Policy</span>

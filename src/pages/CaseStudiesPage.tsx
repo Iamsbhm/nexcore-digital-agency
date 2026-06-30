@@ -13,7 +13,7 @@ const cases = [
     gradient: 'from-amber-600/20 to-amber-900/5',
     accent: '#f59e0b',
     challenge: 'Apex SaaS was struggling to capture high-intent Google search leads. Flatlining organic search traffic due to slow LCP loading speeds (4.2s), a lack of structured content clusters, and no schema validation led to high customer acquisition costs (CAC) via paid ads.',
-    solution: 'Pixel Vance Digital executed a semantic keyword mapping audit, deployed an optimized Next.js content engine with sub-second LCP (0.8s), integrated structured JSON-LD schema markup, and built 15 high-authority search content clusters linking directly to product pages.',
+    solution: 'Pixel Advance Digital executed a semantic keyword mapping audit, deployed an optimized Next.js content engine with sub-second LCP (0.8s), integrated structured JSON-LD schema markup, and built 15 high-authority search content clusters linking directly to product pages.',
     results: [
       { metric: '+412%', label: 'Organic Traffic' },
       { metric: '−54%', label: 'Lead Cost (CAC)' },
