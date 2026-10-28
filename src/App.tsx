@@ -297,7 +297,7 @@ export default function App() {
       description: <>PixelAdvance Digital builds <span className="text-[#10b981] font-semibold">modern, high-converting websites</span> designed to generate more leads and sales for your business.</>,
       ctaText: "Get Free Consultation",
       activeBadgeText: "Web Dev & Design",
-      activeBadgeColor: "bg-[#10b981] text-white",
+      activeBadgeColor: "bg-[#432f2e] text-[#feefb8]",
       onCtaClick: () => openBooking('GROWTH', '$2,999')
     },
     {
@@ -311,7 +311,7 @@ export default function App() {
       description: <>Secure, scalable, and custom-coded <span className="text-[#818cf8] font-semibold">WordPress themes and systems</span> built to load in milliseconds.</>,
       ctaText: "Request WordPress Quote",
       activeBadgeText: "WordPress Company",
-      activeBadgeColor: "bg-[#6366f1] text-white",
+      activeBadgeColor: "bg-[#432f2e] text-[#feefb8]",
       onCtaClick: () => openBooking('GROWTH', '$2,999')
     },
     {
@@ -325,7 +325,7 @@ export default function App() {
       description: <>Improve conversion rates and <span className="text-[#c5a059] font-semibold">user interaction dynamics</span> with bespoke wireframing and user journey planning.</>,
       ctaText: "Start UI/UX Project",
       activeBadgeText: "UI/UX Agency",
-      activeBadgeColor: "bg-[#7c3aed] text-white",
+      activeBadgeColor: "bg-[#432f2e] text-[#feefb8]",
       onCtaClick: () => openBooking('GROWTH', '$2,999')
     },
     {
@@ -339,7 +339,7 @@ export default function App() {
       description: <>Keep your platform <span className="text-[#fbbf24] font-semibold">secure, updated, and blazing fast</span>. Continuous uptime tracking and backup systems.</>,
       ctaText: "Check Performance",
       activeBadgeText: "Maintenance & Speed",
-      activeBadgeColor: "bg-[#fbbf24] text-black",
+      activeBadgeColor: "bg-[#432f2e] text-[#feefb8]",
       onCtaClick: () => openBooking('SCALE', '$4,999')
     }
   ];
@@ -380,7 +380,7 @@ export default function App() {
 
   return (
     <div
-      className="min-h-screen font-sans relative bg-[#06080e] text-slate-300 selection:bg-[#c5a059]/30 selection:text-[#f7eedb]"
+      className="min-h-screen font-sans relative bg-[#feefb8] text-[#432f2e] selection:bg-[#c4dae8] selection:text-[#432f2e]"
     >
 
       {/* Skip to main content — accessibility & screen reader */}
@@ -426,7 +426,7 @@ export default function App() {
         <nav 
           className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
             scrolled 
-              ? 'backdrop-blur-md border-b py-3 bg-[#0a0a0a]/90 border-white/5'
+              ? 'backdrop-blur-md border-b py-3 bg-[#feefb8]/92 border-[#432f2e]/10 shadow-sm'
               : 'bg-transparent py-5'
           }`}
           id="main-navigation"
@@ -449,8 +449,8 @@ export default function App() {
               <title>Pixel Advance Digital Logo</title>
               <defs>
                 <linearGradient id="pv-pixel-grad" x1="0" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#3b82f6"/>
-                  <stop offset="100%" stopColor="#7c3aed"/>
+                  <stop offset="0%" stopColor="#432f2e"/>
+                  <stop offset="100%" stopColor="#c4dae8"/>
                 </linearGradient>
               </defs>
               {/* Row 0: top accent pixels */}
@@ -480,10 +480,9 @@ export default function App() {
             </svg>
             <div>
               <span
-                className="text-sm font-display font-bold tracking-[0.06em] block leading-tight"
-                style={{ background: 'linear-gradient(90deg, #3b82f6, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+                className="text-sm font-display font-bold tracking-[0.06em] block leading-tight text-[#432f2e]"
               >Pixel Advance</span>
-              <span className="text-[9px] font-display font-bold tracking-[0.18em] block mt-0.5 text-white">Digital</span>
+              <span className="text-[9px] font-display font-bold tracking-[0.18em] block mt-0.5 text-[#432f2e]/70">Digital</span>
             </div>
           </button>
 
@@ -500,7 +499,7 @@ export default function App() {
                 key={link.label}
                 onClick={() => scrollToSection(link.target)}
                 id={`nav-link-${link.label.toLowerCase()}`}
-               className="text-[10px] font-mono tracking-[0.2em] pb-0.5 border-b border-transparent hover:border-[#c5a059] text-white hover:text-[#c5a059] transition-all cursor-pointer relative py-1"
+               className="text-[10px] font-mono tracking-[0.2em] pb-0.5 border-b border-transparent hover:border-[#432f2e] text-[#432f2e] hover:opacity-75 transition-all cursor-pointer relative py-1"
               >
                 {link.label}
               </button>
@@ -510,8 +509,8 @@ export default function App() {
               id="nav-link-about"
               className={`text-[10px] font-mono tracking-[0.2em] pb-0.5 border-b transition-all cursor-pointer relative py-1 ${
                 currentPage === 'about'
-                  ? 'text-[#c5a059] border-[#c5a059]'
-                  : 'text-white hover:text-[#c5a059] border-transparent hover:border-[#c5a059]'
+                  ? 'text-[#432f2e] border-[#432f2e] font-bold'
+                  : 'text-[#432f2e] hover:border-[#432f2e] border-transparent hover:opacity-75'
               }`}
             >
               ABOUT US
@@ -526,7 +525,7 @@ export default function App() {
             <button
               onClick={() => openBooking('GROWTH', '$2,999')}
               id="nav-quick-consult-btn"
-              className="flex items-center gap-1 py-1.5 px-3 sm:py-2 sm:px-5 bg-[#c5a059] hover:bg-transparent border border-[#c5a059] text-black hover:text-white text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] transition-all duration-300 cursor-pointer active:scale-95 shadow-[0_0_20px_rgba(197,160,89,0.15)]"
+              className="flex items-center gap-1 py-1.5 px-3 sm:py-2 sm:px-5 bg-[#432f2e] hover:bg-[#c4dae8] border border-[#432f2e] text-[#feefb8] hover:text-[#432f2e] text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] transition-all duration-300 cursor-pointer active:scale-95 shadow-[0_0_20px_rgba(197,160,89,0.15)]"
             >
               <Calendar className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
               <span className="inline sm:hidden">Start Project</span>
@@ -547,7 +546,7 @@ export default function App() {
         {/* Mobile dropdown — instant close so animation doesn't block taps */}
         {mobileMenuOpen && (
           <div
-            className="lg:hidden backdrop-blur-xl border-b bg-[#06080e]/98 border-white/5"
+            className="lg:hidden backdrop-blur-xl border-b bg-[#feefb8]/98 border-[#432f2e]/10 shadow-lg text-[#432f2e]"
             id="mobile-navigation-dropdown"
           >
             <div className="px-4 py-4 space-y-1">
@@ -562,7 +561,7 @@ export default function App() {
                   key={link.label}
                   onClick={() => scrollToSection(link.target)}
                   id={`mobile-nav-link-${link.label.replace(/\s+/g, '-').toLowerCase()}`}
-                  className="w-full text-left py-3.5 px-2 text-xs font-semibold border-b last:border-0 block font-mono tracking-widest cursor-pointer active:text-[#c5a059] transition-colors text-white hover:text-[#c5a059] border-white/[0.05]"
+                  className="w-full text-left py-3.5 px-2 text-xs font-semibold border-b last:border-0 block font-mono tracking-widest cursor-pointer active:text-[#432f2e] transition-colors text-[#432f2e] hover:text-[#432f2e]/70 border-[#432f2e]/10"
                 >
                   ▶ {link.label.toUpperCase()}
                 </button>
@@ -573,8 +572,8 @@ export default function App() {
                 id="mobile-nav-link-about"
                 className={`w-full text-left py-3.5 px-2 text-xs font-semibold border-b block font-mono tracking-widest cursor-pointer transition-colors ${
                   currentPage === 'about'
-                    ? 'text-[#c5a059]'
-                    : 'text-white hover:text-[#c5a059] border-white/[0.05]'
+                    ? 'text-[#432f2e] font-bold'
+                    : 'text-[#432f2e] hover:text-[#432f2e]/70 border-[#432f2e]/10'
                 }`}
               >
                 ▶ ABOUT US
@@ -584,7 +583,7 @@ export default function App() {
                 <button
                   onClick={() => { setMobileMenuOpen(false); openBooking('GROWTH', '$2,999'); }}
                   id="mobile-nav-book-btn"
-                  className="w-full py-3.5 bg-[#c5a059] text-center font-bold font-mono tracking-wider text-xs rounded-lg uppercase text-black shadow-md cursor-pointer active:scale-95 transition-all"
+                  className="w-full py-3.5 bg-[#432f2e] text-center font-bold font-mono tracking-wider text-xs rounded-lg uppercase text-[#feefb8] shadow-md cursor-pointer active:scale-95 transition-all"
                 >
                   ★ Start a Project
                 </button>
@@ -653,7 +652,7 @@ export default function App() {
               <div className="flex flex-col gap-4 relative">
 
                 {/* Terminal-style top bar — always dark so the UI mockup aesthetic is preserved */}
-                <div className="flex items-center gap-2 bg-[#0d0f1a] border border-white/[0.07] rounded-xl px-3 py-2 w-fit">
+                <div className="flex items-center gap-2 bg-[#432f2e] text-[#feefb8] border border-[#432f2e]/20 rounded-xl px-3 py-2 w-fit">
                   <span className="w-2 h-2 rounded-full bg-[#ff5f57] shadow-[0_0_6px_rgba(255,95,87,0.8)]" />
                   <span className="w-2 h-2 rounded-full bg-[#febc2e] shadow-[0_0_6px_rgba(254,188,46,0.8)]" />
                   <span className="w-2 h-2 rounded-full bg-[#28c840] shadow-[0_0_6px_rgba(40,200,64,0.8)]" />
@@ -714,10 +713,9 @@ export default function App() {
                   ].map((tech) => (
                     <span
                       key={tech.label}
-                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[9px] font-mono tracking-wider transition-colors cursor-default bg-white/[0.04] border-white/[0.07] hover:bg-white/[0.08]"
-                      style={{ color: tech.color }}
+                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[9px] font-mono tracking-wider transition-colors cursor-default bg-white/70 border-[#432f2e]/15 hover:bg-white text-[#432f2e]"
                     >
-                      <span className="w-1 h-1 rounded-full" style={{ backgroundColor: tech.color, boxShadow: `0 0 4px ${tech.color}` }} />
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: tech.color, boxShadow: `0 0 4px ${tech.color}` }} />
                       {tech.label}
                     </span>
                   ))}
@@ -727,7 +725,7 @@ export default function App() {
                 <div className="flex items-center gap-3 mt-2">
                   <button
                     onClick={heroSlides[activeHeroSlide].onCtaClick}
-                    className="group relative flex items-center gap-2 py-2.5 px-6 bg-gradient-to-r from-[#7c3aed] to-[#3b82f6] text-white text-[10px] font-mono tracking-[0.18em] uppercase font-black rounded-lg shadow-lg shadow-[#7c3aed]/25 transition-all duration-300 hover:scale-[1.03] hover:shadow-[#7c3aed]/40 active:scale-[0.98] cursor-pointer overflow-hidden"
+                    className="group relative flex items-center gap-2 py-2.5 px-6 bg-[#432f2e] text-[#feefb8] text-[10px] font-mono tracking-[0.18em] uppercase font-black rounded-lg shadow-lg shadow-[#432f2e]/25 hover:bg-[#2d1e1d] transition-all duration-300 hover:scale-[1.03] hover:shadow-[#7c3aed]/40 active:scale-[0.98] cursor-pointer overflow-hidden"
                     id="hero-main-cta-btn"
                   >
                     <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -736,7 +734,7 @@ export default function App() {
                   </button>
                   <button
                     onClick={() => scrollToSection('services-explorer-section')}
-                    className="flex items-center gap-2 py-2.5 px-5 border border-white/10 hover:border-white/25 text-white/70 hover:text-white text-[10px] font-mono tracking-[0.18em] uppercase transition-all duration-300 rounded-lg active:scale-[0.98] cursor-pointer"
+                    className="flex items-center gap-2 py-2.5 px-5 bg-[#c4dae8]/60 hover:bg-[#c4dae8] border border-[#432f2e]/20 text-[#432f2e] text-[10px] font-mono tracking-[0.18em] uppercase transition-all duration-300 rounded-lg active:scale-[0.98] cursor-pointer"
                     id="hero-explore-btn"
                   >
                     Explore Services
@@ -790,7 +788,7 @@ export default function App() {
       <section className="relative z-10 px-4 md:px-8 max-w-7xl mx-auto" id="free-audit-section">
         <div
           className="relative rounded-3xl overflow-hidden border"
-          style={{ borderColor: 'rgba(197,160,89,0.2)', background: 'rgba(6,7,14,0.97)' }}
+          style={{ borderColor: 'rgba(67,47,46,0.2)', background: '#432f2e' }}
         >
           {/* Glow blobs */}
           <div className="absolute inset-0 pointer-events-none">
@@ -873,7 +871,7 @@ export default function App() {
                 <button
                   onClick={() => window.dispatchEvent(new CustomEvent('pixeladvance:openBooking', { detail: { plan: 'FREE AUDIT', price: 'Free' } }))}
                   className="w-full max-w-xs flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-display font-bold text-sm text-black transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
-                  style={{ background: 'linear-gradient(135deg, #c5a059 0%, #e8c97a 50%, #c5a059 100%)', boxShadow: '0 0 24px rgba(197,160,89,0.25)' }}
+                  style={{ background: 'linear-gradient(135deg, #feefb8 0%, #fff4cc 50%, #feefb8 100%)', color: '#432f2e', boxShadow: '0 0 24px rgba(254,239,184,0.30)' }}
                 >
                   Claim Free Audit →
                 </button>
@@ -896,9 +894,9 @@ export default function App() {
       >
         {/* Soft fading left & right filters client-side */}
         <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{ background: 'linear-gradient(to right, #030407, transparent)' }} />
+          style={{ background: 'linear-gradient(to right, #feefb8, transparent)' }} />
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{ background: 'linear-gradient(to left, #030407, transparent)' }} />
+          style={{ background: 'linear-gradient(to left, #feefb8, transparent)' }} />
 
         <div className="flex w-[200%] overflow-hidden">
           <div className="flex gap-16 item-center shrink-0 animate-slide">

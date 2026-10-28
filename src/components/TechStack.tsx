@@ -304,7 +304,7 @@ const techGroups = [
   },
 ];
 
-const GOLD = '#c5a059';
+const GOLD = '#432f2e';
 
 export default function TechStack() {
   const [activeGroup, setActiveGroup] = useState<string | null>(null);

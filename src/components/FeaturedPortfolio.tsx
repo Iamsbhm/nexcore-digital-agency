@@ -19,7 +19,7 @@ export interface FeaturedProjectItem {
   result?: { val: string; label: string }[];
 }
 
-const GOLD = '#c5a059';
+const GOLD = '#432f2e';
 
 export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps) {
   const [activeDot, setActiveDot] = React.useState(0);
@@ -335,7 +335,7 @@ export default function FeaturedPortfolio({ navigateTo }: FeaturedPortfolioProps
               window.dispatchEvent(new CustomEvent('pixeladvance:openBooking', { detail: { plan: 'FREE AUDIT', price: 'Free' } }))
             }
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider text-black transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
-            style={{ background: 'linear-gradient(135deg, #c5a059, #e8c97a)' }}
+            style={{ background: 'linear-gradient(135deg, #432f2e, #6d4b4a)' }}
           >
             Start My Project <ArrowRight className="w-3.5 h-3.5" />
           </button>

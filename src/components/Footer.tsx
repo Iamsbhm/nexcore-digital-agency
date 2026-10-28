@@ -11,9 +11,9 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
   return (
     <footer className="relative z-10 overflow-hidden" id="footer">
       {/* Gold gradient top border */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#c5a059]/60 to-transparent" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#c4dae8]/60 to-transparent" />
 
-      <div className="bg-[#060608] relative">
+      <div className="bg-[#432f2e] text-[#feefb8] relative">
         {/* Background ambient glow */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[300px] bg-[#c5a059]/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
@@ -29,8 +29,8 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
                   className="drop-shadow-[0_0_14px_rgba(124,58,237,0.5)] flex-shrink-0">
                   <defs>
                     <linearGradient id="pv-footer-pixel-grad" x1="0" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stopColor="#3b82f6"/>
-                      <stop offset="100%" stopColor="#7c3aed"/>
+                      <stop offset="0%" stopColor="#feefb8"/>
+                      <stop offset="100%" stopColor="#c4dae8"/>
                     </linearGradient>
                   </defs>
                   <rect x="8" y="0" width="4" height="4" fill="url(#pv-footer-pixel-grad)"/>
@@ -52,13 +52,12 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
                 </svg>
                 <div>
                   <span
-                    className="text-base font-display font-bold tracking-[0.06em] block leading-tight"
-                    style={{ background: 'linear-gradient(90deg, #3b82f6, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+                    className="text-base font-display font-bold tracking-[0.06em] block leading-tight text-[#feefb8]"
                   >Pixel Advance</span>
-                  <span className="text-[9px] font-display font-bold tracking-[0.2em] text-white/70 block mt-0.5">DIGITAL AGENCY</span>
+                  <span className="text-[9px] font-display font-bold tracking-[0.2em] text-[#c4dae8] block mt-0.5">DIGITAL AGENCY</span>
                 </div>
               </div>
-              <p className="text-sm text-white/35 leading-relaxed font-light">
+              <p className="text-sm text-[#feefb8]/75 leading-relaxed font-light">
                 We craft high-fidelity digital experiences for ambitious brands — from bespoke UI design to AI-powered growth systems.
               </p>
               {/* Social links */}
@@ -76,7 +75,7 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
                       rel={s.href !== '#' ? 'noopener noreferrer' : undefined}
                       id={`footer-social-${s.label.toLowerCase()}`}
                       title={s.title}
-                      className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-white/35 hover:text-[#c5a059] hover:border-[#c5a059]/40 hover:bg-[#c5a059]/5 transition-all duration-200"
+                      className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-[#feefb8]/75 hover:text-[#432f2e] hover:border-[#feefb8] hover:bg-[#feefb8] transition-all duration-200"
                     >
                       <Icon className="w-4 h-4" />
                     </a>
@@ -91,7 +90,7 @@ export default function Footer({ openBooking, scrollToSection, navigateTo }: Foo
               <button
                 onClick={() => openBooking('GROWTH', '$2,999')}
                 id="footer-cta-btn"
-                className="flex items-center gap-2.5 py-3 px-7 border border-[#c5a059]/50 text-[#c5a059] hover:bg-[#c5a059] hover:text-black text-[10px] font-mono tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer"
+                className="flex items-center gap-2.5 py-3 px-7 border border-[#feefb8]/70 text-[#feefb8] hover:bg-[#feefb8] hover:text-[#432f2e] text-[10px] font-mono tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer"
               >
                 Book a Strategy Call →
               </button>

@@ -37,7 +37,7 @@ export default function Particles3D() {
     let particles: Particle[] = [];
     // Reduce particle count on smaller desktops for better perf
     const maxParticles = window.innerWidth < 1024 ? 50 : 90;
-    const colors = ['#3b82f6', '#4f46e5', '#60a5fa', '#a5b4fc', '#818cf8'];
+    const colors = ['#c4dae8', '#432f2e', '#feefb8', '#99bad0', '#634745'];
 
     const mouse = {
       x: -1000,

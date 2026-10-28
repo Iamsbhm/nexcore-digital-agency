@@ -23,7 +23,7 @@ const posts = [
       { type: 'p', text: 'Integrating 3D elements is not just about visual novelty; it is a conversion rate driver. Interactive product configurations allow users to rotate, customize, and examine details in 3D, increasing purchase confidence and reducing return rates. Case studies show that websites featuring interactive 3D elements experience up to a 40% increase in average session duration and a 20% lift in direct sales conversions.' },
       { type: 'h2', text: 'Optimizing 3D for the Web: Achieving 60 FPS' },
       { type: 'p', text: 'The major challenge with 3D on the web is performance. Heavy 3D assets, unoptimized shaders, and concurrent calculations can easily cause frame rates to drop below 30 FPS, leading to laggy user experiences that increase bounce rates. Reaching a fluid 60 FPS requires strict optimization, including low-polygon modeling, compressed GLTF/GLB assets using Draco compression, and asynchronous asset preloading.' },
-      { type: 'code', text: `// Example: Asynchronously loading a compressed GLTF model in React Three Fiber\nimport { Canvas } from '@react-three/fiber';\nimport { useGLTF, OrbitControls } from '@react-three/drei';\nimport { Suspense } from 'react';\n\nfunction Model() {\n  const { scene } = useGLTF('/models/premium_showcase.glb', true);\n  return <primitive object={scene} />;\n}` },
+      { type: 'code', text: '// Example: Asynchronously loading a compressed GLTF model in React Three Fiber\nimport { Canvas } from \'@react-three/fiber\';\nimport { useGLTF, OrbitControls } from \'@react-three/drei\';\nimport { Suspense } from \'react\';\n\nfunction Model() {\n  const { scene } = useGLTF(\'/models/premium_showcase.glb\', true);\n  return <primitive object={scene} />;\n}' },
       { type: 'h2', text: 'Key Optimization Practices for Web 3D' },
       { type: 'ul', text: [
         'Utilize Draco compression to reduce GLTF file sizes by up to 80%.',
@@ -886,7 +886,7 @@ export default function BlogPage({ openBooking }: BlogPageProps) {
               onClick={() => selectPost(posts[0])}
               className="group bg-white/[0.02] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-[#c5a059]/25 transition-all duration-300 cursor-pointer"
             >
-              <div className="h-2 w-full" style={{ background: 'linear-gradient(to right, #c5a059aa, transparent)' }} />
+              <div className="h-2 w-full" style={{ background: 'linear-gradient(to right, #432f2eaa, transparent)' }} />
               <div className="p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
                 <div className="space-y-5 text-left">
                   <div className="flex items-center gap-3">

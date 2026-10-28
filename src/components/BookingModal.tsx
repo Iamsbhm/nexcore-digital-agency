@@ -96,17 +96,17 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className="absolute inset-0 bg-black/75 backdrop-blur-md cursor-pointer"
+        className="absolute inset-0 bg-[#432f2e]/60 backdrop-blur-md cursor-pointer"
         id="booking-modal-overlay"
       />
 
       {/* Panel */}
       <div
-        className="relative w-full max-w-lg bg-[#07090f] border border-white/[0.08] rounded-2xl overflow-hidden shadow-[0_0_80px_rgba(197,160,89,0.12)] z-10"
+        className="relative w-full max-w-lg bg-[#fffef7] border border-[#432f2e]/15 text-[#432f2e] rounded-2xl overflow-hidden shadow-[0_0_80px_rgba(197,160,89,0.12)] z-10"
         id="booking-modal-content"
       >
         {/* ── Header ── */}
-        <div className="sticky top-0 bg-[#07090f] border-b border-white/[0.06] px-5 py-3.5 flex items-center justify-between z-10">
+        <div className="sticky top-0 bg-[#fffef7] border-b border-[#432f2e]/10 px-5 py-3.5 flex items-center justify-between z-10">
           <div className="flex items-center gap-2.5">
             <span className="flex h-2 w-2 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c5a059] opacity-60" />
@@ -149,7 +149,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                           value={clientName}
                           onChange={(e) => setClientName(e.target.value)}
                           id="booking-name-input"
-                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all"
+                          className="w-full text-xs bg-white border border-[#432f2e]/20 text-[#432f2e] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all"
                           placeholder="Your Name"
                         />
                       </div>
@@ -161,7 +161,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                           value={clientEmail}
                           onChange={(e) => setClientEmail(e.target.value)}
                           id="booking-email-input"
-                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
+                          className="w-full text-xs bg-white border border-[#432f2e]/20 text-[#432f2e] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
                           placeholder="you@company.com"
                         />
                       </div>
@@ -179,7 +179,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                             value={clientPhone}
                             onChange={(e) => setClientPhone(e.target.value)}
                             id="booking-phone-input"
-                            className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 pl-6 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
+                            className="w-full text-xs bg-white border border-[#432f2e]/20 text-[#432f2e] rounded-lg p-2.5 pl-6 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
                             placeholder="1 234 567 8900"
                           />
                         </div>
@@ -196,7 +196,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                           value={clientWebsite}
                           onChange={(e) => setClientWebsite(e.target.value)}
                           id="booking-website-input"
-                          className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
+                          className="w-full text-xs bg-white border border-[#432f2e]/20 text-[#432f2e] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 transition-all font-mono"
                           placeholder="https://example.com"
                         />
                       </div>
@@ -213,7 +213,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                         onChange={(e) => setClientNote(e.target.value)}
                         id="booking-note-input"
                         rows={2}
-                        className="w-full text-xs bg-white/[0.01] hover:bg-white/[0.02] border border-white/[0.08] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 resize-none transition-all"
+                        className="w-full text-xs bg-white border border-[#432f2e]/20 text-[#432f2e] rounded-lg p-2.5 outline-none focus:border-[#c5a059]/50 text-white placeholder-white/45 resize-none transition-all"
                         placeholder={selectedPlan === 'FREE AUDIT' ? "E.g., Slow loading speed, poor SEO ranking, mobile rendering issues..." : "Brief notes about your branding or web app goals..."}
                       />
                     </div>
@@ -229,7 +229,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                     type="submit"
                     id="submit-booking-btn"
                     disabled={isSending}
-                    className="w-full py-3.5 bg-[#c5a059] hover:shadow-[0_0_24px_rgba(197,160,89,0.35)] text-black font-bold rounded-xl text-xs tracking-[0.2em] uppercase transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full py-3.5 bg-[#432f2e] hover:bg-[#2b1e1d] hover:shadow-[0_0_24px_rgba(67,47,46,0.30)] text-[#feefb8] font-bold rounded-xl text-xs tracking-[0.2em] uppercase transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSending ? (
                       <><Loader2 className="w-4 h-4 animate-spin" /> Sending…</>
@@ -279,7 +279,7 @@ export default function BookingModal({ isOpen, onClose, selectedPlan, calculated
                   <button
                     onClick={onClose}
                     id="dismiss-booking-modal-btn"
-                    className="w-full py-3 bg-[#c5a059] hover:shadow-[0_0_24px_rgba(197,160,89,0.35)] text-black font-bold rounded-lg text-xs font-mono tracking-wider uppercase transition-all active:scale-95 cursor-pointer flex items-center justify-center"
+                    className="w-full py-3 bg-[#432f2e] hover:bg-[#2b1e1d] hover:shadow-[0_0_24px_rgba(67,47,46,0.30)] text-[#feefb8] font-bold rounded-lg text-xs font-mono tracking-wider uppercase transition-all active:scale-95 cursor-pointer flex items-center justify-center"
                   >
                     Done
                   </button>

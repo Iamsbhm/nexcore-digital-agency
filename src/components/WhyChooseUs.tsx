@@ -27,9 +27,9 @@ function useCounter(target: number, duration = 1600) {
   return { count, ref };
 }
 
-const GOLD = '#c5a059';
-const GOLD_DIM = 'rgba(197,160,89,0.12)';
-const GOLD_BORDER = 'rgba(197,160,89,0.18)';
+const GOLD = '#432f2e';
+const GOLD_DIM = 'rgba(196,218,232,0.45)';
+const GOLD_BORDER = 'rgba(67,47,46,0.15)';
 
 const edges = [
   { icon: Zap,          stat: '2–4 wk', sub: 'avg delivery',    title: 'Blazing Fast Delivery',    desc: 'Most projects ship in 2–4 weeks with zero quality compromise.' },
@@ -187,7 +187,7 @@ export default function WhyChooseUs() {
           <button
             onClick={() => window.dispatchEvent(new CustomEvent('pixeladvance:openBooking', { detail: { plan: 'FREE AUDIT', price: 'Free' } }))}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider text-black transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
-            style={{ background: 'linear-gradient(135deg, #c5a059, #e8c97a)' }}
+            style={{ background: 'linear-gradient(135deg, #432f2e, #6d4b4a)' }}
           >
             Get Free Audit
           </button>

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { CLIENT_REVIEWS } from '../data';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 
-const GOLD = '#c5a059';
+const GOLD = '#432f2e';
 
 export default function TestimonialsSlider() {
   const reviews = CLIENT_REVIEWS;

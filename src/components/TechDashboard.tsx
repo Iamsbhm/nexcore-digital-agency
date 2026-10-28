@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Code, Layers, Palette, Smartphone, Sparkles, ShoppingBag } from 'lucide-react';
 
-const GOLD = '#c5a059';
-const GOLD_GLOW = 'rgba(197, 160, 89, 0.45)';
+const GOLD = '#432f2e';
+const GOLD_GLOW = 'rgba(196, 218, 232, 0.45)';
 
 interface TechDashboardProps {
   scrollToSection: (id: string) => void;

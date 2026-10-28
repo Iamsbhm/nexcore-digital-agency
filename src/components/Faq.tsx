@@ -44,7 +44,7 @@ export default function Faq() {
           — QUESTIONS —
         </span>
         <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight text-white">
-          Frequently Asked <span style={{ background: 'linear-gradient(135deg,#c5a059,#e8c97a,#c5a059)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Questions</span>
+          Frequently Asked <span style={{ background: 'linear-gradient(135deg, #432f2e, #6d4b4a, #432f2e)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Questions</span>
         </h2>
       </div>
 
